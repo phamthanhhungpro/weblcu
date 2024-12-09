@@ -115,5 +115,11 @@ namespace Common
 
         public static readonly string PERMISSION_LOG_VIEW = "PERMISSION_LOG_VIEW";
         public static readonly string PERMISSION_LOG_SETTING = "PERMISSION_LOG_SETTING";
+
+
+        public static readonly string PERMISSION_INSTRUCMENT_CATEGORY_VIEW = "PERMISSION_INSTRUCMENT_CATEGORY_VIEW";
+        public static readonly string PERMISSION_INSTRUCMENT_CATEGORY_ADD = "PERMISSION_INSTRUCMENT_CATEGORY_ADD";
+        public static readonly string PERMISSION_INSTRUCMENT_CATEGORY_EDIT = "PERMISSION_INSTRUCMENT_CATEGORY_EDIT";
+        public static readonly string PERMISSION_INSTRUCMENT_CATEGORY_DELETE = "PERMISSION_INSTRUCMENT_CATEGORY_DELETE";
     }
 }

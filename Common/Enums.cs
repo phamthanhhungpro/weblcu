@@ -65,6 +65,7 @@ namespace Common
             Language,
             File,
             Log,
+            InstrucmentCategory,
         }
 
         public enum ErrorCode

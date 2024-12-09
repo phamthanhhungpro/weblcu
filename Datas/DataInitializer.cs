@@ -19,7 +19,7 @@ namespace Datas
             //var anc=  _context.Database.EnsureDeleted();
             var bcd = _context.Database.EnsureCreated();
             //_context.Database.Migrate();
-            if(bcd)
+            if (bcd)
             {
                 GenerateDatabase();
             }
@@ -33,12 +33,13 @@ namespace Datas
                 UpdateV5();
                 UpdateV6();
                 UpdateV7();
+                UpdateV8();
             }
         }
 
         private void UpdateV1()
         {
-            if(!_context.GroupFunctions.Any(o=>o.Type ==  Enums.GroupFunctionType.Report))
+            if (!_context.GroupFunctions.Any(o => o.Type == Enums.GroupFunctionType.Report))
             {
                 var lstGroupFunction = new List<GroupFunction>
             {
@@ -76,7 +77,7 @@ namespace Datas
                     }
                     _context.SaveChanges();
                 }
-            }    
+            }
         }
 
         private void UpdateV2()
@@ -147,8 +148,8 @@ namespace Datas
 
         private void UpdateV4()
         {
-            var groupFunction = _context.GroupFunctions.Include(o=>o.Functions).FirstOrDefault(o => o.Type == Enums.GroupFunctionType.People);
-            if(groupFunction!=null && !groupFunction.Functions.Any(o=>o.FunctionCode.Equals(Common.Constants.PERMISSION_PEOPLE_COFIRM_REQUEST)))
+            var groupFunction = _context.GroupFunctions.Include(o => o.Functions).FirstOrDefault(o => o.Type == Enums.GroupFunctionType.People);
+            if (groupFunction != null && !groupFunction.Functions.Any(o => o.FunctionCode.Equals(Common.Constants.PERMISSION_PEOPLE_COFIRM_REQUEST)))
             {
                 var lstFunction = new List<Function> {
 
@@ -267,6 +268,38 @@ namespace Datas
             }
         }
 
+        private void UpdateV8()
+        {
+            if (!_context.GroupFunctions.Any(o => o.Type == Enums.GroupFunctionType.InstrucmentCategory))
+            {
+                var lstGroupFunction = new List<GroupFunction>
+                {
+                    new GroupFunction{Name="Danh mục nhạc cụ",Order=26, Type=Enums.GroupFunctionType.InstrucmentCategory},
+                 };
+                _context.GroupFunctions.AddRange(lstGroupFunction);
+                _context.SaveChanges();
+
+                var lstFunction = new List<Function> {
+
+                    new Function{Name="Xem",FunctionCode=Common.Constants.PERMISSION_INSTRUCMENT_CATEGORY_VIEW,Group = lstGroupFunction[0]},
+                    new Function{Name="Thêm mới",FunctionCode=Common.Constants.PERMISSION_INSTRUCMENT_CATEGORY_ADD,Group = lstGroupFunction[0]},
+                    new Function{Name="Sửa",FunctionCode=Common.Constants.PERMISSION_INSTRUCMENT_CATEGORY_EDIT,Group = lstGroupFunction[0]},
+                    new Function{Name="Xóa",FunctionCode=Common.Constants.PERMISSION_INSTRUCMENT_CATEGORY_DELETE,Group = lstGroupFunction[0]},
+
+                    };
+                _context.Functions.AddRange(lstFunction);
+                _context.SaveChanges();
+                var adminRole = _context.Roles.Include("RoleFunctions").FirstOrDefault(o => o.Id == 1);
+                if (adminRole != null)
+                {
+                    foreach (var item in lstFunction)
+                    {
+                        adminRole.RoleFunctions.Add(item);
+                    }
+                    _context.SaveChanges();
+                }
+            }
+        }
 
         private void GenerateDatabase()
         {
@@ -310,7 +343,7 @@ namespace Datas
                 new GroupFunction{Name="Liên hệ",Order=4, Type=Enums.GroupFunctionType.Contact},
                 new GroupFunction{Name="Báo cáo",Order=6, Type=Enums.GroupFunctionType.Report},
                 new GroupFunction{Name="Thành phố - Huyện",Order=23, Type=Enums.GroupFunctionType.District},
-                new GroupFunction{Name="Phường - Xã",Order=24, Type=Enums.GroupFunctionType.Ward}
+                new GroupFunction{Name="Phường - Xã",Order=24, Type=Enums.GroupFunctionType.Ward},
 
             };
             _context.GroupFunctions.AddRange(lstGroupFunction);
@@ -398,6 +431,7 @@ namespace Datas
                 new Function{Name="Thêm mới",FunctionCode=Common.Constants.PERMISSION_WARD_ADD,Group = lstGroupFunction[16]},
                 new Function{Name="Sửa",FunctionCode=Common.Constants.PERMISSION_WARD_EDIT,Group = lstGroupFunction[16]},
                 new Function{Name="Xóa",FunctionCode=Common.Constants.PERMISSION_WARD_DELETE,Group = lstGroupFunction[16]},
+
 
             };
             _context.Functions.AddRange(lstFunction);

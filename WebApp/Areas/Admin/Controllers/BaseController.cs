@@ -154,13 +154,14 @@ namespace WebApp.Areas.Admin.Controllers
         private void BuildMenu(string controllerName)
         {
             List<MenuItem> lstMenu = new List<MenuItem>();
+            var url = Request.Path;
+
             try
             {
                 var lstGroup = Authen.GetListGroupFunction();
                 var functionResult = Authen.GetFunctionsByUserId(UserData.Id);
                 if (functionResult.IsSuccess())
                 {
-                    var url = Request.Path;
                     foreach (var group in lstGroup.OrderBy(o => o.Order))
                     {
                         switch (group.Type)
@@ -305,6 +306,21 @@ namespace WebApp.Areas.Admin.Controllers
                                 if (languageMenu != null)
                                     lstMenu.Add(languageMenu);
                                 break;
+                            case Enums.GroupFunctionType.InstrucmentCategory:
+                                AddMenuItem(ref lstMenu,
+                                            controllerName,
+                                            "InstrucmentCategory",
+                                            group,
+                                            functionResult.Value,
+                                            url,
+                                            Constants.PERMISSION_INSTRUCMENT_CATEGORY_VIEW,
+                                            Constants.PERMISSION_INSTRUCMENT_CATEGORY_ADD,
+                                            "fa fa-music");
+                                break;
+
+                            default:
+                                break;
+
                         }
                     }
                 }
@@ -317,8 +333,31 @@ namespace WebApp.Areas.Admin.Controllers
             {
                 Log.LogError(ex, "");
             }
-      
+
             ViewBag.Menu = lstMenu;
+        }
+
+        private void AddMenuItem(ref List<MenuItem> lstMenu,
+                                string currentControllerName,
+                                string menuControllerName,
+                                GroupFunction groupFunction,
+                                List<Function> funcs,
+                                string currentUrl,
+                                string viewPermission,
+                                string addPermission,
+                                string iconClass)
+        {
+            var menu = CreateMenuItem(menuControllerName, groupFunction, funcs, currentUrl,
+                viewPermission, addPermission, iconClass);
+
+            if (currentControllerName.Equals(menuControllerName) && menu != null)
+            {
+                menu.IsOpen = true;
+            }
+            if (menu != null)
+            {
+                lstMenu.Add(menu);
+            }
         }
 
         private MenuItem CreateFileMenu(GroupFunction group, List<Function> functions, string url)
@@ -746,6 +785,47 @@ namespace WebApp.Areas.Admin.Controllers
             }
             return null;
         }
+
+        /// <summary>
+        /// Common function to create menu item
+        /// </summary>
+        /// <param name="group"></param>
+        /// <param name="functions"></param>
+        /// <param name="controllerName"></param>
+        /// <param name="url"></param>
+        /// <param name="viewPermission"></param>
+        /// <param name="addPermission"></param>
+        /// <param name="cssClass"></param>
+        /// <returns></returns>
+        private MenuItem CreateMenuItem(string controllerName, GroupFunction group, List<Function> functions, string url, string viewPermission, string addPermission, string cssClass)
+        {
+            var lstMenu = new List<MenuItem>();
+            if (IsPermisson(viewPermission, functions))
+                lstMenu.Add(new MenuItem { Name = "Danh sách", Url = Url.Action("Index", controllerName), ClassCss = "fa fa-caret-right" });
+            if (IsPermisson(addPermission, functions))
+                lstMenu.Add(new MenuItem { Name = "Thêm mới", Url = Url.Action("Create", controllerName), ClassCss = "fa fa-caret-right" });
+
+            bool isOpen = false;
+            foreach (var item in lstMenu.Where(o => o.Url.Equals(url)))
+            {
+                isOpen = true;
+                item.IsOpen = true;
+            }
+            if (lstMenu.Any())
+            {
+                return new MenuItem { Name = group.Name, Childrens = lstMenu, ClassCss = cssClass, IsOpen = isOpen };
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// For this scope all additional scope will have the same permission with WARD function
+        /// </summary>
+        /// <param name="group"></param>
+        /// <param name="functions"></param>
+        /// <param name="url"></param>
+        /// <returns></returns>
+
 
         private bool IsPermisson(string permissionKey, List<Function> functions)
         {
