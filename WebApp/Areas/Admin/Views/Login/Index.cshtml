@@ -1,0 +1,53 @@
+﻿@using Datas.Models.ViewModels
+@model LoginModel
+@{
+    Layout = "";
+    ViewBag.Title = "Đăng nhập hệ thống";
+}
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="~/css/login.css" asp-append-version="true">
+</head>
+<body>
+    <div class="container index">
+        <h1 class="login-logo"><p style="font-size:0.9rem; color:#fff;margin-bottom:2px;font-weight:400;">PHẦN MỀM</p><a href="/" style="color: #f3f562;"> QUẢN LÝ DÂN TỘC</a></h1>
+        <div class="login">
+            <div class="login-form">
+                <h2 class="login-title">Đăng nhập hệ thống</h2>
+                <div class="login-fields">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="field">
+                            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "input", @style = "top:50%;left:50%;margin: 0 auto;color:black;", @placeholder = "Tên đăng nhập" } })
+                            @Html.ValidationMessageFor(model => model.UserName, "", new { @style = "color:red;" })
+                        </div>
+                        <div class="field">
+                            @Html.PasswordFor(model => model.Password, new { @class = "input", @style = "top:50%;left:50%;margin: 0 auto;color:black;", @placeholder = "Mật khẩu" })
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @style = "color:red;" })
+                        </div>
+                        <div class="login-footer">
+                            <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Đăng nhập</button>
+                        </div>
+                        <div class="login-footer">
+                            @Html.ValidationSummary(true, "", new { @style = "color:red;" })
+                        </div>
+                    }
+                </div>
+            </div>
+
+        </div>
+    </div>
+    @*<div class="footer">
+    </div>*@
+    <script src="~/plugins/jquery/jquery.min.js" asp-append-version="true"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="~/plugins/jquery-ui/jquery-ui.min.js" asp-append-version="true"></script>
+    <script src="~/plugins/jquery-validation/jquery.validate.min.js" asp-append-version="true"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js" asp-append-version="true"></script>
+
+</body>
+</html>

@@ -1,0 +1,97 @@
+﻿@using Common
+@model Datas.Models.ViewModels.UserModel
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+<div class="form-group">
+    <label asp-for="UserName" class="control-label"></label> <span class="text-danger">(*)</span>
+    <span asp-validation-for="UserName" class="text-danger"></span>
+    @if (Model != null && Model.Id > 0)
+    {
+        <input asp-for="UserName" class="form-control" readonly="true" />
+    }
+    else
+    {
+        <input asp-for="UserName" class="form-control" />
+        <span asp-validation-for="UserName" class="text-danger"></span>
+    }
+</div>
+<div class="form-group">
+    <label asp-for="FullName" class="control-label"></label> <span class="text-danger">(*)</span>
+    <input asp-for="FullName" class="form-control" />
+    <span asp-validation-for="FullName" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="Email" class="control-label"></label>
+    <input asp-for="Email" class="form-control" />
+    <span asp-validation-for="Email" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="Birthday" class="control-label"></label>
+    <input asp-for="Birthday" class="form-control" type="text" />
+    <span asp-validation-for="Birthday" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="PhoneNumber" class="control-label"></label>
+    <input asp-for="PhoneNumber" class="form-control" />
+    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="CompanyId" class="control-label"></label>
+    <select class="form-control" asp-for="CompanyId" asp-items="(IEnumerable<SelectListItem>)ViewBag.ListCompanies">
+        <option value="">---Chọn đơn vị---</option>
+    </select>
+    <input type="hidden" asp-for="CompanyId" />
+    <span asp-validation-for="CompanyId" class="text-danger"></span>
+</div>
+<div id="display-select">
+    @Html.Partial("_LoadSelect")
+</div>
+<div class="form-group">
+    <label asp-for="PositionId" class="control-label"></label>
+    <select class="form-control" asp-for="PositionId" asp-items="(IEnumerable<SelectListItem>)ViewBag.ListPosition">
+        <option value="">---Chọn chức vụ---</option>
+    </select>
+    <input type="hidden" asp-for="PositionId" />
+    <span asp-validation-for="PositionId" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="Status" class="control-label"></label>
+    <select class="form-control" asp-for="Status" asp-items="Html.GetEnumSelectList(typeof(Enums.ActiveStatus))">
+    </select>
+    <input type="hidden" asp-for="Status" />
+    <span asp-validation-for="Status" class="text-danger"></span>
+</div>
+<script>
+    $(document).ready(function () {
+        $.datepicker.regional["vi-VN"] =
+        {
+            closeText: "Đóng",
+            prevText: "Trước",
+            nextText: "Sau",
+            currentText: "Hôm nay",
+            monthNames: ["Tháng một", "Tháng hai", "Tháng ba", "Tháng tư", "Tháng năm", "Tháng sáu", "Tháng bảy", "Tháng tám", "Tháng chín", "Tháng mười", "Tháng mười một", "Tháng mười hai"],
+            monthNamesShort: ["Một", "Hai", "Ba", "Bốn", "Năm", "Sáu", "Bảy", "Tám", "Chín", "Mười", "Mười một", "Mười hai"],
+            dayNames: ["Chủ nhật", "Thứ hai", "Thứ ba", "Thứ tư", "Thứ năm", "Thứ sáu", "Thứ bảy"],
+            dayNamesShort: ["CN", "Hai", "Ba", "Tư", "Năm", "Sáu", "Bảy"],
+            dayNamesMin: ["CN", "T2", "T3", "T4", "T5", "T6", "T7"],
+            weekHeader: "Tuần",
+            dateFormat: "dd/mm/yy",
+            firstDay: 1,
+            isRTL: false,
+            showMonthAfterYear: false,
+            yearSuffix: ""
+        };
+
+        $.datepicker.setDefaults($.datepicker.regional["vi-VN"]);
+        $('#Birthday').datepicker({
+            dateFormat: "dd/mm/yy",
+            showStatus: true,
+            showWeeks: true,
+            currentText: 'Now',
+            autoSize: true,
+            gotoCurrent: true,
+            showAnim: 'blind',
+            highlightWeek: true,
+            language: "vi",
+        });
+    });
+</script>

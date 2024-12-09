@@ -1,0 +1,267 @@
+﻿@using Common.Entity.Permission;
+@model Datas.Models.ViewModels.PeopleModel
+
+@{
+    ViewBag.Title = "Chỉnh sửa dân tộc";
+    var buttonText = string.Empty;
+    var isConfirmValue1 = 0;
+    var isConfirmValue2 = 0;
+    var permission = (PeoplePermission)ViewBag.Permission;
+    if (permission.IsEdit)
+    {
+        buttonText = "Cập nhật & ";
+    }
+    switch(Model.ConfirmStatus)
+    {
+        case Common.Enums.PeopleConfirmStatus.Update:
+        case Common.Enums.PeopleConfirmStatus.Reject:
+            isConfirmValue1 = 0;
+            isConfirmValue2 = 1;
+            if (permission.IsConfirm)
+                buttonText = buttonText + " Duyệt";
+            else
+                buttonText = buttonText + " Gửi duyệt";
+            break;
+        case Common.Enums.PeopleConfirmStatus.Request:
+            isConfirmValue1 = 0;
+            isConfirmValue2 = 2;
+            buttonText = buttonText + " Duyệt";
+         break;
+        case Common.Enums.PeopleConfirmStatus.Confirm:
+            isConfirmValue1 = 0;
+            isConfirmValue2 = 3;
+            buttonText = buttonText + " Hủy duyệt";
+        break;
+    }
+}
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Chỉnh sửa dân tộc</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item">
+                            <a asp-area="Admin" asp-controller="Default" asp-action="Index">Trang chủ</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a asp-area="Admin" asp-controller="People" asp-action="Index">Danh sách</a>
+                        </li>
+                        <li class="breadcrumb-item active">
+                            Chỉnh sửa dân tộc
+                        </li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <!-- Main row -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="float-left">
+                                <span>Trường có dấu <span class="text-danger">(*)</span> là bắt buộc</span>
+                            </div>
+                            <div class="float-right">
+                                <a asp-area="Admin" asp-controller="People" asp-action="ImportExcel" class="btn btn-primary">Danh sách</a>
+                            </div>
+                        </div>
+                        <form asp-action="Edit" asp-controller="People" asp-area="Admin">
+                            <div class="card-body">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <input type="hidden" asp-for="Id" />
+
+                                @Html.Partial("_CreateOrEdit")
+                            </div>
+                            <div class="card-footer">
+                                <div class="row">
+                                    @if (permission.IsEdit)
+                                    {
+                                        <div class="form-group pl-2 pr-2">
+                                            <input type="submit" value="Cập nhật" class="btn btn-primary" id="btnSave" onclick="Save()" />
+                                        </div>
+                                    }
+
+                                    @if ((permission.IsRequest && Model.ConfirmStatus == Common.Enums.PeopleConfirmStatus.Update) || (permission.IsConfirm && Model.ConfirmStatus == Common.Enums.PeopleConfirmStatus.Request) || (permission.IsConfirm && Model.ConfirmStatus == Common.Enums.PeopleConfirmStatus.Confirm) || (permission.IsReject && Model.ConfirmStatus == Common.Enums.PeopleConfirmStatus.Reject))
+                                    {
+                                        <div class="form-group pl-2 pr-2">
+                                            <input type="button" value="@buttonText" class="btn btn-primary" data-toggle="modal" data-target="#modal-save" />
+                                        </div>
+                                    }
+                                    <div class="form-group pl-2 pr-2">
+                                        <input type="button" value="Ý kiến xuất bản" class="btn btn-primary" id="btnH"/>
+                                    </div>
+                                </div>
+                                @if ((permission.IsRequest && Model.ConfirmStatus == Common.Enums.PeopleConfirmStatus.Update) || (permission.IsConfirm && Model.ConfirmStatus == Common.Enums.PeopleConfirmStatus.Request) || (permission.IsConfirm && Model.ConfirmStatus == Common.Enums.PeopleConfirmStatus.Confirm) || (permission.IsReject && Model.ConfirmStatus == Common.Enums.PeopleConfirmStatus.Reject))
+                                {
+                                    <div class="modal fade" id="modal-save">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">@buttonText</h4>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    @if (permission.IsRequest && permission.IsConfirm && permission.IsReject)
+                                                    {
+                                                        @if (Model.ConfirmStatus == Common.Enums.PeopleConfirmStatus.Update)
+                                                        {
+                                                            <div class="form-group">
+                                                                <label class="control-label">Tùy chọn </label>
+                                                                <select class="form-control" id="confirmValue" name="confirmValue">
+                                                                    <option value="1">Gửi duyệt</option>
+                                                                    <option value="2">Duyệt</option>
+                                                                </select>
+                                                            </div>
+                                                        }
+                                                        else if (Model.ConfirmStatus == Common.Enums.PeopleConfirmStatus.Request)
+                                                        {
+                                                            <div class="form-group">
+                                                                <select class="form-control" id="confirmValue" name="confirmValue">
+                                                                    <option value="2">Duyệt</option>
+                                                                    <option value="3">Hủy</option>
+                                                                </select>
+                                                            </div>
+                                                        }
+                                                        else if (Model.ConfirmStatus == Common.Enums.PeopleConfirmStatus.Reject)
+                                                        {
+                                                            <div class="form-group">
+                                                                <select class="form-control" id="confirmValue" name="confirmValue">
+                                                                    <option value="1">Gửi duyệt</option>
+                                                                    <option value="2">Duyệt</option>
+                                                                </select>
+                                                            </div>
+                                                        }
+                                                    }
+                                                    else if (permission.IsRequest && permission.IsConfirm)
+                                                    {
+                                                        @if (Model.ConfirmStatus == Common.Enums.PeopleConfirmStatus.Update)
+                                                        {
+                                                            <div class="form-group">
+                                                                <label class="control-label">Tùy chọn </label>
+                                                                <select class="form-control" id="confirmValue" name="confirmValue">
+                                                                    <option value="1">Gửi duyệt</option>
+                                                                    <option value="2">Duyệt</option>
+                                                                </select>
+                                                            </div>
+                                                        }
+                                                        else if (Model.ConfirmStatus == Common.Enums.PeopleConfirmStatus.Request)
+                                                        {
+                                                            <div class="form-group">
+                                                                <select class="form-control" id="confirmValue" name="confirmValue">
+                                                                    <option value="2">Duyệt</option>
+                                                                    <option value="3">Hủy</option>
+                                                                </select>
+                                                            </div>
+                                                        }
+                                                    }
+                                                    else if (permission.IsConfirm && permission.IsReject)
+                                                    {
+                                                        if (Model.ConfirmStatus == Common.Enums.PeopleConfirmStatus.Update)
+                                                        {
+                                                            isConfirmValue2 = 2;
+                                                        }
+                                                        if (Model.ConfirmStatus == Common.Enums.PeopleConfirmStatus.Request)
+                                                        {
+                                                            <div class="form-group">
+                                                                <select class="form-control" id="confirmValue" name="confirmValue">
+                                                                    <option value="2">Duyệt</option>
+                                                                    <option value="3">Hủy</option>
+                                                                </select>
+                                                            </div>
+                                                        }
+                                                        else if (Model.ConfirmStatus == Common.Enums.PeopleConfirmStatus.Reject)
+                                                        {
+                                                            <div class="form-group">
+                                                                <select class="form-control" id="confirmValue" name="confirmValue">
+                                                                    <option value="2">Duyệt</option>
+                                                                    <option value="3">Hủy</option>
+                                                                </select>
+                                                            </div>
+                                                        }
+                                                    }
+                                                    <div class="form-group">
+                                                        <label asp-for="ConfirmData" class="control-label"></label>
+                                                        <textarea asp-for="ConfirmData" class="form-control"></textarea>
+                                                        <input type="hidden" asp-for="IsConfirm" />
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer justify-content-between">
+                                                    <button type="button" class="btn btn-primary" onclick="SaveConfirm()">Cập nhật</button>
+                                                </div>
+                                            </div>
+                                            <!-- /.modal-content -->
+                                        </div>
+                                        <!-- /.modal-dialog -->
+                                    </div>
+                                }
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.row (main row) -->
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+<script>
+    $("#btnH").click(function () {
+        $.ajax({
+            url: "LoadConfirmHistory",
+            type: "POST",
+            data: { id: @Model.Id },
+            beforeSend: function (xhr) {
+                $("#ajax-loading").modal("show");
+            },
+            success: function (data) {
+                $("#modal-show-history-data").html(data);
+                $("#modal-show-history").modal('show');
+            },
+            complete: function () {
+                $("#ajax-loading").modal("hide");
+            },
+        });
+    });
+</script>
+<script>
+    var isConfirmValue2 = @isConfirmValue2;
+    var check = false;
+    function Save() {
+        if (check == false) {
+            $("#IsConfirm").val(@isConfirmValue1);
+        }
+        check = false;
+    }
+    function SaveConfirm() {
+        $("#IsConfirm").val(isConfirmValue2);
+        $("#modal-save").modal('hide');
+        check = true;
+        $("#btnSave").trigger("click");
+    }
+</script>
+<script type="text/javascript">
+    $("#confirmValue").change(function () {
+        var warid = this.options[this.selectedIndex].value;
+        isConfirmValue2 = warid;
+    });
+</script>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+

@@ -1,0 +1,11 @@
+﻿@if (!string.IsNullOrEmpty(ViewBag.FileData))
+{
+    <object id="view-file" width="100%" height='900' type='@ViewBag.Mime' style="border: 1px solid;" data="data:@(ViewBag.Mime);base64, @ViewBag.FileData">
+    </object>
+}
+else if (ViewBag.ViewExtent != null && (bool)ViewBag.ViewExtent == true)
+{
+    <iframe id="view-file-extent" width="100%" height='900' style="border: 1px solid;" src="https://view.officeapps.live.com/op/embed.aspx?src=@Uri.EscapeDataString(ViewBag.Host + ViewBag.Action)"></iframe>
+    @*  <iframe id="view-file-extent" width="100%" height='900' style="border: 1px solid;" src="https://view.officeapps.live.com/op/embed.aspx?src=@Uri.EscapeDataString("https://donganh360.vn/Content/template/H_Example.xlsx")"></iframe> *@
+}
+

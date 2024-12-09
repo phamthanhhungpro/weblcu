@@ -1,0 +1,148 @@
+﻿@using Common
+@using Common.Entity.Permission
+@model List<Datas.Models.DomainModels.People>
+<table class="table table-bordered table-hover" id="list-news">
+    <thead>
+        <tr style="text-align:center">
+            <th style="vertical-align:middle; text-align:center; width:5%">
+                Số TT
+            </th>
+            <th style="vertical-align:middle; text-align:center; width:10%">
+               Tên dân tộc
+            </th>
+            <th style="vertical-align:middle; text-align:center; width:15%">
+               Địa chỉ
+            </th>
+            <th style="vertical-align:middle; text-align:center; width:10%">
+               Dân số
+            </th>
+            <th style="vertical-align:middle; text-align:center; width:10%">
+               Lịch sử
+            </th>
+            <th style="vertical-align:middle; text-align:center; width:10%">
+                Vị trí
+            </th>
+            <th style="vertical-align:middle; text-align:center; width:15%">
+                Chi tiết
+            </th>
+            <th style="vertical-align:middle; text-align:center; width:10%">
+                Trực thuộc dân tộc
+            </th>
+            <th style="vertical-align:middle; text-align:center; width:10%">
+                Dân tộc phụ thuộc
+            </th>
+            <th style="vertical-align:middle; text-align:center; width:5%">
+                Lượt xem
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model!=null)
+        {
+            int index = 1;
+            @foreach (var item in Model)
+            {
+                <tr class="row-@item.Id">
+                    <td>
+                        @index
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Address)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Population)
+                    </td>
+                    <td style="word-wrap: break-word;">
+                        @Html.DisplayFor(modelItem => item.History)
+                    </td>
+                    <td>
+                        @foreach (var loca in item.Locations.Where(o => o.DeleteStatus == Enums.DeleteStatus.Normal))
+                        {
+                            <div>Vĩ độ (lat): @loca.Lat - Kinh độ (long): @loca.Long</div>
+                        }
+                    </td>
+                    <td style="word-wrap: break-word;">
+                        @Html.DisplayFor(modelItem => item.Details)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Parent.Name)
+                    </td>
+                    <td>
+                        @foreach (var peo in item.Childrens.Where(o => o.DeleteStatus == Enums.DeleteStatus.Normal))
+                        {
+                            <span>@peo.Name</span>
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.View)
+                    </td>
+
+                </tr>
+                index++;
+            }
+        }
+    </tbody>
+</table>
+<script type="text/javascript">
+    var table;
+
+    $(function () {
+        LoadAjaxNew();
+    });
+
+    function LoadAjaxNew() {
+        table = $('#list-news').DataTable({
+            "buttons": ["copy",
+                {
+                    extend: 'csv', exportOptions: {
+                        columns: [':visible:not(.not-export-col):not(.hidden)'],
+                    }
+                },
+                {
+                    extend: 'excel', exportOptions: {
+                        columns: [':visible:not(.not-export-col):not(.hidden)'],
+                    }
+                },
+                {
+                    extend: 'pdf', exportOptions: {
+                        columns: [':visible:not(.not-export-col):not(.hidden)'],
+                    }
+                }, 
+                {
+                    extend: 'print', exportOptions: {
+                        columns: [':visible:not(.not-export-col):not(.hidden)'],
+                    }
+                },
+                { extend: 'colvis', text: 'Cài đặt cột' }],
+            "processing": true,
+            "serverSide": false,
+            "orderMulti": false,
+            "destroy": true,
+            "scrollX": true,
+            "searchHighlight": true,
+            "language": {
+                "sProcessing": "Đang xử lý...",
+                "sLengthMenu": "Xem _MENU_ mục",
+                "sZeroRecords": "Không tổn tại dữ liệu",
+                "sInfo": "Đang xem _START_ đến _END_ trong tổng số _TOTAL_ mục",
+                "sInfoEmpty": "Đang xem 0 đến 0 trong tổng số 0 mục",
+                "sInfoFiltered": "(được lọc từ _MAX_ mục)",
+                "sInfoPostFix": "",
+                "sSearch": "Tìm kiếm: ",
+                "sUrl": "",
+                "oPaginate": {
+                    "sFirst": "Đầu",
+                    "sPrevious": "Trước",
+                    "sNext": "Tiếp",
+                    "sLast": "Cuối"
+                }
+            },
+            "pagingType": 'full_numbers', 'sPaging': 'pagination',
+            "bSortable": false,
+        }).buttons().container().appendTo('#list-news_wrapper .col-md-6:eq(0)');
+    }
+
+</script>

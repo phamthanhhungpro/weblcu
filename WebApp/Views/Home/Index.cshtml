@@ -1,0 +1,472 @@
+﻿@using Datas.Models.ViewModels
+@using Datas.Entity
+@{
+    var setting = (SettingModel)ViewBag.Setting;
+    //var lstPeopleCategories = (List<PeopleCategoryModel>)ViewBag.PeopleCategories;
+    var lstPeople = (List<PeopleModel>)ViewBag.Peoples;
+    var lstNationalCostume = (List<NationalCostumeModel>)ViewBag.NationalCostumes;
+    //var lstNews = (List<NewsInfo>)ViewBag.News;
+    var lstTopNews = (List<NewsModel>)ViewBag.TopNews;
+    //var lstImages = (List<Image360Model>)ViewBag.Image360;
+    //var lstMapType = (List<HistoricalRelicTypeModel>)ViewBag.ListMapType;
+    var currentMonth = DateTime.Now.Month;
+    var detailsName = "Xem chi tiết";
+    var detailsEthnicMinorityLink = "";
+    var detailsTraditionalCostumeLink = "";
+    var detailsNewsLink = "";
+    if (string.IsNullOrEmpty(ViewBag.SubDomain))
+    {
+        detailsName = "Xem chi tiết";
+        detailsEthnicMinorityLink = "/dan-toc/chi-tiet";
+        detailsTraditionalCostumeLink = "/trang-phuc/chi-tiet";
+        detailsNewsLink = "/tin-tuc/chi-tiet";
+    }
+    else
+    {
+        detailsName = "Details";
+        detailsEthnicMinorityLink = "/ethnic-minority/details";
+        detailsTraditionalCostumeLink = "/traditional-costume/details";
+        detailsNewsLink = "/news/details";
+    }
+}
+<!--  Phần Banner 360  -->
+@if (setting !=null && !string.IsNullOrEmpty(setting.ImageLink))
+{
+    <section id="banner360">
+        <div class="iframe-360">
+            <iframe src="@setting.ImageLink" frameborder="0"></iframe>
+        </div>
+
+    </section>
+}
+
+<!--  Phần dân tộc  -->
+<section id="people">
+    <div class="container">
+        <div class="people-title">
+            @if (string.IsNullOrEmpty(ViewBag.SubDomain))
+            {
+                <h2>Danh mục dân tộc thiểu số</h2>
+                <p>Khám phá các dân tộc thiểu số trên địa bàn tỉnh Lai Châu</p>
+            }
+            else
+            {
+                <h2>LIST OF ETHNIC MINORITY</h2>
+                <p>Explore ethnic minorities in Lai Chau province</p>
+            }
+        </div>
+        <div class="people-slide">
+            @* @foreach(var item in lstPeopleCategories)
+            {
+                <div class="item-people-slide">
+                    <div class="item-people-content">
+                        <div class="people-img">
+                            <a href="/danh-muc-dan-toc/@item.Url"><img src="@item.Image" alt=""></a>
+                        </div>
+                        <div class="people-type">
+                            <a href="/danh-muc-dan-toc/@item.Url">@item.Name</a>
+                        </div>
+                    </div>
+                </div>
+            } *@
+            @foreach (var item in lstPeople)
+            {
+                <div class="item-people-slide">
+                    <div class="item-people-content">
+                        <div class="people-img">
+                            <a href="@detailsEthnicMinorityLink/@item.Url"><img src="@item.Image0" alt=""></a>
+                        </div>
+                        <div class="people-type">
+                            <a href="@detailsEthnicMinorityLink/@item.Url">@item.Name</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+@if (lstNationalCostume.Count >0)
+{
+    <!--  Phần Places  -->
+    <section id="places">
+        <div class="row">
+            <div class="places-title">
+                @if (string.IsNullOrEmpty(ViewBag.SubDomain))
+                {
+                    <h2>TRANG PHỤC TRUYỀN THỐNG</h2>
+                    <p>Khám phá trang phục truyền thống các dân tộc thiểu số tỉnh Lai Châu</p>
+                }
+                else
+                {
+                    <h2>TRADITIONAL COSTUME</h2>
+                    <p>Discover the traditional costumes of ethnic minorities in Lai Chau province</p>
+                }
+               
+            </div>
+        </div>
+        <div class="row">
+            <div class="container-fluid">
+                <div class="places-slide">
+                    @foreach (var item in lstNationalCostume)
+                    {
+                        <div class="item-slide">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="item-slide-img">
+                                        <a href="@detailsTraditionalCostumeLink/@item.Url"><img src="@item.Image0" alt=""></a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="item-slide-content">
+                                        <a href="@detailsTraditionalCostumeLink/@item.Url">@item.Name</a>
+                                        <span>@item.Details</span>
+                                    </div>
+                                    <div class="item-slide-btn">
+                                        <a href="@detailsTraditionalCostumeLink/@item.Url">@detailsName</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </section>
+}
+
+
+<!--  Phần Event  -->
+<section id="events">
+    <div class="row">
+        <div class="events-title">
+            @if (string.IsNullOrEmpty(ViewBag.SubDomain))
+            {
+                <h2>Tin tức - sự kiện</h2>
+                <p>Những Tin tức - Sự kiện Văn hoá, Du lịch tiêu biểu</p>
+            }
+            else
+            {
+                <h2>News and events</h2>
+                <p>Typical News - Cultural and Tourism Events</p>
+            }
+
+        </div>
+    </div>
+
+    <div class="container-fluid combo-slide-1">
+        <div class="events-month-slide">
+           @*  @for (var index = currentMonth; index <= 12; index++)
+            {
+                <div class="item-month-slide">
+                    <p>Tháng @index</p>
+                </div>
+            }
+            @if (currentMonth > 1)
+            {
+                for (var index = 1; index < currentMonth; index++)
+                {
+                    <div class="item-month-slide">
+                        <p>Tháng @index</p>
+                    </div>
+                }
+            } *@
+      @*       @foreach(var item in lstTopNews)
+            {
+                <div class="item-month-slide">
+                    <p>item.Id</p>
+                </div>
+            } *@
+        </div>
+    </div>
+
+    <div class="container-fluid combo-slide-2">
+        <div class="events-slide">
+            @foreach(var item in lstTopNews)
+            {
+                <div class="item-events-slide ">
+                    <div class="events-slide-img">
+                        <img src="@item.Image" alt="">
+                    </div>
+                    <div class="events-slide-content">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-7 col-sm-12">
+                                <div class="events-slide-content-box">
+                                    <div class="events-slide-detail">
+                                        <a href="@detailsNewsLink/@item.Url">
+                                            <h3>@item.Title</h3>
+                                        </a>
+                                        <p>@item.Details</p>
+                                    </div>
+                                    <div class="events-slide-btn">
+                                        <a href="@detailsNewsLink/@item.Url">@detailsName</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+          @*   @for (var index = currentMonth; index <= 12; index++)
+            {
+                var item = lstNews[index - 1];
+                if (item.isDisplay)
+                {
+                    <div class="item-events-slide ">
+                        <div class="events-slide-img">
+                            <img src="@item.Image" alt="">
+                        </div>
+                        <div class="events-slide-content">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-7 col-sm-12">
+                                    <div class="events-slide-content-box">
+                                        <div class="events-slide-detail">
+                                            <a href="/tin-tuc/chi-tiet/@item.Url">
+                                                <h3>@item.Title</h3>
+                                            </a>
+                                            <p>@item.Details</p>
+                                        </div>
+                                        <div class="events-slide-btn">
+                                            <a href="/tin-tuc/chi-tiet/@item.Url">Xem chi tiết</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="item-events-slide">
+                        <div class="events-slide-img">
+                            <img src="~/fe/images/destination-slide.jpg" alt="">
+                        </div>
+                        <div class="events-slide-content">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-7 col-sm-12">
+                                    <div class="events-slide-content-box">
+                                        <div class="events-slide-detail">
+                                            <h3>Chưa có sự kiện</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            @if (currentMonth > 1)
+            {
+                for (var index = 1; index < currentMonth; index++)
+                {
+                    var item = lstNews[index - 1];
+                    if (item.isDisplay)
+                    {
+                        <div class="item-events-slide ">
+                            <div class="events-slide-img">
+                                <img src="@item.Image" alt="">
+                            </div>
+                            <div class="events-slide-content">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-7 col-sm-12">
+                                        <div class="events-slide-content-box">
+                                            <div class="events-slide-detail">
+                                                <a href="/tin-tuc/chi-tiet/@item.Url">
+                                                    <h3>@item.Title</h3>
+                                                </a>
+                                                <p>@item.Details</p>
+                                            </div>
+                                            <div class="events-slide-btn">
+                                                <a href="/tin-tuc/chi-tiet/@item.Url">Xem chi tiết</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="item-events-slide">
+                            <div class="events-slide-img">
+                                <img src="~/fe/images/destination-slide.jpg" alt="">
+                            </div>
+                            <div class="events-slide-content">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-7 col-sm-12">
+                                        <div class="events-slide-content-box">
+                                            <div class="events-slide-detail">
+                                                <h3>Chưa có sự kiện</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            } *@
+        </div>
+    </div>
+
+    <div class="event-bg">
+        <img src="~/fe/images/bg3.png" alt="">
+    </div>
+
+</section>
+
+<section id="map">
+    <div class="row">
+        <div class="map-title">
+            @if (string.IsNullOrEmpty(ViewBag.SubDomain))
+            {
+                <h2>Bản đồ Số</h2>
+                <p>Bản đồ số dân tộc thiểu số tỉnh Lai Châu</p>
+            }
+            else
+            {
+                <h2>DIGITAL MAP</h2>
+                <p>Map of ethnic minorities in Lai Chau province</p>
+            }
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="map-iframe">
+            @* <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d29793.980453131055!2d105.81636413072086!3d21.022778419188782!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab9bd9861ca1%3A0xe7887f7b72ca17a9!2zSMOgIE7hu5lpLCBWaeG7h3QgTmFt!5e0!3m2!1svi!2s!4v1700124380662!5m2!1svi!2s"
+                    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> *@
+            <div id="map_HS" class="leaflet-container leaflet-touch leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom" tabindex="5" style="position: relative; width:100%; height: 100%;">
+            </div>
+            <!-- Lọc di tích-->
+            <div class="map-filter">
+                <div class="map-filter-list-inner">
+                    <div class="input-group-filter">
+                        @if (string.IsNullOrEmpty(ViewBag.SubDomain))
+                        {
+                            <div class="map-filter-title">
+                                DANH MỤC DÂN TỘC THIỂU SỐ
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="map-filter-title">
+                                LIST OF ETHNIC MINORITY
+                            </div>
+                        }
+
+                        @* @if (lstPeopleCategories.Count > 0)
+                        {
+                            <div class="map-filter-list">
+                                <ul>
+                                    <li>
+                                        <input id="selectAll" type="checkbox" checked="checked" onclick="checkAll(this);">
+                                        <label for='selectAll'>Chọn tất cả</label>
+                                    </li>
+                                    @foreach (var item in lstPeopleCategories)
+                                    {
+                                        <li>
+                                            <input id="check-@item.Id" type="checkbox" onclick="initMap();" name="check-child" value="@item.Id" checked="checked" />
+                                            <label for="check-@item.Id">@item.Name</label>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        } *@
+                        @if (lstPeople.Count > 0)
+                        {
+                            <div class="map-filter-list">
+                                <ul>
+                                    <li>
+                                        <input id="selectAll" type="checkbox" checked="checked" onclick="checkAll(this);">
+                                        <label for='selectAll'>@(string.IsNullOrEmpty(ViewBag.SubDomain)? "CHỌN TẤT CẢ":"CHECK ALL")</label>
+                                    </li>
+                                    @foreach (var item in lstPeople)
+                                    {
+                                        <li>
+                                            <input id="check-@item.Id" type="checkbox" onclick="initMap();" name="check-child" value="@item.Id" checked="checked" />
+                                            <label for="check-@item.Id">@item.Name</label>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="map-filter-close">
+                <i class="fa-solid fa-angle-down rotate"></i>
+            </div>
+            <!--Kết thúc Lọc -->
+
+
+        </div>
+    </div>
+
+</section>
+<script type="text/javascript">
+    var keyMap = 'efe2301638f6af0bd594f5f607d6dc86ea53e3406d158d44';
+
+    var locations = @Html.Raw(ViewBag.ListMap);
+    //locations = [];
+    const map = L.map('map_HS', {
+        center: [22.389144, 103.475724],
+        zoom: 15,
+    });
+
+    const pointLayer = L.layerGroup().addTo(map);
+
+    function initMap() {
+        //  L.tileLayer('https://maps.vnpost.vn/api/tm/{z}/{x}/{y}@@2x.png?apikey='+keyMap, {
+        //    attribution: 'Map data &copy; <a href="https://vmap.vn">Vmap</a>, <a href="http://openstreetmap.org">OSM Contributors</a>',
+        //    maxZoom: 18,
+        //    id: 'Vmap.streets',
+        //    accessToken: keyMap
+        //}).addTo(map);
+
+        L.tileLayer('https://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+            maxZoom: 18,
+            id: 'Vmap.streets',
+            subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+        }).addTo(map);
+
+        var icon, y, i;
+
+        pointLayer.clearLayers();
+        var checkboxes = document.getElementsByName("check-child");
+        for (var j = 0; j < checkboxes.length; j++) {
+            if (checkboxes[j].checked) {
+                var value = checkboxes[j].value;
+                for (i = 0; i < locations.length; i++) {
+                    if (value == locations[i][4]) {
+                        icon = L.icon({
+                            iconUrl: locations[i][3],
+                            iconSize: [40, 40],
+                        });
+                        L.marker([locations[i][1], locations[i][2]], { icon: icon }).bindPopup(locations[i][0]).on('mouseover', function (e) {
+                            this.openPopup();
+                        }).addTo(pointLayer);
+                    }
+                }
+            }
+        }
+    }
+    $(document).ready(function () {
+        initMap();
+    });
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-4E7Q3K90Z3');
+
+    function checkAll(source, nameLoad) {
+        var checkboxes = document.getElementsByName("check-child");
+        for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i] != source)
+                checkboxes[i].checked = source.checked;
+        }
+
+        initMap();
+    }
+</script>

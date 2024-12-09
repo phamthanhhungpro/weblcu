@@ -1,0 +1,371 @@
+﻿@using Datas.Models.ViewModels
+@using System.Net
+@model PeopleModel
+@{
+    var lstNationalCostume = (List<NationalCostumeModel>)ViewBag.NationalCostumes;
+    var lstOtherPeople = (List<PeopleModel>)ViewBag.OtherPeoples;
+    var lstOtherPeopleCategory = (List<PeopleCategoryModel>)ViewBag.OtherPeopleCategories;
+    var lstLocation = Model.GetListLocationDisplay();
+
+    var detailsEthnicMinorityLink = "";
+    var detailsTraditionalCostumeLink = "";
+    var detailsNewsLink = "";
+    if (string.IsNullOrEmpty(ViewBag.SubDomain))
+    {
+        detailsEthnicMinorityLink = "/dan-toc/chi-tiet";
+        detailsTraditionalCostumeLink = "/trang-phuc/chi-tiet";
+        detailsNewsLink = "/tin-tuc/chi-tiet";
+    }
+    else
+    {
+        detailsEthnicMinorityLink = "/ethnic-minority/details";
+        detailsTraditionalCostumeLink = "/traditional-costume/details";
+        detailsNewsLink = "/news/details";
+    }
+    var url = ViewBag.Host + detailsEthnicMinorityLink + "/" + Model.Url;
+}
+@if (!string.IsNullOrEmpty(Model.Image360))
+{
+    <section id="relics-360">
+
+        <div class="relics-iframe">
+            <iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="true" src="@Model.Image360" frameborder="0"></iframe>
+        </div>
+
+    </section>
+}
+<section id="relics-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="relics-infor">
+                    <div class="relics-infor-detail">
+                        <h3>@Model.Name.ToUpper()</h3>
+                 @*        @if (!string.IsNullOrEmpty(Model.Address))
+                        {
+                            <p><i><i class="fa-solid fa-location-dot"></i></i>@Model.Address</p>
+                        } *@
+                        <!-- <p><i><i class="fa-solid fa-phone"></i></i>0243 851 1306</p> -->
+                    </div>
+                    <div class="relics-infor-btn">
+                        <div id="fbShare" class="fb-share-button" data-href="@url" data-layout="button" data-size="large">
+                            <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=@WebUtility.UrlEncode(url)" class="fb-xfbml-parse-ignore">
+                                <i class="fa-brands fa-facebook"></i>Share
+                            </a>
+                        </div>
+                        @*<div class="fb-like" data-href="@url" data-width="" data-layout="" data-action="" data-size="large" data-share="true"></div>*@
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="slide-relics-image">
+                    @if (!string.IsNullOrEmpty(Model.Image0))
+                    {
+                        <div class="item-relics-image">
+                            <img src="@Model.Image0" alt="">
+                        </div>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.Image1))
+                    {
+                        <div class="item-relics-image">
+                            <img src="@Model.Image1" alt="">
+                        </div>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.Image2))
+                    {
+                        <div class="item-relics-image">
+                            <img src="@Model.Image2" alt="">
+                        </div>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.Image3))
+                    {
+                        <div class="item-relics-image">
+                            <img src="@Model.Image3" alt="">
+                        </div>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.Image4))
+                    {
+                        <div class="item-relics-image">
+                            <img src="@Model.Image4" alt="">
+                        </div>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.Image5))
+                    {
+                        <div class="item-relics-image">
+                            <img src="@Model.Image5" alt="">
+                        </div>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.Image6))
+                    {
+                        <div class="item-relics-image">
+                            <img src="@Model.Image6" alt="">
+                        </div>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.Image7))
+                    {
+                        <div class="item-relics-image">
+                            <img src="@Model.Image7" alt="">
+                        </div>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.Image8))
+                    {
+                        <div class="item-relics-image">
+                            <img src="@Model.Image8" alt="">
+                        </div>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.Image9))
+                    {
+                        <div class="item-relics-image">
+                            <img src="@Model.Image9" alt="">
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="col-lg-12">
+                <div class="relics-text">
+                    @if (string.IsNullOrEmpty(ViewBag.SubDomain))
+                    {
+                        <h4>GIỚI THIỆU</h4>
+                    }
+                    else
+                    {
+                        <h4>INTRODUCE</h4>
+                    }
+      
+                    @if (!string.IsNullOrEmpty(Model.Content))
+                    {
+                        @Html.Raw(Model.Content)
+                    }
+                     @if (!string.IsNullOrEmpty(Model.Content1))
+                    {
+                        @Html.Raw(Model.Content1)
+                    }
+                    @if (!string.IsNullOrEmpty(Model.Content2))
+                    {
+                        @Html.Raw(Model.Content2)
+                    }
+                    @if (!string.IsNullOrEmpty(Model.Content3))
+                    {
+                        @Html.Raw(Model.Content3)
+                    }
+                    @if (!string.IsNullOrEmpty(Model.Content4))
+                    {
+                        @Html.Raw(Model.Content4)
+                    }
+                    @if (!string.IsNullOrEmpty(Model.Content5))
+                    {
+                        @Html.Raw(Model.Content5)
+                    }
+                </div>
+            </div>
+
+     @*        @if(lstOtherPeopleCategory.Count >0)
+            {
+                <div class="col-lg-12">
+                    <div class="people-class-title">Phân loại dân tộc</div>
+                    <div class="people-class">
+                        @foreach (var item in lstOtherPeopleCategory)
+                        {
+                            <div class="item-people-class">
+                                <div class="people-class-img">
+                                    <a href="/danh-muc-dan-toc/@item.Url"><img src="@item.Image" alt=""></a>
+                                </div>
+                                <div class="people-class-name">
+                                    <a href="">@item.Name</a>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            } *@
+
+            @if(lstNationalCostume.Count >0)
+            {
+                <div class="col-lg-12">
+                    @if (string.IsNullOrEmpty(ViewBag.SubDomain))
+                    {
+                        <div class="national-costume-title">
+                            Trang phục dân tộc
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="national-costume-title">
+                            Traditional Costume
+                        </div>
+                    }
+                 
+                    <div class="national-costume-slide">
+                        @foreach (var item in lstNationalCostume)
+                        {
+                            <div class="item-national-costume">
+                                <div class="national-costume-content">
+                                    <div class="national-costume-img">
+                                        <img src="@item.Image0" alt="">
+                                    </div>
+                                    <div class="national-costume-name">
+                                        <a href="@detailsTraditionalCostumeLink/@item.Url">@item.Name</a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                </div>
+            }
+
+            @if (lstLocation.Count >0)
+            {
+                var location = Model.GetFirstLocationDisplay();
+                <div class="col-lg-12">
+                    <div class="relics-map">
+                        @if (string.IsNullOrEmpty(ViewBag.SubDomain))
+                        {
+                            <h4>BẢN ĐỒ</h4>
+                            <div id="map_HS" class="leaflet-container leaflet-touch leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom" tabindex="5" style="position: relative; width:100%; height: 450px;">
+                                @if (location != null)
+                                {
+                                    <div class="map-btn">
+                                        <a target="_blank" href="https://www.google.com/maps/dir/@location.Lat ,+@location.Long/">Xem chỉ đường</a>
+                                    </div>
+                                }
+
+                            </div>
+                        }
+                        else
+                        {
+                            <h4>MAP</h4>
+                            <div id="map_HS" class="leaflet-container leaflet-touch leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom" tabindex="5" style="position: relative; width:100%; height: 450px;">
+                                @if (location != null)
+                                {
+                                    <div class="map-btn">
+                                        <a target="_blank" href="https://www.google.com/maps/dir/@location.Lat ,+@location.Long/">See directions</a>
+                                    </div>
+                                }
+
+                            </div>
+                        }
+                     
+                    </div>
+                </div>
+            }
+
+            @if (lstOtherPeople.Count > 0)
+            {
+                <div class="col-lg-12">
+                    <div class="relics-destinations">
+                        @if (string.IsNullOrEmpty(ViewBag.SubDomain))
+                        {
+                            <h4>Các dân tộc khác</h4>
+                        }
+                        else
+                        {
+                            <h4>OTHER ETHNICS</h4>
+                        }
+
+                        <div class="relics-destinations-slide">
+                            @foreach (var item in lstOtherPeople)
+                            {
+                                <div class="item-relics-destinations">
+                                    <div class="relics-destinations-img">
+                                        <a href="@detailsEthnicMinorityLink/@item.Url">
+                                            <img src="@item.Image0" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="relics-destinations-name">
+                                        <a href="@detailsEthnicMinorityLink/@item.Url">
+                                            @item.Name
+                                        </a>
+                                    </div>
+                                @*     <div class="relics-destinations-box-addr">
+                                        <div class="relics-destinations-addr">
+                                            <p>
+                                                <span style="color: #4FA3DE"><i class="fa-solid fa-location-dot"></i>&nbsp;&nbsp;</span>
+                                                @item.Address
+                                             </p>
+                                        </div>
+                                        <div class="relics-destinations-distance">
+                                            @{
+                                                var data = @item.CaclulerDistance(Model.Lat, Model.Long);
+                                            }
+                                            @if (!string.IsNullOrEmpty(data))
+                                            {
+                                                <p>@data</p>
+                                            }
+                                        </div>
+                                    </div> *@
+                                </div>
+
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+<script type="text/javascript">
+    var keyMap = 'efe2301638f6af0bd594f5f607d6dc86ea53e3406d158d44';
+    var a = 22.389144;
+    var b = 103.475724;
+    var locations = @Html.Raw(Model.BuildListMap(ViewBag.SubDomain));
+    if (locations.length > 0) {
+        a = parseFloat(locations[0][1]);
+        b = parseFloat(locations[0][2]);
+    }
+    
+    const map = L.map('map_HS', {
+        center: [a, b],
+        zoom: 15,
+    });
+
+  
+
+    const pointLayer = L.layerGroup().addTo(map);
+
+    function initMap() {
+        //  L.tileLayer('https://maps.vnpost.vn/api/tm/{z}/{x}/{y}@@2x.png?apikey='+keyMap, {
+        //    attribution: 'Map data &copy; <a href="https://vmap.vn">Vmap</a>, <a href="http://openstreetmap.org">OSM Contributors</a>',
+        //    maxZoom: 18,
+        //    id: 'Vmap.streets',
+        //    accessToken: keyMap
+        //}).addTo(map);
+
+        L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+            maxZoom: 18,
+            id: 'Vmap.streets',
+            subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+        }).addTo(map);
+
+        var icon, y, i;
+
+        pointLayer.clearLayers();
+        for (i = 0; i < locations.length; i++) {
+            icon = L.icon({
+                iconUrl: locations[i][3],
+                iconSize: [40, 40],
+            });
+            L.marker([locations[i][1], locations[i][2]], { icon: icon }).bindPopup(locations[i][0]).on('mouseover', function (e) {
+                this.openPopup();
+            }).addTo(pointLayer);
+        }
+    }
+    $(document).ready(function () {
+        initMap();
+    });
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-4E7Q3K90Z3');
+    function checkAll(source, nameLoad) {
+        var checkboxes = document.getElementsByName("check-child");
+        for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i] != source)
+                checkboxes[i].checked = source.checked;
+        }
+
+        initMap();
+    }
+</script> 

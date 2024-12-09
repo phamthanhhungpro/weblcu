@@ -1,0 +1,250 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>@ViewBag.Title - Hệ thống quản lý dân tộc</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/plugins/fontawesome-free/css/all.min.css" asp-append-version="true">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Tempusdominus Bootstrap 4 -->
+    <link rel="stylesheet" href="~/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css" asp-append-version="true">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="~/plugins/select2/css/select2.min.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css" asp-append-version="true">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="~/plugins/icheck-bootstrap/icheck-bootstrap.min.css" asp-append-version="true">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/dist/css/adminlte.min.css" asp-append-version="true">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="~/plugins/overlayScrollbars/css/OverlayScrollbars.min.css" asp-append-version="true">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="~/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/plugins/datatables-responsive/css/responsive.bootstrap4.min.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/plugins/datatables-buttons/css/buttons.bootstrap4.min.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/plugins/jquery-ui/jquery-ui.min.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/plugins/jquery-ui/jquery-ui.theme.min.css" asp-append-version="true">
+     <!-- fancytree -->
+    <link rel="stylesheet" href="~/lib/fancytree/libs/jquery/skin-awesome/ui.fancytree.min.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/lib/fancytree/libs/jquery/skin-win8-n/ui.fancytree.min.css" asp-append-version="true">
+    <!-- Toastr -->
+    <link rel="stylesheet" href="~/plugins/toastr/toastr.min.css" asp-append-version="true">
+    <!-- elfinder -->
+    <link rel="stylesheet" href="~/lib/elfinder/css/elfinder.full.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/elfinder/css/theme.min.css" asp-append-version="true" />
+
+    <!-- jQuery -->
+    <script src="~/plugins/jquery/jquery.min.js" asp-append-version="true"></script>
+</head>
+<body class="sidebar-mini layout-fixed layout-navbar-fixed">
+    <div class="wrapper">
+
+        <!-- Preloader -->
+        <div class="preloader flex-column justify-content-center align-items-center">
+            <img class="animation__shake" src="~/dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
+        </div>
+
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+            @Html.Partial("_MainHeader")
+        </nav>
+        <!-- /.navbar -->
+        <!-- Main Sidebar Container -->
+        <aside class="main-sidebar sidebar-light-info elevation-4">
+            @Html.Partial("_MainSideBar")
+        </aside>
+        @{
+            Html.RenderPartial("_Notifications");
+        }
+        @RenderBody()
+        <!-- /.content-wrapper -->
+        <footer class="main-footer">
+            @Html.Partial("_MainFooter")
+        </footer>
+        <div id="image-finder" style="display:none;"></div>
+        <div id="attach-finder" style="display:none;"></div>
+        <div class="modal" id="modal-view-file" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" data-bs-dismiss="modal">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <object id="view-file" width="100%" height='750' type='application/pdf' style="border: 1px solid;"></object>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+        <div class="modal" id="modal-view-word-file" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" data-bs-dismiss="modal">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="view-word-file">
+                       
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+        <div class="modal" id="ajax-loading" style="z-index:99999999;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="form-group" style="text-align: center;">
+                            <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+                            <span style="font-size: large;">Đang tải dữ liệu. Vui lòng đợi trong giây lát...</span>
+                        </div>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+        <div class="modal fade" id="modal-show-history">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Lịch sử ý kiến xuất bản</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <div id="modal-show-history-data"></div>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+    </div>
+    <!-- ./wrapper -->
+    <!-- jQuery -->
+    <script src="~/plugins/jquery/jquery.unobtrusive-ajax.min.js" asp-append-version="true"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="~/plugins/jquery-ui/jquery-ui.min.js" asp-append-version="true"></script>
+
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <!-- Bootstrap 4 -->
+    <script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js" asp-append-version="true"></script>
+    <!-- overlayScrollbars -->
+    <script src="~/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js" asp-append-version="true"></script>
+    <!-- Select2 -->
+    <script src="~/plugins/select2/js/select2.full.min.js" asp-append-version="true"></script>
+    <!-- DataTables  & Plugins -->
+    <script src="~/plugins/datatables/jquery.dataTables.min.js" asp-append-version="true"></script>
+    <script src="~/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js" asp-append-version="true"></script>
+    <script src="~/plugins/datatables-responsive/js/dataTables.responsive.min.js" asp-append-version="true"></script>
+    <script src="~/plugins/datatables-responsive/js/responsive.bootstrap4.min.js" asp-append-version="true"></script>
+    <script src="~/plugins/datatables-buttons/js/dataTables.buttons.min.js" asp-append-version="true"></script>
+    <script src="~/plugins/datatables-buttons/js/buttons.bootstrap4.min.js" asp-append-version="true"></script>
+    <script src="~/plugins/jszip/jszip.min.js" asp-append-version="true"></script>
+    <script src="~/plugins/pdfmake/pdfmake.min.js" asp-append-version="true"></script>
+    <script src="~/plugins/pdfmake/vfs_fonts.js" asp-append-version="true"></script>
+    <script src="~/plugins/datatables-buttons/js/buttons.html5.min.js" asp-append-version="true"></script>
+    <script src="~/plugins/datatables-buttons/js/buttons.print.min.js" asp-append-version="true"></script>
+    <script src="~/plugins/datatables-buttons/js/buttons.colVis.min.js" asp-append-version="true"></script>
+    <!-- AdminLTE App -->
+    <script src="~/dist/js/adminlte.js" asp-append-version="true"></script> 
+    <!-- fancytree -->
+    <script src="~/lib/fancytree/jquery.fancytree-all.min.js" asp-append-version="true"></script>
+
+    <!-- Toastr -->
+    <script src="~/plugins/toastr/toastr.min.js" asp-append-version="true"></script>
+    <!-- elfinder -->
+    <script src="~/lib/elfinder/js/elfinder.min.js" asp-append-version="true"></script>
+    <script src="~/plugins/jquery-ui/jquery-ui.min.js" asp-append-version="true"></script>
+
+    <script src="~/lib/ckeditor/ckeditor.js" asp-append-version="true"></script>
+    <script src="~/lib/ckeditor/adapters/jquery.js" asp-append-version="true"></script>
+    <script src="~/lib/ckeditor/plugins/image2/plugin.js" asp-append-version="true"></script>
+    <script src="~/lib/ckeditor/plugins/image2/dialogs/image2.js" asp-append-version="true"></script>
+    <script src="~/lib/ckeditor/plugins/image2/lang/en.js" asp-append-version="true"></script>
+
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
+<script type="text/javascript">
+    function OnFailure(data) {
+        if (data.message != undefined) {
+            toastr.error(data.message);
+        }
+        else {
+            toastr.error("Lỗi không xác định");
+        }
+    };
+    function OnAjaxsuccess(data) {
+        var functionName = $(this).attr("fncsuccess");
+        var reload = $(this).attr("reload");
+        if (data.message != undefined) {
+            if (data.code == 0) {
+                toastr.success(data.message);
+                BinD(this);
+                if (reload != undefined && (reload == "yes" || reload == "1")) {
+                    setTimeout(function () { location.reload(); }, 1300);
+                }
+            }
+            else {
+                toastr.error(data.message);
+                var isForce = $(this).attr("ForeOpen");
+                if (isForce == undefined) {
+                    var IsModal = $(this).attr("IsModal");
+                    if (IsModal != undefined) {
+                        $("#" + IsModal).modal("hide");
+                    }
+                }
+            }
+        }
+        else {
+            var isTarget = $(this).attr("IsTarget");
+            if (isTarget != undefined) {
+                $("#" + isTarget).html(data);
+            }
+            BinD(this);
+        }
+        if (functionName != undefined) {
+            window[functionName](res);
+        }
+    }
+
+    function onComplete(data)
+    {
+        $("#ajax-loading").modal("hide");
+    }
+</script>
+<script>
+    $(document).ready(function () {
+        $.datepicker.regional["vi-VN"] =
+        {
+            closeText: "Đóng",
+            prevText: "Trước",
+            nextText: "Sau",
+            currentText: "Hôm nay",
+            monthNames: ["Tháng một", "Tháng hai", "Tháng ba", "Tháng tư", "Tháng năm", "Tháng sáu", "Tháng bảy", "Tháng tám", "Tháng chín", "Tháng mười", "Tháng mười một", "Tháng mười hai"],
+            monthNamesShort: ["Một", "Hai", "Ba", "Bốn", "Năm", "Sáu", "Bảy", "Tám", "Chín", "Mười", "Mười một", "Mười hai"],
+            dayNames: ["Chủ nhật", "Thứ hai", "Thứ ba", "Thứ tư", "Thứ năm", "Thứ sáu", "Thứ bảy"],
+            dayNamesShort: ["CN", "Hai", "Ba", "Tư", "Năm", "Sáu", "Bảy"],
+            dayNamesMin: ["CN", "T2", "T3", "T4", "T5", "T6", "T7"],
+            weekHeader: "Tuần",
+            dateFormat: "dd/mm/yy",
+            firstDay: 1,
+            isRTL: false,
+            showMonthAfterYear: false,
+            yearSuffix: ""
+        };
+
+        $.datepicker.setDefaults($.datepicker.regional["vi-VN"]);
+    });
+</script>

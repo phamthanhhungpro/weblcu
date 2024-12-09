@@ -1,0 +1,91 @@
+﻿@using Datas.Models.ViewModels
+@model LoginModel
+@{
+    Layout = "";
+    ViewBag.Title = "Đăng nhập hệ thống";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hệ thống quản lý dân tộc</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/plugins/fontawesome-free/css/all.min.css">
+    <!-- icheck bootstrap -->
+    <link rel="stylesheet" href="~/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/dist/css/adminlte.min.css">
+</head>
+<body class="hold-transition login-page">
+    <div class="login-box">
+        <!-- /.login-logo -->
+        <div class="card card-outline card-primary">
+            <div class="card-header text-center">
+                <p style="font-size:0.9rem;margin-bottom:2px;font-weight:400;">PHẦN MỀM</p>
+                <a href="/" class="h3">QUẢN LÝ DÂN TỘC</a>
+            </div>
+            <div class="card-body">
+                <form method="post" asp-action="Index" asp-controller="Login" asp-area="Admin">
+                    <div class="mb-3">
+                        <div class="input-group">
+                            <input asp-for="UserName" class="form-control" placeholder="Tài khoản" />
+
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-user"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <span asp-validation-for="UserName" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <div class="input-group">
+                            <input type="password" asp-for="Password" class="form-control" placeholder="Mật khẩu" />
+
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-lock"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="row">
+                        <div class="col-7">
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-5">
+                            <button type="submit" class="btn btn-primary btn-block mb-3">Đăng nhập</button>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            @Html.ValidationSummary(true, "", new { @style = "color:red;" })
+                        </div>
+                    </div>
+                </form>
+                <p class="mb-1">
+                    <a asp-action="ForgotPass" asp-controller="Login" asp-area="Admin">Quên mật khẩu?</a>
+                </p>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+    <!-- /.login-box -->
+    <!-- jQuery -->
+    <script src="~/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/dist/js/adminlte.min.js"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="~/plugins/jquery-validation/jquery.validate.min.js" asp-append-version="true"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js" asp-append-version="true"></script>
+</body>
+</html>

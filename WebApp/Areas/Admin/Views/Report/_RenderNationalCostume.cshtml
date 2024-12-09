@@ -1,0 +1,214 @@
+﻿@using Common
+@using Common.Entity.Permission
+@model List<Datas.Models.DomainModels.NationalCostume>
+<table class="table table-bordered table-hover " id="list-news">
+    <thead>
+        <tr style="text-align:center">
+            <th style="vertical-align:middle; text-align:center; width:5%">
+                Số TT
+            </th>
+            <th style="vertical-align:middle; text-align:center; width:5%">
+                Ký hiệu, mã số ảnh
+            </th>
+            <th style="vertical-align:middle; text-align:center; width:5%">
+               Tên trang phục
+            </th>
+            <th style="vertical-align:middle; text-align:center; width:5%">
+                Ý nghĩa văn hóa
+            </th>
+            <th style="vertical-align:middle; text-align:center; width:10%">
+                Phụ kiện đi kèm
+            </th>
+            <th style="vertical-align:middle; text-align:center; width:5%">
+                Giá cả trung bình
+            </th>
+            <th style="vertical-align:middle; text-align:center; width:5%">
+                Dịp sử dụng
+            </th>
+            <th style="vertical-align:middle; text-align:center; width:5%">
+                Nguyên liệu sử dụng
+            </th>
+            <th style="vertical-align:middle; text-align:center; width:5%">
+                Màu sắc
+            </th>
+            <th style="vertical-align:middle; text-align:center; width:5%">
+                Kích thước
+            </th>
+            <th style="vertical-align:middle; text-align:center; width:5%">
+                Nguyên tắc thiết kế
+            </th>
+            <th style="vertical-align:middle; text-align:center; width:5%">
+                Kỹ thuật chế tác
+            </th>
+            <th style="vertical-align:middle; text-align:center; width:5%">
+                Hiện trạng
+            </th>
+            <th style="vertical-align:middle; text-align:center; width:20%">
+                Chi tiết
+            </th>
+            <th style="vertical-align:middle; text-align:center; width:5%;" >
+                Thuộc dân tộc
+            </th>
+            <th style="vertical-align:middle; text-align:center; width:5%">
+                Loại trang phục
+            </th>
+            <th style="vertical-align:middle; text-align:center; width:5%">
+                Lượt xem
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model!=null)
+        {
+            int index = 1;
+            @foreach (var item in Model)
+            {
+                <tr class="row-@item.Id">
+                    <td>
+                        @index
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Code)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Classify)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Shape)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cost)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Event)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Material)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Color)
+                    </td>
+                    <td style="word-wrap: break-word;">
+                        @Html.DisplayFor(modelItem => item.Size)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Certification)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Technique)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CurrentStatus)
+                    </td>
+                    <td style="word-wrap: break-word;">
+                        @Html.DisplayFor(modelItem => item.Details)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.People.Name)
+                    </td>
+                    <td >
+                        @Html.DisplayFor(modelItem => item.Category.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.View)
+                    </td>
+                </tr>
+                index++;
+            }
+        }
+    </tbody>
+</table>
+<script type="text/javascript">
+    var table;
+
+    $(function () {
+        LoadAjaxNew();
+    });
+
+    $("#isGroup").change(function () {
+        if (table)
+            table.draw();
+    });
+
+    function LoadAjaxNew() {
+        table = $('#list-news').DataTable({
+            "buttons": ["copy",
+                {
+                    extend: 'csv', exportOptions: {
+                        columns: [':visible:not(.not-export-col):not(.hidden)'],
+                    }
+                },
+                {
+                    extend: 'excel', exportOptions: {
+                        columns: [':visible:not(.not-export-col):not(.hidden)'],
+                    }
+                },
+                {
+                    extend: 'pdf', exportOptions: {
+                        columns: [':visible:not(.not-export-col):not(.hidden)'],
+                    }
+                },
+                {
+                    extend: 'print', exportOptions: {
+                        columns: [':visible:not(.not-export-col):not(.hidden)'],
+                    }
+                },
+                { extend: 'colvis', text: 'Cài đặt cột' }],
+            "processing": true,
+            "serverSide": false,
+            "orderMulti": false,
+            "destroy": true,
+            "scrollX": true,
+            "searchHighlight": true,
+            "language": {
+                "sProcessing": "Đang xử lý...",
+                "sLengthMenu": "Xem _MENU_ mục",
+                "sZeroRecords": "Không tổn tại dữ liệu",
+                "sInfo": "Đang xem _START_ đến _END_ trong tổng số _TOTAL_ mục",
+                "sInfoEmpty": "Đang xem 0 đến 0 trong tổng số 0 mục",
+                "sInfoFiltered": "(được lọc từ _MAX_ mục)",
+                "sInfoPostFix": "",
+                "sSearch": "Tìm kiếm: ",
+                "sUrl": "",
+                "oPaginate": {
+                    "sFirst": "Đầu",
+                    "sPrevious": "Trước",
+                    "sNext": "Tiếp",
+                    "sLast": "Cuối"
+                }
+            },
+            "pagingType": 'full_numbers', 'sPaging': 'pagination',
+            "bSortable": false,
+            "drawCallback": function (settings) {
+                var api = this.api();
+                var rows = api.rows({ page: 'current' }).nodes();
+                var last = null;
+                var s = document.getElementById("isGroup").value;
+                if (s == "1") {
+                    api.column(14, { page: 'current' }).data().each(function (group, i) {
+                        if (last !== group) {
+                            $(rows).eq(i).before('<tr class="group"><td colspan="17" style="color: dodgerblue;font-weight: bold;"> Dân tộc: ' + group + '</td></tr>'
+                            );
+                            last = group;
+                        }
+                    });
+                }
+                else if (s == "2") {
+                    api.column(15, { page: 'current' }).data().each(function (group, i) {
+                        if (last !== group) {
+                            $(rows).eq(i).before('<tr class="group"><td colspan="17" style="color: dodgerblue;font-weight: bold;"> Loại trang phục: ' + group + '</td></tr>'
+                            );
+                            last = group;
+                        }
+                    });
+                }
+
+            },
+        });
+        table.buttons().container().appendTo('#list-news_wrapper .col-md-6:eq(0)');
+    }
+
+</script>

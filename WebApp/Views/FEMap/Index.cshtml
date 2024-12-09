@@ -1,0 +1,125 @@
+﻿@using Datas.Models.ViewModels
+@{
+    var lstMapType = (List<PeopleModel>)ViewBag.ListMapType;
+}
+<section id="map360">
+    @if (string.IsNullOrEmpty(ViewBag.SubDomain))
+    {
+        <h2>Bản đồ số các dân tộc thiểu số</h2>
+    }
+    else
+    {
+        <h2>DIGITAL MAP OF ETHNIC MINORITY</h2>
+    }
+
+    <div class="map360-iframe">
+        <div id="map_HS" class="leaflet-container leaflet-touch leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom" tabindex="0" style="width:100%; height: 100%;">
+        </div>
+        <div class="map-filter">
+            <div class="map-filter-list-inner">
+                <div class="input-group-filter">
+             
+                    @if (string.IsNullOrEmpty(ViewBag.SubDomain))
+                    {
+                        <div class="map-filter-title">
+                            DANH MỤC DÂN TỘC THIỂU SỐ
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="map-filter-title">
+                            LIST OF ETHNIC MINORITY
+                        </div>
+                    }
+
+                    @if (lstMapType.Count > 0)
+                    {
+                        <div class="map-filter-list">
+                            <ul>
+                                <li>
+                                    <input id="selectAll" type="checkbox" checked="checked" onclick="checkAll(this);">
+                                    <label for='selectAll'>@(string.IsNullOrEmpty(ViewBag.SubDomain) ? "CHỌN TẤT CẢ" : "CHECK ALL")</label>
+                                </li>
+                                @foreach (var item in lstMapType)
+                                {
+                                    <li>
+                                        <input id="check-@item.Id" type="checkbox" onclick="initMap();" name="check-child" value="@item.Id" checked="checked" />
+                                        <label for="check-@item.Id">@item.Name</label>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="map-filter-close">
+            <i class="fa-solid fa-angle-down rotate"></i>
+        </div>
+    </div>
+</section>
+<script type="text/javascript">
+    var keyMap = 'efe2301638f6af0bd594f5f607d6dc86ea53e3406d158d44';
+
+    var locations = @Html.Raw(ViewBag.ListMap);
+    const map = L.map('map_HS', {
+        center: [22.389144, 103.475724],
+        zoom: 15,
+    });
+
+    const pointLayer = L.layerGroup().addTo(map);
+
+    function initMap() {
+        //  L.tileLayer('https://maps.vnpost.vn/api/tm/{z}/{x}/{y}@@2x.png?apikey='+keyMap, {
+        //    attribution: 'Map data &copy; <a href="https://vmap.vn">Vmap</a>, <a href="http://openstreetmap.org">OSM Contributors</a>',
+        //    maxZoom: 18,
+        //    id: 'Vmap.streets',
+        //    accessToken: keyMap
+        //}).addTo(map);
+
+        L.tileLayer('https://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+            maxZoom: 18,
+            id: 'Vmap.streets',
+            subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+        }).addTo(map);
+
+        var icon, y, i;
+
+        pointLayer.clearLayers();
+        var checkboxes = document.getElementsByName("check-child");
+        for (var j = 0; j < checkboxes.length; j++) {
+            if (checkboxes[j].checked) {
+                var value = checkboxes[j].value;
+                for (i = 0; i < locations.length; i++) {
+                    if (value == locations[i][4]) {
+                        icon = L.icon({
+                            iconUrl: locations[i][3],
+                            iconSize: [40, 40],
+                        });
+                        L.marker([locations[i][1], locations[i][2]], { icon: icon }).bindPopup(locations[i][0]).on('mouseover', function (e) {
+                            this.openPopup();
+                        }).addTo(pointLayer);
+                    }
+                }
+            }
+        }
+    }
+    $(document).ready(function () {
+        initMap();
+    });
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-4E7Q3K90Z3');
+    function checkAll(source, nameLoad) {
+        var checkboxes = document.getElementsByName("check-child");
+        for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i] != source)
+                checkboxes[i].checked = source.checked;
+        }
+
+        initMap();
+    }
+</script> 

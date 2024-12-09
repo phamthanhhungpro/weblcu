@@ -1,0 +1,96 @@
+﻿@using Common
+@model Datas.Models.ViewModels.PeopleCategoryModel
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+<div class="form-group">
+    <label asp-for="Name" class="control-label"></label> <span class="text-danger">(*)</span>
+    <input asp-for="Name" class="form-control" />
+    <span asp-validation-for="Name" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="Image" class="control-label"></label> <span class="text-danger">(*)</span>
+    <div class="col-md-12" style="padding-left: 0px;">
+        <div class="row">
+            <div class="col-md-11">
+                <input asp-for="Image" class="form-control" />
+            </div>
+            <div class="col-md-1">
+                <input type="button" class="btn btn-secondary" value="Upload" onclick="BrowseServerImage();" />
+            </div>
+        </div>
+
+    </div>
+    <div>
+        <span asp-validation-for="Image" class="text-danger"></span>
+    </div>
+</div>
+<div class="form-group">
+    <label asp-for="KeyWord" class="control-label"></label>
+    <input asp-for="KeyWord" class="form-control" />
+    <span asp-validation-for="KeyWord" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="Details" class="control-label"></label>
+    <textarea asp-for="Details" class="form-control"></textarea>
+    <span asp-validation-for="Details" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="ParentId" class="control-label"></label>
+    <select class="form-control" asp-for="ParentId" asp-items="(IEnumerable<SelectListItem>)ViewBag.PeopleCategories">
+        <option value="">---Chọn loại dân tộc---</option>
+    </select>
+    <input type="hidden" asp-for="ParentId" />
+    <span asp-validation-for="ParentId" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="Status" class="control-label"></label>
+    <select class="form-control" asp-for="Status" asp-items="Html.GetEnumSelectList(typeof(Enums.ActiveStatus))">
+    </select>
+    <input type="hidden" asp-for="Status" />
+    <span asp-validation-for="Status" class="text-danger"></span>
+</div>
+<script type="text/javascript">
+    var openFile;
+    function BrowseServerImage() {
+        var myCommands = elFinder.prototype._options.commands;
+        var options = {
+            baseUrl: "/lib/elfinder/",
+            url: "/Admin/file-system/connector",
+            rememberLastDir: false,
+            commands: myCommands,
+            lang: 'vi',
+            commandsOptions: {
+                getfile: {
+                    oncomplete: 'close' // destroy elFinder after file selection
+                }
+            },
+            getFileCallback: function (a, b) {
+                document.getElementById("Image").value = "/" + a.path;
+            },
+            uiOptions: {
+                toolbar: [
+                    ['back', 'forward'],
+                    ['reload'],
+                    ['home', 'up'],
+                    ['mkdir', 'mkfile', 'upload'],
+                    ['open', 'download'],
+                    ['undo', 'redo'],
+                    ['info'],
+                    ['quicklook'],
+                    ['copy', 'cut', 'paste'],
+                    ['rm'],
+                    ['duplicate', 'rename', 'edit'],
+                    ['selectall', 'selectnone', 'selectinvert'],
+                    ['view', 'sort']
+                ]
+            },
+            lang: 'vi',
+        };
+        if (!openFile) {
+            openFile = $('#image-finder').dialogelfinder(options);
+        }
+        else {
+            openFile.dialogelfinder('open');
+        }
+    }
+
+</script>

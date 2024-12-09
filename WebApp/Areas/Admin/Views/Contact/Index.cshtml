@@ -1,0 +1,138 @@
+﻿@using Common
+@using Common.Entity.Permission
+@model IEnumerable<Datas.Models.DomainModels.Contact>
+@{
+    ViewBag.Title = "Danh sách liên hệ";
+    var permission = (PermissionInfo)ViewBag.Permission;
+}
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Danh sách liên hệ</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item">
+                            <a asp-area="Admin" asp-controller="Default" asp-action="Index">Trang chủ</a>
+                        </li>
+                        <li class="breadcrumb-item active">Danh sách liên hệ</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <!-- Main row -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <table class="table table-bordered table-hover" id="list-company">
+                                <thead>
+                                    <tr style="text-align:center">
+                                        <th>
+                                            Số TT
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.FullName)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Email)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Phone)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Title)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Content)
+                                        </th>
+                                        <th>
+                                            Thao tác
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        int index = 1;
+                                    }
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr class="row-@item.Id">
+                                            <td>
+                                                @index
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.FullName)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Email)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Phone)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Title)
+                                            </td>
+                                            <td style="white-space: pre-line">
+                                                @Html.DisplayFor(modelItem => item.Content)
+                                            </td>
+                                            <td>
+                                                @if (permission.IsDelete)
+                                                {
+                                                    <a class="fas fa fa-trash"
+                                                       data-ajax="true"
+                                                       data-ajax-confirm="Bạn có muốn xóa liên hệ này?"
+                                                       data-ajax-failure="OnFailure"
+                                                       data-ajax-loading="#ajax-loading"
+                                                       data-ajax-method="POST"
+                                                       data-ajax-success="onDelete(@item.Id,data)"
+                                                       data-toggle="tooltip"
+                                                       asp-action="Delete" asp-route-id="@item.Id" asp-area="Admin" asp-controller="Contact"
+                                                       style="margin-right:6px"
+                                                       title=""
+                                                       data-original-title="Xóa liên hệ khỏi danh sách"> Xóa</a>
+                                                }
+                                            </td>
+                                        </tr>
+                                        index++;
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+              
+            </div>
+            <!-- /.row (main row) -->
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+<script type="text/javascript">
+    $(function () {
+        $("#list-company").dataTable({
+            "language": {
+                "url": "/plugins/datatables/Vietnamese.json"
+            }
+        });
+    });
+    function onDelete(id, data) {
+        if (data.code == 0) {
+            $(".row-" + id + "").hide();
+            toastr.success("Xóa thành công");
+        }
+        else {
+            toastr.error("Lỗi: " + data.message);
+        }
+    };
+</script>

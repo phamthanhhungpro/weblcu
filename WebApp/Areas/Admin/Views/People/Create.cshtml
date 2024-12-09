@@ -1,0 +1,179 @@
+﻿@using Common.Entity.Permission;
+@model Datas.Models.ViewModels.PeopleModel
+
+@{
+    ViewBag.Title = "Thêm mới dân tộc";
+    var permission = (PeoplePermission)ViewBag.Permission;
+}
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Thêm mới dân tộc</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item">
+                            <a asp-area="Admin" asp-controller="Default" asp-action="Index">Trang chủ</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a asp-area="Admin" asp-controller="People" asp-action="Index">Danh sách</a>
+                        </li>
+                        <li class="breadcrumb-item active">
+                            <a asp-area="Admin" asp-controller="People" asp-action="Create">Thêm mới</a>
+                        </li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <!-- Main row -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="float-left">
+                                <span>Trường có dấu <span class="text-danger">(*)</span> là bắt buộc</span>
+                            </div>
+                            <div class="float-right">
+                                <a asp-area="Admin" asp-controller="People" asp-action="Index" class="btn btn-primary">Danh sách</a>
+                            </div>
+                        </div>
+                        <form asp-action="Create" asp-controller="People" asp-area="Admin">
+                            <div class="card-body">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                @Html.Partial("_CreateOrEdit")
+                            </div>
+                            <div class="card-footer">
+                                <div class="row">
+                                    <div class="form-group pl-2 pr-2">
+                                        <input type="submit" value="Thêm mới" class="btn btn-primary" id="btnSave" onclick="Save()"/>
+                                    </div>
+                                    @if (permission.IsRequest && permission.IsConfirm)
+                                    {
+                                        <div class="form-group pl-2 pr-2">
+                                            <input type="button" value="Thêm mới & Duyệt" class="btn btn-primary" data-toggle="modal" data-target="#modal-save" />
+                                        </div>
+                                    }
+                                    else if (permission.IsRequest)
+                                    {
+                                        <div class="form-group pl-2 pr-2">
+                                            <input type="button" value="Thêm mới & Gửi duyệt" class="btn btn-primary" data-toggle="modal" data-target="#modal-save" />
+                                        </div>
+                                    }
+                                    else if (permission.IsConfirm)
+                                    {
+                                        <div class="form-group pl-2 pr-2">
+                                            <input type="button" value="Thêm mới & Duyệt" class="btn btn-primary" data-toggle="modal" data-target="#modal-save" />
+                                        </div>
+                                    }
+                                </div>
+                                @if (permission.IsRequest || permission.IsConfirm)
+                                {
+                                    <div class="modal fade" id="modal-save">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    @if (permission.IsRequest && permission.IsConfirm)
+                                                    {
+                                                        <h4 class="modal-title">Thêm mới & Duyệt</h4>
+                                                    }
+                                                    else  @if (permission.IsRequest)
+                                                    {
+                                                        <h4 class="modal-title">Thêm mới & Gửi duyệt</h4>
+                                                    }
+                                                    else
+                                                    {
+                                                        <h4 class="modal-title">Thêm mới & Duyệt</h4>
+                                                    }
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    @if (permission.IsRequest && permission.IsConfirm)
+                                                    {
+                                                        <div class="form-group">
+                                                            <label class="control-label">Tùy chọn </label>
+                                                            <select class="form-control" id="confirmValue" name="confirmValue">
+                                                                <option value="1">Gửi duyệt</option>
+                                                                <option value="2">Duyệt</option>
+                                                            </select>
+                                                        </div>
+                                                    }
+                                                    <div class="form-group">
+                                                        <label asp-for="ConfirmData" class="control-label"></label>
+                                                        <textarea asp-for="ConfirmData" class="form-control"></textarea>
+                                                        <input type="hidden" asp-for="IsConfirm" />
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer justify-content-between">
+                                                    <button type="button" class="btn btn-primary" onclick="SaveConfirm()">Thêm mới</button>
+                                                </div>
+                                            </div>
+                                            <!-- /.modal-content -->
+                                        </div>
+                                        <!-- /.modal-dialog -->
+                                    </div>
+                                }
+                              
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.row (main row) -->
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+@if (permission.IsRequest)
+{
+   <script>
+        var isConfirmValue2 = "1";
+   </script> 
+}
+else if (permission.IsConfirm)
+{
+    <script>
+        var isConfirmValue2 = "2";
+    </script>
+}
+<script>
+ 
+    var check = false;
+    function Save() {
+        if(check == false)
+        {
+            $("#IsConfirm").val("0");
+        }
+        check = false;
+    }
+    function SaveConfirm()
+    {
+        $("#IsConfirm").val(isConfirmValue2);
+            $("#modal-save").modal('hide');
+        check = true;
+        $("#btnSave").trigger("click");
+    }
+</script>
+<script type="text/javascript">
+    $("#confirmValue").change(function () {
+        var warid = this.options[this.selectedIndex].value;
+        isConfirmValue2 = warid;
+    });
+</script>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+

@@ -1,0 +1,313 @@
+﻿@using Common
+@using Common.Entity.Permission
+@model IEnumerable<Datas.Models.DomainModels.People>
+@{
+    var isViewDelete = false;
+    if(ViewBag.IsDelete !=null)
+    {
+        isViewDelete = (bool)ViewBag.IsDelete;
+    }
+    var name = "Danh sách dân tộc";
+    if (isViewDelete)
+        name = "Danh sách dân tộc đã xóa";
+    else
+
+        ViewBag.Title = name;
+    var permission = (PeoplePermission)ViewBag.Permission;
+    var confirmStatus = ViewBag.ConfirmStatus;
+}
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">@name</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item">
+                            <a asp-area="Admin" asp-controller="Default" asp-action="Index">Trang chủ</a>
+                        </li>
+                        <li class="breadcrumb-item active">@name</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <!-- Main row -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="float-left col-md-10">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        @* <div class="form-group">
+                                        <label class="control-label">Lọc loại dân tộc: </label>
+                                        @Html.DropDownList("searchType", (IEnumerable<SelectListItem>
+                                        )ViewBag.PeopleCategories, "---Chọn loại dân tộc---",
+                                        new { @class = "form-control" })
+                                        </div> *@
+                                        <div class="form-group">
+                                            <label class="control-label">Lọc thành phố/huyện: </label>
+                                            @Html.DropDownList("searchDistrict", (IEnumerable<SelectListItem>
+                                                     )ViewBag.Districts, "---Tất cả---",
+                                                     new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group" id="display-ward">
+                                            @Html.Partial("_DisplayWardSearch")
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label">Lọc dân tộc con: </label>
+                                            @Html.DropDownList("searchPeople", (IEnumerable<SelectListItem>
+                                                     )ViewBag.Peoples, "---Tất cả---",
+                                                     new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label>Thao tác:</label>
+                                            <div class="clearfix"></div>
+                                            <button class="btn btn-success form-control" onclick="Search()"><i class="fa fa-search"></i> Tìm</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @if (permission.IsAdd)
+                            {
+                                <div class="float-right"><a class="btn btn-primary" asp-area="Admin" asp-controller="People" asp-action="Create">Thêm mới</a></div>
+                            }
+
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-bordered table-hover" id="list-news">
+                                <thead>
+                                    <tr style="text-align:center">
+                                        <th style="vertical-align:middle; text-align:center; width:5%">
+                                            Số TT
+                                        </th>
+                                        <th style="vertical-align:middle; text-align:center; width:10%">
+                                            @Html.DisplayNameFor(model => model.Image0)
+                                        </th>
+                                        <th style="vertical-align:middle; text-align:center; width:25%">
+                                            @Html.DisplayNameFor(model => model.Name)
+                                        </th>
+                                        <th style="vertical-align:middle; text-align:center; width:10%">
+                                            @Html.DisplayNameFor(model => model.Population)
+                                        </th>
+                                        <th style="vertical-align:middle; text-align:center; width:25%">
+                                            @Html.DisplayNameFor(model => model.Address)
+                                        </th>
+                                        <th style="vertical-align:middle; text-align:center; width:10%">
+                                            @Html.DisplayNameFor(model => model.Status)
+                                        </th>
+                                        <th style="vertical-align:middle; text-align:center; width:10%">
+                                            Thao tác
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+              
+            </div>
+            <!-- /.row (main row) -->
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+<script type="text/javascript">
+    $("#searchDistrict").change(function () {
+        var warid = this.options[this.selectedIndex].value;
+        $.ajax({
+            url: "GetWardSearch",
+            type: "POST",
+            data: { id: warid },
+            success: function (data) {
+                $("#display-ward").html(data);
+
+            }
+        });
+    });
+</script>
+<script type="text/javascript">
+    var table;
+
+    $(function () {
+        LoadAjaxNew(0,0,0,0);
+    });
+
+    function onDelete(id, data) {
+        if (data.code == 0) {
+            id.parentNode.parentNode.style.display = 'none';
+            toastr.success(data.message);
+        }
+        else {
+            toastr.error("Lỗi: " + data.message);
+        }
+    };
+
+    function Search() {
+        var c = 0; //document.getElementById("searchType").value
+        var d = document.getElementById("searchDistrict").value;
+        var w = document.getElementById("searchWard").value;
+        var p = document.getElementById("searchPeople").value;
+        LoadAjaxNew(c,d,w,p);
+    }
+</script>
+@if(isViewDelete)
+{
+    <script>
+        function LoadAjaxNew(category, district, ward, people) {
+            table = $('#list-news').DataTable({
+                "processing": true,
+                "serverSide": true,
+                "orderMulti": false,
+                "destroy": true,
+                "searchHighlight": true,
+                "language": {
+                    "url": "/plugins/datatables/Vietnamese.json"
+                },
+                "pagingType": 'full_numbers', 'sPaging': 'pagination',
+                "ajax": {
+                    "url": "/Admin/People/LoadAjaxByDelete",
+                    "data": { category: category, district: district, ward: ward, people: people },
+                    "type": "GET",
+                    "datatype": "json"
+                },
+                "bSortable": false,
+                "columns": [
+                    { "data": "index", "width": "5%", "bSortable": false },
+                    {
+                        "data": "image", "bSortable": false, "mRender": function (data, display, alldata) {
+                            var str = "<img src='" + data + "' width='100'>";
+                            return str;
+                        }
+                    },
+                    { "data": "name" },
+                    { "data": "population" },
+                    { "data": "address" },
+                    {
+                        "data": "confirmStatus", "bSortable": false, "mRender": function (data, display, alldata) {
+                            var str = ""
+                            switch (data) {
+                                case 0:
+                                    str = "<span class='badge bg-info'>Chưa gửi duyệt</span>";
+                                    break;
+                                case 1:
+                                    str = "<span class='badge bg-info'>Gửi duyệt</span>";
+                                    break
+                                case 2:
+                                    str = "<span class='badge bg-success'>Xuất bản</span>";
+                                    break;
+                                case 3:
+                                    str = "<span class='badge bg-danger'>Hủy duyệt</span>";
+                                    break;
+                                default:
+                                    str = "<span class='badge bg-danger'>Hủy duyệt</span>";
+                            }
+                            return str;
+                        }
+                    },
+                    {
+                        "data": "id", "bSortable": false, "render": function (data, display, alldata) {
+                            var str = "";
+                            str += "<a class='fas fa fa-trash-restore' data-ajax='true' data-ajax-confirm='Bạn có chắc chắn khôi phục dân tộc này? ' data-ajax-failure='OnFailure' data-ajax-loading='#ajax-loading' data-ajax-method='POST' data-ajax-success='onDelete(this,data)' data-toggle='tooltip' href='/Admin/People/UnDelete?id=" + alldata.id + "' style='margin-right:6px' title='Khôi phục dân tộc'> Khôi phục</a>"
+                            return str;
+                        }
+                    },
+                ],
+            });
+            //table.$('[data-toggle="tooltip"]').tooltip({
+            //    placement: '',
+            //    html: true
+            //});
+        };
+    </script>
+}
+else
+{
+    <script>
+        function LoadAjaxNew(category, district, ward, people) {
+            table = $('#list-news').DataTable({
+                "processing": true,
+                "serverSide": true,
+                "orderMulti": false,
+                "destroy": true,
+                "searchHighlight": true,
+                "language": {
+                    "url": "/plugins/datatables/Vietnamese.json"
+                },
+                "pagingType": 'full_numbers', 'sPaging': 'pagination',
+                "ajax": {
+                    "url": "/Admin/People/LoadAjaxNew",
+                    "data": { type: @((int)confirmStatus), category: category, district: district, ward: ward, people: people },
+                    "type": "GET",
+                    "datatype": "json"
+                },
+                "bSortable": false,
+                "columns": [
+                    { "data": "index", "width": "5%", "bSortable": false },
+                    {
+                        "data": "image", "bSortable": false, "mRender": function (data, display, alldata) {
+                            var str = "<img src='" + data + "' width='100'>";
+                            return str;
+                        }
+                    },
+                    { "data": "name" },
+                    { "data": "population" },
+                    { "data": "address" },
+                    {
+                        "data": "confirmStatus", "bSortable": false, "mRender": function (data, display, alldata) {
+                            var str = ""
+                            switch (data) {
+                                case 0:
+                                    str = "<span class='badge bg-info'>Chưa gửi duyệt</span>";
+                                    break;
+                                case 1:
+                                    str = "<span class='badge bg-info'>Gửi duyệt</span>";
+                                    break
+                                case 2:
+                                    str = "<span class='badge bg-success'>Xuất bản</span>";
+                                    break;
+                                case 3:
+                                    str = "<span class='badge bg-danger'>Hủy duyệt</span>";
+                                    break;
+                                default:
+                                    str = "<span class='badge bg-danger'>Hủy duyệt</span>";
+                            }
+                            return str;
+                        }
+                    },
+                    {
+                        "data": "id", "bSortable": false, "render": function (data, display, alldata) {
+                            var str = "";
+                            str += "<a class='fas fa fa-edit' forceopen='1'  href='/Admin/People/Edit?id=" + alldata.id + "'  style='margin-right:6px'> Sửa</a>"
+                            str += "<a class='fas fa fa-trash' data-ajax='true' data-ajax-confirm='Bạn có chắc chắn xóa dân tộc này? ' data-ajax-failure='OnFailure' data-ajax-loading='#ajax-loading' data-ajax-method='POST' data-ajax-success='onDelete(this,data)' data-toggle='tooltip' href='/Admin/People/Delete?id=" + alldata.id + "' style='margin-right:6px' title='Xóa dân tộc'> Xóa</a>"
+                            return str;
+                        }
+                    },
+                ],
+            });
+            //table.$('[data-toggle="tooltip"]').tooltip({
+            //    placement: '',
+            //    html: true
+            //});
+        };
+    </script>
+}
+

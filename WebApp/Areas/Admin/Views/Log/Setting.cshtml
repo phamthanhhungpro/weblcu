@@ -1,0 +1,173 @@
+﻿@model Datas.Models.ViewModels.AdminSettingModel
+
+@{
+    ViewBag.Title = "Kiểm soát truy cập";
+    var indexLocation = 1;
+    if (Model != null)
+    {
+        indexLocation = Model.BlockIps.Count;
+    }
+}
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Kiểm soát truy cập</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item">
+                            <a asp-area="Admin" asp-controller="Log" asp-action="Index">Trang chủ</a>
+                        </li>
+                        <li class="breadcrumb-item active">
+                            <a asp-area="Admin" asp-controller="Log" asp-action="Setting">Cài đặt</a>
+                        </li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <!-- Main row -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="float-left">
+                                <span>Trường có dấu <span class="text-danger">(*)</span> là bắt buộc</span>
+                            </div>
+                        </div>
+                        <form asp-action="Setting" asp-controller="Log" asp-area="Admin">
+                            <div class="card-body">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h4 style="font-weight: bold;">Thời gian khóa ứng dụng:</h4>
+                                        <div class="form-group">
+                                            <label asp-for="LockStartTime" class="control-label"></label>
+                                            <input asp-for="LockStartTime" class="form-control" />
+                                            <span asp-validation-for="LockStartTime" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="LockEndTime" class="control-label"></label>
+                                            <input asp-for="LockEndTime" class="form-control" />
+                                            <span asp-validation-for="LockEndTime" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="LockTimeType" class="control-label"></label>
+                                            <select class="form-control" id="LockTimeType" name="LockTimeType" >
+                                                @if (Model.LockTimeType == 0)
+                                                {
+                                                    <option value="0" selected>Không khóa</option>
+                                                    <option value="1">Hàng ngày</option>
+                                                    <option value="2">1 Ngày</option>
+                                                }
+                                                else if (Model.LockTimeType == 1)
+                                                {
+                                                    <option value="0">Không khóa</option>
+                                                    <option value="1" selected>Hàng ngày</option>
+                                                    <option value="2">1 Ngày</option>
+                                                }
+                                                else if (Model.LockTimeType == 2)
+                                                {
+                                                    <option value="0">Không khóa</option>
+                                                    <option value="1">Hàng ngày</option>
+                                                    <option value="2" selected>1 Ngày</option>
+                                                }
+                                            </select>
+                                            <span asp-validation-for="LockTimeType" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h4 style="font-weight: bold;">Khóa địa chỉ IP:</h4>
+                                        <div class="form-group">
+                                            <label asp-for="BlockIps" class="control-label"></label>
+                                            <table class="table table-bordered table-hover" id="list-location">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="width:10%">
+                                                            Số TT
+                                                        </th>
+                                                        <th style="width:90%">
+                                                            Địa chỉ IP
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="lst-location">
+                                                    @if (Model == null)
+                                                    {
+                                                        <tr class="row-1">
+                                                            <td>1</td>
+                                                            <td>
+                                                                <input id="BlockIps-0" type="text" name="BlockIps[0]" style="width:100%" />
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                    else
+                                                    {
+                                                        int index = 0;
+                                                        for (int i = 0; i < Model.BlockIps.Count; i++)
+                                                        {
+                                                            index++;
+                                                            var location = Model.BlockIps[i];
+                                                            <tr class="row-@index">
+                                                                <td>
+                                                                    @index
+                                                                </td>
+                                                                <td>
+                                                                    <input id="BlockIps-@i" type="text" name="BlockIps[@i]" style="width:100%" value="@location" />
+                                                                </td>
+                                                            </tr>
+                                                        }
+                                                    }
+
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr>
+                                                        <td colspan="2"><button type="button" class="btn btn-success btn-xs float-right" onclick="Add();"><i class="fas fa-plus-square"></i> Dòng</button></td>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="form-group">
+                                    <input type="submit" value="Cập nhật" class="btn btn-primary" />
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.row (main row) -->
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+<script>
+    var indexLocation = @indexLocation;
+    function Add() {
+        var index = indexLocation + 1;
+        var strLocation = '';
+        strLocation += '<tr class="row-' + index + '" ><td>' + index + '</td>';
+        strLocation += '<td><input id="BlockIps-' + indexLocation + '-Long" type="text" name="BlockIps[' + indexLocation + ']" style="width:100%" /></td></tr>';
+        $("#lst-location").append(strLocation);
+        indexLocation++;
+    }
+</script>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+

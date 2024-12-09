@@ -1,0 +1,9 @@
+﻿@model Datas.Models.ViewModels.DepartmentModel
+<div class="form-group">
+    <label asp-for="ParentId" class="control-label"></label>
+    <select class="form-control" asp-for="ParentId" asp-items="(IEnumerable<SelectListItem>)ViewBag.Departments">
+        <option value="">---Chọn bộ phận---</option>
+    </select>
+    <input type="hidden" asp-for="ParentId" />
+    <span asp-validation-for="ParentId" class="text-danger"></span>
+</div>

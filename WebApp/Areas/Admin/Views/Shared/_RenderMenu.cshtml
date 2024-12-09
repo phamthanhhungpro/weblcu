@@ -1,0 +1,36 @@
+﻿@using Common.Entity
+@model List<MenuItem>
+<ul class="nav nav-treeview">
+    @foreach (var item in Model)
+    {
+        if (item.Childrens.Any())
+        {
+            <li class="nav-item @(item.IsOpen? "menu-open":"")">
+                <a href="@(item.Url)" class="nav-link @(item.IsActive? "active":"")">
+                    <i class="nav-icon fas @item.ClassCss"></i>
+                    <p>
+                        @item.Name
+                        <i class="fas fa-angle-left right"></i>
+                    </p>
+                </a>
+                @Html.Partial("_RenderMenu", item.Childrens, new ViewDataDictionary(ViewData) { { "isOpen", item.IsOpen ? "menu-open" : "" } })
+            </li>
+        }
+        else
+        {
+            <li class="nav-item">
+                <a href="@(item.Url)" class="nav-link @(item.IsActive? "active":"")">
+                    <i class="nav-icon fas @item.ClassCss"></i>
+                    <p>
+                        @item.Name
+                        @if (item.Notify.HasValue)
+                        {
+                            <span class="badge badge-info right">@item.Notify</span>
+                        }
+                    </p>
+
+                </a>
+            </li>
+        }
+    }
+</ul>

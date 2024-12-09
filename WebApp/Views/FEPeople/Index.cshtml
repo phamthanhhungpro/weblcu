@@ -1,0 +1,171 @@
+﻿@using Datas.Models.ViewModels
+@{
+    var lstPeoples = (List<PeopleModel>)ViewBag.Peoples;
+    var currentPage = (int)ViewBag.CurrentPage;
+    var maxPage = (int)ViewBag.MaxPage;
+    var isSearch = (bool)ViewBag.IsSearch;
+
+    var urlPrefix = "";
+
+    var detailsName = "Xem chi tiết";
+    var detailsEthnicMinorityLink = "";
+    var detailsTraditionalCostumeLink = "";
+    var detailsNewsLink = "";
+    if (string.IsNullOrEmpty(ViewBag.SubDomain))
+    {
+        urlPrefix = "/dan-toc";
+        detailsName = "Xem chi tiết";
+        detailsEthnicMinorityLink = "/dan-toc/chi-tiet";
+        detailsTraditionalCostumeLink = "/trang-phuc/chi-tiet";
+        detailsNewsLink = "/tin-tuc/chi-tiet";
+    }
+    else
+    {
+        urlPrefix = "/ethnic-minority";
+        detailsName = "Details";
+        detailsEthnicMinorityLink = "/ethnic-minority/details";
+        detailsTraditionalCostumeLink = "/traditional-costume/details";
+        detailsNewsLink = "/news/details";
+    }
+    if (isSearch)
+    {
+        if (string.IsNullOrEmpty(ViewBag.SubDomain))
+        {
+            urlPrefix = urlPrefix + "/tim-kiem/" + ViewBag.SearchValue;
+        }
+        else
+        {
+            urlPrefix = urlPrefix + "/search/" + ViewBag.SearchValue;
+        }
+    }
+}
+<section id="relics_banner">
+    <div class="overlay"></div>
+    <div class="relics-banner-content">
+        @if (string.IsNullOrEmpty(ViewBag.SubDomain))
+        {
+            <div class="relics-title">
+                <h1>DANH MỤC DÂN TỘC THIỂU SỐ</h1>
+            </div>
+            <div class="relics-search">
+                <div class="relics-search-input">
+                    <input type="text" name="search" id="search" placeholder="Tìm kiếm dân tộc...">
+                    <div class="relics-search-btn">
+                        <button style="border:none; background:transparent;" type="submit" onclick="onSearch()">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        }
+        else
+        {
+            <div class="relics-title">
+                <h1>LIST OF ETHNIC MINORITY</h1>
+            </div>
+            <div class="relics-search">
+                <div class="relics-search-input">
+                    <input type="text" name="search" id="search" placeholder="Search ethnic minority...">
+                    <div class="relics-search-btn">
+                        <button style="border:none; background:transparent;" type="submit" onclick="onSearch()">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+        }
+      
+    </div>
+
+</section>
+
+<section id="relics-page">
+    <div class="relics-page-text">
+        @if (string.IsNullOrEmpty(ViewBag.SubDomain))
+        {
+            <p>Khám phá các dân tộc thiểu số trên địa bàn tỉnh Lai Châu</p>
+        }
+        else
+        {
+            <p>Explore ethnic minorities in Lai Chau province</p>
+        }
+    </div>
+    <div class="list-relics">
+        <div class="container">
+            <div class="row">
+                @foreach (var item in lstPeoples)
+                {
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="item-relics">
+                            <div class="item-relics-img">
+                                <a href="@detailsEthnicMinorityLink/@item.Url"><img src="@item.Image0" alt=""></a>
+                            </div>
+                            <div class="item-relics-btn">
+                                <a href="@detailsEthnicMinorityLink/@item.Url">@item.Name</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="next-page-btn">
+        <ul>
+            @if (maxPage >= 1 && maxPage <= 3)
+            {
+                <li><a href="@urlPrefix/1"><i class="fa-solid fa-chevron-left"></i></a></li>
+                for (int i = 1; i <= maxPage; i++)
+                {
+                    <li><a href="@urlPrefix/@i">@i</a></li>
+                }
+                <li><a href="@urlPrefix/@maxPage"><i class="fa-solid fa-chevron-right"></i></a></li>
+            }
+            else if (maxPage > 3)
+            {
+                <li><a href="@urlPrefix/1"><i class="fa-solid fa-chevron-left"></i></a></li>
+                if (currentPage >= maxPage)
+                {
+                    <li><a href="@urlPrefix/@(maxPage-2)">@(maxPage - 2)</a></li>
+                    <li><a href="@urlPrefix/@(maxPage-1)">@(maxPage - 1)</a></li>
+                    <li><a href="@urlPrefix/@maxPage">@maxPage</a></li>
+                }
+                else if (currentPage == 1)
+                {
+                    <li><a href="@urlPrefix/1">1</a></li>
+                    <li><a href="@urlPrefix/2">2</a></li>
+                    <li><a href="@urlPrefix/3">3</a></li>
+
+                }
+                else
+                {
+                    <li><a href="@urlPrefix/@(currentPage-1)">@(currentPage - 1)</a></li>
+                    <li><a href="@urlPrefix/@currentPage">@currentPage</a></li>
+                    <li><a href="@urlPrefix/@(currentPage+1)">@(currentPage + 1)</a></li>
+
+                }
+                <li><a href="@urlPrefix/@maxPage"><i class="fa-solid fa-chevron-right"></i></a></li>
+            }
+
+        </ul>
+    </div>
+</section>
+<script type="text/javascript">
+    var input = document.getElementById("search");
+    var searhUrl = "@(string.IsNullOrEmpty(ViewBag.SubDomain) ? "/dan-toc/tim-kiem/" : "/ethnic-minority/search/")";
+    input.addEventListener("keypress", function (event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            onSearch();
+        }
+    });
+    function onSearch() {
+        var value = $("#search").val().trim();
+        if (value.length > 0) {
+            location.href = searhUrl + value;
+        }
+    }
+</script>

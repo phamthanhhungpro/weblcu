@@ -1,0 +1,50 @@
+﻿@using Common.Entity
+@{
+    var lstMenu = (List<MenuItem>)ViewBag.Menu;
+}
+<!-- Brand Logo -->
+<a href="/Admin" class="brand-link">
+    <img src="~/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+    <span class="brand-text font-weight-light">Quản lý dân tộc</span>
+</a>
+
+<!-- Sidebar -->
+<div class="sidebar">
+    <!-- Sidebar Menu -->
+    <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            @if (lstMenu != null && lstMenu.Count > 0)
+            {
+                foreach (var item in lstMenu)
+                {
+                    if (item.IsArea())
+                    {
+                        <li class="nav-header">@item.Area.ToUpper()</li>
+                    }
+                    if (item.Childrens.Any())
+                    {
+                        <li class="nav-item @(item.IsOpen? "menu-open":"")">
+                            <a href="@(item.Url)" class="nav-link @(item.IsActive? "active":"")">
+                                <i class="nav-icon fas @item.ClassCss"></i>
+                                <p>@item.Name
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            @Html.Partial("_RenderMenu", item.Childrens, new ViewDataDictionary(ViewData) { { "isOpen", item.IsOpen ? "menu-open" : "" } })
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="@(item.IsOpen? "menu-open":"")"><a href="@(item.Url)"><i class="@item.ClassCss"></i>@item.Name</a></li>
+                    }
+                }
+            }
+            else
+            {
+                <li class="nav-header"></li>
+            }
+        </ul>
+    </nav>
+    <!-- /.sidebar-menu -->
+</div>
+<!-- /.sidebar -->

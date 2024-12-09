@@ -1,0 +1,296 @@
+/* Base styles */
+*, *:after, *:before {
+	box-sizing: border-box;
+}
+html {
+	font-size: 100%;
+	line-height: 1.5;
+	height: 100%;
+}
+
+body {
+    position: relative;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    min-height: 100%;
+    background: url(../Content/images/bg.jpg) no-repeat center center;
+    background-size: cover;
+    color: #777;
+}
+img {
+	vertical-align: middle;
+	max-width: 100%;
+}
+button {
+	cursor: pointer;
+	border: 0;
+	padding: 0;
+	background-color: transparent;
+}
+a{
+	text-decoration: none;
+	color:#1f91fb;
+}
+a:hover{
+	color:#5ba7ed;
+}
+.fl{
+	display: block;
+	float:left;
+}
+.fr{
+	display: block;
+	float:right;
+}
+/* Container */
+.container {
+	position: absolute;
+	width: 24em;
+	left: 50%;
+	top: 0;
+	margin-left: -12em;
+	margin-top:-200px;
+	animation: intro .7s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.header{
+	padding:10px 0;
+	background:#003e88;
+}
+
+.header .logo{
+    background:url(../Images/logoLogin.png) center center;
+	height:52px;
+	display:block;
+	margin:auto;
+	text-indent:-9999px;
+    background-repeat: no-repeat;
+}
+
+.footer{
+	padding:5px 0;
+	background:#003e88;
+	position:absolute;
+	bottom:0;
+	width:100%;
+	text-align:center;
+	opacity: 0.8;
+    color: aliceblue;
+}
+.footer p{
+	color:#fff;
+}
+/* Intro animation */
+@keyframes intro {
+	from {
+		opacity: 0;
+		top: 0;
+	}
+	to {
+		opacity: 1;
+		top: 50%;
+	}
+}
+
+h1.login-logo{
+	font-size: 1.6rem;
+	line-height: 1.6rem;
+	color:#f3f562;
+	display: block;
+	font-family: "Roboto Condensed", Arial;
+	font-weight: 700;
+	position: relative;
+	text-align: center;
+	background: #00408a;
+	margin-bottom: 0;
+	border-top-left-radius: .25em;
+	border-top-right-radius: .25em;
+	padding: 2px 0 15px 0;
+	opacity: 0.8;
+}
+/* login Card */
+.login {
+	position: relative;
+	opacity: 0.8;
+	color: black;
+}
+
+.login h2.login-title{
+	font-size: 1.2rem;
+	text-align: center;
+	font-weight: 700;
+	color:#333;
+}
+.login h3.login-subtitle{
+	font-size:80%;
+	font-weight: 400;
+	color:#666;
+}
+.login .login-form {
+	visibility: visible;
+	height: auto;
+	opacity: 1;
+	padding-top: 0.8em;
+}
+.login .login-fields {
+	opacity: 1;
+	visibility: visible;
+}
+.login .login-avatar {
+	transform: translate(-50%, -1.5em);
+	border-radius: 50%;
+}
+.login-form {
+	position: relative;
+	background: white;
+	visibility: hidden;
+	opacity: 0;
+	height: 0;
+	padding: 1em;
+	border-bottom-left-radius: .25em;
+	border-bottom-right-radius: .25em;
+	-webkit-filter: drop-shadow(0 0 2em rgba(0,0,0,0.2));
+	transition:
+	opacity .4s ease-in-out,
+	height .4s ease-in-out,
+	transform .4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+	padding .4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.login-fields {
+	opacity: 0;
+	visibility: hidden;
+}
+.login-avatar {
+	position: absolute;
+	z-index: 1;
+	left: 50%;
+	border-radius: 1.25em;
+	overflow: hidden;
+	width: 4.5em;
+	height: 4.5em;
+	display: block;
+}
+.login-avatar:focus {
+	outline: 0;
+}
+.login-footer {
+	padding-bottom: 0.7em;
+}
+.register .login-footer, .forget .login-footer {
+	padding: 0.7em 0;
+}
+
+
+
+/* Form */
+.field {
+	position: relative;
+	margin-bottom: 2em;
+}
+.field:after{
+	content: "";
+	display: table;
+	clear: both;
+}
+.label {
+	position: absolute;
+	height: 2rem;
+	line-height: 2rem;
+	bottom: 0;
+	left:0;
+	color: #ccc;
+}
+.input, .select{
+	width: 100%;
+	font-size: 100%;
+	border: 0;
+	padding: 0;
+	background-color: transparent;
+	height: 2rem;
+	line-height: 2rem;
+	border-bottom: 1px solid #ccc;
+	color: #777;
+}
+.input:focus {
+	outline: 0;
+	border-color: #1f91fb;
+}
+
+/* Using required and a faux pattern to see if input has text from http://stackoverflow.com/questions/16952526/detect-if-an-input-has-text-in-it-using-css */
+.index .input:focus + .label,
+.index input:valid + .label,
+.forget .input:focus + .label,
+.forget input:valid + .label{
+	transform: translateY(-70%);
+	font-size: 0.75rem;
+	color: #999;
+}
+
+
+
+/* Button */
+.btn {
+	border: 0;
+	font-size: 0.75rem;
+	height: 2.5rem;
+	line-height: 2.5rem;
+	padding: 0 1.5rem;
+	color: white;
+	background: #db442b;
+	text-transform: uppercase;
+	border-radius: .25rem;
+	letter-spacing: .2em;
+	transition: background .2s;
+}
+.btn:focus {
+	outline: 0;
+}
+.btn:hover,
+.btn:focus {
+	background: #e56a56;
+}
+.login-footer{
+	text-align: center;
+}
+.login-footer .btn{
+	width: 100%
+}
+
+.btn-link{
+	position: absolute;
+	right: 8px;
+	top: 8px;
+	text-align: right;
+	font-size: 0.75rem;
+}
+
+.register .field {
+	position: relative;
+	margin-bottom: 0.4em;
+}
+.register .label{
+	position: absolute;
+	height: 2rem;
+	line-height: 2rem;
+	bottom: -3px;
+	color: #999;
+	width:140px;
+	text-align: right;
+	line-height: 1.8rem;
+	font-size: 0.75rem;
+	color: #666;
+}
+.register .input, .register .select{
+	width: 60%;
+	margin-left:40%;
+	padding: 6px 5px 6px 10px;
+	background-color: transparent;
+	height: 1.9rem;
+	line-height: 1.9rem;
+	border: 1px solid #ddd;
+	font-size: 0.75rem;
+}
+.register .input:focus, .register .select:focus{
+	border-color: #1f91fb;
+	outline: 0;
+}

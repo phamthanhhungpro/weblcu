@@ -1,0 +1,127 @@
+﻿@using Datas.Models.ViewModels
+@model NewsModel
+@{
+    var lstNews = (List<NewsModel>)ViewBag.OtherNews;
+    var lstTopNews = (List<NewsModel>)ViewBag.TopNews;
+    var detailsName = "Xem chi tiết";
+    var detailsEthnicMinorityLink = "";
+    var detailsTraditionalCostumeLink = "";
+    var detailsNewsLink = "";
+    if (string.IsNullOrEmpty(ViewBag.SubDomain))
+    {
+        detailsName = "Xem chi tiết";
+        detailsEthnicMinorityLink = "/dan-toc/chi-tiet";
+        detailsTraditionalCostumeLink = "/trang-phuc/chi-tiet";
+        detailsNewsLink = "/tin-tuc/chi-tiet";
+    }
+    else
+    {
+        detailsName = "Details";
+        detailsEthnicMinorityLink = "/ethnic-minority/details";
+        detailsTraditionalCostumeLink = "/traditional-costume/details";
+        detailsNewsLink = "/news/details";
+    }
+}
+<section id="news-content">
+    <div class="container">
+        <div class="pagination">
+            @if (string.IsNullOrEmpty(ViewBag.SubDomain))
+            {
+                <a href="">Trang chủ</a> <span>/</span> <a href="/tin-tuc">Tin tức & Sự kiện</a> <span>/</span> <a href="/tin-tuc/chi-tiet/@Model.Url">Bài viết</a>
+            }
+            else
+            {
+                <a href="">Home</a> <span>/</span> <a href="/news">News & Events</a> <span>/</span> <a href="/news/details/@Model.Url">Post</a>
+            }
+            
+        </div>
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="news-post">
+                    <div class="post-title">
+                        <h2>@Model.Title.ToUpper()</h2>
+                        <span>@Model.Author - @Model.PostDate.ToString("dd/MM/yyyy HH:mm")</span>
+                    </div>
+                    <div class="post-text-content">
+                        @Html.Raw(Model.Content)
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="news-other-title">
+                    @if (string.IsNullOrEmpty(ViewBag.SubDomain))
+                    {
+                        <h3>Các tin tức khác</h3>
+                    }
+                    else
+                    {
+                        <h3>Other news</h3>
+                    }
+              
+                </div>
+                <div class="news-other">
+                    @foreach(var item in lstTopNews)
+                    {
+                        <div class="item-news">
+                            <div class="item-news-img">
+                                <a href="@detailsNewsLink/@item.Url">
+                                    <img src="@item.Image" alt="">
+                                </a>
+                            </div>
+
+                            <div class="item-news-text">
+                                <a href="@detailsNewsLink/@item.Url">@item.Title</a>
+                                <span><i class="fa-solid fa-clock"></i>@item.Calendar</span>
+                                <div class="item-news-btn">
+                                    <a href="@detailsNewsLink/@item.Url">@detailsName</a>
+                                    <div class="news-view">
+                                        <p><i class="fa-solid fa-eye"></i>@item.View</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="news-slide">
+            @if (lstNews.Count > 0)
+            {
+
+                <div class="news-slide-title">
+                    @if (string.IsNullOrEmpty(ViewBag.SubDomain))
+                    {
+                        <h3>Tin tức liên quan</h3>
+                    }
+                    else
+                    {
+                        <h3>Related news</h3>
+                    }
+                </div>
+                <div class="slick-news">
+                    @foreach (var item in lstNews)
+                    {
+                        <div class="item-news">
+                            <div class="item-news-img">
+                                <a href="@detailsNewsLink/@item.Url">
+                                    <img src="@item.Image" alt="">
+                                </a>
+                            </div>
+                            <div class="item-news-text">
+                                <a href="@detailsNewsLink/@item.Url">@item.Title</a>
+                                <span><i class="fa-solid fa-clock"></i>@item.Calendar</span>
+                                <div class="item-news-btn">
+                                    <a href="@detailsNewsLink/@item.Url">@detailsName</a>
+                                    <div class="news-view">
+                                        <p><i class="fa-solid fa-eye"></i>@item.View</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</section>

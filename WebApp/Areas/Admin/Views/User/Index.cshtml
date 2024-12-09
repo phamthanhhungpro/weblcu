@@ -1,0 +1,213 @@
+﻿@using Common
+@using Common.Entity.Permission
+@model IEnumerable<Datas.Models.DomainModels.User>
+@{
+    ViewBag.Title = "Danh sách người dùng";
+    var permission = (UserPermission)ViewBag.Permisson;
+}
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Danh sách người dùng</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item">
+                            <a asp-area="Admin" asp-controller="Default" asp-action="Index">Trang chủ</a>
+                        </li>
+                        <li class="breadcrumb-item active">Danh sách người dùng</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <!-- Main row -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        @if (permission.IsAdd)
+                        {
+                            <div class="card-header">
+                                <div class="float-right"><a class="btn btn-primary" asp-area="Admin" asp-controller="User" asp-action="Create">Thêm mới</a></div>
+                            </div>
+                        }
+                        <div class="card-body">
+                            <table class="table table-bordered table-hover" id="list-user">
+                                <thead>
+                                    <tr>
+                                        <th style="vertical-align:middle; text-align:center; width:5%">
+                                            STT
+                                        </th>
+
+                                        <th style="vertical-align:middle; text-align:center; width:15%">
+                                            @Html.DisplayNameFor(model => model.FullName)
+                                        </th>
+                                        <th style="vertical-align:middle; text-align:center; width:10%">
+                                            @Html.DisplayNameFor(model => model.Birthday)
+                                        </th>
+                                        <th style="vertical-align:middle; text-align:center; width:10%">
+                                            @Html.DisplayNameFor(model => model.PhoneNumber)
+                                        </th>
+                                        <th style="vertical-align:middle; text-align:center; width:10%">
+                                            @Html.DisplayNameFor(model => model.Email)
+                                        </th>
+                                        <th style="vertical-align:middle; text-align:center; width:15%">
+                                            @Html.DisplayNameFor(model => model.DepartmentCompanyId)
+                                        </th>
+                                        <th style="vertical-align:middle; text-align:center; width:10%">
+                                            Trạng thái
+                                        </th>
+                                        <th style="vertical-align:middle; text-align:center; width:25%">
+                                            Thao tác
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        int index = 1;
+                                    }
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr class="row-@item.Id">
+                                            <td style="vertical-align:middle; text-align:center">
+                                                @index
+                                            </td>
+
+                                            <td style="vertical-align:middle; text-align:left">
+                                                @Html.DisplayFor(modelItem => item.FullName)
+                                            </td>
+                                            <td style="vertical-align:middle; text-align:right">
+                                                @Html.DisplayFor(modelItem => item.Birthday)
+                                            </td>
+                                            <td style="vertical-align:middle; text-align:right">
+                                                @Html.DisplayFor(modelItem => item.PhoneNumber)
+                                            </td>
+                                            <td style="vertical-align:middle; text-align:left">
+                                                @Html.DisplayFor(modelItem => item.Email)
+                                            </td>
+                                            <td style="vertical-align:middle; text-align:left">
+                                                @Html.DisplayFor(modelItem => item.DepartmentCompany.Name)
+                                            </td>
+                                            <td style="vertical-align:middle; text-align:center">
+                                                @{
+                                                    if (item.Status == Enums.ActiveStatus.Active)
+                                                    {
+                                                        <span class="badge bg-success" id="col-@item.Id">@item.Status.DisplayName()</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="badge bg-danger" id="col-@item.Id">@item.Status.DisplayName()</span>
+                                                    }
+                                                }
+                                            </td>
+                                            <td style="vertical-align:middle; text-align:center">
+                                                @if (permission.IsEdit)
+                                                {
+                                                    <a asp-action="Edit" asp-route-id="@item.Id" asp-area="Admin" class="fas fa fa-edit" style="margin-right:6px" data_toggle="tooltip" title="Chỉnh sửa thông tin tài khoản">Edit</a>
+                                                }
+                                                @if (permission.IsLockUser)
+                                                {
+                                                    <a class="fas fa fa-lock"
+                                                       data-ajax="true"
+                                                       data-ajax-confirm="Bạn có muốn khóa tài khoản này?"
+                                                       data-ajax-failure="OnFailure"
+                                                       data-ajax-loading="#ajax-loading"
+                                                       data-ajax-method="POST"
+                                                       data-ajax-success="LockDone(@item.Id,data)"
+                                                       data-toggle="tooltip"
+                                                       asp-action="LockUser" asp-route-id="@item.Id" asp-area="Admin" asp-controller="User"
+                                                       style="margin-right:6px"
+                                                       title=""
+                                                       data-original-title="Khóa tài khoản"> Khóa</a>
+                                                }
+
+                                                @if (permission.IsDelete)
+                                                {
+                                                    <a class="fas fa fa-trash"
+                                                       data-ajax="true"
+                                                       data-ajax-confirm="Bạn có muốn khóa tài khoản này?"
+                                                       data-ajax-failure="OnFailure"
+                                                       data-ajax-loading="#ajax-loading"
+                                                       data-ajax-method="POST"
+                                                       data-ajax-success="onDelete(@item.Id,data)"
+                                                       data-toggle="tooltip"
+                                                       asp-action="Delete" asp-route-id="@item.Id" asp-area="Admin" asp-controller="User"
+                                                       style="margin-right:6px"
+                                                       title=""
+                                                       data-original-title="Xóa tài khoản khỏi danh sách"> Xóa</a>
+                                                }
+                                                @if (permission.IsResetPass)
+                                                {
+                                                    <a class="fas fa fa-retweet"
+                                                       data-ajax="true"
+                                                       data-ajax-confirm="Bạn có muổn reset mật khẩu tài khoàn này không?"
+                                                       data-ajax-failure="OnFailure"
+                                                       data-ajax-loading="#ajax-loading"
+                                                       data-ajax-method="POST"
+                                                       data-ajax-success="ResetDone(@item.Id,data)"
+                                                       data-toggle="tooltip"
+                                                       asp-action="ResetPass" asp-route-id="@item.Id" asp-area="Admin" asp-controller="User"
+                                                       style="margin-right:6px"
+                                                       title=""
+                                                       data-original-title="Reset mật khẩu về mặc định"> Reset</a>
+                                                }
+                                            </td>
+                                        </tr>
+                                        index++;
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.row (main row) -->
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+<script type="text/javascript">
+    $(function () {
+        $("#list-user").dataTable({
+            "language": {
+                "url": "/plugins/datatables/Vietnamese.json"
+            }
+        });
+    });
+    function LockDone(id, data) {
+        if (data.code == 0) {
+            $("#col-" + id + "").attr("class", "badge bg-danger");
+            toastr.success("Khóa thành công");
+        }
+        else {
+            toastr.error("Lỗi: " + data.message);
+        }
+    };
+    function DeleteDone(id, data) {
+        if (data.code == 0) {
+            $(".row-" + id + "").hide()
+            toastr.success("Xóa thành công");
+        }
+        else {
+            toastr.error("Lỗi: " + data.message);
+        }
+    };
+    function ResetDone(id, data) {
+        if (data.code == 0) {
+            toastr.success("Reset thành công");
+        }
+        else {
+            toastr.error("Lỗi: " + data.message);
+        }
+    };
+</script>

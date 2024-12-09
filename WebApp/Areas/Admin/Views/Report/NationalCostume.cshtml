@@ -1,0 +1,133 @@
+﻿@using Common
+@using Common.Entity.Permission
+@{
+    ViewBag.Title = "Báo cáo thống kê trang phục";
+}
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Báo cáo thống kê trang phục</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item">
+                            <a asp-area="Admin" asp-controller="Default" asp-action="Index">Trang chủ</a>
+                        </li>
+                        <li class="breadcrumb-item active">Báo cáo thống kê trang phục</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <!-- Main row -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label">Lọc loại trang phục: </label>
+                                            @Html.DropDownList("searchType", (IEnumerable<SelectListItem>
+                                                     )ViewBag.NationalCostumeCategories, "---Tất cả---",
+                                                     new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label">Lọc dân tộc: </label>
+                                            @Html.DropDownList("searchPeople", (IEnumerable<SelectListItem>
+                                                     )ViewBag.Peoples, "---Tất cả---",
+                                                     new { @class = "form-control" })
+                                            <label for="isSub">Tải dữ liệu dân tộc con: </label>
+                                            <input id="isSub" name="isSub" type="checkbox" value="true" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label">Hiển thị </label>
+                                            <select class="form-control" id="isDisplay" name="isDisplay">
+                                                <option value="0">---Tất cả---</option>
+                                                <option value="1">Hiển thị</option>
+                                                <option value="2">Ẩn</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="float-right">
+                                            <div class="form-group">
+                                                <button class="btn btn-success form-control" onclick="Search()"><i class="fa fa-search"></i> Tìm</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body" >
+                            <div id="display-nc">
+                                @Html.Partial("_RenderNationalCostume")
+                            </div>
+                            <div>
+                                <div class="float-left">
+                                    <div class="form-group">
+                                        <label class="control-label">Gom nhóm: </label>
+                                        <select id="isGroup" name="isGroup">
+                                            <option value="0">---Không---</option>
+                                            <option value="1">Dân tộc</option>
+                                            <option value="2">Loại trang phục</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.row (main row) -->
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+<script type="text/javascript">
+    var table;
+
+    // $(function () {
+    //     LoadAjaxNew(0, 0, 0, 0);
+    // });
+
+    function Search() {
+        var p = document.getElementById("searchPeople").value;
+        var dis = document.getElementById("isDisplay").value;
+        var s = document.getElementById("searchType").value;
+        var sub = document.getElementById("isSub").checked;
+        
+        $.ajax({
+            url: "GetNationalCostumeSearch",
+            type: "POST",
+            data: { category: s, people: p, display: dis, sub: sub },
+            beforeSend: function (xhr) {
+                $("#ajax-loading").modal("show");
+            },
+            success: function (data) {
+                $("#display-nc").html(data);
+
+            },
+            complete: function () {
+                $("#ajax-loading").modal("hide");
+            },
+        });
+    }
+</script>

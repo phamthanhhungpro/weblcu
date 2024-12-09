@@ -1,0 +1,168 @@
+﻿@using Common
+@using Datas.Models.DomainModels
+@using Datas.Models.ViewModels
+@model Datas.Models.ViewModels.AssignUserModel
+@{
+    ViewBag.Title = "Phân quyền người dùng";
+    TempData["indexUser"] = 0;
+    var userShareData = (string)ViewBag.UserShare;
+}
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Phân quyền người dùng</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item">
+                            <a asp-area="Admin" asp-controller="Default" asp-action="Index">Trang chủ</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a asp-area="Admin" asp-controller="Role" asp-action="Index">Danh sách</a>
+                        </li>
+                        <li class="breadcrumb-item active">
+                            Phân quyền
+                        </li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <!-- Main row -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="float-left">
+                                <span>Trường có dấu <span class="text-danger">(*)</span> là bắt buộc</span>
+                            </div>
+                            <div class="float-right">
+                                <a asp-area="Admin" asp-controller="Role" asp-action="Index" class="btn btn-primary">Danh sách</a>
+                            </div>
+                        </div>
+                        <form asp-action="AssignUser" asp-controller="Role" asp-area="Admin" asp-route-id="@Model.Id">
+                            <div class="card-body">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="RoleName" class="control-label"></label> <span class="text-danger">(*)</span>
+                                            <input asp-for="RoleName" class="form-control" disabled />
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="Title" class="control-label"></label>
+                                            <input asp-for="Title" class="form-control" disabled />
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="Status" class="control-label"></label>
+                                            <select class="form-control" asp-for="Status" asp-items="Html.GetEnumSelectList(typeof(Enums.ActiveStatus))" disabled>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Assign" class="control-label"></label>
+                                            <input asp-for="Assign" class="form-control" type="hidden" />
+                                            <div id="display-user-select" style="max-height:300px">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="form-group">
+                                    <input type="submit" value="Cập nhật" class="btn btn-primary" />
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.row (main row) -->
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+<script type="text/javascript">
+    var timeout = null;
+    var baseShareValue = "@(Model != null ? Model.Assign : "")";
+    $(function () {
+        LoadUser();
+    });
+    function LoadUser() {
+        $("#display-user-select").fancytree({
+            checkbox: true,
+            selectMode: 2,
+            source: @Html.Raw(userShareData),
+            icon: function (event, data) {
+                if (data.node.type == 0) {
+                    return "fas fa-solid fa-landmark";
+                }
+                else if (data.node.type == 1) {
+                    return "fas fa-solid fa-building";
+                }
+                else {
+                    return "fas fa-solid fa-user";
+                }
+            },
+            init: function (event, data) {
+                // Set key from first part of title (just for this demo output)
+                var isReGetValue = false;
+                var arrayValue = [];
+                if (baseShareValue) {
+                    arrayValue = baseShareValue.split("|");
+                }
+                data.tree.visit(function (n) {
+                    if (n.checkbox) {
+                        if (arrayValue.includes(n.key)) {
+                            n.setSelected(true);
+                        }
+                        else {
+                            isReGetValue = true;
+                        }
+                    }
+                });
+                if (isReGetValue) {
+                    var selNodes = data.tree.getSelectedNodes();
+                    // convert to title/key array
+                    var selKeys = $.map(selNodes, function (node) {
+                        return node.key;
+                    });
+                    $("#Assign").val(selKeys.join("|"));
+                }
+            },
+            select: function (event, data) {
+                // Display list of selected nodes
+                var selNodes = data.tree.getSelectedNodes();
+                // convert to title/key array
+                var selKeys = $.map(selNodes, function (node) {
+                    return node.key;
+                });
+                $("#Assign").val(selKeys.join("|"));
+            },
+            // The following options are only required, if we have more than one tree on one page:
+            cookieId: "fancytree-Cb2",
+            idPrefix: "fancytree-Cb2-"
+        });
+    }
+</script>
+<style>
+    span.fancytree-checkbox {
+        margin-top: 2px;
+    }
+</style>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

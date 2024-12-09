@@ -1,0 +1,38 @@
+﻿@{
+    //success messages
+    var successMessages = new List<string>();
+    const string successKey = "notifications.Success";
+    const string errorKey = "notifications.Error";
+    if (TempData[successKey] != null)
+    {
+        successMessages.AddRange(TempData[successKey] as IList<string>);
+    }
+    if (ViewData[successKey] != null)
+    {
+        successMessages.AddRange(ViewData[successKey] as IList<string>);
+    }
+
+
+    //error messages
+    var errorMessages = new List<string>();
+    if (TempData[errorKey] != null)
+    {
+        errorMessages.AddRange(TempData[errorKey] as IList<string>);
+    }
+    if (ViewData[errorKey] != null)
+    {
+        errorMessages.AddRange(ViewData[errorKey] as IList<string>);
+    }
+}
+<script type="text/javascript">
+    $(function () {
+        var successData = @Html.Raw(Json.Serialize(successMessages.ToArray()));
+        for (i = 0; i < successData.length; i++) {
+            toastr.success(successData[i]);
+        }
+        var errorData = @Html.Raw(Json.Serialize(errorMessages.ToArray()));
+        for (i = 0; i < errorData.length; i++) {
+            toastr.error(errorData[i]);
+        }
+    });
+</script>

@@ -1,0 +1,84 @@
+﻿@using Common.Entity
+@{
+    var lstMenu = (List<MenuItem>)ViewBag.Menu;
+}
+<div class="top-menu" id="fixedNav">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="@Url.Action("Index","Home")">
+                <img src="~/fe/images/logo.png" alt="">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    @if (string.IsNullOrEmpty(ViewBag.SubDomain))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="@Url.Action("Index","Home")">Trang chủ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/dan-toc">Danh mục dân tộc thiểu số</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/trang-phuc">Trang phục truyền thống</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/tin-tuc">Tin tức - Sự kiện</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/ban-do">Bản đồ số</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/lien-he">Liên hệ</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-chevron-down dropdown-icon"></i>
+
+                            </a>
+                            <ul class="dropdown-menu language-drop">
+                                <li><a class="dropdown-item" href="https://laichau360.vn">Tiếng Việt</a></li>
+                                <li><a class="dropdown-item" href="https://en.laichau360.vn">Tiếng Anh</a></li>
+                            </ul>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="@Url.Action("Index","Home")">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/ethnic-minority">List Of Ethnic Minority</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/traditional-costume">Traditional Costume</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/news">News And Events</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/map">Digital Map</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/contact">Contact</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-chevron-down dropdown-icon"></i>
+
+                            </a>
+                            <ul class="dropdown-menu language-drop">
+                                <li><a class="dropdown-item" href="https://laichau360.vn">Vietnamese</a></li>
+                                <li><a class="dropdown-item" href="https://en.laichau360.vn">English</a></li>
+                            </ul>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>

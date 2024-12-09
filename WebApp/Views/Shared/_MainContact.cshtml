@@ -1,0 +1,66 @@
+﻿@using Datas.Models.ViewModels
+@{
+    var setting = (SettingModel)ViewBag.Setting;
+}
+<section id="contact">
+    <div class="container">
+        <div class="contact-content row">
+            <div class="col-lg-1 col-md-12">
+                <div class="contact-logo ">
+                    <img src="~/fe/images/logo.png" alt="">
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+                <div class="contact-detail">
+                    <h4>@setting.FooterTitle</h4>
+                    @if (string.IsNullOrEmpty(ViewBag.SubDomain))
+                    {
+                        <p>Cơ quan chủ quản: <span>@setting.FooterAgency</span></p>
+                        <p>Chịu trách nhiệm chính: <span>@setting.FooterAuthor</span></p>
+                    }
+                    else
+                    {
+                        <p>Line agency: <span>@setting.FooterAgency</span></p>
+                        <p>Responsible for implementation: <span>@setting.FooterAuthor</span></p>
+                    }
+                   
+                    <ul>
+                        <li><i class="fa-solid fa-house"></i>@setting.FooterAddress</li>
+                        <li><i class="fa-solid fa-phone"></i>@setting.FooterPhone</li>
+                        <li><i class="fa-regular fa-envelope"></i>@setting.FooterEmail</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="contact-text">
+                    @if(string.IsNullOrEmpty(ViewBag.SubDomain))
+                    {
+                        <h4>Về chúng tôi</h4>
+                    }
+                    else
+                    {
+                        <h4>About us</h4>
+                    }
+                    @Html.Raw(setting.OwnerDetails)
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-6 col-sm-12">
+                <div class="contact-icon">
+                    @if (string.IsNullOrEmpty(ViewBag.SubDomain))
+                    {
+                        <h4>Theo dõi tại:</h4>
+                    }
+                    else
+                    {
+                        <h4>Follow us</h4>
+                    }
+                    <div class="combo-icon">
+                        <a href="@setting.FollowFacebook"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="@setting.FollowTiktok"><i class="fa-brands fa-tiktok"></i></a>
+                        <a href="@setting.FollowYouTube"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

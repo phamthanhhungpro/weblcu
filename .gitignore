@@ -1,0 +1,10 @@
+*.dll
+/common/bin
+/common/obj
+/datas/bin
+/datas/obj
+/Services/bin
+/Services/obj
+/WebApp/bin
+/WebApp/obj
+.vs/

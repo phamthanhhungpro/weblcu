@@ -1,0 +1,116 @@
+﻿@using Common
+@using Datas.Entity
+@using Datas.Models.DomainModels
+@using Datas.Models.ViewModels
+@model Datas.Models.ViewModels.RoleModel
+@{
+    var groupId = 0;
+    var index = 0;
+    var lstFunction = Model == null ? new List<AssignFunction>() : Model.Functions;
+}
+<div class="row">
+    <div class="col-md-12">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-7">
+        <div class="form-group">
+            <label asp-for="Name" class="control-label"></label> <span class="text-danger">(*)</span>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Title" class="control-label"></label>
+            <input asp-for="Title" class="form-control" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Status" class="control-label"></label>
+            <select class="form-control" asp-for="Status" asp-items="Html.GetEnumSelectList(typeof(Enums.ActiveStatus))">
+            </select>
+            <input type="hidden" asp-for="Status" />
+            <span asp-validation-for="Status" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-md-5">
+        <div class="form-group">
+            <div>
+                <table class="table table-bordered table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Tên quyền</th>
+                            <th><input type="checkbox" name="select-all" id="select-all" /> </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in ((IEnumerable<Function>)ViewBag.ListFunction).OrderBy(o => o.Group.Order))
+                        {
+                            if (groupId != item.Group.Id)
+                            {
+                                groupId = item.Group.Id;
+                                <tr>
+                                    <td colspan="1"><strong>Nhóm quyền: @item.Group.Name</strong></td>
+                                    <td><input type="checkbox" name="select-all" id="select-all" alt="control-@item.Group.Id" /></td>
+                                </tr>
+
+
+                            }
+                            <tr>
+                                <td>
+                                    <label for="function-@item.Id" style="padding-left:10px;font-weight:normal;width:100%">- @item.Name</label>
+                                    <input type="hidden" name="Functions[@index].FunctionId" value="@item.Id" alt="group-@item.Group.Id" />
+                                </td>
+                                <td>
+                                    @if (lstFunction.Any(o => o.FunctionId.Equals(item.Id)))
+                                    {
+                                        <input id="function-@item.Id" type="checkbox" name="Functions[@index].IsSelect" checked value="true" alt="group-@item.Group.Id" />
+                                    }
+                                    else
+                                    {
+                                        <input id="function-@item.Id" type="checkbox" name="Functions[@index].IsSelect" value="true" alt="group-@item.Group.Id" />
+                                    }
+                                </td>
+                            </tr>
+                            index++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $('#select-all').click(function (event) {
+            if (this.checked) {
+                $(':checkbox').each(function () {
+                    this.checked = true;
+                });
+            }
+            else {
+                $(':checkbox').each(function () {
+                    this.checked = false;
+                });
+            }
+        });
+
+        var index = $("input[alt*='control']").length;
+        for (var i = 1; i < index; i++) {
+            $("input[alt=control" + i + "]").click(function (event) {
+                if (this.checked) {
+                    $(':checkbox').each(function () {
+                        this.checked = true;
+                    });
+                }
+                else {
+                    $(':checkbox').each(function () {
+                        this.checked = false;
+                    });
+                }
+            });
+
+        }
+    });
+</script>
+

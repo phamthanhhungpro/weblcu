@@ -1,0 +1,150 @@
+﻿@using Common
+@using Common.Entity.Permission
+@{
+    ViewBag.Title = "Báo cáo thống kê dân tộc";
+}
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Báo cáo thống kê dân tộc</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item">
+                            <a asp-area="Admin" asp-controller="Default" asp-action="Index">Trang chủ</a>
+                        </li>
+                        <li class="breadcrumb-item active">Báo cáo thống kê dân tộc</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <!-- Main row -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label">Lọc thành phố/huyện: </label>
+                                            @Html.DropDownList("searchDistrict", (IEnumerable<SelectListItem>
+                                                     )ViewBag.Districts, "---Tất cả---",
+                                                     new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group" id="display-ward">
+                                            @Html.Partial("_DisplayWardSearch")
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label">Lọc dân tộc con: </label>
+                                            @Html.DropDownList("searchPeople", (IEnumerable<SelectListItem>
+                                                     )ViewBag.Peoples, "---Tất cả---",
+                                                     new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label">Hiển thị </label>
+                                            <select class="form-control" id="isDisplay" name="isDisplay">
+                                                <option value="0">---Tất cả---</option>
+                                                <option value="1">Hiển thị</option>
+                                                <option value="2">Ẩn</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="float-right">
+                                            <div class="form-group">
+                                                <button class="btn btn-success form-control" onclick="Search()"><i class="fa fa-search"></i> Tìm</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body" id="display-people">
+                            @Html.Partial("_RenderPeople")
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.row (main row) -->
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+<script type="text/javascript">
+    $("#searchDistrict").change(function () {
+        var warid = this.options[this.selectedIndex].value;
+        $.ajax({
+            url: "GetWardSearch",
+            type: "POST",
+            data: { id: warid },
+            beforeSend: function (xhr) {
+                $("#ajax-loading").modal("show");
+            },
+            success: function (data) {
+                $("#display-ward").html(data);
+            },
+            complete: function () {
+                $("#ajax-loading").modal("hide");
+            },
+        });
+    });
+</script>
+<script type="text/javascript">
+    var table;
+
+    // $(function () {
+    //     LoadAjaxNew(0, 0, 0, 0);
+    // });
+
+    function Search() {
+        var c = 0; //document.getElementById("searchType").value
+        var d = document.getElementById("searchDistrict").value;
+        var w = document.getElementById("searchWard").value;
+        var p = document.getElementById("searchPeople").value;
+        var dis = document.getElementById("isDisplay").value;
+        $.ajax({
+            url: "GetPeopleSearch",
+            type: "POST",
+            data: { category: c, district: d, ward: w, people: p, display: dis },
+            beforeSend: function (xhr) {
+                $("#ajax-loading").modal("show");
+            },
+            success: function (data) {
+                $("#display-people").html(data);
+            },
+            complete: function () {
+                $("#ajax-loading").modal("hide");
+            },
+        });
+    }
+
+    function onDelete(id, data) {
+        if (data.code == 0) {
+            $(".row-" + id + "").hide();
+            toastr.success("Xóa thành công");
+        }
+        else {
+            toastr.error("Lỗi: " + data.message);
+        }
+    };
+</script>

@@ -1,0 +1,229 @@
+﻿@using Common
+@model Datas.Models.ViewModels.NationalCostumeModel
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label asp-for="Image0" class="control-label"></label> <span class="text-danger">(*)</span>
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-10">
+                        <input asp-for="Image0" class="form-control" />
+                    </div>
+                    <div class="col-md-2">
+                        <input type="button" class="btn btn-secondary" value="Upload" onclick="BrowseServerImage(0);" />
+                    </div>
+                </div>
+
+            </div>
+            <div>
+                <span asp-validation-for="Image0" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Image2" class="control-label"></label>
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-10">
+                        <input asp-for="Image2" class="form-control" />
+                    </div>
+                    <div class="col-md-2">
+                        <input type="button" class="btn btn-secondary" value="Upload" onclick="BrowseServerImage(2);" />
+                    </div>
+                </div>
+
+            </div>
+            <div>
+                <span asp-validation-for="Image2" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Image4" class="control-label"></label>
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-10">
+                        <input asp-for="Image4" class="form-control" />
+                    </div>
+                    <div class="col-md-2">
+                        <input type="button" class="btn btn-secondary" value="Upload" onclick="BrowseServerImage(4);" />
+                    </div>
+                </div>
+
+            </div>
+            <div>
+                <span asp-validation-for="Image4" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Image6" class="control-label"></label>
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-10">
+                        <input asp-for="Image6" class="form-control" />
+                    </div>
+                    <div class="col-md-2">
+                        <input type="button" class="btn btn-secondary" value="Upload" onclick="BrowseServerImage(6);" />
+                    </div>
+                </div>
+
+            </div>
+            <div>
+                <span asp-validation-for="Image6" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Image8" class="control-label"></label>
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-10">
+                        <input asp-for="Image8" class="form-control" />
+                    </div>
+                    <div class="col-md-2">
+                        <input type="button" class="btn btn-secondary" value="Upload" onclick="BrowseServerImage(8);" />
+                    </div>
+                </div>
+
+            </div>
+            <div>
+                <span asp-validation-for="Image8" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label asp-for="Image1" class="control-label"></label>
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-10">
+                        <input asp-for="Image1" class="form-control" />
+                    </div>
+                    <div class="col-md-2">
+                        <input type="button" class="btn btn-secondary" value="Upload" onclick="BrowseServerImage(1);" />
+                    </div>
+                </div>
+
+            </div>
+            <div>
+                <span asp-validation-for="Image1" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Image3" class="control-label"></label>
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-10">
+                        <input asp-for="Image3" class="form-control" />
+                    </div>
+                    <div class="col-md-2">
+                        <input type="button" class="btn btn-secondary" value="Upload" onclick="BrowseServerImage(3);" />
+                    </div>
+                </div>
+
+            </div>
+            <div>
+                <span asp-validation-for="Image3" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Image5" class="control-label"></label>
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-10">
+                        <input asp-for="Image5" class="form-control" />
+                    </div>
+                    <div class="col-md-2">
+                        <input type="button" class="btn btn-secondary" value="Upload" onclick="BrowseServerImage(5);" />
+                    </div>
+                </div>
+
+            </div>
+            <div>
+                <span asp-validation-for="Image5" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Image7" class="control-label"></label>
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-10">
+                        <input asp-for="Image7" class="form-control" />
+                    </div>
+                    <div class="col-md-2">
+                        <input type="button" class="btn btn-secondary" value="Upload" onclick="BrowseServerImage(7);" />
+                    </div>
+                </div>
+
+            </div>
+            <div>
+                <span asp-validation-for="Image7" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Image9" class="control-label"></label>
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-10">
+                        <input asp-for="Image9" class="form-control" />
+                    </div>
+                    <div class="col-md-2">
+                        <input type="button" class="btn btn-secondary" value="Upload" onclick="BrowseServerImage(9);" />
+                    </div>
+                </div>
+
+            </div>
+            <div>
+                <span asp-validation-for="Image9" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    let openFile;
+    let idx = 0;
+    let options;
+    $(function () {
+        var myCommands = elFinder.prototype._options.commands;
+        options = {
+            baseUrl: "/lib/elfinder/",
+            url: "/Admin/file-system/connector",
+            rememberLastDir: false,
+            commands: myCommands,
+            lang: 'vi',
+            commandsOptions: {
+                getfile: {
+                    oncomplete: 'close' // destroy elFinder after file selection
+                }
+            },
+            getFileCallback: function (a, b) {
+                document.getElementById("Image" + idx).value = "/" + a.path;
+            },
+            uiOptions: {
+                toolbar: [
+                    ['back', 'forward'],
+                    ['reload'],
+                    ['home', 'up'],
+                    ['mkdir', 'mkfile', 'upload'],
+                    ['open', 'download'],
+                    ['undo', 'redo'],
+                    ['info'],
+                    ['quicklook'],
+                    ['copy', 'cut', 'paste'],
+                    ['rm'],
+                    ['duplicate', 'rename', 'edit'],
+                    ['selectall', 'selectnone', 'selectinvert'],
+                    ['view', 'sort']
+                ]
+            },
+            lang: 'vi',
+        };
+    });
+        
+        function BrowseServerImage(id) {
+        idx = id;
+            if (!openFile) {
+                openFile = $('#image-finder').dialogelfinder(options);
+            }
+            else {
+                openFile.dialogelfinder('open');
+            }
+        }
+</script>

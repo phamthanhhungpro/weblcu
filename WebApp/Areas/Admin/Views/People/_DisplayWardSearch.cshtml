@@ -1,0 +1,4 @@
+﻿<label class="control-label">Lọc phường/xã: </label>
+@Html.DropDownList("searchWard", (IEnumerable<SelectListItem>
+                  )ViewBag.Wards, "---Tất cả---",
+                  new { @class = "form-control" })

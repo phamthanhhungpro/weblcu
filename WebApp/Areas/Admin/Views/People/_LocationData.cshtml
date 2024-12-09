@@ -1,0 +1,234 @@
+﻿@using Common
+@model Datas.Models.ViewModels.PeopleModel
+@{
+    var indexLocation = 3;
+    if(Model !=null)
+    {
+        indexLocation = Model.Locations.Count;
+    }
+}
+<table class="table table-bordered table-hover" id="list-location">
+    <thead>
+        <tr>
+            <th style="width:5%">
+                Số TT
+            </th>
+            <th style="width:30%">
+                Thành phố/huyện
+            </th>
+            <th style="width:30%">
+                Phường/xã
+            </th>
+            <th style="width:15%">
+                Vĩ độ (lat)
+            </th>
+            <th style="width:15%">
+                Kinh độ (long)
+            </th>
+             <th style="width:5%">
+                #
+            </th>
+        </tr>
+    </thead>
+    <tbody id="lst-location">
+        @if(Model ==null)
+        {
+            <tr class="row-1">
+                <td>1</td>
+                <td>
+                    <input id="location-0-DistrictId" type="hidden" name="Locations[0].DistrictId" style="width:100%" />
+                    <input id="location-0-DistrictId-name" type="text" onclick="SelectArea(0)"  readonly style="width:100%" />
+                </td>
+                <td>
+                    <input id="location-0-WardId" type="hidden" name="Locations[0].WardId" style="width:100%" />
+                    <input id="location-0-WardId-name" type="text" onclick="SelectArea(0)" readonly style="width:100%" />
+                </td>
+                <td>
+                    <input id="function-0-Lat" type="text" name="Locations[0].Lat" style="width:100%" />
+                </td>
+                <td>
+                    <input id="function-0-Long" type="text" name="Locations[0].Long" style="width:100%" />
+                </td>
+                <td>
+                    <button type="button" class="btn btn-default btn-xs" onclick="RemoveLocation(0);"><i class="fas fa-trash"></i> Xóa</button>
+                </td>
+            </tr>
+            <tr class="row-2">
+                <td>2</td>
+                <td>
+                    <input id="location-1-DistrictId" type="hidden" name="Locations[1].DistrictId" style="width:100%" />
+                    <input id="location-1-DistrictId-name" type="text" onclick="SelectArea(1)" readonly style="width:100%" />
+                </td>
+                <td>
+                    <input id="location-1-WardId" type="hidden" name="Locations[1].WardId" style="width:100%" />
+                    <input id="location-1-WardId-name" type="text" onclick="SelectArea(1)" readonly style="width:100%" />
+                </td>
+                <td>
+                    <input id="function-1-Lat" type="text" name="Locations[1].Lat" style="width:100%" />
+                </td>
+                <td>
+                    <input id="function-1-Long" type="text" name="Locations[1].Long" style="width:100%" />
+                </td>
+                <td>
+                    <button type="button" class="btn btn-default btn-xs" onclick="RemoveLocation(1);"><i class="fas fa-trash"></i> Xóa</button>
+                </td>
+            </tr>
+            <tr class="row-3">
+                <td>3</td>
+                <td>
+                    <input id="location-2-DistrictId" type="hidden" name="Locations[2].DistrictId" style="width:100%" />
+                    <input id="location-2-DistrictId-name" type="text" onclick="SelectArea(2)" readonly style="width:100%" />
+                </td>
+                <td>
+                    <input id="location-2-WardId" type="hidden" name="Locations[2].WardId" style="width:100%" />
+                    <input id="location-2-WardId-name" type="text" onclick="SelectArea(2)" readonly style="width:100%" />
+                </td>
+                <td>
+                    <input id="function-2-Lat" type="text" name="Locations[2].Lat" style="width:100%" />
+                </td>
+                <td>
+                    <input id="function-2-Long" type="text" name="Locations[2].Long" style="width:100%" />
+                </td>
+                <td>
+                    <button type="button" class="btn btn-default btn-xs" onclick="RemoveLocation(2);"><i class="fas fa-trash"></i> Xóa</button>
+                </td>
+            </tr>
+        }
+        else
+        {
+            int index = 0;
+            for(int i=0; i< Model.Locations.Count;i++)
+            {
+                index++;
+                var location = Model.Locations[i];
+                <tr class="row-@index">
+                    <td>
+                        @index
+                        <input id="location-@i-Id" type="hidden" name="Locations[@i].Id" style="width:100%" value="@location.Id" />
+                    </td>
+                    <td>
+                        <input id="location-@i-DistrictId" type="hidden" name="Locations[@i].DistrictId" style="width:100%" value="@location.DistrictId" />
+                        <input id="location-@i-DistrictId-name" type="text" onclick="SelectArea(@i)" value="@location.GetDistrictName()" readonly style="width:100%" />
+                    </td>
+                    <td>
+                        <input id="location-@i-WardId" type="hidden" name="Locations[@i].WardId" style="width:100%" value="@location.WardId" />
+                        <input id="location-@i-WardId-name" type="text" onclick="SelectArea(@i)" value="@location.GetWardName()" readonly style="width:100%" />
+                    </td>
+                    <td>
+                        <input id="location-@i-Lat" type="text" name="Locations[@i].Lat" style="width:100%" value="@location.Lat" />
+                    </td>
+                    <td>
+                        <input id="location-@i-Long" type="text" name="Locations[@i].Long" style="width:100%" value="@location.Long" />
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-default btn-xs" onclick="RemoveLocation(@i);"><i class="fas fa-trash"></i> Xóa</button>
+                    </td>
+                </tr>
+            }
+        }
+
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="6"><button type="button" class="btn btn-success btn-xs float-right" onclick="Add();"><i class="fas fa-plus-square"></i> Dòng</button></td>
+        </tr>
+    </tfoot>
+</table>
+<div class="modal fade" id="modal-location">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Chọn khu vực</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="control-label">Thành phố/huyện </label>
+                    <select class="form-control" id="select-DistrictId" asp-items="(IEnumerable<SelectListItem>)ViewBag.Districts">
+                        <option value="">---Chọn thành phố/huyện---</option>
+                    </select>
+                </div>
+                <div id="display-ward-area">
+                    @Html.Partial("_DisplayWardArea")
+                </div>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-primary" onclick="LocationConfirm()">Xác nhận</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<script>
+    var indexLocation = @indexLocation;
+    function Add()
+    {
+        var index = indexLocation + 1;
+        var strLocation = '';
+        strLocation += '<tr class="row-' + index + '" ><td>' + index + '</td>';
+        strLocation += '<td><input id="location-' + indexLocation + '-DistrictId" type="hidden" name="Locations[' + indexLocation + '].DistrictId" style="width:100%" />';
+        strLocation += '<input id="location-' + indexLocation + '-DistrictId-name" onclick="SelectArea('+indexLocation+')" readonly type="text"  style="width:100%" /></td>';
+        strLocation += '<td><input id="location-' + indexLocation + '-WardId" type="hidden" name="Locations[' + indexLocation + '].WardId" style="width:100%" />';
+        strLocation += '<input id="location-' + indexLocation + '-WardId-name" onclick="SelectArea(' + indexLocation + ')" readonly type="text" style="width:100%" /></td>';
+        strLocation += '<td><input id="location-' + indexLocation + '-Lat" type="text" name="Locations[' + indexLocation + '].Lat" style="width:100%" /></td>';
+        strLocation += '<td><input id="location-' + indexLocation + '-Long" type="text" name="Locations[' + indexLocation + '].Long" style="width:100%" /></td>';
+        strLocation += '<td><button type="button" class="btn btn-default btn-xs" onclick="RemoveLocation(' + indexLocation + ');"><i class="fas fa-trash"></i> Xóa</button></td></tr>';
+        $("#lst-location").append(strLocation);
+        indexLocation++;
+    }
+
+    var ereaIndex = -1;
+    function SelectArea(index) {
+        $("#modal-location").modal('show');
+        ereaIndex = index;
+    }
+    function LocationConfirm() {
+        $("#modal-location").modal('hide');
+        var d = $("#select-DistrictId").val();
+        var w = $("#select-WardId").val();
+        $("#location-" + ereaIndex + "-DistrictId").val(d);
+        $("#location-" + ereaIndex + "-WardId").val(w);
+        if (d)
+        {
+            $("#location-" + ereaIndex + "-DistrictId-name").val($("#select-DistrictId :selected").text());
+        }
+        else
+        {
+            $("#location-" + ereaIndex + "-DistrictId-name").val("");
+        }
+        if (w) {
+            $("#location-" + ereaIndex + "-WardId-name").val($("#select-WardId :selected").text());
+        }
+        else {
+            $("#location-" + ereaIndex + "-WardId-name").val("");
+        }
+       
+        ereaIndex = -1;
+    }
+    function RemoveLocation(index)
+    {
+        $("#location-" + index + "-DistrictId").val("");
+        $("#location-" + index + "-DistrictId-name").val("");
+        $("#location-" + index + "-WardId").val("");
+        $("#location-" + index + "-WardId-name").val("");
+        $("#location-" + index + "-Lat").val("");
+        $("#location-" + index + "-Long").val("");
+    }
+</script>
+<script type="text/javascript">
+    $("#select-DistrictId").change(function () {
+        var warid = this.options[this.selectedIndex].value;
+        $.ajax({
+            url: "GetWardArea",
+            type: "POST",
+            data: { id: warid },
+            success: function (data) {
+                $("#display-ward-area").html(data);
+
+            }
+        });
+    });
+</script>

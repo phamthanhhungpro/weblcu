@@ -1,0 +1,278 @@
+﻿@using Common
+@using Common.Entity.Permission
+@model Datas.Models.ViewModels.FileModel
+@{
+    ViewBag.Title = "Xem tài liệu";
+    var permission = (FilePermission)ViewBag.Permission;
+    var userShareData = (string)ViewBag.UserShare;
+    // var file = string.Empty;
+    // if (Model != null && !string.IsNullOrEmpty(Model.File))
+    // {
+    //     file = Model.File.Replace(@"\", @"/");
+    // }
+    var baseFolder = ViewBag.BaseFolder;
+}
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Xem tài liệu</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item">
+                            <a asp-area="Admin" asp-controller="Default" asp-action="Index">Trang chủ</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a asp-area="Admin" asp-controller="File" asp-action="Index">Danh sách</a>
+                        </li>
+                        <li class="breadcrumb-item active">
+                            Xem
+                        </li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <!-- Main row -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="float-left">
+                                <span>Trường có dấu <span class="text-danger">(*)</span> là bắt buộc</span>
+                            </div>
+                            <div class="float-right">
+                                @if (permission.IsEdit)
+                                {
+                                    <a asp-area="Admin" asp-controller="File" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary"><i class="fa fa-edit"></i> Sửa</a>
+                                }
+                              
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <label asp-for="FilePath" class="control-label"></label>
+                                        <div class="row">
+                                            <div class="col-md-10" style="margin-bottom: 15px;padding-left: 0px;padding-right: 0px;">
+                                                <input asp-for="FilePath" class="form-control" disabled="true" />
+                                            </div>
+                                            <div class="col-md-2">
+                                                <a class="btn btn-success" target="_blank" asp-action="ReadFileById" asp-route-id="@Model.Id" asp-controller="File" asp-area="Admin">Download</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="form-group">
+                                        <label class="control-label ">Xem trước tài liệu:</label>
+                                        <div id="display-file">
+                                            @if (Model != null && !string.IsNullOrEmpty(ViewBag.FileData))
+                                            {
+                                                @Html.Partial("_ViewFile")
+                                            }
+                                            else if (ViewBag.ViewExtent != null && (bool)ViewBag.ViewExtent == true)
+                                            {
+                                                <iframe id="view-file-extent" width="100%" height='900' style="border: 1px solid;" src="https://view.officeapps.live.com/op/embed.aspx?src=@Uri.EscapeDataString(ViewBag.Host + ViewBag.Action)"></iframe>
+                                               @*  <iframe id="view-file-extent" width="100%" height='900' style="border: 1px solid;" src="https://view.officeapps.live.com/op/embed.aspx?src=@Uri.EscapeDataString("https://donganh360.vn/Content/template/H_Example.xlsx")"></iframe> *@
+                                            }
+                                            else
+                                            {
+                                                <object id="view-file" width="100%" height='900' type='image/png' style="border: 1px solid;"></object>
+                                            }
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <ul class="nav nav-tabs" id="tab-data" role="tablist">
+                                        <li class="nav-item"><a class="nav-link active" id="info-data-tab" data-toggle="pill" href="#info-data" aria-controls="info-data" aria-selected="true">Thông tin tài liệu</a></li>
+                                        <li class="nav-item"><a class="nav-link" id="image-data-tab" data-toggle="pill" href="#image-data" aria-controls="image-data" aria-selected="false">Phân quyền truy cập</a></li>
+                                    </ul>
+                                    <div class="tab-content" id="tab-data-content" style="padding-top:20px;">
+                                        <div class="tab-pane fade show active" id="info-data" role="tabpanel" aria-labelledby="info-data-tab">
+                                            <div class="form-group">
+                                                <label asp-for="Name" class="control-label"></label> <span class="text-danger">(*)</span>
+                                                <input asp-for="Name" class="form-control" disabled="true" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label asp-for="Details" class="control-label"></label>
+                                                <textarea asp-for="Details" class="form-control" disabled="true"></textarea>
+                                            </div>
+                                            <div class="form-group">
+                                                <label asp-for="Status" class="control-label"></label>
+                                                <select class="form-control" disabled="true" asp-for="Status" asp-items="Html.GetEnumSelectList(typeof(Enums.ActiveStatus))">
+                                                </select>
+                                                <input type="hidden" asp-for="Status" />
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="image-data" role="tabpanel" aria-labelledby="image-data-tab">
+                                            <div class="form-group">
+                                                <label asp-for="Access" class="control-label"></label>
+                                                <select class="form-control" disabled="true" asp-for="Access" asp-items="Html.GetEnumSelectList(typeof(Enums.AccessStatus))" onchange="OnShare(this.value)">
+                                                </select>
+                                                <input type="hidden" asp-for="Access" />
+                                            </div>
+                                            <div class="form-group" id="display-share">
+                                                <label asp-for="AccessData" class="control-label"></label>
+                                                <input asp-for="AccessData" class="form-control" type="hidden" />
+                                                <div id="display-share-select" style="max-height:300px" disabled="true">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.row (main row) -->
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+<script type="text/javascript">
+    var openFile;
+    var folder = "@baseFolder";
+    function DisplayFile(fileUrl) {
+        if (fileUrl) {
+            var extension = fileUrl.substring(fileUrl.lastIndexOf("."));
+            var type = "";
+            switch (extension) {
+                case ".jpg":
+                    type = "image/jpg";
+                    break;
+                case ".png":
+                    type = "image/png";
+                    break;
+                case ".gif":
+                    type = "image/gif";
+                    break;
+                case ".jpeg":
+                    type = "image/jpeg";
+                    break;
+                case ".pdf":
+                    type = "application/pdf";
+                    break;
+            }
+            if (type == "") {
+                var obj = document.getElementById("view-file");
+                obj.setAttribute('data', "");
+                obj.setAttribute('type', type);
+                var cl = obj.cloneNode(true);
+                var parent = obj.parentNode;
+                parent.removeChild(obj);
+                parent.appendChild(cl);
+            }
+            else {
+                $.ajax({
+                    url: "ReadFileByPath",
+                    type: "POST",
+                    data: { filePath: fileUrl },
+                    beforeSend: function (xhr) {
+                        $("#ajax-loading").modal("show");
+                    },
+                    success: function (data) {
+                        $("#display-file").html(data);
+                    },
+                    complete: function () {
+                        $("#ajax-loading").modal("hide");
+                    },
+                });
+            }
+
+        }
+    }
+</script>
+<script type="text/javascript">
+
+    var baseShareValue = "@(Model != null ? Model.AccessData : "")";
+    $(function () {
+        OnShare();
+        LoadUser();
+    });
+
+    function LoadUser() {
+        $("#display-share-select").fancytree({
+            checkbox: true,
+            selectMode: 2,
+            source: @Html.Raw(userShareData),
+            icon: function (event, data) {
+                if (data.node.type == 0) {
+                    return "fas fa-solid fa-landmark";
+                }
+                else if (data.node.type == 1) {
+                    return "fas fa-solid fa-building";
+                }
+                else {
+                    return "fas fa-solid fa-user";
+                }
+            },
+            init: function (event, data) {
+                // Set key from first part of title (just for this demo output)
+                var isReGetValue = false;
+                var arrayValue = [];
+                if (baseShareValue) {
+                    arrayValue = baseShareValue.split("|");
+                }
+                data.tree.visit(function (n) {
+                    if (n.checkbox) {
+                        if (arrayValue.includes(n.key)) {
+                            n.setSelected(true);
+                        }
+                        else {
+                            isReGetValue = true;
+                        }
+                    }
+                });
+                if (isReGetValue) {
+                    var selNodes = data.tree.getSelectedNodes();
+                    // convert to title/key array
+                    var selKeys = $.map(selNodes, function (node) {
+                        return node.key;
+                    });
+                    $("#AccessData").val("|" + selKeys.join("|") + "|");
+                }
+            },
+            select: function (event, data) {
+                // Display list of selected nodes
+                var selNodes = data.tree.getSelectedNodes();
+                // convert to title/key array
+                var selKeys = $.map(selNodes, function (node) {
+                    return node.key;
+                });
+                $("#AccessData").val("|" + selKeys.join("|") + "|");
+            },
+            // The following options are only required, if we have more than one tree on one page:
+            cookieId: "fancytree-Cb2",
+            idPrefix: "fancytree-Cb2-"
+        });
+    }
+
+    function OnShare() {
+        var value = document.getElementById("Access").value;
+        var share = document.getElementById("display-share");
+        if (value == 1) {
+            //share.style.visibility = 'visible';
+            share.style.display = 'block';
+        }
+        else {
+            //share.style.visibility = 'hidden';
+            share.style.display = 'none';
+        }
+    }
+
+</script>
+

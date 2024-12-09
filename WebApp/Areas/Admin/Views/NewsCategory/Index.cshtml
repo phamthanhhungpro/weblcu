@@ -1,0 +1,159 @@
+﻿@using Common
+@using Common.Entity.Permission
+@model IEnumerable<Datas.Models.DomainModels.NewsCategory>
+@{
+    ViewBag.Title = "Danh sách danh mục tin tức";
+    var permission = (PermissionInfo)ViewBag.Permission;
+}
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Danh sách danh mục tin tức</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item">
+                            <a asp-area="Admin" asp-controller="Default" asp-action="Index">Trang chủ</a>
+                        </li>
+                        <li class="breadcrumb-item active">Danh sách danh mục tin tức</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <!-- Main row -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        @if (permission.IsAdd)
+                        {
+                            <div class="card-header">
+                                <div class="float-right"><a class="btn btn-primary" asp-area="Admin" asp-controller="NewsCategory" asp-action="Create">Thêm mới</a></div>
+                            </div>
+                        }
+                        <div class="card-body">
+                            <table class="table table-bordered table-hover" id="list-company">
+                                <thead>
+                                    <tr style="text-align:center">
+                                        <th style="vertical-align:middle; text-align:center; width:5%">
+                                            Số TT
+                                        </th>
+                                        <th style="vertical-align:middle; text-align:center; width:20%">
+                                            @Html.DisplayNameFor(model => model.Name)
+                                        </th>
+                                        <th style="vertical-align:middle; text-align:center; width:25%">
+                                            @Html.DisplayNameFor(model => model.KeyWord)
+                                        </th>
+                                        <th style="vertical-align:middle; text-align:center; width:10%">
+                                            @Html.DisplayNameFor(model => model.Details)
+                                        </th>
+                                        <th style="vertical-align:middle; text-align:center; width:10%">
+                                            @Html.DisplayNameFor(model => model.Status)
+                                        </th>
+                                        <th style="vertical-align:middle; text-align:center; width:20%">
+                                            Trực thuộc đơn vị
+                                        </th>
+                                        <th style="vertical-align:middle; text-align:center; width:10%">
+                                            Thao tác
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        int index = 1;
+                                    }
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr class="row-@item.Id">
+                                            <td style="vertical-align:middle;text-align:center">
+                                                @index
+                                            </td>
+                                            <td style="vertical-align:middle;text-align:left">
+                                                @Html.DisplayFor(modelItem => item.Name)
+                                            </td>
+                                            <td style="vertical-align:middle;text-align:left">
+                                                @Html.DisplayFor(modelItem => item.KeyWord)
+                                            </td>
+                                            <td style="vertical-align:middle;text-align:center">
+                                                @Html.DisplayFor(modelItem => item.Details)
+                                            </td>
+                                            <td style="vertical-align:middle;text-align:center">
+                                                @{
+                                                    if (item.Status == Enums.ActiveStatus.Active)
+                                                    {
+                                                        <span class="label label-success">@item.Status.DisplayName()</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="label label-danger">@item.Status.DisplayName()</span>
+                                                    }
+                                                }
+                                            </td>
+                                            <td style="vertical-align:middle;text-align:left">
+
+                                                @Html.DisplayFor(modelItem => item.Parent.Name)
+
+                                            </td>
+                                            <td style="vertical-align:middle;text-align:center">
+                                                @if (permission.IsEdit)
+                                                {
+                                                    <a asp-action="Edit" asp-route-id="@item.Id"  asp-area="Admin" class="fas fa fa-edit" style="margin-right:6px" data_toggle="tooltip" title="Chỉnh sửa thông tin danh mục tin tức">Edit</a>
+                                                }
+                                                @if (permission.IsDelete)
+                                                {
+                                                    <a class="fas fa fa-trash"
+                                                       data-ajax="true"
+                                                       data-ajax-confirm="Bạn có muốn xóa danh mục tin tức này?"
+                                                       data-ajax-failure="OnFailure"
+                                                       data-ajax-loading="#ajax-loading"
+                                                       data-ajax-method="POST"
+                                                       data-ajax-success="onDelete(@item.Id,data)"
+                                                       data-toggle="tooltip"
+                                                       asp-action="Delete" asp-route-id="@item.Id" asp-area="Admin" asp-controller="NewsCategory"
+                                                       style="margin-right:6px"
+                                                       title=""
+                                                       data-original-title="Xóa danh mục tin tức khỏi danh sách"> Xóa</a>
+                                                }
+                                            </td>
+                                        </tr>
+                                        index++;
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+              
+            </div>
+            <!-- /.row (main row) -->
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+<script type="text/javascript">
+    $(function () {
+        $("#list-company").dataTable({
+            "language": {
+                "url": "/plugins/datatables/Vietnamese.json"
+            }
+        });
+    });
+    function onDelete(id, data) {
+        if (data.code == 0) {
+            $(".row-" + id + "").hide();
+            toastr.success("Xóa thành công");
+        }
+        else {
+            toastr.error("Lỗi: " + data.message);
+        }
+    };
+</script>

@@ -1,0 +1,25 @@
+﻿<div class="search-area">
+    <div class="search-input">
+        <input type="text" id="main-search" placeholder="@(string.IsNullOrEmpty(ViewBag.SubDomain) ?"Tìm kiếm tại đây...":"Search here...")">
+    </div>
+    <div class="search-btn">
+        <button style="border:none; background:transparent;" type="submit" onclick="onMainSearch();">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+    </div>
+</div>
+<script type="text/javascript">
+    var input = document.getElementById("main-search");
+    input.addEventListener("keypress", function (event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            onMainSearch();
+        }
+    });
+    function onMainSearch() {
+        var value = $("#main-search").val().trim();
+        if (value.length > 0) {
+            location.href = "/dan-toc/tim-kiem/" + value;
+        }
+    }
+</script>

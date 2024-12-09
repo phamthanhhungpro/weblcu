@@ -1,0 +1,283 @@
+﻿@using Common
+@model Datas.Models.ViewModels.FileModel
+@{
+    var userShareData = (string)ViewBag.UserShare;
+    // var file = string.Empty;
+    // if (Model != null && !string.IsNullOrEmpty(Model.File))
+    // {
+    //     file = Model.File.Replace(@"\", @"/");
+    // }
+    var baseFolder = ViewBag.BaseFolder;
+}
+<style>
+    span.fancytree-checkbox {
+        margin-top: 2px;
+    }
+</style>
+<div class="row">
+    <div class="col-md-8">
+        <div class="form-group">
+            <label asp-for="FilePath" class="control-label"></label>
+            <div class="row">
+                <div class="col-md-10" style="margin-bottom: 15px;padding-left: 0px;padding-right: 0px;">
+                    <input asp-for="FilePath" class="form-control" />
+                </div>
+                <div class="col-md-2">
+                    <input type="button" class="btn btn-secondary" value="Upload" onclick="BrowseServerFile();" />
+                </div>
+            </div>
+            <div>
+                <span asp-validation-for="FilePath" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="form-group">
+            <label class="control-label ">Xem trước tài liệu:</label>
+            <div id="display-file">
+                @if (Model != null && !string.IsNullOrEmpty(ViewBag.FileData))
+                {
+                    @Html.Partial("_ViewFile")
+                }
+                else if (ViewBag.ViewExtent != null && (bool)ViewBag.ViewExtent == true)
+                {
+                    <iframe id="view-file-extent" width="100%" height='900' style="border: 1px solid;" src="https://view.officeapps.live.com/op/embed.aspx?src=@Uri.EscapeDataString(ViewBag.Host + ViewBag.Action)"></iframe>
+                    @*  <iframe id="view-file-extent" width="100%" height='900' style="border: 1px solid;" src="https://view.officeapps.live.com/op/embed.aspx?src=@Uri.EscapeDataString("https://donganh360.vn/Content/template/H_Example.xlsx")"></iframe> *@
+                }
+                else
+                {
+                    <object id="view-file" width="100%" height='900' type='image/png' style="border: 1px solid;"></object>
+                }
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <ul class="nav nav-tabs" id="tab-data" role="tablist">
+            <li class="nav-item"><a class="nav-link active" id="info-data-tab" data-toggle="pill" href="#info-data" aria-controls="info-data" aria-selected="true">Thông tin tài liệu</a></li>
+            <li class="nav-item"><a class="nav-link" id="image-data-tab" data-toggle="pill" href="#image-data" aria-controls="image-data" aria-selected="false">Phân quyền truy cập</a></li>
+        </ul>
+        <div class="tab-content" id="tab-data-content" style="padding-top:20px;">
+            <div class="tab-pane fade show active" id="info-data" role="tabpanel" aria-labelledby="info-data-tab">
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label> <span class="text-danger">(*)</span>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Details" class="control-label"></label>
+                    <textarea asp-for="Details" class="form-control"></textarea>
+                    <span asp-validation-for="Details" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Status" class="control-label"></label>
+                    <select class="form-control" asp-for="Status" asp-items="Html.GetEnumSelectList(typeof(Enums.ActiveStatus))">
+                    </select>
+                    <input type="hidden" asp-for="Status" />
+                    <span asp-validation-for="Status" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="image-data" role="tabpanel" aria-labelledby="image-data-tab">
+                <div class="form-group">
+                    <label asp-for="Access" class="control-label"></label>
+                    <select class="form-control" asp-for="Access" asp-items="Html.GetEnumSelectList(typeof(Enums.AccessStatus))" onchange="OnShare(this.value)">
+                    </select>
+                    <input type="hidden" asp-for="Access" />
+                    <span asp-validation-for="Access" class="text-danger"></span>
+                </div>
+                <div class="form-group" id="display-share">
+                    <label asp-for="AccessData" class="control-label"></label>
+                    <input asp-for="AccessData" class="form-control" type="hidden"/>
+                    <span asp-validation-for="AccessData" class="text-danger"></span>
+                    <div id="display-share-select" style="max-height:300px">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        
+    </div>
+</div>
+<script type="text/javascript">
+    var openFile;
+    var folder = "@baseFolder";
+    var baseHost = "@ViewBag.Host";
+    function BrowseServerFile() {
+        var myCommands = elFinder.prototype._options.commands;
+        var options = {
+            baseUrl: "/lib/elfinder/",
+            url: "/Admin/file-user/connector",
+            rememberLastDir: false,
+            commands: myCommands,
+            lang: 'vi',
+            commandsOptions: {
+                getfile: {
+                    oncomplete: 'close' // destroy elFinder after file selection
+                }
+            },
+            getFileCallback: function (a, b) {
+                document.getElementById("FilePath").value = folder + a.path.substring(5);
+                DisplayFile(folder + a.path.substring(5));
+            },
+            uiOptions: {
+                toolbar: [
+                    ['back', 'forward'],
+                    ['reload'],
+                    ['home', 'up'],
+                    ['mkdir', 'mkfile', 'upload'],
+                    ['open', 'download'],
+                    ['undo', 'redo'],
+                    ['info'],
+                    ['quicklook'],
+                    ['copy', 'cut', 'paste'],
+                    ['rm'],
+                    ['duplicate', 'rename', 'edit'],
+                    ['selectall', 'selectnone', 'selectinvert'],
+                    ['view', 'sort']
+                ]
+            },
+            lang: 'vi',
+        };
+        if (!openFile) {
+            openFile = $('#image-finder').dialogelfinder(options);
+        }
+        else {
+            openFile.dialogelfinder('open');
+        }
+    }
+
+    function DisplayFile(fileUrl) {
+        if (fileUrl) {
+            var extension = fileUrl.substring(fileUrl.lastIndexOf("."));
+            var type = "";
+            switch (extension) {
+                case ".jpg":
+                    type = "image/jpg";
+                    break;
+                case ".png":
+                    type = "image/png";
+                    break;
+                case ".gif":
+                    type = "image/gif";
+                    break;
+                case ".jpeg":
+                    type = "image/jpeg";
+                    break;
+                case ".pdf":
+                    type = "application/pdf";
+                    break;
+                case ".doc":
+                case ".docx":
+                case ".xls":
+                case ".xlsx":
+                    type = "word";
+                    break;
+
+            }
+            if (type == "") {
+                var obj = document.getElementById("view-file");
+                obj.setAttribute('data', "");
+                obj.setAttribute('type', type);
+                var cl = obj.cloneNode(true);
+                var parent = obj.parentNode;
+                parent.removeChild(obj);
+                parent.appendChild(cl);
+            }
+            else {
+                $.ajax({
+                    url: "ReadFileByPath",
+                    type: "POST",
+                    data: { filePath: fileUrl },
+                    beforeSend: function (xhr) {
+                        $("#ajax-loading").modal("show");
+                    },
+                    success: function (data) {
+                        $("#display-file").html(data);
+                    },
+                    complete: function () {
+                        $("#ajax-loading").modal("hide");
+                    },
+                });
+            }
+            
+        }
+    }
+</script>
+<script type="text/javascript">
+
+    var baseShareValue = "@(Model != null ? Model.AccessData : "")";
+    $(function () {
+        OnShare();
+        LoadUser();
+    });
+
+    function LoadUser() {
+        $("#display-share-select").fancytree({
+            checkbox: true,
+            selectMode: 2,
+            source: @Html.Raw(userShareData),
+            icon: function (event, data) {
+                if (data.node.type == 0) {
+                    return "fas fa-solid fa-landmark";
+                }
+                else if (data.node.type == 1) {
+                    return "fas fa-solid fa-building";
+                }
+                else {
+                    return "fas fa-solid fa-user";
+                }
+            },
+            init: function (event, data) {
+                // Set key from first part of title (just for this demo output)
+                var isReGetValue = false;
+                var arrayValue = [];
+                if (baseShareValue) {
+                    arrayValue = baseShareValue.split("|");
+                }
+                data.tree.visit(function (n) {
+                    if (n.checkbox) {
+                        if (arrayValue.includes(n.key)) {
+                            n.setSelected(true);
+                        }
+                        else {
+                            isReGetValue = true;
+                        }
+                    }
+                });
+                if (isReGetValue) {
+                    var selNodes = data.tree.getSelectedNodes();
+                    // convert to title/key array
+                    var selKeys = $.map(selNodes, function (node) {
+                        return node.key;
+                    });
+                    $("#AccessData").val("|" + selKeys.join("|") + "|");
+                }
+            },
+            select: function (event, data) {
+                // Display list of selected nodes
+                var selNodes = data.tree.getSelectedNodes();
+                // convert to title/key array
+                var selKeys = $.map(selNodes, function (node) {
+                    return node.key;
+                });
+                $("#AccessData").val("|" + selKeys.join("|") + "|");
+            },
+            // The following options are only required, if we have more than one tree on one page:
+            cookieId: "fancytree-Cb2",
+            idPrefix: "fancytree-Cb2-"
+        });
+    }
+
+    function OnShare() {
+        var value = document.getElementById("Access").value;
+        var share = document.getElementById("display-share");
+        if (value == 1) {
+            //share.style.visibility = 'visible';
+            share.style.display = 'block';
+        }
+        else {
+            //share.style.visibility = 'hidden';
+            share.style.display = 'none';
+        }
+    }
+
+</script>

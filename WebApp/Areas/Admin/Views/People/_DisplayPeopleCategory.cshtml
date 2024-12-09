@@ -1,0 +1,9 @@
+﻿@model Datas.Models.ViewModels.PeopleModel
+<div class="form-group">
+    <label asp-for="PeopleCategoryId" class="control-label"></label> <span class="text-danger">(*)</span>
+    <select class="form-control" asp-for="PeopleCategoryId" asp-items="(IEnumerable<SelectListItem>)ViewBag.PeopleCategories">
+        <option value="">---Chọn loại dân tộc---</option>
+    </select>
+    <input type="hidden" asp-for="PeopleCategoryId" />
+    <span asp-validation-for="PeopleCategoryId" class="text-danger"></span>
+</div>

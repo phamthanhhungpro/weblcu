@@ -1,0 +1,200 @@
+﻿@model Datas.Models.ViewModels.SettingModel
+
+@{
+    ViewBag.Title = "Quản trị cài đặt";
+}
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Quản trị cài đặt</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item">
+                            <a asp-area="Admin" asp-controller="Default" asp-action="Index">Trang chủ</a>
+                        </li>
+                        <li class="breadcrumb-item active">
+                            <a asp-area="Admin" asp-controller="Default" asp-action="Setting">Cài đặt</a>
+                        </li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <!-- Main row -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="float-left">
+                                <span>Trường có dấu <span class="text-danger">(*)</span> là bắt buộc</span>
+                            </div>
+                        </div>
+                        <form asp-action="Setting" asp-controller="Default" asp-area="Admin">
+                            <div class="card-body">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h4 style="font-weight: bold;">Banner:</h4>
+                                        <div class="form-group">
+                                            <label asp-for="ImageLink" class="control-label"></label>
+                                            <input asp-for="ImageLink" class="form-control" />
+                                            <span asp-validation-for="ImageLink" class="text-danger"></span>
+                                        </div>
+                                        <h4 style="font-weight: bold;">Follow Link:</h4>
+                                        <div class="form-group">
+                                            <label asp-for="FollowFacebook" class="control-label"></label>
+                                            <input asp-for="FollowFacebook" class="form-control" />
+                                            <span asp-validation-for="FollowFacebook" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="FollowTiktok" class="control-label"></label>
+                                            <input asp-for="FollowTiktok" class="form-control" />
+                                            <span asp-validation-for="FollowTiktok" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="FollowYouTube" class="control-label"></label>
+                                            <input asp-for="FollowYouTube" class="form-control" />
+                                            <span asp-validation-for="FollowYouTube" class="text-danger"></span>
+                                        </div>
+                                        <h4 style="font-weight: bold;">Contact:</h4>
+                                        <div class="form-group">
+                                            <label asp-for="ContactAddress" class="control-label"></label>
+                                            <input asp-for="ContactAddress" class="form-control" />
+                                            <span asp-validation-for="ContactAddress" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="ContactPhone" class="control-label"></label>
+                                            <input asp-for="ContactPhone" class="form-control" />
+                                            <span asp-validation-for="ContactPhone" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="ContactEmail" class="control-label"></label>
+                                            <input asp-for="ContactEmail" class="form-control" />
+                                            <span asp-validation-for="ContactEmail" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="ContactLink" class="control-label"></label>
+                                            <input asp-for="ContactLink" class="form-control" />
+                                            <span asp-validation-for="ContactLink" class="text-danger"></span>
+                                        </div>
+                                        <h4 style="font-weight: bold;">Cài đặt SMTP gửi email:</h4>
+                                        <div class="form-group">
+                                            <label asp-for="EmailAccount" class="control-label"></label>
+                                            <input asp-for="EmailAccount" class="form-control" />
+                                            <span asp-validation-for="EmailAccount" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="EmailPass" class="control-label"></label>
+                                            <input asp-for="EmailPass" class="form-control" />
+                                            <span asp-validation-for="EmailPass" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="EmailName" class="control-label"></label>
+                                            <input asp-for="EmailName" class="form-control" />
+                                            <span asp-validation-for="EmailName" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="EmailServer" class="control-label"></label>
+                                            <input asp-for="EmailServer" class="form-control" />
+                                            <span asp-validation-for="EmailServer" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="EmailPort" class="control-label"></label>
+                                            <input asp-for="EmailPort" class="form-control" />
+                                            <span asp-validation-for="EmailPort" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h4 style="font-weight: bold;">Footer:</h4>
+                                        <div class="form-group">
+                                            <label asp-for="FooterTitle" class="control-label"></label>
+                                            <input asp-for="FooterTitle" class="form-control" />
+                                            <span asp-validation-for="FooterTitle" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="FooterAgency" class="control-label"></label>
+                                            <input asp-for="FooterAgency" class="form-control" />
+                                            <span asp-validation-for="FooterAgency" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="FooterAddress" class="control-label"></label>
+                                            <input asp-for="FooterAddress" class="form-control" />
+                                            <span asp-validation-for="FooterAddress" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="FooterAuthor" class="control-label"></label>
+                                            <input asp-for="FooterAuthor" class="form-control" />
+                                            <span asp-validation-for="FooterAuthor" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="FooterPhone" class="control-label"></label>
+                                            <input asp-for="FooterPhone" class="form-control" />
+                                            <span asp-validation-for="FooterPhone" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="FooterEmail" class="control-label"></label>
+                                            <input asp-for="FooterEmail" class="form-control" />
+                                            <span asp-validation-for="FooterEmail" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="OwnerDetails" class="control-label"></label>
+                                            <textarea asp-for="OwnerDetails" class="form-control"></textarea>
+                                            <span asp-validation-for="OwnerDetails" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="form-group">
+                                    <input type="submit" value="Cập nhật" class="btn btn-primary" />
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.row (main row) -->
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        CKEDITOR.replace('OwnerDetails', {
+            toolbarGroups: [
+                { name: 'document', groups: ['mode', 'document', 'doctools'] },
+                { name: 'clipboard', groups: ['clipboard', 'undo'] },
+                { name: 'editing', groups: ['find', 'selection', 'spellchecker', 'editing'] },
+                { name: 'forms', groups: ['forms'] },
+                { name: 'paragraph', groups: ['list', 'indent', 'blocks', 'align', 'bidi', 'paragraph'] },
+                '/',
+                { name: 'basicstyles', groups: ['basicstyles', 'cleanup'] },
+                { name: 'links', groups: ['links'] },
+                { name: 'insert', groups: ['insert'] },
+                '/',
+                { name: 'styles', groups: ['styles'] },
+                { name: 'colors', groups: ['colors'] },
+                { name: 'tools', groups: ['tools'] },
+                { name: 'others', groups: ['others'] },
+                { name: 'about', groups: ['about'] }
+            ],
+            removeButtons: 'Save,Preview,Print,ExportPdf,NewPage,Templates,Cut,Copy,Paste,PasteText,PasteFromWord,Undo,Redo,Find,Replace,SelectAll,Scayt,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,Image,Table,HorizontalRule,SpecialChar,Smiley,PageBreak,Iframe'
+        });
+    });
+</script>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+

@@ -1,0 +1,151 @@
+﻿@using Datas.Models.ViewModels
+@{
+    //success messages
+    var successMessages = new List<string>();
+    const string successKey = "notifications.Success";
+    if (TempData[successKey] != null)
+    {
+        successMessages.AddRange(TempData[successKey] as IList<string>);
+    }
+    if (ViewData[successKey] != null)
+    {
+        successMessages.AddRange(ViewData[successKey] as IList<string>);
+    }
+    var setting = (SettingModel)ViewBag.Setting;
+}
+@if (string.IsNullOrEmpty(ViewBag.SubDomain))
+{
+    <section id="contact-us">
+        <div class="container">
+            <div class="contact-us-title">
+                <h2>Liên hệ</h2>
+            </div>
+            <div class="row">
+                <div class="col-lg-7 order-custom">
+                    <div class="contact-infor">
+                        <div class="contact-infor-title">
+                            <h3>Thông tin liên hệ</h3>
+                        </div>
+                        @if (successMessages.Count > 0)
+                        {
+                            <div>
+                                @foreach (var item in successMessages)
+                                {
+                                    <p style="color:red;">
+                                        @item
+                                    </p>
+                                }
+                            </div>
+                        }
+
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="col-lg-12 combo-input">
+                                <input type="text" name="FullName" id="FullName" placeholder="Họ và tên">
+                                <input type="email" name="Email" id="Email" placeholder="Email">
+                            </div>
+                            <div class="col-lg-12">
+                                <input type="tel" name="Phone" id="Phone" placeholder="Số điện thoại">
+                            </div>
+                            <div class="col-lg-12">
+                                <input type="text" name="Title" id="Title" placeholder="Chủ đề">
+                            </div>
+                            <div class="col-lg-12">
+                                <textarea name="Content" id="Content" cols="30" rows="8" placeholder="Nội dung"></textarea>
+                            </div>
+                            <div class="contact-infor-btn">
+                                <button type="submit">Gửi </button>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="contact-us-infor">
+                        <div class="contact-us-infor-title">
+                            <h3>Liên hệ với chúng tôi</h3>
+                        </div>
+                        <div class="contact-us-infor-detail">
+                            <p><i class="fa-solid fa-location-dot"></i>@setting.ContactAddress</p>
+                            <p><i class="fa-solid fa-phone"></i>@setting.ContactPhone</p>
+                            <p><i class="fa-solid fa-envelope"></i>@setting.ContactEmail</p>
+                            <p><i class="fa-solid fa-globe"></i>@setting.ContactLink</p>
+                        </div>
+                        <div class="bg-earth">
+                            <img src="~/fe/images/bg3.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+else
+{
+    <section id="contact-us">
+        <div class="container">
+            <div class="contact-us-title">
+                <h2>Contact</h2>
+            </div>
+            <div class="row">
+                <div class="col-lg-7 order-custom">
+                    <div class="contact-infor">
+                        <div class="contact-infor-title">
+                            <h3>Contact Info</h3>
+                        </div>
+                        @if (successMessages.Count > 0)
+                        {
+                            <div>
+                                @foreach (var item in successMessages)
+                                {
+                                    <p style="color:red;">
+                                        @item
+                                    </p>
+                                }
+                            </div>
+                        }
+
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="col-lg-12 combo-input">
+                                <input type="text" name="FullName" id="FullName" placeholder="First and last name">
+                                <input type="email" name="Email" id="Email" placeholder="Email">
+                            </div>
+                            <div class="col-lg-12">
+                                <input type="tel" name="Phone" id="Phone" placeholder="Phone">
+                            </div>
+                            <div class="col-lg-12">
+                                <input type="text" name="Title" id="Title" placeholder="Topic">
+                            </div>
+                            <div class="col-lg-12">
+                                <textarea name="Content" id="Content" cols="30" rows="8" placeholder="Content"></textarea>
+                            </div>
+                            <div class="contact-infor-btn">
+                                <button type="submit">Send </button>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="contact-us-infor">
+                        <div class="contact-us-infor-title">
+                            <h3>Contact us</h3>
+                        </div>
+                        <div class="contact-us-infor-detail">
+                            <p><i class="fa-solid fa-location-dot"></i>@setting.ContactAddress</p>
+                            <p><i class="fa-solid fa-phone"></i>@setting.ContactPhone</p>
+                            <p><i class="fa-solid fa-envelope"></i>@setting.ContactEmail</p>
+                            <p><i class="fa-solid fa-globe"></i>@setting.ContactLink</p>
+                        </div>
+                        <div class="bg-earth">
+                            <img src="~/fe/images/bg3.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}

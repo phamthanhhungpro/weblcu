@@ -1,0 +1,191 @@
+﻿@using Common
+@model Datas.Models.ViewModels.PeopleModel
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label asp-for="Name" class="control-label"></label> <span class="text-danger">(*)</span>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+@*         <div class="form-group">
+            <label asp-for="DistrictId" class="control-label"></label>
+            <select class="form-control" asp-for="DistrictId" asp-items="(IEnumerable<SelectListItem>)ViewBag.Districts">
+                <option value="">---Chọn thành phố/huyện---</option>
+            </select>
+            <input type="hidden" asp-for="DistrictId" />
+            <span asp-validation-for="DistrictId" class="text-danger"></span>
+        </div>
+        <div id="display-ward">
+            @Html.Partial("_DisplayWard")
+        </div> *@
+        <div class="form-group">
+            <label asp-for="Address" class="control-label"></label>
+            <input asp-for="Address" class="form-control" />
+            <span asp-validation-for="Address" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Population" class="control-label"></label>
+            <input asp-for="Population" class="form-control" />
+            <span asp-validation-for="Population" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="History" class="control-label"></label>
+            <input asp-for="History" class="form-control" />
+            <span asp-validation-for="History" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Image360" class="control-label"></label>
+            <input asp-for="Image360" class="form-control" />
+            <span asp-validation-for="Image360" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="row" style="margin-top:38px;">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label asp-for="IsDisplay" class="control-label"></label>
+                    <input asp-for="IsDisplay" />
+                    <span asp-validation-for="IsDisplay" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label asp-for="Top" class="control-label"></label>
+                    <input asp-for="Top" />
+                    <span asp-validation-for="Top" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+         <div class="form-group">
+            @Html.Partial("_DisplayParent")
+        </div>
+@*         <div class="form-group">
+            <label asp-for="LanguageId" class="control-label"></label>
+            <select class="form-control" asp-for="LanguageId" asp-items="(IEnumerable<SelectListItem>)ViewBag.Languages">
+                <option value="">---Chọn ngôn ngữ---</option>
+            </select>
+            <input type="hidden" asp-for="LanguageId" />
+            <span asp-validation-for="LanguageId" class="text-danger"></span>
+        </div> *@
+        <div class="form-group">
+            <label asp-for="LanguageIds" class="control-label"></label>
+            <select class="form-control" asp-for="LanguageIds" asp-items="(IEnumerable<SelectListItem>)ViewBag.Languages">
+            </select>
+         @*    <input type="hidden" asp-for="LanguageIds" /> *@
+            <span asp-validation-for="LanguageIds" class="text-danger"></span>
+        </div>
+       @*  <div class="form-group">
+            @Html.Partial("_DisplayPeopleCategory")
+        </div> *@
+        <div class="form-group">
+            <label asp-for="Details" class="control-label"></label>
+            <textarea asp-for="Details" class="form-control"></textarea>
+            <span asp-validation-for="Details" class="text-danger"></span>
+        </div>
+@*         <div class="form-group">
+            <label asp-for="Status" class="control-label"></label>
+            <select class="form-control" asp-for="Status" asp-items="Html.GetEnumSelectList(typeof(Enums.ActiveStatus))">
+            </select>
+            <input type="hidden" asp-for="Status" />
+            <span asp-validation-for="Status" class="text-danger"></span>
+        </div> *@
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            <label asp-for="Content" class="control-label"></label> <span class="text-danger">(*)</span>
+            <div id="container">
+                <textarea asp-for="Content" class="form-control" rows="10"></textarea>
+            </div>
+
+            <span asp-validation-for="Content" class="text-danger"></span>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            <label asp-for="Content1" class="control-label"></label>
+            <div id="container">
+                <textarea asp-for="Content1" class="form-control" rows="10"></textarea>
+            </div>
+
+            <span asp-validation-for="Content1" class="text-danger"></span>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            <label asp-for="Content2" class="control-label"></label>
+            <div id="container">
+                <textarea asp-for="Content2" class="form-control" rows="10"></textarea>
+            </div>
+
+            <span asp-validation-for="Content2" class="text-danger"></span>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            <label asp-for="Content3" class="control-label"></label>
+            <div id="container">
+                <textarea asp-for="Content3" class="form-control" rows="10"></textarea>
+            </div>
+
+            <span asp-validation-for="Content3" class="text-danger"></span>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            <label asp-for="Content4" class="control-label"></label>
+            <div id="container">
+                <textarea asp-for="Content4" class="form-control" rows="10"></textarea>
+            </div>
+
+            <span asp-validation-for="Content4" class="text-danger"></span>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            <label asp-for="Content5" class="control-label"></label>
+            <div id="container">
+                <textarea asp-for="Content5" class="form-control" rows="10"></textarea>
+            </div>
+
+            <span asp-validation-for="Content5" class="text-danger"></span>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $('#LanguageIds').select2({
+            "language": {
+                "noMatches": function () {
+                    return "Không tìm thấy ngôn ngữ";
+                },
+                "noResults": function () {
+                    return "Không có ngôn ngữ";
+                }
+            }
+        });
+    });
+    $("#DistrictId").change(function () {
+        var warid = this.options[this.selectedIndex].value;
+        $.ajax({
+            url: "GetWard",
+            type: "POST",
+            data: { id: warid },
+            success: function (data) {
+                $("#display-ward").html(data);
+
+            }
+        });
+    });
+</script>
