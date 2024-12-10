@@ -270,25 +270,41 @@ namespace Datas
 
         private void UpdateV8()
         {
-            if (!_context.GroupFunctions.Any(o => o.Type == Enums.GroupFunctionType.InstrucmentCategory))
+            AddGroupFunctionWithFunctions(
+                Enums.GroupFunctionType.InstrucmentCategory,
+                "Danh mục nhạc cụ",
+                26,
+                [
+                    ("Xem", Common.Constants.PERMISSION_INSTRUCMENT_CATEGORY_VIEW),
+                    ("Thêm mới", Common.Constants.PERMISSION_INSTRUCMENT_CATEGORY_ADD),
+                    ("Sửa", Common.Constants.PERMISSION_INSTRUCMENT_CATEGORY_EDIT),
+                    ("Xóa", Common.Constants.PERMISSION_INSTRUCMENT_CATEGORY_DELETE)
+                ]);
+
+            AddGroupFunctionWithFunctions(
+                Enums.GroupFunctionType.ProduceToolCategory,
+                "DM công cụ sản xuất",
+                27,
+                [
+                    ("Xem", Common.Constants.PERMISSION_PRODUCETOOL_CATEGORY_VIEW),
+                    ("Thêm mới", Common.Constants.PERMISSION_PRODUCETOOL_CATEGORY_ADD),
+                    ("Sửa", Common.Constants.PERMISSION_PRODUCETOOL_CATEGORY_EDIT),
+                    ("Xóa", Common.Constants.PERMISSION_PRODUCETOOL_CATEGORY_DELETE)
+                ]);
+        }
+
+        private void AddGroupFunctionWithFunctions(Enums.GroupFunctionType type, string groupName, int order, List<(string Name, string FunctionCode)> functions)
+        {
+            if (!_context.GroupFunctions.Any(o => o.Type == type))
             {
-                var lstGroupFunction = new List<GroupFunction>
-                {
-                    new GroupFunction{Name="Danh mục nhạc cụ",Order=26, Type=Enums.GroupFunctionType.InstrucmentCategory},
-                 };
-                _context.GroupFunctions.AddRange(lstGroupFunction);
+                var groupFunction = new GroupFunction { Name = groupName, Order = order, Type = type };
+                _context.GroupFunctions.Add(groupFunction);
                 _context.SaveChanges();
 
-                var lstFunction = new List<Function> {
-
-                    new Function{Name="Xem",FunctionCode=Common.Constants.PERMISSION_INSTRUCMENT_CATEGORY_VIEW,Group = lstGroupFunction[0]},
-                    new Function{Name="Thêm mới",FunctionCode=Common.Constants.PERMISSION_INSTRUCMENT_CATEGORY_ADD,Group = lstGroupFunction[0]},
-                    new Function{Name="Sửa",FunctionCode=Common.Constants.PERMISSION_INSTRUCMENT_CATEGORY_EDIT,Group = lstGroupFunction[0]},
-                    new Function{Name="Xóa",FunctionCode=Common.Constants.PERMISSION_INSTRUCMENT_CATEGORY_DELETE,Group = lstGroupFunction[0]},
-
-                    };
+                var lstFunction = functions.Select(f => new Function { Name = f.Name, FunctionCode = f.FunctionCode, Group = groupFunction }).ToList();
                 _context.Functions.AddRange(lstFunction);
                 _context.SaveChanges();
+
                 var adminRole = _context.Roles.Include("RoleFunctions").FirstOrDefault(o => o.Id == 1);
                 if (adminRole != null)
                 {

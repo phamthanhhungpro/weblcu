@@ -317,7 +317,17 @@ namespace WebApp.Areas.Admin.Controllers
                                             Constants.PERMISSION_INSTRUCMENT_CATEGORY_ADD,
                                             "fa fa-music");
                                 break;
-
+                            case Enums.GroupFunctionType.ProduceToolCategory:
+                                AddMenuItem(ref lstMenu,
+                                            controllerName,
+                                            "ProduceToolCategory",
+                                            group,
+                                            functionResult.Value,
+                                            url,
+                                            Constants.PERMISSION_PRODUCETOOL_CATEGORY_VIEW,
+                                            Constants.PERMISSION_PRODUCETOOL_CATEGORY_ADD,
+                                            "fa fa-wrench");
+                                break;
                             default:
                                 break;
 
