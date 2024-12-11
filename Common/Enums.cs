@@ -69,7 +69,8 @@ namespace Common
             Instrument,
             ProduceToolCategory,
             ProduceTool,
-            CustomsTradition
+            CustomsTradition,
+            Festival,
         }
 
         public enum ErrorCode

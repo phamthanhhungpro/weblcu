@@ -362,6 +362,18 @@ namespace WebApp.Areas.Admin.Controllers
                                             Constants.PERMISSION_CUSTOMSTRADITION_ADD,
                                             "fa fa-feather-alt");
                                 break;
+
+                            case Enums.GroupFunctionType.Festival:
+                                AddMenuItem(ref lstMenu,
+                                            controllerName,
+                                            "Festival",
+                                            group,
+                                            functionResult.Value,
+                                            url,
+                                            Constants.PERMISSION_FESTIVAL_VIEW,
+                                            Constants.PERMISSION_FESTIVAL_ADD,
+                                            "fa fa-holly-berry");
+                                break;
                             default:
                                 break;
 
