@@ -283,13 +283,24 @@ namespace Datas
 
             AddGroupFunctionWithFunctions(
                 Enums.GroupFunctionType.ProduceToolCategory,
-                "DM công cụ sản xuất",
+                "Danh mục công cụ sản xuất",
                 27,
                 [
                     ("Xem", Common.Constants.PERMISSION_PRODUCETOOL_CATEGORY_VIEW),
                     ("Thêm mới", Common.Constants.PERMISSION_PRODUCETOOL_CATEGORY_ADD),
                     ("Sửa", Common.Constants.PERMISSION_PRODUCETOOL_CATEGORY_EDIT),
                     ("Xóa", Common.Constants.PERMISSION_PRODUCETOOL_CATEGORY_DELETE)
+                ]);
+
+            AddGroupFunctionWithFunctions(
+                Enums.GroupFunctionType.ProduceTool,
+                "Công cụ sản xuất",
+                8,
+                [
+                    ("Xem", Common.Constants.PERMISSION_PRODUCETOOL_VIEW),
+                    ("Thêm mới", Common.Constants.PERMISSION_PRODUCETOOL_ADD),
+                    ("Sửa", Common.Constants.PERMISSION_PRODUCETOOL_EDIT),
+                    ("Xóa", Common.Constants.PERMISSION_PRODUCETOOL_DELETE)
                 ]);
         }
 

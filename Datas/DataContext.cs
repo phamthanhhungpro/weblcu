@@ -41,6 +41,7 @@ namespace Datas
         public DbSet<PeopleConfirm> PeopleConfirmes { set; get; }
         public DbSet<LogData> Logs { set; get; }
         public DbSet<ProduceToolCategory> ProduceToolCategories { set; get; }
+        public DbSet<ProduceTool> ProduceTools { set; get; }
 
 
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
