@@ -144,5 +144,11 @@ namespace Common
         public static readonly string PERMISSION_CUSTOMSTRADITION_DELETE = "PERMISSION_CUSTOMSTRADITION_DELETE";
         public static readonly string PERMISSION_CUSTOMSTRADITION_SHOW = "PERMISSION_CUSTOMSTRADITION_SHOW";
 
+        public static readonly string PERMISSION_FESTIVAL_VIEW = "PERMISSION_FESTIVAL_VIEW";
+        public static readonly string PERMISSION_FESTIVAL_ADD = "PERMISSION_FESTIVAL_ADD";
+        public static readonly string PERMISSION_FESTIVAL_EDIT = "PERMISSION_FESTIVAL_EDIT";
+        public static readonly string PERMISSION_FESTIVAL_DELETE = "PERMISSION_FESTIVAL_DELETE";
+        public static readonly string PERMISSION_FESTIVAL_SHOW = "PERMISSION_FESTIVAL_SHOW";
+
     }
 }

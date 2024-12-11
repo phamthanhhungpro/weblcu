@@ -300,7 +300,7 @@ namespace Datas
                     ("Xem", Common.Constants.PERMISSION_PRODUCETOOL_CATEGORY_VIEW),
                     ("Thêm mới", Common.Constants.PERMISSION_PRODUCETOOL_CATEGORY_ADD),
                     ("Sửa", Common.Constants.PERMISSION_PRODUCETOOL_CATEGORY_EDIT),
-                    ("Xóa", Common.Constants.PERMISSION_PRODUCETOOL_CATEGORY_DELETE)
+                    ("Xóa", Common.Constants.PERMISSION_PRODUCETOOL_CATEGORY_DELETE),
                 ]);
 
             AddGroupFunctionWithFunctions(
@@ -311,7 +311,8 @@ namespace Datas
                     ("Xem", Common.Constants.PERMISSION_PRODUCETOOL_VIEW),
                     ("Thêm mới", Common.Constants.PERMISSION_PRODUCETOOL_ADD),
                     ("Sửa", Common.Constants.PERMISSION_PRODUCETOOL_EDIT),
-                    ("Xóa", Common.Constants.PERMISSION_PRODUCETOOL_DELETE)
+                    ("Xóa", Common.Constants.PERMISSION_PRODUCETOOL_DELETE),
+                    ("Hiển thị", Common.Constants.PERMISSION_PRODUCETOOL_SHOW),
                 ]);
 
 
@@ -323,7 +324,20 @@ namespace Datas
                     ("Xem", Common.Constants.PERMISSION_CUSTOMSTRADITION_VIEW),
                     ("Thêm mới", Common.Constants.PERMISSION_CUSTOMSTRADITION_ADD),
                     ("Sửa", Common.Constants.PERMISSION_CUSTOMSTRADITION_EDIT),
-                    ("Xóa", Common.Constants.PERMISSION_CUSTOMSTRADITION_DELETE)
+                    ("Xóa", Common.Constants.PERMISSION_CUSTOMSTRADITION_DELETE),
+                    ("Hiển thị", Common.Constants.PERMISSION_CUSTOMSTRADITION_SHOW),
+                ]);
+
+            AddGroupFunctionWithFunctions(
+                Enums.GroupFunctionType.Festival,
+                "Lễ hội văn hóa",
+                10,
+                [
+                    ("Xem", Common.Constants.PERMISSION_FESTIVAL_VIEW),
+                    ("Thêm mới", Common.Constants.PERMISSION_FESTIVAL_ADD),
+                    ("Sửa", Common.Constants.PERMISSION_FESTIVAL_EDIT),
+                    ("Xóa", Common.Constants.PERMISSION_FESTIVAL_DELETE),
+                    ("Hiển thị", Common.Constants.PERMISSION_FESTIVAL_SHOW),
                 ]);
         }
 

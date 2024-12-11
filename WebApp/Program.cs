@@ -44,6 +44,7 @@ builder.Services.AddTransient<LogService>();
 builder.Services.AddTransient<ProduceToolCategoryService>();
 builder.Services.AddTransient<ProduceToolService>();
 builder.Services.AddTransient<CustomsTraditionService>();
+builder.Services.AddTransient<FestivalService>();
 
 builder.Services.AddTransient<InstrumentCategoryService>();
 builder.Services.AddTransient<InstrumentService>();

@@ -9,6 +9,5 @@ namespace Common.Entity.Permission
     public class CustomsTraditionPermission : PermissionInfo
     {
         public bool IsShow { get; set; } = false;
-
     }
 }
