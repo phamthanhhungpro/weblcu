@@ -41,6 +41,12 @@ namespace Datas.Models.DomainModels
         [Display(Name = "Lễ hội văn hóa")]
         public virtual Festival? Festival { set; get; }
 
+        [Display(Name = "Hoạt động du lịch")]
+        public int? TravelId { set; get; }
+
+        [Display(Name = "Hoạt động du lịch")]
+        public virtual Travel? Travel { set; get; }
+
         public AttachmentModel ToAttachmentModel()
         {
             var data = new AttachmentModel
@@ -53,7 +59,8 @@ namespace Datas.Models.DomainModels
                 NationalCostumeId = NationalCostumeId,
                 ProduceToolId = ProduceToolId,
                 CustomsTraditionId = CustomsTraditionId,
-                FestivalId = FestivalId
+                FestivalId = FestivalId,
+                TravelId = TravelId
             };
             
             return data;

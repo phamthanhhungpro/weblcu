@@ -30,5 +30,8 @@ namespace Datas.Models.ViewModels
 
         [Display(Name = "Lễ hội văn hóa")]
         public int? FestivalId { set; get; }
+
+        [Display(Name = "Hoạt động du lịch")]
+        public int? TravelId { set; get; }
     }
 }

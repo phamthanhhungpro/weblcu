@@ -49,6 +49,7 @@ namespace Datas
         public DbSet<ProduceTool> ProduceTools { set; get; }
         public DbSet<CustomsTradition> CustomsTraditions { set; get; }
         public DbSet<Festival> Festivals { set; get; }
+        public DbSet<Travel> Travels { set; get; }
 
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{

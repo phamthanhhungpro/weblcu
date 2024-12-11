@@ -1,0 +1,161 @@
+﻿@using Datas.Models.ViewModels
+@{
+    var lstNews = (List<TravelModel>)ViewBag.Travels;
+    var currentPage = (int)ViewBag.CurrentPage;
+    var maxPage = (int)ViewBag.MaxPage;
+    var isSearch = (bool)ViewBag.IsSearch;
+
+    var urlPrefix = "";
+
+    var detailsName = "Xem chi tiết";
+    var detailsEthnicMinorityLink = "";
+    var detailTravelLink = "";
+    var detailsNewsLink = "";
+    if (string.IsNullOrEmpty(ViewBag.SubDomain))
+    {
+        urlPrefix = "/hoat-dong-du-lich";
+        detailsName = "Xem chi tiết";
+        detailsEthnicMinorityLink = "/dan-toc/chi-tiet";
+        detailTravelLink = "/hoat-dong-du-lich/chi-tiet";
+        detailsNewsLink = "/tin-tuc/chi-tiet";
+    }
+    else
+    {
+        urlPrefix = "/travel";
+        detailsName = "Details";
+        detailsEthnicMinorityLink = "/ethnic-minority/details";
+        detailTravelLink = "/travel/details";
+        detailsNewsLink = "/news/details";
+    }
+    if (isSearch)
+    {
+        if (string.IsNullOrEmpty(ViewBag.SubDomain))
+        {
+            urlPrefix = urlPrefix + "/tim-kiem/" + ViewBag.SearchValue;
+        }
+        else
+        {
+            urlPrefix = urlPrefix + "/search/" + ViewBag.SearchValue;
+        }
+    }
+}
+<section id="news-banner">
+    <div class="news-overlay"></div>
+    <div class="news-banner-content">
+        @if (string.IsNullOrEmpty(ViewBag.SubDomain))
+        {
+            <div class="news-title">
+                <h1>Hoạt động du lịch</h1>
+            </div>
+            <div class="news-search">
+                <div class="news-search-input">
+                    <form action="/hoat-dong-du-lich/tim-kiem/">
+                        <input type="text" name="search" placeholder="Tìm kiếm Hoạt động du lịch...">
+                        <div class="news-search-btn">
+                            <button style="border:none; background:transparent;" type="submit">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="news-title">
+                <h1>Travel</h1>
+            </div>
+            <div class="news-search">
+                <div class="news-search-input">
+                    <form action="/travel/search/">
+                        <input type="text" name="search" placeholder="Search Travel...">
+                        <div class="news-search-btn">
+                            <button style="border:none; background:transparent;" type="submit">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        }
+       
+    </div>
+</section>
+<section id="news-page" class="skin-page-plus">
+    @if (string.IsNullOrEmpty(ViewBag.SubDomain))
+    {
+        <div class="news-page-text">
+            <p>Hoạt động du lịch</p>
+        </div>
+    }
+    else
+    {
+        <div class="news-page-text">
+            <p>Travel</p>
+        </div>
+    }
+
+    <div class="list-news">
+        <div class="container">
+            <div class="row">
+                @foreach (var item in lstNews)
+                {
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="item-news">
+                            <div class="item-news-img">
+                                <a href="@detailTravelLink/@item.Url">
+                                    <img src="@item.Image0" alt="">
+                                </a>
+                            </div>
+                            <div class="item-news-text">
+                                <a href="@detailTravelLink/@item.Url">@item.Name</a>
+                                <div class="item-news-btn">
+                                    <a href="@detailTravelLink/@item.Url">@detailsName</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="next-page-btn">
+        <ul>
+            @if (maxPage <= 3)
+            {
+                <li><a href="@urlPrefix/1"><i class="fa-solid fa-chevron-left"></i></a></li>
+                for (int i = 1; i <= maxPage; i++)
+                {
+                    <li><a href="@urlPrefix/@i">@i</a></li>
+                }
+                <li><a href="@urlPrefix/@maxPage"><i class="fa-solid fa-chevron-right"></i></a></li>
+            }
+            else
+            {
+                <li><a href="@urlPrefix/1"><i class="fa-solid fa-chevron-left"></i></a></li>
+                if (currentPage >= maxPage)
+                {
+                    <li><a href="@urlPrefix/@(maxPage-2)">@(maxPage - 2)</a></li>
+                    <li><a href="@urlPrefix/@(maxPage-1)">@(maxPage - 1)</a></li>
+                    <li><a href="@urlPrefix/@maxPage">@maxPage</a></li>
+                }
+                else if (currentPage == 1)
+                {
+                    <li><a href="@urlPrefix/1">1</a></li>
+                    <li><a href="@urlPrefix/2">2</a></li>
+                    <li><a href="@urlPrefix/3">3</a></li>
+
+                }
+                else
+                {
+                    <li><a href="@urlPrefix/@(currentPage-1)">@(currentPage - 1)</a></li>
+                    <li><a href="@urlPrefix/@currentPage">@currentPage</a></li>
+                    <li><a href="@urlPrefix/@(currentPage+1)">@(currentPage + 1)</a></li>
+
+                }
+                <li><a href="@urlPrefix/@maxPage"><i class="fa-solid fa-chevron-right"></i></a></li>
+            }
+        </ul>
+    </div>
+</section>

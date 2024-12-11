@@ -150,5 +150,10 @@ namespace Common
         public static readonly string PERMISSION_FESTIVAL_DELETE = "PERMISSION_FESTIVAL_DELETE";
         public static readonly string PERMISSION_FESTIVAL_SHOW = "PERMISSION_FESTIVAL_SHOW";
 
+        public static readonly string PERMISSION_TRAVEL_VIEW = "PERMISSION_TRAVEL_VIEW";
+        public static readonly string PERMISSION_TRAVEL_ADD = "PERMISSION_TRAVEL_ADD";
+        public static readonly string PERMISSION_TRAVEL_EDIT = "PERMISSION_TRAVEL_EDIT";
+        public static readonly string PERMISSION_TRAVEL_DELETE = "PERMISSION_TRAVEL_DELETE";
+        public static readonly string PERMISSION_TRAVEL_SHOW = "PERMISSION_TRAVEL_SHOW";
     }
 }
