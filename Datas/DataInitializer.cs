@@ -270,11 +270,11 @@ namespace Datas
 
         private void UpdateV8()
         {
-            if (!_context.GroupFunctions.Any(o => o.Type == Enums.GroupFunctionType.InstrucmentCategory))
+            if (!_context.GroupFunctions.Any(o => o.Type == Enums.GroupFunctionType.InstrumentCategory))
             {
                 var lstGroupFunction = new List<GroupFunction>
                 {
-                    new GroupFunction{Name="Danh mục nhạc cụ",Order=26, Type=Enums.GroupFunctionType.InstrucmentCategory},
+                    new GroupFunction{Name="Danh mục nhạc cụ",Order=26, Type=Enums.GroupFunctionType.InstrumentCategory},
                  };
                 _context.GroupFunctions.AddRange(lstGroupFunction);
                 _context.SaveChanges();

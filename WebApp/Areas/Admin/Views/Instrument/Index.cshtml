@@ -1,0 +1,149 @@
+﻿@using Common
+@using Common.Entity.Permission
+@model IEnumerable<Datas.Models.DomainModels.Instrument>
+@{
+    ViewBag.Title = "Danh sách nhạc cụ";
+    var permission = (InstrumentPermission)ViewBag.Permission;
+}
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Danh sách nhạc cụ</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item">
+                            <a asp-area="Admin" asp-controller="Default" asp-action="Index">Trang chủ</a>
+                        </li>
+                        <li class="breadcrumb-item active">Danh sách nhạc cụ</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <!-- Main row -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        @if (permission.IsAdd)
+                        {
+                            <div class="card-header">
+                                <div class="float-right"><a class="btn btn-primary" asp-area="Admin" asp-controller="Instrument" asp-action="Create">Thêm mới</a></div>
+                            </div>
+                        }
+                        <div class="card-body">
+                            <table class="table table-bordered table-hover" id="list-news">
+                                <thead>
+                                    <tr style="text-align:center">
+                                        <th style="vertical-align:middle; text-align:center; width:5%">
+                                            Số TT
+                                        </th>
+                                        <th style="vertical-align:middle; text-align:center; width:10%">
+                                            @Html.DisplayNameFor(model => model.PostDate)
+                                        </th>
+                                        <th style="vertical-align:middle; text-align:center; width:35%">
+                                            @Html.DisplayNameFor(model => model.Name)
+                                        </th>
+                                        <th style="vertical-align:middle; text-align:center; width:30%">
+                                            @Html.DisplayNameFor(model => model.Details)
+                                        </th>
+                                        <th style="vertical-align:middle; text-align:center; width:10%">
+                                            @Html.DisplayNameFor(model => model.Status)
+                                        </th>
+                                        <th style="vertical-align:middle; text-align:center; width:10%">
+                                            Thao tác
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+              
+            </div>
+            <!-- /.row (main row) -->
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+<script type="text/javascript">
+    $(function () {
+        LoadAjaxNew();
+    });
+
+    function LoadAjaxNew() {
+        var table = $('#list-news').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "orderMulti": false,
+            "destroy": true,
+            "searchHighlight": true,
+            "language": {
+                "url": "/plugins/datatables/Vietnamese.json"
+            },
+            "pagingType": 'full_numbers', 'sPaging': 'pagination',
+            "ajax": {
+                "url": "/Admin/Instrument/LoadAjaxNew",
+                //"data": { type: "25" },
+                "type": "GET",
+                "datatype": "json"
+            },
+            "bSortable": false,
+            "columns": [
+                { "data": "index", "width": "5%" },
+                { "data": "postDate" },
+                { "data": "title" },
+                { "data": "details" },
+                {
+                    "data": "status", "bSortable": false, "mRender": function (data, display, alldata) {
+                        var str = ""
+                        switch (data) {
+                            case 1:
+                                str = "<span class='label label-danger'>Ngừng hoạt động</span>";
+                                break;
+                            case 0:
+                                str = "<span class='label label-success'>Đang hoạt động</span>";
+                                break;
+                            default:
+                                str = "<span class='label label-danger'>Ngừng hoạt động</span>";
+                        }
+                        return str;
+                    }, "width": "30%"
+                },
+                {
+                    "data": "id", "bSortable": false, "render": function (data, display, alldata) {
+                        var str = "";
+                        str += "<a class='fas fa fa-edit' forceopen='1'  href='/Admin/Instrument/Edit?id=" + alldata.id + "'  style='margin-right:6px'> Sửa</a>"
+                        str += "<a class='fas fa fa-trash' data-ajax='true' data-ajax-confirm='Bạn có chắc chắn xóa tin bài này? ' data-ajax-failure='OnFailure' data-ajax-loading='#ajax-loading' data-ajax-method='POST' data-ajax-success='onDelete(this,data)' data-toggle='tooltip' href='/Admin/Instrument/Delete?id=" + alldata.id + "' style='margin-right:6px' title='Xóa  tin bài'> Xóa</a>"
+                        return str;
+                    }, "width": "15%"
+                },
+            ],
+        });
+        //table.$('[data-toggle="tooltip"]').tooltip({
+        //    placement: '',
+        //    html: true
+        //});
+    };
+
+    function onDelete(id, data) {
+        if (data.code == 0) {
+            id.parentNode.parentNode.style.display = 'none';
+            toastr.success(data.message);
+        }
+        else {
+            toastr.error("Lỗi: " + data.message);
+        }
+    };
+</script>

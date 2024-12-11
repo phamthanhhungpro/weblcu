@@ -42,6 +42,9 @@ builder.Services.AddTransient<LanguageService>();
 builder.Services.AddTransient<FileService>();
 builder.Services.AddTransient<LogService>();
 
+builder.Services.AddTransient<InstrumentCategoryService>();
+builder.Services.AddTransient<InstrumentService>();
+
 builder.Services.AddSingleton<AdminSettingUtils>();
 builder.Services.AddSingleton<SettingUtils>();
 builder.Services.AddSingleton<MailUtils>();

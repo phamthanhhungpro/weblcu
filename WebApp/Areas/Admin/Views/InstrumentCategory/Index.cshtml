@@ -1,8 +1,8 @@
-﻿@* @using Common
+﻿@using Common
 @using Common.Entity.Permission
-@model IEnumerable<Datas.Models.DomainModels.NewsCategory>
+@model IEnumerable<Datas.Models.DomainModels.InstrumentCategory>
 @{
-    ViewBag.Title = "Danh sách danh mục tin tức";
+    ViewBag.Title = "Danh sách danh mục nhạc cụ";
     var permission = (PermissionInfo)ViewBag.Permission;
 }
 
@@ -13,14 +13,14 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Danh sách danh mục tin tức</h1>
+                    <h1 class="m-0">Danh sách danh mục nhạc cụ</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item">
                             <a asp-area="Admin" asp-controller="Default" asp-action="Index">Trang chủ</a>
                         </li>
-                        <li class="breadcrumb-item active">Danh sách danh mục tin tức</li>
+                        <li class="breadcrumb-item active">Danh sách danh mục nhạc cụ</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -37,7 +37,7 @@
                         @if (permission.IsAdd)
                         {
                             <div class="card-header">
-                                <div class="float-right"><a class="btn btn-primary" asp-area="Admin" asp-controller="NewsCategory" asp-action="Create">Thêm mới</a></div>
+                                <div class="float-right"><a class="btn btn-primary" asp-area="Admin" asp-controller="InstrumentCategory" asp-action="Create">Thêm mới</a></div>
                             </div>
                         }
                         <div class="card-body">
@@ -106,22 +106,22 @@
                                             <td style="vertical-align:middle;text-align:center">
                                                 @if (permission.IsEdit)
                                                 {
-                                                    <a asp-action="Edit" asp-route-id="@item.Id"  asp-area="Admin" class="fas fa fa-edit" style="margin-right:6px" data_toggle="tooltip" title="Chỉnh sửa thông tin danh mục tin tức">Edit</a>
+                                                    <a asp-action="Edit" asp-route-id="@item.Id"  asp-area="Admin" class="fas fa fa-edit" style="margin-right:6px" data_toggle="tooltip" title="Chỉnh sửa thông tin danh mục nhạc cụ">Edit</a>
                                                 }
                                                 @if (permission.IsDelete)
                                                 {
                                                     <a class="fas fa fa-trash"
                                                        data-ajax="true"
-                                                       data-ajax-confirm="Bạn có muốn xóa danh mục tin tức này?"
+                                                       data-ajax-confirm="Bạn có muốn xóa danh mục nhạc cụ này?"
                                                        data-ajax-failure="OnFailure"
                                                        data-ajax-loading="#ajax-loading"
                                                        data-ajax-method="POST"
                                                        data-ajax-success="onDelete(@item.Id,data)"
                                                        data-toggle="tooltip"
-                                                       asp-action="Delete" asp-route-id="@item.Id" asp-area="Admin" asp-controller="NewsCategory"
+                                                       asp-action="Delete" asp-route-id="@item.Id" asp-area="Admin" asp-controller="InstrumentCategory"
                                                        style="margin-right:6px"
                                                        title=""
-                                                       data-original-title="Xóa danh mục tin tức khỏi danh sách"> Xóa</a>
+                                                       data-original-title="Xóa danh mục nhạc cụ khỏi danh sách"> Xóa</a>
                                                 }
                                             </td>
                                         </tr>
@@ -156,6 +156,4 @@
             toastr.error("Lỗi: " + data.message);
         }
     };
-</script> *@
-
-    <p>works</p>
+</script>

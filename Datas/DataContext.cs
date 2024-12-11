@@ -11,9 +11,10 @@ namespace Datas
 {
     public class DataContext : DbContext
     {
-        public DataContext(DbContextOptions<DataContext> options): base(options)
-        { 
+        public DataContext(DbContextOptions<DataContext> options) : base(options)
+        {
         }
+
         public DbSet<User> Users { get; set; }
         public DbSet<Function> Functions { set; get; }
         public DbSet<GroupFunction> GroupFunctions { set; get; }
@@ -30,6 +31,9 @@ namespace Datas
         public DbSet<Location> Locations { set; get; }
         public DbSet<NationalCostumeCategory> NationalCostumeCategories { set; get; }
         public DbSet<NationalCostume> NationalCostumes { set; get; }
+
+        public DbSet<Instrument> Instruments { set; get; }
+        public DbSet<InstrumentCategory> InstrumentCategories { set; get; }
         public DbSet<Image360> Images { set; get; }
         public DbSet<Contact> Contacts { set; get; }
         public DbSet<District> Districts { set; get; }

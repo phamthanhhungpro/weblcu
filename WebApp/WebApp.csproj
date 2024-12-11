@@ -33,4 +33,12 @@
     <Folder Include="wwwroot\datas\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <AdditionalFiles Include="Areas\Admin\Views\Instrument\Create.cshtml" />
+    <AdditionalFiles Include="Areas\Admin\Views\Instrument\Edit.cshtml" />
+    <AdditionalFiles Include="Areas\Admin\Views\Instrument\Index.cshtml" />
+    <AdditionalFiles Include="Areas\Admin\Views\Instrument\_CreateOrEdit.cshtml" />
+    <AdditionalFiles Include="Areas\Admin\Views\Instrument\_DisplayViewsCategory.cshtml" />
+  </ItemGroup>
+
 </Project>
