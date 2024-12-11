@@ -66,6 +66,7 @@ namespace Common
             File,
             Log,
             InstrucmentCategory,
+            ProduceToolCategory
         }
 
         public enum ErrorCode
