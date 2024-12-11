@@ -339,6 +339,18 @@ namespace WebApp.Areas.Admin.Controllers
                                             Constants.PERMISSION_PRODUCETOOL_ADD,
                                             "fa fa-wrench");
                                 break;
+
+                            case Enums.GroupFunctionType.CustomsTradition:
+                                AddMenuItem(ref lstMenu,
+                                            controllerName,
+                                            "CustomsTradition",
+                                            group,
+                                            functionResult.Value,
+                                            url,
+                                            Constants.PERMISSION_CUSTOMSTRADITION_VIEW,
+                                            Constants.PERMISSION_CUSTOMSTRADITION_ADD,
+                                            "fa fa-feather-alt");
+                                break;
                             default:
                                 break;
 

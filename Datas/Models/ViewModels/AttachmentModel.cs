@@ -25,5 +25,8 @@ namespace Datas.Models.ViewModels
         [Display(Name = "Công cụ sản xuất")]
         public int? ProduceToolId { set; get; }
 
+        [Display(Name = "Phong tục tập quán")]
+        public int? CustomsTraditionId { set; get; }
+
     }
 }

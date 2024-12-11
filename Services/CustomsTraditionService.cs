@@ -6,15 +6,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Services
 {
-    public class ProduceToolService : AbstractService<ProduceTool, ProduceToolModel>
+    public class CustomsTraditionService : AbstractService<CustomsTradition, CustomsTraditionModel>
     {
-        public ProduceToolService(DataContext dataContext) : base(dataContext)
+        public CustomsTraditionService(DataContext dataContext) : base(dataContext)
         {
         }
 
-        protected override IQueryable<ProduceTool> AppendChildData(params string[] includes)
+        protected override IQueryable<CustomsTradition> AppendChildData(params string[] includes)
         {
-            var result = Context.ProduceTools.Where(x => x.DeleteStatus == Common.Enums.DeleteStatus.Normal).AsQueryable();
+            var result = Context.CustomsTraditions.Where(x => x.DeleteStatus == Common.Enums.DeleteStatus.Normal).AsQueryable();
             foreach (var include in includes)
             {
                 result = result.Include(include);
@@ -22,7 +22,7 @@ namespace Services
             return result;
         }
 
-        private ProduceTool SetUrl(ProduceTool entity)
+        private CustomsTradition SetUrl(CustomsTradition entity)
         {
             entity.ReNewUrl();
             var checkUrl = this.GetAll(o => o.Url.Contains(entity.Url) && o.Id != entity.Id).ToList();
@@ -45,13 +45,13 @@ namespace Services
             return entity;
         }
 
-        public override MessageResult Add(ProduceTool entity)
+        public override MessageResult Add(CustomsTradition entity)
         {
             var result = new MessageResult();
             try
             {
                 SetUrl(entity);
-                Context.ProduceTools.Add(entity);
+                Context.CustomsTraditions.Add(entity);
                 Context.SaveChanges();
             }
             catch (Exception ex)
@@ -62,21 +62,14 @@ namespace Services
             }
             return result;
         }
-        public override MessageResult Add(ProduceToolModel entity)
+        public override MessageResult Add(CustomsTraditionModel entity)
         {
             var result = new MessageResult();
             try
             {
-                var data = new ProduceTool();
+                var data = new CustomsTradition();
                 data.SetNewData(entity);
-                if (entity.CategoryId.HasValue)
-                {
-                    var peopleType = Context.ProduceToolCategories.FirstOrDefault(x => x.Id == entity.CategoryId);
-                    if (peopleType != null)
-                    {
-                        data.Category = peopleType;
-                    }
-                }
+
                 if (entity.PeopleId.HasValue)
                 {
                     var people = Context.Peoples.FirstOrDefault(x => x.Id == entity.PeopleId);
@@ -93,7 +86,7 @@ namespace Services
                         {
                             Context.Attachments.Add(new Attachment
                             {
-                                ProduceTool = data,
+                                CustomsTradition = data,
                                 Path = item.Path,
                                 Name = item.Name
                             });
@@ -101,7 +94,7 @@ namespace Services
                     }
                 }
                 SetUrl(data);
-                Context.ProduceTools.Add(data);
+                Context.CustomsTraditions.Add(data);
                 Context.SaveChanges();
             }
             catch (Exception ex)
@@ -112,22 +105,13 @@ namespace Services
             return result;
         }
 
-        public MessageResult AddByCheckName(ProduceToolModel entity)
+        public MessageResult AddByCheckName(CustomsTraditionModel entity)
         {
             var result = new MessageResult();
             try
             {
-                var data = new ProduceTool();
-                var type = entity.GetCategoryName();
-                if (!string.IsNullOrEmpty(type))
-                {
-                    var typeData = Context.ProduceToolCategories.FirstOrDefault(o => o.Name.ToLower().Equals(type) && o.DeleteStatus == Common.Enums.DeleteStatus.Normal);
-                    if (typeData != null)
-                    {
-                        data.Category = typeData;
-                        entity.CategoryId = typeData.Id;
-                    }
-                }
+                var data = new CustomsTradition();
+
                 var people = entity.GetPeopleName();
                 if (!string.IsNullOrEmpty(people))
                 {
@@ -140,7 +124,7 @@ namespace Services
                 }
                 data.SetNewData(entity);
                 SetUrl(data);
-                Context.ProduceTools.Add(data);
+                Context.CustomsTraditions.Add(data);
                 Context.SaveChanges();
             }
             catch (Exception ex)
@@ -150,12 +134,12 @@ namespace Services
             }
             return result;
         }
-        public override MessageResult Update(ProduceTool entity)
+        public override MessageResult Update(CustomsTradition entity)
         {
             var result = new MessageResult();
             try
             {
-                var updateData = Context.ProduceTools.FirstOrDefault(x => x.Id == entity.Id);
+                var updateData = Context.CustomsTraditions.FirstOrDefault(x => x.Id == entity.Id);
                 if (updateData != null)
                 {
                     updateData.SetNewData(entity);
@@ -175,32 +159,18 @@ namespace Services
             }
             return result;
         }
-        public override MessageResult Update(ProduceToolModel entity)
+        public override MessageResult Update(CustomsTraditionModel entity)
         {
             var result = new MessageResult();
             try
             {
-                var updateData = Context.ProduceTools.Include(o => o.Category).FirstOrDefault(x => x.Id == entity.Id);
+                var updateData = Context.CustomsTraditions.Include(x => x.People)
+                                                            .Include(x => x.Attachments)
+                                                            .FirstOrDefault(x => x.Id == entity.Id);
                 if (updateData != null)
                 {
                     updateData.SetNewData(entity);
 
-                    if (entity.CategoryId.HasValue)
-                    {
-                        var ward = Context.ProduceToolCategories.FirstOrDefault(x => x.Id == entity.CategoryId);
-                        if (ward != null)
-                        {
-                            updateData.Category = ward;
-                        }
-                        else
-                        {
-                            updateData.Category = null;
-                        }
-                    }
-                    else
-                    {
-                        updateData.Category = null;
-                    }
                     if (entity.PeopleId.HasValue)
                     {
                         var people = Context.Peoples.FirstOrDefault(x => x.Id == entity.PeopleId);
@@ -240,7 +210,7 @@ namespace Services
                                 {
                                     Context.Attachments.Add(new Attachment
                                     {
-                                        ProduceTool = updateData,
+                                        CustomsTradition = updateData,
                                         Path = item.Path,
                                         Name = item.Name
                                     });
@@ -252,7 +222,7 @@ namespace Services
                                 {
                                     Context.Attachments.Add(new Attachment
                                     {
-                                        ProduceTool = updateData,
+                                        CustomsTradition = updateData,
                                         Path = item.Path,
                                         Name = item.Name
                                     });
@@ -282,7 +252,7 @@ namespace Services
             var result = new MessageResult();
             try
             {
-                var deleteData = Context.ProduceTools.FirstOrDefault(x => x.Id == id);
+                var deleteData = Context.CustomsTraditions.FirstOrDefault(x => x.Id == id);
                 if (deleteData != null)
                 {
                     if (!deleteData.IsExistAnother())
@@ -308,7 +278,7 @@ namespace Services
             }
             return result;
         }
-        public override ProduceTool GetById(int id, params string[] includes)
+        public override CustomsTradition GetById(int id, params string[] includes)
         {
             return AppendChildData(includes).FirstOrDefault(x => x.Id == id);
         }
@@ -318,7 +288,7 @@ namespace Services
             var result = new MessageResult();
             try
             {
-                var updateData = Context.ProduceTools.FirstOrDefault(x => x.Id == id);
+                var updateData = Context.CustomsTraditions.FirstOrDefault(x => x.Id == id);
                 if (updateData != null)
                 {
                     updateData.View = updateData.View + 1;
