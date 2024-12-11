@@ -126,6 +126,7 @@ namespace Common
         public static readonly string PERMISSION_INSTRUMENT_ADD = "PERMISSION_INSTRUMENT_ADD";
         public static readonly string PERMISSION_INSTRUMENT_EDIT = "PERMISSION_INSTRUMENT_EDIT";
         public static readonly string PERMISSION_INSTRUMENT_DELETE = "PERMISSION_INSTRUMENT_DELETE";
+        public static readonly string PERMISSION_INSTRUMENT_SHOW = "PERMISSION_INSTRUMENT_SHOW";
 
         public static readonly string PERMISSION_PRODUCETOOL_CATEGORY_VIEW = "PERMISSION_PRODUCETOOL_CATEGORY_VIEW";
         public static readonly string PERMISSION_PRODUCETOOL_CATEGORY_ADD = "PERMISSION_PRODUCETOOL_CATEGORY_ADD";
@@ -149,6 +150,18 @@ namespace Common
         public static readonly string PERMISSION_FESTIVAL_EDIT = "PERMISSION_FESTIVAL_EDIT";
         public static readonly string PERMISSION_FESTIVAL_DELETE = "PERMISSION_FESTIVAL_DELETE";
         public static readonly string PERMISSION_FESTIVAL_SHOW = "PERMISSION_FESTIVAL_SHOW";
+        
+        
+        public static readonly string PERMISSION_LANDMARK_CATEGORY_VIEW = "PERMISSION_LANDMARK_CATEGORY_VIEW";
+        public static readonly string PERMISSION_LANDMARK_CATEGORY_ADD = "PERMISSION_LANDMARK_CATEGORY_ADD";
+        public static readonly string PERMISSION_LANDMARK_CATEGORY_EDIT = "PERMISSION_LANDMARK_CATEGORY_EDIT";
+        public static readonly string PERMISSION_LANDMARK_CATEGORY_DELETE = "PERMISSION_LANDMARK_CATEGORY_DELETE";
+
+        public static readonly string PERMISSION_LANDMARK_VIEW = "PERMISSION_LANDMARK_VIEW";
+        public static readonly string PERMISSION_LANDMARK_ADD = "PERMISSION_LANDMARK_ADD";
+        public static readonly string PERMISSION_LANDMARK_EDIT = "PERMISSION_LANDMARK_EDIT";
+        public static readonly string PERMISSION_LANDMARK_DELETE = "PERMISSION_LANDMARK_DELETE";
+        public static readonly string PERMISSION_LANDMARK_SHOW = "PERMISSION_PRODUCETOOL_SHOW";
 
         public static readonly string PERMISSION_TRAVEL_VIEW = "PERMISSION_TRAVEL_VIEW";
         public static readonly string PERMISSION_TRAVEL_ADD = "PERMISSION_TRAVEL_ADD";

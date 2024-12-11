@@ -12,8 +12,8 @@ namespace Datas.Models.ViewModels
 {
     public class InstrumentCategoryModel : AbstractData
     {
-        [Required(ErrorMessage = "Bạn cần nhập tên loại nhạc cụ")]
-        [Display(Name = "Loại nhạc cụ")]
+        [Required(ErrorMessage = "Bạn cần nhập tên danh mục nhạc cụ")]
+        [Display(Name = "Tên danh mục nhạc cụ")]
         public string Name { get; set; }
 
         [Display(Name = "Hình minh họa")]
@@ -26,7 +26,7 @@ namespace Datas.Models.ViewModels
         [DataType(DataType.MultilineText)]
         public string? Details { set; get; }
 
-        [Display(Name = "Loại nhạc cụ cha")]
+        [Display(Name = "Danh mục cha")]
         public int? ParentId { get; set; }
     }
 }

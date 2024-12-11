@@ -39,6 +39,22 @@
     <AdditionalFiles Include="Areas\Admin\Views\Instrument\Index.cshtml" />
     <AdditionalFiles Include="Areas\Admin\Views\Instrument\_CreateOrEdit.cshtml" />
     <AdditionalFiles Include="Areas\Admin\Views\Instrument\_DisplayViewsCategory.cshtml" />
+    <AdditionalFiles Include="Areas\Admin\Views\Landmark\EditExcel.cshtml" />
+    <AdditionalFiles Include="Areas\Admin\Views\Landmark\ImportExcel.cshtml" />
+    <AdditionalFiles Include="Areas\Admin\Views\Landmark\_AttachmentData.cshtml" />
+    <AdditionalFiles Include="Areas\Admin\Views\Landmark\_DisplayPeople.cshtml" />
+    <AdditionalFiles Include="Areas\Admin\Views\Landmark\_DisplayViewsCategory.cshtml" />
+    <AdditionalFiles Include="Areas\Admin\Views\Landmark\_ImageData.cshtml" />
+    <AdditionalFiles Include="Areas\Admin\Views\Landmark\_InfoData.cshtml" />
+    <AdditionalFiles Include="Views\FEInstrument\Details.cshtml" />
+    <AdditionalFiles Include="Views\FEInstrument\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Areas\Admin\Views\LandmarkCategory\Create.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Admin\Views\LandmarkCategory\Edit.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Admin\Views\LandmarkCategory\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Admin\Views\LandmarkCategory\_CreateOrEdit.cshtml" />
   </ItemGroup>
 
 </Project>

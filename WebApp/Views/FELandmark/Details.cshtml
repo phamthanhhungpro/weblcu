@@ -1,0 +1,345 @@
+﻿@using Datas.Models.ViewModels
+@using System.Net
+@model LandmarkModel
+@{
+    var lstLandmark = (List<LandmarkModel>)ViewBag.OtherLandmark;
+    var detailsName = "Xem chi tiết";
+    var detailsEthnicMinorityLink = "";
+    var detailLink = "";
+    var detailsNewsLink = "";
+    if (string.IsNullOrEmpty(ViewBag.SubDomain))
+    {
+        detailsName = "Xem chi tiết";
+        detailsEthnicMinorityLink = "/dan-toc/chi-tiet";
+        detailLink = "/di-tich/chi-tiet";
+        detailsNewsLink = "/tin-tuc/chi-tiet";
+    }
+    else
+    {
+        detailsName = "Details";
+        detailsEthnicMinorityLink = "/ethnic-minority/details";
+        detailLink = "/landmark/details";
+        detailsNewsLink = "/news/details";
+    }
+    var url = ViewBag.Host + detailLink + "/" + Model.Url;
+
+}
+@if (!string.IsNullOrEmpty(Model.Image360))
+{
+    <section id="relics-360">
+        <div class="relics-iframe">
+            <iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="true" src="@Model.Image360" frameborder="0"></iframe>
+        </div>
+    </section>
+}
+
+
+<section id="artifacts">
+    <div class="container">
+        <div class="row">
+            <div class="artifacts-title">
+                @if (string.IsNullOrEmpty(ViewBag.SubDomain))
+                {
+                    <h2>Nhạc cụ</h2>
+                }
+                else
+                {
+
+                    <h2>Landmark</h2>
+                }
+            </div>
+            <div class="row mb-4">
+                <div class="col-lg-4">
+                    <div class="relics-infor">
+                        <div class="relics-infor-detail">
+                            <h3>@Model.Name.ToUpper()</h3>
+                        </div>
+                        <div class="relics-infor-btn">
+                            <div id="fbShare" class="fb-share-button" data-href="@url" data-layout="button" data-size="large">
+                                <a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=@WebUtility.UrlEncode(url)">
+                                    <i class="fa-brands fa-facebook"></i>Share
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-4">
+                <div class="artifacts-slide-1">
+                    @if (!string.IsNullOrEmpty(Model.Image0))
+                    {
+                        <div class="items-artifacts-1">
+                            <img src="@Model.Image0" alt="">
+                        </div>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.Image1))
+                    {
+                        <div class="items-artifacts-1">
+                            <img src="@Model.Image1" alt="">
+                        </div>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.Image2))
+                    {
+                        <div class="items-artifacts-1">
+                            <img src="@Model.Image2" alt="">
+                        </div>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.Image3))
+                    {
+                        <div class="items-artifacts-1">
+                            <img src="@Model.Image3" alt="">
+                        </div>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.Image4))
+                    {
+                        <div class="items-artifacts-1">
+                            <img src="@Model.Image4" alt="">
+                        </div>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.Image5))
+                    {
+                        <div class="items-artifacts-1">
+                            <img src="@Model.Image5" alt="">
+                        </div>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.Image6))
+                    {
+                        <div class="items-artifacts-1">
+                            <img src="@Model.Image6" alt="">
+                        </div>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.Image7))
+                    {
+                        <div class="items-artifacts-1">
+                            <img src="@Model.Image7" alt="">
+                        </div>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.Image8))
+                    {
+                        <div class="items-artifacts-1">
+                            <img src="@Model.Image8" alt="">
+                        </div>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.Image9))
+                    {
+                        <div class="items-artifacts-1">
+                            <img src="@Model.Image9" alt="">
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="col-lg-5 .col-md-8 artifacts-img">
+                <div class="artifacts-slide-2">
+                    @if (!string.IsNullOrEmpty(Model.Image0))
+                    {
+                        <div class="items-artifacts-2">
+                            <img src="@Model.Image0" alt="">
+                        </div>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.Image1))
+                    {
+                        <div class="items-artifacts-2">
+                            <img src="@Model.Image1" alt="">
+                        </div>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.Image2))
+                    {
+                        <div class="items-artifacts-2">
+                            <img src="@Model.Image2" alt="">
+                        </div>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.Image3))
+                    {
+                        <div class="items-artifacts-2">
+                            <img src="@Model.Image3" alt="">
+                        </div>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.Image4))
+                    {
+                        <div class="items-artifacts-2">
+                            <img src="@Model.Image4" alt="">
+                        </div>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.Image5))
+                    {
+                        <div class="items-artifacts-2">
+                            <img src="@Model.Image5" alt="">
+                        </div>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.Image6))
+                    {
+                        <div class="items-artifacts-2">
+                            <img src="@Model.Image6" alt="">
+                        </div>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.Image7))
+                    {
+                        <div class="items-artifacts-2">
+                            <img src="@Model.Image7" alt="">
+                        </div>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.Image8))
+                    {
+                        <div class="items-artifacts-2">
+                            <img src="@Model.Image8" alt="">
+                        </div>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.Image9))
+                    {
+                        <div class="items-artifacts-2">
+                            <img src="@Model.Image9" alt="">
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="col-lg-5 .col-md-12 artifacts-detail">
+                @if (string.IsNullOrEmpty(ViewBag.SubDomain))
+                {
+                    <div class="artifacts-name">
+                        <h3>@Model.Name</h3>
+                    </div>
+                    <div class="artifacts-infor">
+                        <p><span>Nhạc cụ: </span>@Model.GetPeopleName()</p>
+                        @if (!string.IsNullOrEmpty(Model.Code))
+                        {
+                            <p><span>Kí hiệu, mã số ảnh: </span>@Model.Code</p>
+                        }
+                        @if (!string.IsNullOrEmpty(Model.Event))
+                        {
+                            <p><span>Dịp sử dụng: </span>@Model.Event</p>
+                        }
+                        @if (!string.IsNullOrEmpty(Model.Certification))
+                        {
+                            <p><span>Nguyên tắc thiết kế: </span>@Model.Certification</p>
+                        }
+                        @if (!string.IsNullOrEmpty(Model.Material))
+                        {
+                            <p><span>Nguyên liệu sử dụng: </span>@Model.Material</p>
+                        }
+                        @if (!string.IsNullOrEmpty(Model.Classify))
+                        {
+                            <p><span>Ý nghĩa văn hóa: </span>@Model.Classify</p>
+                        }
+                        @if (!string.IsNullOrEmpty(Model.Shape))
+                        {
+                            <p><span>Phụ kiện đi kèm: </span>@Model.Shape</p>
+                        }
+                        @if (!string.IsNullOrEmpty(Model.Cost))
+                        {
+                            <p><span>Giá cả trung bình: </span>@Model.Cost</p>
+                        }
+                        @if (!string.IsNullOrEmpty(Model.Technique))
+                        {
+                            <p><span>Kỹ thuật chế tác: </span>@Model.Technique</p>
+                        }
+                        @if (!string.IsNullOrEmpty(Model.Size))
+                        {
+                            <div class="artifacts-size">
+                                <div class="title-artifact-size">Kích thước: </div>
+                                <p style="white-space: pre-line">@Html.Raw(Model.Size)</p>
+                            </div>
+                        }
+
+                    </div>
+                }
+                else
+                {
+
+                    <div class="artifacts-name">
+                        <h3>@Model.Name</h3>
+                    </div>
+                    <div class="artifacts-infor">
+                        <p><span> </span>@Model.GetPeopleName()</p>
+                        @if (!string.IsNullOrEmpty(Model.Code))
+                        {
+                            <p><span>Symbols, image codes: </span>@Model.Code</p>
+                        }
+                        @if (!string.IsNullOrEmpty(Model.Event))
+                        {
+                            <p><span>Event: </span>@Model.Event</p>
+                        }
+                        @if (!string.IsNullOrEmpty(Model.Certification))
+                        {
+                            <p><span>Design principles: </span>@Model.Certification</p>
+                        }
+                        @if (!string.IsNullOrEmpty(Model.Material))
+                        {
+                            <p><span>Raw materials used: </span>@Model.Material</p>
+                        }
+                        @if (!string.IsNullOrEmpty(Model.Classify))
+                        {
+                            <p><span>Cultural significance: </span>@Model.Classify</p>
+                        }
+                        @if (!string.IsNullOrEmpty(Model.Shape))
+                        {
+                            <p><span>Accessories included: </span>@Model.Shape</p>
+                        }
+                        @if (!string.IsNullOrEmpty(Model.Cost))
+                        {
+                            <p><span>Average price: </span>@Model.Cost</p>
+                        }
+                        @if (!string.IsNullOrEmpty(Model.Technique))
+                        {
+                            <p><span>Manufacturing techniques: </span>@Model.Technique</p>
+                        }
+                        @if (!string.IsNullOrEmpty(Model.Size))
+                        {
+                            <div class="artifacts-size">
+                                <div class="title-artifact-size">Size: </div>
+                                <p style="white-space: pre-line">@Html.Raw(Model.Size)</p>
+                            </div>
+                        }
+
+                    </div>
+                }
+
+            </div>
+            <div class="col-lg-12 col describe-artif">
+                <div class="artifacts-describe">
+                    @if (string.IsNullOrEmpty(ViewBag.SubDomain))
+                    {
+                        <h3>Mô tả đặc điểm</h3>
+                    }
+                    else
+                    {
+
+                        <h3>CHARACTERISTIC DESCRIPTION</h3>
+                    }
+
+                    <div class="describe-detail">
+                        <p style="white-space: pre-line">@Html.Raw(Model.Content)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="artifacts-other">
+    @if (lstLandmark.Count > 0)
+    {
+        <div class="container">
+            @if (string.IsNullOrEmpty(ViewBag.SubDomain))
+            {
+                <h3>Các công cụ khác</h3>
+            }
+            else
+            {
+                <h3>Other tools</h3>
+            }
+            <div class="slide-artifacts-other">
+                @foreach (var item in lstLandmark)
+                {
+                    <div class="items-artifacts">
+                        <div class="artifacts-img">
+                            <a href="@detailLink/@item.Url"><img src="@item.Image0" alt=""></a>
+                        </div>
+                        <div class="artifacts-name">
+                            <a href="@detailLink/@item.Url">@item.Name</a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+</section>

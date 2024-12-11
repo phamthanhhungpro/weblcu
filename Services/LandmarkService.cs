@@ -12,15 +12,15 @@ using System.Threading.Tasks;
 
 namespace Services
 {
-    public class InstrumentService : AbstractService<Instrument, InstrumentModel>
+    public class LandmarkService : AbstractService<Landmark, LandmarkModel>
     {
-        public InstrumentService(DataContext dataContext) : base(dataContext)
+        public LandmarkService(DataContext dataContext) : base(dataContext)
         {
         }
 
-        protected override IQueryable<Instrument> AppendChildData(params string[] includes)
+        protected override IQueryable<Landmark> AppendChildData(params string[] includes)
         {
-            var result = Context.Instruments.Where(x => x.DeleteStatus == Common.Enums.DeleteStatus.Normal).AsQueryable();
+            var result = Context.Landmarks.Where(x => x.DeleteStatus == Common.Enums.DeleteStatus.Normal).AsQueryable();
             foreach (var include in includes)
             {
                 result = result.Include(include);
@@ -28,7 +28,7 @@ namespace Services
             return result;
         }
 
-        private Instrument SetUrl(Instrument entity)
+        private Landmark SetUrl(Landmark entity)
         {
             entity.ReNewUrl();
             var checkUrl = this.GetAll(o => o.Url.Contains(entity.Url) && o.Id != entity.Id).ToList();
@@ -51,13 +51,13 @@ namespace Services
             return entity;
         }
 
-        public override MessageResult Add(Instrument entity)
+        public override MessageResult Add(Landmark entity)
         {
             var result = new MessageResult();
             try
             {
                 SetUrl(entity);
-                Context.Instruments.Add(entity);
+                Context.Landmarks.Add(entity);
                 Context.SaveChanges();
             }
             catch (Exception ex)
@@ -68,21 +68,14 @@ namespace Services
             }
             return result;
         }
-        public override MessageResult Add(InstrumentModel entity)
+        public override MessageResult Add(LandmarkModel entity)
         {
             var result = new MessageResult();
             try
             {
-                var data = new Instrument();
+                var data = new Landmark();
                 data.SetNewData(entity);
-                if (entity.CategoryId.HasValue)
-                {
-                    var peopleType = Context.InstrumentCategories.FirstOrDefault(x => x.Id == entity.CategoryId);
-                    if (peopleType != null)
-                    {
-                        data.Category = peopleType;
-                    }
-                }
+
                 if (entity.PeopleId.HasValue)
                 {
                     var people = Context.Peoples.FirstOrDefault(x => x.Id == entity.PeopleId);
@@ -99,7 +92,7 @@ namespace Services
                         {
                             Context.Attachments.Add(new Attachment
                             {
-                                Instrument = data,
+                                Landmark = data,
                                 Path = item.Path,
                                 Name = item.Name
                             });
@@ -107,7 +100,7 @@ namespace Services
                     }
                 }
                 SetUrl(data);
-                Context.Instruments.Add(data);
+                Context.Landmarks.Add(data);
                 Context.SaveChanges();
             }
             catch (Exception ex)
@@ -118,22 +111,13 @@ namespace Services
             return result;
         }
 
-        public MessageResult AddByCheckName(InstrumentModel entity)
+        public MessageResult AddByCheckName(LandmarkModel entity)
         {
             var result = new MessageResult();
             try
             {
-                var data = new Instrument();
-                var type = entity.GetCategoryName();
-                if (!string.IsNullOrEmpty(type))
-                {
-                    var typeData = Context.InstrumentCategories.FirstOrDefault(o => o.Name.ToLower().Equals(type) && o.DeleteStatus == Common.Enums.DeleteStatus.Normal);
-                    if (typeData != null)
-                    {
-                        data.Category = typeData;
-                        entity.CategoryId = typeData.Id;
-                    }
-                }
+                var data = new Landmark();
+
                 var people = entity.GetPeopleName();
                 if (!string.IsNullOrEmpty(people))
                 {
@@ -146,7 +130,7 @@ namespace Services
                 }
                 data.SetNewData(entity);
                 SetUrl(data);
-                Context.Instruments.Add(data);
+                Context.Landmarks.Add(data);
                 Context.SaveChanges();
             }
             catch (Exception ex)
@@ -156,12 +140,12 @@ namespace Services
             }
             return result;
         }
-        public override MessageResult Update(Instrument entity)
+        public override MessageResult Update(Landmark entity)
         {
             var result = new MessageResult();
             try
             {
-                var updateData = Context.Instruments.FirstOrDefault(x => x.Id == entity.Id);
+                var updateData = Context.Landmarks.FirstOrDefault(x => x.Id == entity.Id);
                 if (updateData != null)
                 {
                     updateData.SetNewData(entity);
@@ -181,32 +165,18 @@ namespace Services
             }
             return result;
         }
-        public override MessageResult Update(InstrumentModel entity)
+        public override MessageResult Update(LandmarkModel entity)
         {
             var result = new MessageResult();
             try
             {
-                var updateData = Context.Instruments.Include(o => o.Category).FirstOrDefault(x => x.Id == entity.Id);
+                var updateData = Context.Landmarks.Include(x => x.People)
+                                                            .Include(x => x.Attachments)
+                                                            .FirstOrDefault(x => x.Id == entity.Id);
                 if (updateData != null)
                 {
                     updateData.SetNewData(entity);
 
-                    if (entity.CategoryId.HasValue)
-                    {
-                        var ward = Context.InstrumentCategories.FirstOrDefault(x => x.Id == entity.CategoryId);
-                        if (ward != null)
-                        {
-                            updateData.Category = ward;
-                        }
-                        else
-                        {
-                            updateData.Category = null;
-                        }
-                    }
-                    else
-                    {
-                        updateData.Category = null;
-                    }
                     if (entity.PeopleId.HasValue)
                     {
                         var people = Context.Peoples.FirstOrDefault(x => x.Id == entity.PeopleId);
@@ -246,7 +216,7 @@ namespace Services
                                 {
                                     Context.Attachments.Add(new Attachment
                                     {
-                                        Instrument = updateData,
+                                        Landmark = updateData,
                                         Path = item.Path,
                                         Name = item.Name
                                     });
@@ -258,7 +228,7 @@ namespace Services
                                 {
                                     Context.Attachments.Add(new Attachment
                                     {
-                                        Instrument = updateData,
+                                        Landmark = updateData,
                                         Path = item.Path,
                                         Name = item.Name
                                     });
@@ -288,7 +258,7 @@ namespace Services
             var result = new MessageResult();
             try
             {
-                var deleteData = Context.Instruments.FirstOrDefault(x => x.Id == id);
+                var deleteData = Context.Landmarks.FirstOrDefault(x => x.Id == id);
                 if (deleteData != null)
                 {
                     if (!deleteData.IsExistAnother())
@@ -314,7 +284,7 @@ namespace Services
             }
             return result;
         }
-        public override Instrument GetById(int id, params string[] includes)
+        public override Landmark GetById(int id, params string[] includes)
         {
             return AppendChildData(includes).FirstOrDefault(x => x.Id == id);
         }
@@ -324,7 +294,7 @@ namespace Services
             var result = new MessageResult();
             try
             {
-                var updateData = Context.Instruments.FirstOrDefault(x => x.Id == id);
+                var updateData = Context.Landmarks.FirstOrDefault(x => x.Id == id);
                 if (updateData != null)
                 {
                     updateData.View = updateData.View + 1;

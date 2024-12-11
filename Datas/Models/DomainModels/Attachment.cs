@@ -22,6 +22,12 @@ namespace Datas.Models.DomainModels
 
         [Display(Name = "Trang phục")]
         public virtual NationalCostume NationalCostume { set; get; }
+        
+        [Display(Name = "Nhạc cụ")]
+        public int? InstrumentId { set; get; }
+
+        [Display(Name = "Nhạc cụ")]
+        public virtual Instrument? Instrument { set; get; }
 
         [Display(Name = "Công cụ sản xuất")]
         public int? ProduceToolId { set; get; }
@@ -40,6 +46,12 @@ namespace Datas.Models.DomainModels
 
         [Display(Name = "Lễ hội văn hóa")]
         public virtual Festival? Festival { set; get; }
+        
+        [Display(Name = "Di tích, danh lam")]
+        public int? LandmarkId { set; get; }
+
+        [Display(Name = "Di tích, danh lam")]
+        public virtual Landmark? Landmark { set; get; }
 
         [Display(Name = "Hoạt động du lịch")]
         public int? TravelId { set; get; }
@@ -60,6 +72,8 @@ namespace Datas.Models.DomainModels
                 ProduceToolId = ProduceToolId,
                 CustomsTraditionId = CustomsTraditionId,
                 FestivalId = FestivalId,
+                InstrumentId = InstrumentId,
+                LandmarkId = LandmarkId
                 TravelId = TravelId
             };
             

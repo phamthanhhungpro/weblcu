@@ -33,7 +33,7 @@ namespace Datas.Models.DomainModels
         [Display(Name = "Danh mục con")]
         public virtual ICollection<InstrumentCategory>? Childrens { get; set; }
 
-        public virtual ICollection<Instrument>? Instrument { get; set; }
+        public virtual ICollection<Instrument>? Instruments { get; set; }
 
         public int View { get; set; }
 
@@ -47,17 +47,17 @@ namespace Datas.Models.DomainModels
             Url = newUrl;
         }
 
-        public void SetNewData(InstrumentCategory newCategory)
+        public void SetNewData(InstrumentCategory model)
         {
 
-            Name = newCategory.Name;
-            Image = newCategory.Image;
-            KeyWord = newCategory.KeyWord;
-            Details = newCategory.Details;
-            Status = newCategory.Status;
-            ParentId = newCategory.ParentId;
-            Parent = newCategory.Parent;
-            Childrens = newCategory.Childrens;
+            Name = model.Name;
+            Image = model.Image;
+            KeyWord = model.KeyWord;
+            Details = model.Details;
+            Status = model.Status;
+            ParentId = model.ParentId;
+            Parent = model.Parent;
+            Childrens = model.Childrens;
         }
         public void SetNewData(InstrumentCategoryModel data)
         {
@@ -70,9 +70,11 @@ namespace Datas.Models.DomainModels
         }
         public override bool IsExistAnother()
         {
-            return (Childrens!=null && Childrens.Any(o => o.DeleteStatus == Common.Enums.DeleteStatus.Normal)) || (Instrument!=null &&  Instrument.Any(o => o.DeleteStatus == Common.Enums.DeleteStatus.Normal));
+            return (Childrens!=null && Childrens.Any(o => o.DeleteStatus == Common.Enums.DeleteStatus.Normal))
+                || (Instruments != null
+                && Instruments.Any(o => o.DeleteStatus == Common.Enums.DeleteStatus.Normal));
         }
-        public InstrumentCategoryModel ToInstrumentCategoryModel()
+        public InstrumentCategoryModel ToModel()
         {
             var companyModel = new InstrumentCategoryModel
             {

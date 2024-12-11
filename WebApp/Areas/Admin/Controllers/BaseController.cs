@@ -374,7 +374,19 @@ namespace WebApp.Areas.Admin.Controllers
                                             Constants.PERMISSION_FESTIVAL_ADD,
                                             "fa fa-holly-berry");
                                 break;
-
+                            
+                            case Enums.GroupFunctionType.Landmark:
+                                AddMenuItem(ref lstMenu,
+                                    controllerName,
+                                    "Landmark",
+                                    group,
+                                    functionResult.Value,
+                                    url,
+                                    Constants.PERMISSION_LANDMARK_VIEW,
+                                    Constants.PERMISSION_LANDMARK_ADD,
+                                    "fa fa-landmark");
+                                 break;
+                                 
                             case Enums.GroupFunctionType.Travel:
                                 AddMenuItem(ref lstMenu,
                                             controllerName,

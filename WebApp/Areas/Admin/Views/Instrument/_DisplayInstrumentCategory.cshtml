@@ -1,4 +1,4 @@
-@model Datas.Models.ViewModels.InstrumentModel
+﻿@model Datas.Models.ViewModels.InstrumentModel
 <div class="form-group">
     <label asp-for="CategoryId" class="control-label"></label> <span class="text-danger">(*)</span>
     <select class="form-control" asp-for="CategoryId" asp-items="(IEnumerable<SelectListItem>)ViewBag.InstrumentCategories">

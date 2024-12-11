@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Common.Entity.Permission
 {
-    public class InstrumentPermission : PermissionInfo
+    public class LandmarkPermission : PermissionInfo
     {
         public bool IsShow { get; set; } = false;
     }

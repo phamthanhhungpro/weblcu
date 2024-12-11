@@ -72,6 +72,7 @@ namespace Common
             CustomsTradition = 24,
             Festival = 25,
             Travel = 26,
+            Landmark = 27,
         }
 
         public enum ErrorCode
