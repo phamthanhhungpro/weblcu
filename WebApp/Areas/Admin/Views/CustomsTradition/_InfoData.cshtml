@@ -1,6 +1,6 @@
 ﻿
 @using Common
-@model Datas.Models.ViewModels.NationalCostumeModel
+@model Datas.Models.ViewModels.CustomsTraditionModel
 <div class="row">
     <div class="col-md-6">
         <div class="form-group">
@@ -17,9 +17,6 @@
             <label asp-for="Event" class="control-label"></label>
             <input asp-for="Event" class="form-control" />
             <span asp-validation-for="Event" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            @Html.Partial("_DisplayNationalCostumeCategory")
         </div>
         <div class="form-group">
             @Html.Partial("_DisplayPeople")

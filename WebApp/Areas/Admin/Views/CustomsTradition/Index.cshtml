@@ -1,9 +1,9 @@
 ﻿@using Common
 @using Common.Entity.Permission
-@model IEnumerable<Datas.Models.DomainModels.NationalCostume>
+@model IEnumerable<Datas.Models.DomainModels.CustomsTradition>
 @{
-    ViewBag.Title = "Danh sách trang phục dân tộc";
-    var permission = (NationalCostumePermission)ViewBag.Permission;
+    ViewBag.Title = "Danh sách phong tục tập quán";
+    var permission = (CustomsTraditionPermission)ViewBag.Permission;
 }
 
 <!-- Content Wrapper. Contains page content -->
@@ -13,14 +13,14 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Danh sách trang phục dân tộc</h1>
+                    <h1 class="m-0">Danh sách phong tục tập quán</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item">
                             <a asp-area="Admin" asp-controller="Default" asp-action="Index">Trang chủ</a>
                         </li>
-                        <li class="breadcrumb-item active">Danh sách trang phục dân tộc</li>
+                        <li class="breadcrumb-item active">Danh sách phong tục tập quán</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -39,14 +39,6 @@
                                     <div class="row">
                                         <div class="col-md-10">
                                             <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label class="control-label">Lọc loại trang phục: </label>
-                                                        @Html.DropDownList("searchType", (IEnumerable<SelectListItem>
-                                                                 )ViewBag.NationalCostumeCategories, "---Chọn trang phục dân tộc---",
-                                                                 new { @class = "form-control" })
-                                                    </div>
-                                                </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label class="control-label">Lọc dân tộc: </label>
@@ -69,7 +61,7 @@
                                 </div>
                                 @if (permission.IsAdd)
                                 {
-                                    <div class="float-right"><a class="btn btn-primary" asp-area="Admin" asp-controller="NationalCostume" asp-action="Create">Thêm mới</a></div>
+                                    <div class="float-right"><a class="btn btn-primary" asp-area="Admin" asp-controller="CustomsTradition" asp-action="Create">Thêm mới</a></div>
                                 }
 
                             </div>
@@ -88,9 +80,6 @@
                                         </th>
                                         <th style="vertical-align:middle; text-align:center; width:10%">
                                             @Html.DisplayNameFor(model => model.People)
-                                        </th>
-                                        <th style="vertical-align:middle; text-align:center; width:25%">
-                                            @Html.DisplayNameFor(model => model.Material)
                                         </th>
                                         <th style="vertical-align:middle; text-align:center; width:10%">
                                             @Html.DisplayNameFor(model => model.Status)
@@ -121,7 +110,7 @@
     });
 
     function Search() {
-        var c = document.getElementById("searchType").value;
+        var c = document.getElementById("searchType")?.value;
         var p = document.getElementById("searchPeople").value;
         LoadAjaxNew(c,p);
     }
@@ -138,8 +127,8 @@
             },
             "pagingType": 'full_numbers', 'sPaging': 'pagination',
             "ajax": {
-                "url": "/Admin/NationalCostume/LoadAjaxNew",
-                "data": { category: category, people: people },
+                "url": "/Admin/CustomsTradition/LoadAjaxNew",
+                "data": { people: people },
                 "type": "GET",
                 "datatype": "json"
             },
@@ -154,7 +143,6 @@
                 },
                 { "data": "name" },
                 { "data": "people" },
-                { "data": "material" },
                 {
                     "data": "status", "bSortable": false, "mRender": function (data, display, alldata) {
                         var str = ""
@@ -174,8 +162,8 @@
                 {
                     "data": "id", "bSortable": false, "render": function (data, display, alldata) {
                         var str = "";
-                        str += "<a class='fas fa fa-edit' forceopen='1'  href='/Admin/NationalCostume/Edit?id=" + alldata.id + "'  style='margin-right:6px'> Sửa</a>"
-                        str += "<a class='fas fa fa-trash' data-ajax='true' data-ajax-confirm='Bạn có chắc chắn xóa trang phục dân tộc này? ' data-ajax-failure='OnFailure' data-ajax-loading='#ajax-loading' data-ajax-method='POST' data-ajax-success='onDelete(this,data)' data-toggle='tooltip' href='/Admin/NationalCostume/Delete?id=" + alldata.id + "' style='margin-right:6px' title='Xóa trang phục dân tộc'> Xóa</a>"
+                        str += "<a class='fas fa fa-edit' forceopen='1'  href='/Admin/CustomsTradition/Edit?id=" + alldata.id + "'  style='margin-right:6px'> Sửa</a>"
+                        str += "<a class='fas fa fa-trash' data-ajax='true' data-ajax-confirm='Bạn có chắc chắn xóa phong tục tập quán này? ' data-ajax-failure='OnFailure' data-ajax-loading='#ajax-loading' data-ajax-method='POST' data-ajax-success='onDelete(this,data)' data-toggle='tooltip' href='/Admin/CustomsTradition/Delete?id=" + alldata.id + "' style='margin-right:6px' title='Xóa phong tục tập quán'> Xóa</a>"
                         return str;
                     }
                 },

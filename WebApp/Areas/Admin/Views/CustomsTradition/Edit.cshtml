@@ -1,7 +1,7 @@
-﻿@model Datas.Models.ViewModels.NationalCostumeModel
+﻿@model Datas.Models.ViewModels.CustomsTraditionModel
 
 @{
-    ViewBag.Title = "Chỉnh sửa trang phục dân tộc";
+    ViewBag.Title = "Chỉnh sửa phong tục tập quán";
 }
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -10,7 +10,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Chỉnh sửa trang phục dân tộc</h1>
+                    <h1 class="m-0">Chỉnh sửa phong tục tập quán</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -18,10 +18,10 @@
                             <a asp-area="Admin" asp-controller="Default" asp-action="Index">Trang chủ</a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a asp-area="Admin" asp-controller="NationalCostume" asp-action="Index">Danh sách</a>
+                            <a asp-area="Admin" asp-controller="CustomsTradition" asp-action="Index">Danh sách</a>
                         </li>
                         <li class="breadcrumb-item active">
-                            Chỉnh sửa trang phục dân tộc
+                            Chỉnh sửa phong tục tập quán
                         </li>
                     </ol>
                 </div><!-- /.col -->
@@ -41,10 +41,10 @@
                                 <span>Trường có dấu <span class="text-danger">(*)</span> là bắt buộc</span>
                             </div>
                             <div class="float-right">
-                                <a asp-area="Admin" asp-controller="NationalCostume" asp-action="Index" class="btn btn-primary">Danh sách</a>
+                                <a asp-area="Admin" asp-controller="CustomsTradition" asp-action="Index" class="btn btn-primary">Danh sách</a>
                             </div>
                         </div>
-                        <form asp-action="Edit" asp-controller="NationalCostume" asp-area="Admin">
+                        <form asp-action="Edit" asp-controller="CustomsTradition" asp-area="Admin">
                             <div class="card-body">
                                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                 <input type="hidden" asp-for="Id" />

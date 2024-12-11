@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace Common.Entity.Permission
 {
-    public class ProduceToolPermission : PermissionInfo
+    public class CustomsTraditionPermission : PermissionInfo
     {
         public bool IsShow { get; set; } = false;
 
     }
-
 }

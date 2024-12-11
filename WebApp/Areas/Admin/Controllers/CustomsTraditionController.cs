@@ -16,11 +16,11 @@ namespace WebApp.Areas.Admin.Controllers
 {
     [Area(nameof(Admin))]
     [Route(nameof(Admin) + "/[controller]")]
-    public class CustomsTraditionController(LogService logService, ILogger<CustomsTraditionController> logger, AuthenUtils authenUtils, IWebHostEnvironment environment, NationalCostumeCategoryService nationalCostumeCategoryService, NationalCostumeService nationalCostumeService, PeopleService peopleService) : BaseController<CustomsTraditionController>(logger, authenUtils,logService)
+    public class CustomsTraditionController(LogService logService, ILogger<CustomsTraditionController> logger, 
+        AuthenUtils authenUtils, IWebHostEnvironment environment, CustomsTraditionService CustomsTraditionService, PeopleService peopleService) : BaseController<CustomsTraditionController>(logger, authenUtils,logService)
     {
         private IWebHostEnvironment _hostEnvironment = environment;
-        private NationalCostumeCategoryService _nationalCostumeCategoryService = nationalCostumeCategoryService;
-        private NationalCostumeService _nationalCostumeService = nationalCostumeService;
+        private CustomsTraditionService _CustomsTraditionService = CustomsTraditionService;
         private PeopleService _peopleService = peopleService;
 
         // GET: Admin/News
@@ -28,16 +28,16 @@ namespace WebApp.Areas.Admin.Controllers
         [Route("")]
         public ActionResult Index()
         {
-            var permission = new NationalCostumePermission();
-            if (CheckFunctionPermission(Constants.PERMISSION_NATIONAL_COSTUME_VIEW))
+            var permission = new CustomsTraditionPermission();
+            if (CheckFunctionPermission(Constants.PERMISSION_CUSTOMSTRADITION_VIEW))
             {
                 permission.IsView = true;
-                permission.IsAdd = CheckFunctionPermission(Constants.PERMISSION_NATIONAL_COSTUME_ADD);
-                permission.IsEdit = CheckFunctionPermission(Constants.PERMISSION_NATIONAL_COSTUME_EDIT);
-                permission.IsDelete = CheckFunctionPermission(Constants.PERMISSION_NATIONAL_COSTUME_DELETE);
-                permission.IsShow = CheckFunctionPermission(Constants.PERMISSION_NATIONAL_COSTUME_SHOW);
+                permission.IsAdd = CheckFunctionPermission(Constants.PERMISSION_CUSTOMSTRADITION_ADD);
+                permission.IsEdit = CheckFunctionPermission(Constants.PERMISSION_CUSTOMSTRADITION_EDIT);
+                permission.IsDelete = CheckFunctionPermission(Constants.PERMISSION_CUSTOMSTRADITION_DELETE);
+                permission.IsShow = CheckFunctionPermission(Constants.PERMISSION_CUSTOMSTRADITION_SHOW);
                 ViewBag.Permission = permission;
-                ViewBag.NationalCostumeCategories = GetListNationalCostumeCategory();
+                ViewBag.CustomsTraditionCategories = GetListCustomsTraditionCategory();
                 ViewBag.Peoples = GetListPeople(true);
                 return View();
             }
@@ -51,16 +51,16 @@ namespace WebApp.Areas.Admin.Controllers
         [Route("ImportExcel")]
         public ActionResult ImportExcel()
         {
-            if (CheckFunctionPermission(Constants.PERMISSION_NATIONAL_COSTUME_ADD))
+            if (CheckFunctionPermission(Constants.PERMISSION_CUSTOMSTRADITION_ADD))
             {
-                var permission = new NationalCostumePermission();
+                var permission = new CustomsTraditionPermission();
                 permission.IsView = true;
-                permission.IsAdd = CheckFunctionPermission(Constants.PERMISSION_NATIONAL_COSTUME_ADD);
-                permission.IsEdit = CheckFunctionPermission(Constants.PERMISSION_NATIONAL_COSTUME_EDIT);
-                permission.IsDelete = CheckFunctionPermission(Constants.PERMISSION_NATIONAL_COSTUME_DELETE);
-                permission.IsShow = CheckFunctionPermission(Constants.PERMISSION_NATIONAL_COSTUME_SHOW);
+                permission.IsAdd = CheckFunctionPermission(Constants.PERMISSION_CUSTOMSTRADITION_ADD);
+                permission.IsEdit = CheckFunctionPermission(Constants.PERMISSION_CUSTOMSTRADITION_EDIT);
+                permission.IsDelete = CheckFunctionPermission(Constants.PERMISSION_CUSTOMSTRADITION_DELETE);
+                permission.IsShow = CheckFunctionPermission(Constants.PERMISSION_CUSTOMSTRADITION_SHOW);
                 ViewBag.Permission = permission;
-                var excel = new NationalCostumeExcel(Log, _hostEnvironment.ContentRootPath, UserData.Id);
+                var excel = new GenericExcelHandler<CustomsTraditionModel>(Log, _hostEnvironment.ContentRootPath, UserData.Id);
                 excel.Read();
                 ViewBag.Date = excel.ImportDate;
                 ViewBag.FileName = excel.FileName;
@@ -77,16 +77,16 @@ namespace WebApp.Areas.Admin.Controllers
         [Route("ImportExcel")]
         public ActionResult ImportExcel(IFormFile file, bool save = false)
         {
-            if (CheckFunctionPermission(Constants.PERMISSION_NATIONAL_COSTUME_ADD))
+            if (CheckFunctionPermission(Constants.PERMISSION_CUSTOMSTRADITION_ADD))
             {
-                var permission = new NationalCostumePermission();
+                var permission = new CustomsTraditionPermission();
                 permission.IsView = true;
-                permission.IsAdd = CheckFunctionPermission(Constants.PERMISSION_NATIONAL_COSTUME_ADD);
-                permission.IsEdit = CheckFunctionPermission(Constants.PERMISSION_NATIONAL_COSTUME_EDIT);
-                permission.IsDelete = CheckFunctionPermission(Constants.PERMISSION_NATIONAL_COSTUME_DELETE);
-                permission.IsShow = CheckFunctionPermission(Constants.PERMISSION_NATIONAL_COSTUME_SHOW);
+                permission.IsAdd = CheckFunctionPermission(Constants.PERMISSION_CUSTOMSTRADITION_ADD);
+                permission.IsEdit = CheckFunctionPermission(Constants.PERMISSION_CUSTOMSTRADITION_EDIT);
+                permission.IsDelete = CheckFunctionPermission(Constants.PERMISSION_CUSTOMSTRADITION_DELETE);
+                permission.IsShow = CheckFunctionPermission(Constants.PERMISSION_CUSTOMSTRADITION_SHOW);
                 ViewBag.Permission = permission;
-                var excel = new NationalCostumeExcel(Log, _hostEnvironment.ContentRootPath, UserData.Id);
+                var excel = new GenericExcelHandler<CustomsTraditionModel>(Log, _hostEnvironment.ContentRootPath, UserData.Id);
                 excel.Read();
                 if (file != null && file.Length > 0)
                 {
@@ -131,10 +131,10 @@ namespace WebApp.Areas.Admin.Controllers
         }
 
 
-        private List<NationalCostumeModel> ReadExcelSheet(string filePath, bool isSave = false)
+        private List<CustomsTraditionModel> ReadExcelSheet(string filePath, bool isSave = false)
         {
             var countAdd = 0;
-            var lstData = new List<NationalCostumeModel>();
+            var lstData = new List<CustomsTraditionModel>();
             using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             {
                 using (SpreadsheetDocument doc = SpreadsheetDocument.Open(fs, false))
@@ -150,7 +150,7 @@ namespace WebApp.Areas.Admin.Controllers
                     {
                         var row = rows[i];
                         var cells = row.Elements<Cell>().ToList();
-                        var model = new NationalCostumeModel();
+                        var model = new CustomsTraditionModel();
                         model.Id = i;
                         bool isAdd = cells.Count > 0;
                         for (int j = 0; j < cells.Count; j++)
@@ -167,7 +167,7 @@ namespace WebApp.Areas.Admin.Controllers
                         {
                             if (isSave)
                             {
-                                if (_nationalCostumeService.AddByCheckName(model).IsSuccess())
+                                if (_CustomsTraditionService.AddByCheckName(model).IsSuccess())
                                     countAdd++;
                                 else
                                 {
@@ -189,19 +189,10 @@ namespace WebApp.Areas.Admin.Controllers
             return lstData;
         }
 
-        private void SetBaseValue(NationalCostumeModel model)
+        private void SetBaseValue(CustomsTraditionModel model)
         {
-            var type = model.GetCategoryName();
-            if (!string.IsNullOrEmpty(type))
-            {
-                var typeData = _nationalCostumeCategoryService.GetFirstOrDefault(o => o.Name.ToLower().Equals(type));
-                if (typeData != null)
-                {
-                    model.CategoryId = typeData.Id;
-                }
-            }
             var people = model.GetPeopleName();
-            if (!string.IsNullOrEmpty(type))
+            if (!string.IsNullOrEmpty(people))
             {
                 var peopleData = _peopleService.GetFirstOrDefault(o => o.Name.ToLower().Equals(people));
                 if (peopleData != null)
@@ -211,7 +202,7 @@ namespace WebApp.Areas.Admin.Controllers
             }
         }
 
-        private void SetData(NationalCostumeModel nationalCostumeModel, int index, Cell cellData, SharedStringTable sst)
+        private void SetData(CustomsTraditionModel CustomsTraditionModel, int index, Cell cellData, SharedStringTable sst)
         {
             var value = string.Empty;
             if ((cellData.DataType != null) && (cellData.DataType == CellValues.SharedString))
@@ -319,7 +310,7 @@ namespace WebApp.Areas.Admin.Controllers
             var startParam = HttpContext.Request.Query["start"].ToString();
             var lengthParam = HttpContext.Request.Query["length"].ToString();
             var orderDir = HttpContext.Request.Query["order[0][dir]"].ToString();
-            IEnumerable<NationalCostume> list = null;
+            IEnumerable<CustomsTradition> list = null;
             if (term != null)
             {
                 term = term.ToLower();
@@ -342,13 +333,10 @@ namespace WebApp.Areas.Admin.Controllers
                 int.TryParse(people, out p);
             var totalRecord = 0;
             var total = _peopleService.GetAll().Count();
-            if (CheckFunctionPermission(Constants.PERMISSION_NATIONAL_COSTUME_VIEW))
+            if (CheckFunctionPermission(Constants.PERMISSION_CUSTOMSTRADITION_VIEW))
             {
-                Expression<Func<NationalCostume, bool>> expression = o => o.DeleteStatus == Enums.DeleteStatus.Normal;
-                if (c > 0)
-                {
-                    expression = expression.AndAlso1(o => o.CategoryId.HasValue && o.CategoryId == c);
-                }
+                Expression<Func<CustomsTradition, bool>> expression = o => o.DeleteStatus == Enums.DeleteStatus.Normal;
+
                 if (p > 0)
                 {
                     expression = expression.AndAlso1(o => o.PeopleId.HasValue && o.PeopleId == p);
@@ -357,7 +345,7 @@ namespace WebApp.Areas.Admin.Controllers
                 {
                     expression = expression.AndAlso1(e => e.Content.ToLower().Contains(term) || e.Name.ToLower().Contains(term) || (!string.IsNullOrEmpty(e.Image360) && e.Image360.ToLower().Contains(term)) || (!string.IsNullOrEmpty(e.Shape) && e.Shape.ToLower().Contains(term)) || (!string.IsNullOrEmpty(e.CurrentStatus) && e.CurrentStatus.ToLower().Contains(term)) || (!string.IsNullOrEmpty(e.Classify) && e.Classify.ToLower().Contains(term)) || (!string.IsNullOrEmpty(e.Certification) && e.Certification.ToLower().Contains(term)) || (!string.IsNullOrEmpty(e.Material) && e.Material.ToLower().Contains(term)) || (!string.IsNullOrEmpty(e.Color) && e.Color.ToLower().Contains(term)) || (!string.IsNullOrEmpty(e.Size) && e.Size.ToLower().Contains(term)));
                 }
-                list = _nationalCostumeService.GetAll(expression);
+                list = _CustomsTraditionService.GetAll(expression);
                 totalRecord = list.Count();
             }
             var result = new
@@ -370,7 +358,7 @@ namespace WebApp.Areas.Admin.Controllers
             return jsonResult;
         }
 
-        private Object BindData(IEnumerable<NationalCostume> list, int start, int length)
+        private Object BindData(IEnumerable<CustomsTradition> list, int start, int length)
         {
             var result = new List<object>();
             var index = start + 1;
@@ -396,9 +384,9 @@ namespace WebApp.Areas.Admin.Controllers
         [Route("Create")]
         public ActionResult Create()
         {
-            if (CheckFunctionPermission(Constants.PERMISSION_NATIONAL_COSTUME_ADD))
+            if (CheckFunctionPermission(Constants.PERMISSION_CUSTOMSTRADITION_ADD))
             {
-                ViewBag.NationalCostumeCategories = GetListNationalCostumeCategory();
+                ViewBag.CustomsTraditionCategories = GetListCustomsTraditionCategory();
                 ViewBag.Peoples = GetListPeople(true);
                 return View();
             }
@@ -426,38 +414,11 @@ namespace WebApp.Areas.Admin.Controllers
             return lstData;
         }
 
-        private List<SelectListItem> GetListNationalCostumeCategory(int? nationalCostumeCategoryId = null)
+        private List<SelectListItem> GetListCustomsTraditionCategory(int? CustomsTraditionCategoryId = null)
         {
-            Expression<Func<NationalCostumeCategory, bool>> query = x => x.Status == Enums.ActiveStatus.Active && x.Parent == null;
-            if (nationalCostumeCategoryId.HasValue)
-            {
-                query = ExtensionMethod.AndAlso(query, x => x.Id != nationalCostumeCategoryId.Value);
-            }
             var companyData = new List<SelectListItem>();
-            foreach (var item in _nationalCostumeCategoryService.GetAll().Where(query.Compile()))
-            {
-                companyData.AddRange(CreateNationalCostumeCategory(item, nationalCostumeCategoryId));
-            }
 
             return companyData;
-        }
-
-        private List<SelectListItem> CreateNationalCostumeCategory(NationalCostumeCategory nationalCostumeCategory, int? newsCategoryId, string prefix = "")
-        {
-            var lstData = new List<SelectListItem>();
-            lstData.Add(new SelectListItem { Value = nationalCostumeCategory.Id.ToString(), Text = prefix + nationalCostumeCategory.Name });
-            foreach (var item in nationalCostumeCategory.Childrens)
-            {
-                if (newsCategoryId.HasValue && !item.Id.Equals(newsCategoryId.Value))
-                {
-                    lstData.AddRange(CreateNationalCostumeCategory(item, newsCategoryId, prefix + "---"));
-                }
-                else if (!newsCategoryId.HasValue)
-                {
-                    lstData.AddRange(CreateNationalCostumeCategory(item, newsCategoryId, prefix + "---"));
-                }
-            }
-            return lstData;
         }
 
 
@@ -474,20 +435,20 @@ namespace WebApp.Areas.Admin.Controllers
 
         [HttpPost]
         [Route("Create")]
-        public ActionResult Create(NationalCostumeModel model)
+        public ActionResult Create(CustomsTraditionModel model)
         {
-            if (CheckFunctionPermission(Constants.PERMISSION_NATIONAL_COSTUME_ADD))
+            if (CheckFunctionPermission(Constants.PERMISSION_CUSTOMSTRADITION_ADD))
             {
                 if (ModelState.IsValid)
                 {
-                    _nationalCostumeService.Add(model);
+                    _CustomsTraditionService.Add(model);
                     base.SuccessNotification("Thêm mới trang phục dân tộc thành công !");
                     return RedirectToAction(nameof(Index));
                 }
                 else
                 {
                     ModelState.AddModelError("", "Bạn chưa nhập đủ thông tin bắt buộc");
-                    ViewBag.NationalCostumeCategories = GetListNationalCostumeCategory();
+                    ViewBag.CustomsTraditionCategories = GetListCustomsTraditionCategory();
                     ViewBag.Peoples = GetListPeople(true);
                     return View(model);
                 }
@@ -503,15 +464,15 @@ namespace WebApp.Areas.Admin.Controllers
         [Route("Edit")]
         public ActionResult Edit(int id)
         {
-            if (CheckFunctionPermission(Constants.PERMISSION_NATIONAL_COSTUME_EDIT))
+            if (CheckFunctionPermission(Constants.PERMISSION_CUSTOMSTRADITION_EDIT))
             {
-                var data = _nationalCostumeService.GetById(id);
+                var data = _CustomsTraditionService.GetById(id);
 
                 if (data != null)
                 {
-                    ViewBag.NationalCostumeCategories = GetListNationalCostumeCategory();
+                    ViewBag.CustomsTraditionCategories = GetListCustomsTraditionCategory();
                     ViewBag.Peoples = GetListPeople(true);
-                    return View(data.ToNationalCostumeModel());
+                    return View(data.ToModel());
                 }
                 base.ErrorNotification("Không tồn tại trang phục dân tộc!");
                 return RedirectToAction(nameof(Index));
@@ -527,13 +488,13 @@ namespace WebApp.Areas.Admin.Controllers
         [HttpPost]
         [Route("Edit")]
         [AutoValidateAntiforgeryToken]
-        public ActionResult Edit(NationalCostumeModel model)
+        public ActionResult Edit(CustomsTraditionModel model)
         {
-            if (CheckFunctionPermission(Constants.PERMISSION_NATIONAL_COSTUME_EDIT))
+            if (CheckFunctionPermission(Constants.PERMISSION_CUSTOMSTRADITION_EDIT))
             {
                 if (ModelState.IsValid)
                 {
-                    var result = _nationalCostumeService.Update(model);
+                    var result = _CustomsTraditionService.Update(model);
                     if (result.IsSuccess())
                     {
                         base.SuccessNotification("Cập nhật trang phục thành công");
@@ -543,7 +504,7 @@ namespace WebApp.Areas.Admin.Controllers
                     {
                         base.ErrorNotification(result.Message);
                         ViewBag.Peoples = GetListPeople(true);
-                        ViewBag.NationalCostumeCategories = GetListNationalCostumeCategory();
+                        ViewBag.CustomsTraditionCategories = GetListCustomsTraditionCategory();
                         return View(model);
                     }
                 }
@@ -551,7 +512,7 @@ namespace WebApp.Areas.Admin.Controllers
                 {
                     ModelState.AddModelError("", "Bạn chưa nhập đủ thông tin bắt buộc");
                     ViewBag.Peoples = GetListPeople();
-                    ViewBag.NationalCostumeCategories = GetListNationalCostumeCategory();
+                    ViewBag.CustomsTraditionCategories = GetListCustomsTraditionCategory();
                     return View(model);
                 }
 
@@ -567,14 +528,14 @@ namespace WebApp.Areas.Admin.Controllers
         public ActionResult EditExcel(int id)
         {
 
-            if (CheckFunctionPermission(Constants.PERMISSION_NATIONAL_COSTUME_ADD))
+            if (CheckFunctionPermission(Constants.PERMISSION_CUSTOMSTRADITION_ADD))
             {
                 var excel = new PeopleExcel(Log, _hostEnvironment.ContentRootPath, UserData.Id);
                 excel.Read();
                 var data = excel.Datas.FirstOrDefault(o => o.Id == id);
                 if (data != null)
                 {
-                    ViewBag.NationalCostumeCategories = GetListNationalCostumeCategory();
+                    ViewBag.CustomsTraditionCategories = GetListCustomsTraditionCategory();
                     ViewBag.Peoples = GetListPeople(true);
                     return View(data);
                 }
@@ -591,17 +552,17 @@ namespace WebApp.Areas.Admin.Controllers
 
         [HttpPost]
         [Route("EditExcel")]
-        public ActionResult EditExcel(NationalCostumeModel model, int idExcel)
+        public ActionResult EditExcel(CustomsTraditionModel model, int idExcel)
         {
-            if (CheckFunctionPermission(Constants.PERMISSION_NATIONAL_COSTUME_EDIT))
+            if (CheckFunctionPermission(Constants.PERMISSION_CUSTOMSTRADITION_EDIT))
             {
                 if (ModelState.IsValid)
                 {
                     model.Id = 0;
-                    var result = _nationalCostumeService.Add(model);
+                    var result = _CustomsTraditionService.Add(model);
                     if (result.IsSuccess())
                     {
-                        var excel = new NationalCostumeExcel(Log, _hostEnvironment.ContentRootPath, UserData.Id);
+                        var excel = new GenericExcelHandler<CustomsTraditionModel>(Log, _hostEnvironment.ContentRootPath, UserData.Id);
                         excel.Read();
                         var data = excel.Datas.FirstOrDefault(o => o.Id == idExcel);
                         if (data != null)
@@ -616,14 +577,14 @@ namespace WebApp.Areas.Admin.Controllers
                     {
                         base.ErrorNotification(result.Message);
                         ViewBag.Peoples = GetListPeople(true);
-                        ViewBag.NationalCostumeCategories = GetListNationalCostumeCategory();
+                        ViewBag.CustomsTraditionCategories = GetListCustomsTraditionCategory();
                         return View(model);
                     }
                 }
                 else
                 {
                     ViewBag.Peoples = GetListPeople(true);
-                    ViewBag.NationalCostumeCategories = GetListNationalCostumeCategory();
+                    ViewBag.CustomsTraditionCategories = GetListCustomsTraditionCategory();
                     return View(model);
                 }
 
@@ -640,10 +601,10 @@ namespace WebApp.Areas.Admin.Controllers
         public JsonResult Delete(int id)
         {
             MessageResult message = new MessageResult();
-            if (CheckFunctionPermission(Constants.PERMISSION_NATIONAL_COSTUME_DELETE))
+            if (CheckFunctionPermission(Constants.PERMISSION_CUSTOMSTRADITION_DELETE))
             {
                 message = new MessageResult();
-                message = _nationalCostumeService.Delete(id);
+                message = _CustomsTraditionService.Delete(id);
                 if (message.IsSuccess())
                 {
                     message.Message = "Xóa thành công trang phục dân tộc";
@@ -662,7 +623,7 @@ namespace WebApp.Areas.Admin.Controllers
         public JsonResult DeleteExcel(int id)
         {
             MessageResult message = new MessageResult();
-            if (CheckFunctionPermission(Constants.PERMISSION_NATIONAL_COSTUME_ADD))
+            if (CheckFunctionPermission(Constants.PERMISSION_CUSTOMSTRADITION_ADD))
             {
                 message = new MessageResult();
                 var excel = new PeopleExcel(Log, _hostEnvironment.ContentRootPath, UserData.Id);
