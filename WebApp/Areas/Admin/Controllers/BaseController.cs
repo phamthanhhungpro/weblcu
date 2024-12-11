@@ -313,9 +313,20 @@ namespace WebApp.Areas.Admin.Controllers
                                             group,
                                             functionResult.Value,
                                             url,
-                                            Constants.PERMISSION_INSTRUCMENT_CATEGORY_VIEW,
-                                            Constants.PERMISSION_INSTRUCMENT_CATEGORY_ADD,
+                                            Constants.PERMISSION_INSTRUMENT_CATEGORY_VIEW,
+                                            Constants.PERMISSION_INSTRUMENT_CATEGORY_ADD,
                                             "fa fa-music");
+                                break;
+                            case Enums.GroupFunctionType.Instrument:
+                                AddMenuItem(ref lstMenu,
+                                    controllerName,
+                                    "Instrument",
+                                    group,
+                                    functionResult.Value,
+                                    url,
+                                    Constants.PERMISSION_INSTRUMENT_VIEW,
+                                    Constants.PERMISSION_INSTRUMENT_ADD,
+                                    "fa fa-music");
                                 break;
                             case Enums.GroupFunctionType.ProduceToolCategory:
                                 AddMenuItem(ref lstMenu,

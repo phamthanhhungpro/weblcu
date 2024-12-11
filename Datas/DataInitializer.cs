@@ -280,6 +280,17 @@ namespace Datas
                     ("Sửa", Common.Constants.PERMISSION_INSTRUMENT_CATEGORY_EDIT),
                     ("Xóa", Common.Constants.PERMISSION_INSTRUMENT_CATEGORY_DELETE)
                 ]);
+            
+            AddGroupFunctionWithFunctions(
+                Enums.GroupFunctionType.Instrument,
+                "Nhạc cụ",
+                7,
+                [
+                    ("Xem", Common.Constants.PERMISSION_INSTRUMENT_VIEW),
+                    ("Thêm mới", Common.Constants.PERMISSION_INSTRUMENT_ADD),
+                    ("Sửa", Common.Constants.PERMISSION_INSTRUMENT_EDIT),
+                    ("Xóa", Common.Constants.PERMISSION_INSTRUMENT_DELETE)
+                ]);
 
             AddGroupFunctionWithFunctions(
                 Enums.GroupFunctionType.ProduceToolCategory,
