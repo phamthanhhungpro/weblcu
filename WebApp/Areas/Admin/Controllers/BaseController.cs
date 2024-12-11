@@ -328,6 +328,17 @@ namespace WebApp.Areas.Admin.Controllers
                                             Constants.PERMISSION_PRODUCETOOL_CATEGORY_ADD,
                                             "fa fa-wrench");
                                 break;
+                            case Enums.GroupFunctionType.ProduceTool:
+                                AddMenuItem(ref lstMenu,
+                                            controllerName,
+                                            "ProduceTool",
+                                            group,
+                                            functionResult.Value,
+                                            url,
+                                            Constants.PERMISSION_PRODUCETOOL_VIEW,
+                                            Constants.PERMISSION_PRODUCETOOL_ADD,
+                                            "fa fa-wrench");
+                                break;
                             default:
                                 break;
 
