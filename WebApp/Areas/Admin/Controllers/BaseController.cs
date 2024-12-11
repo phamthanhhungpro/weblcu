@@ -374,6 +374,18 @@ namespace WebApp.Areas.Admin.Controllers
                                             Constants.PERMISSION_FESTIVAL_ADD,
                                             "fa fa-holly-berry");
                                 break;
+
+                            case Enums.GroupFunctionType.Travel:
+                                AddMenuItem(ref lstMenu,
+                                            controllerName,
+                                            "Travel",
+                                            group,
+                                            functionResult.Value,
+                                            url,
+                                            Constants.PERMISSION_TRAVEL_VIEW,
+                                            Constants.PERMISSION_TRAVEL_ADD,
+                                            "fa fa-plane");
+                                break;
                             default:
                                 break;
 
