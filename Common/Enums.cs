@@ -68,6 +68,7 @@ namespace Common
             InstrucmentCategory,
             ProduceToolCategory,
             ProduceTool,
+            CustomsTradition
         }
 
         public enum ErrorCode

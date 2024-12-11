@@ -302,6 +302,18 @@ namespace Datas
                     ("Sửa", Common.Constants.PERMISSION_PRODUCETOOL_EDIT),
                     ("Xóa", Common.Constants.PERMISSION_PRODUCETOOL_DELETE)
                 ]);
+
+
+            AddGroupFunctionWithFunctions(
+                Enums.GroupFunctionType.CustomsTradition,
+                "Phong tục tập quán",
+                9,
+                [
+                    ("Xem", Common.Constants.PERMISSION_CUSTOMSTRADITION_VIEW),
+                    ("Thêm mới", Common.Constants.PERMISSION_CUSTOMSTRADITION_ADD),
+                    ("Sửa", Common.Constants.PERMISSION_CUSTOMSTRADITION_EDIT),
+                    ("Xóa", Common.Constants.PERMISSION_CUSTOMSTRADITION_DELETE)
+                ]);
         }
 
         private void AddGroupFunctionWithFunctions(Enums.GroupFunctionType type, string groupName, int order, List<(string Name, string FunctionCode)> functions)
