@@ -271,14 +271,14 @@ namespace Datas
         private void UpdateV8()
         {
             AddGroupFunctionWithFunctions(
-                Enums.GroupFunctionType.InstrucmentCategory,
+                Enums.GroupFunctionType.InstrumentCategory,
                 "Danh mục nhạc cụ",
                 26,
                 [
-                    ("Xem", Common.Constants.PERMISSION_INSTRUCMENT_CATEGORY_VIEW),
-                    ("Thêm mới", Common.Constants.PERMISSION_INSTRUCMENT_CATEGORY_ADD),
-                    ("Sửa", Common.Constants.PERMISSION_INSTRUCMENT_CATEGORY_EDIT),
-                    ("Xóa", Common.Constants.PERMISSION_INSTRUCMENT_CATEGORY_DELETE)
+                    ("Xem", Common.Constants.PERMISSION_INSTRUMENT_CATEGORY_VIEW),
+                    ("Thêm mới", Common.Constants.PERMISSION_INSTRUMENT_CATEGORY_ADD),
+                    ("Sửa", Common.Constants.PERMISSION_INSTRUMENT_CATEGORY_EDIT),
+                    ("Xóa", Common.Constants.PERMISSION_INSTRUMENT_CATEGORY_DELETE)
                 ]);
 
             AddGroupFunctionWithFunctions(

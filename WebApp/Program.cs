@@ -45,6 +45,9 @@ builder.Services.AddTransient<ProduceToolCategoryService>();
 builder.Services.AddTransient<ProduceToolService>();
 builder.Services.AddTransient<CustomsTraditionService>();
 
+builder.Services.AddTransient<InstrumentCategoryService>();
+builder.Services.AddTransient<InstrumentService>();
+
 builder.Services.AddSingleton<AdminSettingUtils>();
 builder.Services.AddSingleton<SettingUtils>();
 builder.Services.AddSingleton<MailUtils>();

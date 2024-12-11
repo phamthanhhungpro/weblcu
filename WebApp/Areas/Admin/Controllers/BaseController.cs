@@ -306,10 +306,10 @@ namespace WebApp.Areas.Admin.Controllers
                                 if (languageMenu != null)
                                     lstMenu.Add(languageMenu);
                                 break;
-                            case Enums.GroupFunctionType.InstrucmentCategory:
+                            case Enums.GroupFunctionType.InstrumentCategory:
                                 AddMenuItem(ref lstMenu,
                                             controllerName,
-                                            "InstrucmentCategory",
+                                            "InstrumentCategory",
                                             group,
                                             functionResult.Value,
                                             url,

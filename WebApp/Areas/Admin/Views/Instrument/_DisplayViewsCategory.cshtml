@@ -1,0 +1,9 @@
+﻿@model Datas.Models.ViewModels.InstrumentModel
+<div class="form-group">
+    <label asp-for="CategoryId" class="control-label"></label> <span class="text-danger">(*)</span>
+    <select class="form-control" asp-for="CategoryId" asp-items="(IEnumerable<SelectListItem>)ViewBag.InstrumentsCategories">
+        <option value="">---Chọn chuyên mục---</option>
+    </select>
+    <input type="hidden" asp-for="CategoryId" />
+    <span asp-validation-for="CategoryId" class="text-danger"></span>
+</div>

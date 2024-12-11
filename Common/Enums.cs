@@ -65,7 +65,8 @@ namespace Common
             Language,
             File,
             Log,
-            InstrucmentCategory,
+            InstrumentCategory,
+            Instrument,
             ProduceToolCategory,
             ProduceTool,
             CustomsTradition

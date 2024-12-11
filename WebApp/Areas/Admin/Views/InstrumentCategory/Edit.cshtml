@@ -1,4 +1,4 @@
-﻿@model Datas.Models.ViewModels.NewsCategoryModel
+﻿@model Datas.Models.ViewModels.InstrumentCategoryModel
 
 @{
     ViewBag.Title = "Chỉnh sửa danh mục tin tức";
@@ -18,7 +18,7 @@
                             <a asp-area="Admin" asp-controller="Default" asp-action="Index">Trang chủ</a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a asp-area="Admin" asp-controller="NewsCategory" asp-action="Index">Danh sách</a>
+                            <a asp-area="Admin" asp-controller="InstrumentCategory" asp-action="Index">Danh sách</a>
                         </li>
                         <li class="breadcrumb-item active">
                             Chỉnh sửa danh mục tin tức
@@ -41,10 +41,10 @@
                                 <span>Trường có dấu <span class="text-danger">(*)</span> là bắt buộc</span>
                             </div>
                             <div class="float-right">
-                                <a asp-area="Admin" asp-controller="NewsCategory" asp-action="Index" class="btn btn-primary">Danh sách</a>
+                                <a asp-area="Admin" asp-controller="InstrumentCategory" asp-action="Index" class="btn btn-primary">Danh sách</a>
                             </div>
                         </div>
-                        <form asp-action="Edit" asp-controller="NewsCategory" asp-area="Admin">
+                        <form asp-action="Edit" asp-controller="InstrumentCategory" asp-area="Admin">
                             <div class="card-body">
                                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                 <input type="hidden" asp-for="Id" />
