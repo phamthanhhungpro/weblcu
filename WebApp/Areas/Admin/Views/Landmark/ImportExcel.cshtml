@@ -1,9 +1,11 @@
-﻿@using Common
+﻿@* @using Common
 @using Common.Entity.Permission
-@model IEnumerable<Datas.Models.DomainModels.InstrumentCategory>
+@model IEnumerable<Datas.Models.ViewModels.NationalCostumeModel>
 @{
-    ViewBag.Title = "Danh sách danh mục nhạc cụ";
-    var permission = (PermissionInfo)ViewBag.Permission;
+    ViewBag.Title = "Danh sách dân tộc import excel";
+    var permission = (NationalCostumePermission)ViewBag.Permission;
+    var date = (DateTime)ViewBag.Date;
+    var fileName = (string)ViewBag.FileName;
 }
 
 <!-- Content Wrapper. Contains page content -->
@@ -13,14 +15,14 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Danh sách danh mục nhạc cụ</h1>
+                    <h1 class="m-0">Danh sách trang phục dân tộc</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item">
                             <a asp-area="Admin" asp-controller="Default" asp-action="Index">Trang chủ</a>
                         </li>
-                        <li class="breadcrumb-item active">Danh sách danh mục nhạc cụ</li>
+                        <li class="breadcrumb-item active">Danh sách trang phục dân tộc</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -37,30 +39,68 @@
                         @if (permission.IsAdd)
                         {
                             <div class="card-header">
-                                <div class="float-right"><a class="btn btn-primary" asp-area="Admin" asp-controller="InstrumentCategory" asp-action="Create">Thêm mới</a></div>
+                                <div class="float-right"><a class="btn btn-primary" asp-area="Admin" asp-controller="NationalCostume" asp-action="Create">Thêm mới</a></div>
                             </div>
                         }
                         <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label " for="Title">Tải file mẫu:</label>
+                                            <a class="form-control text-box single-line" href="~/Content/template/H_Example.xlsx"><span class="fas fa fa-file-excel"></span> File mẫu dùng import trang phục dân tộc</a>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label " for="Title">Ngày import:</label>
+                                            <div class="form-control text-box single-line" disabled="true">@date</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    @using (Html.BeginForm("ImportExcel", "NationalCostume", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                    {
+                                        <div class="form-group">
+                                            <label class="control-label " for="Title">Import mới:</label>
+                                            <input class="form-control text-box single-line" style="padding-top:3px;" type="file" name="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label " for="save">Tự động lưu:</label>
+                                            <input id="save" name="save" type="checkbox" value="true">
+                                        </div>
+                                        <button class="btn btn-success" type="submit">Tải lên</button>
+                                        if (ViewBag.CountAdd != null)
+                                        {
+                                            <label class="control-label" style="color:red;"> Đã lưu thành công @ViewBag.CountAdd trang phục dân tộc.</label>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                            <div>
+                                <label class="control-label"> Danh sách chưa lưu: </label>
+                            </div>
+                            <div>
+
+                            </div>
                             <table class="table table-bordered table-hover" id="list-company">
                                 <thead>
                                     <tr style="text-align:center">
                                         <th style="vertical-align:middle; text-align:center; width:5%">
                                             Số TT
                                         </th>
-                                        <th style="vertical-align:middle; text-align:center; width:20%">
-                                            @Html.DisplayNameFor(model => model.Name)
-                                        </th>
-                                        <th style="vertical-align:middle; text-align:center; width:25%">
-                                            @Html.DisplayNameFor(model => model.KeyWord)
+                                        <th style="vertical-align:middle; text-align:center; width:10%">
+                                            Ảnh đại diện
                                         </th>
                                         <th style="vertical-align:middle; text-align:center; width:10%">
-                                            @Html.DisplayNameFor(model => model.Details)
+                                            Tên trang phục dân tộc
                                         </th>
                                         <th style="vertical-align:middle; text-align:center; width:10%">
-                                            @Html.DisplayNameFor(model => model.Status)
+                                            Dân tộc
                                         </th>
-                                        <th style="vertical-align:middle; text-align:center; width:20%">
-                                            Trực thuộc đơn vị
+                                        <th style="vertical-align:middle; text-align:center; width:30%">
+                                            Chất liệu
+                                        </th>
+                                        <th style="vertical-align:middle; text-align:center; width:10%">
+                                           Trạng thái
                                         </th>
                                         <th style="vertical-align:middle; text-align:center; width:10%">
                                             Thao tác
@@ -78,13 +118,16 @@
                                                 @index
                                             </td>
                                             <td style="vertical-align:middle;text-align:left">
-                                                @Html.DisplayFor(modelItem => item.Name)
+                                                <img src='@item.Image0' width='100' />
                                             </td>
                                             <td style="vertical-align:middle;text-align:left">
-                                                @Html.DisplayFor(modelItem => item.KeyWord)
+                                                @Html.DisplayFor(modelItem => item.Name)
                                             </td>
                                             <td style="vertical-align:middle;text-align:center">
-                                                @Html.DisplayFor(modelItem => item.Details)
+                                                @item.GetPeopleName()
+                                            </td>
+                                            <td style="vertical-align:middle;text-align:center">
+                                                @Html.DisplayFor(modelItem => item.Material)
                                             </td>
                                             <td style="vertical-align:middle;text-align:center">
                                                 @{
@@ -98,30 +141,25 @@
                                                     }
                                                 }
                                             </td>
-                                            <td style="vertical-align:middle;text-align:left">
-
-                                                @Html.DisplayFor(modelItem => item.Parent.Name)
-
-                                            </td>
                                             <td style="vertical-align:middle;text-align:center">
                                                 @if (permission.IsEdit)
                                                 {
-                                                    <a asp-action="Edit" asp-route-id="@item.Id"  asp-area="Admin" class="fas fa fa-edit" style="margin-right:6px" data_toggle="tooltip" title="Chỉnh sửa thông tin danh mục tin tức">Edit</a>
+                                                    <a asp-action="EditExcel" asp-route-id="@item.Id" asp-area="Admin" class="fas fa fa-edit" style="margin-right:6px" data_toggle="tooltip" title="Chỉnh sửa dữ liệu">Thêm</a>
                                                 }
                                                 @if (permission.IsDelete)
                                                 {
                                                     <a class="fas fa fa-trash"
                                                        data-ajax="true"
-                                                       data-ajax-confirm="Bạn có muốn xóa danh mục tin tức này?"
+                                                       data-ajax-confirm="Bạn có muốn xóa dữ liệu này?"
                                                        data-ajax-failure="OnFailure"
                                                        data-ajax-loading="#ajax-loading"
                                                        data-ajax-method="POST"
                                                        data-ajax-success="onDelete(@item.Id,data)"
                                                        data-toggle="tooltip"
-                                                       asp-action="Delete" asp-route-id="@item.Id" asp-area="Admin" asp-controller="InstrumentCategory"
+                                                       asp-action="DeleteExcel" asp-route-id="@item.Id" asp-area="Admin" asp-controller="NationalCostume"
                                                        style="margin-right:6px"
                                                        title=""
-                                                       data-original-title="Xóa danh mục tin tức khỏi danh sách"> Xóa</a>
+                                                       data-original-title="Xóa dữ liệu danh sách"> Xóa</a>
                                                 }
                                             </td>
                                         </tr>
@@ -132,7 +170,7 @@
                         </div>
                     </div>
                 </div>
-              
+
             </div>
             <!-- /.row (main row) -->
         </div><!-- /.container-fluid -->
@@ -140,6 +178,8 @@
     <!-- /.content -->
 </div>
 <script type="text/javascript">
+
+
     $(function () {
         $("#list-company").dataTable({
             "language": {
@@ -147,6 +187,7 @@
             }
         });
     });
+
     function onDelete(id, data) {
         if (data.code == 0) {
             $(".row-" + id + "").hide();
@@ -157,3 +198,4 @@
         }
     };
 </script>
+ *@

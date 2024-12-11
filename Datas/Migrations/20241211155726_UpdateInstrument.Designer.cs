@@ -4,6 +4,7 @@ using Datas;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Datas.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20241211155726_UpdateInstrument")]
+    partial class UpdateInstrument
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,9 +51,6 @@ namespace Datas.Migrations
                     b.Property<int?>("InstrumentId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("LandmarkId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -79,8 +79,6 @@ namespace Datas.Migrations
                     b.HasIndex("FestivalId");
 
                     b.HasIndex("InstrumentId");
-
-                    b.HasIndex("LandmarkId");
 
                     b.HasIndex("NationalCostumeId");
 
@@ -821,126 +819,6 @@ namespace Datas.Migrations
                     b.HasIndex("ParentId");
 
                     b.ToTable("InstrumentCategories");
-                });
-
-            modelBuilder.Entity("Datas.Models.DomainModels.Landmark", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Certification")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Classify")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Code")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Color")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Cost")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CurrentStatus")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("DeleteStatus")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Details")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Event")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Image0")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Image1")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Image2")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Image3")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Image360")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Image4")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Image5")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Image6")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Image7")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Image8")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Image9")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("InsertDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDisplay")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Material")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("PeopleId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Shape")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Size")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Technique")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("Top")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("UpdateDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Url")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("View")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PeopleId");
-
-                    b.ToTable("Landmarks");
                 });
 
             modelBuilder.Entity("Datas.Models.DomainModels.Language", b =>
@@ -1962,10 +1840,6 @@ namespace Datas.Migrations
                         .WithMany("Attachments")
                         .HasForeignKey("InstrumentId");
 
-                    b.HasOne("Datas.Models.DomainModels.Landmark", "Landmark")
-                        .WithMany("Attachments")
-                        .HasForeignKey("LandmarkId");
-
                     b.HasOne("Datas.Models.DomainModels.NationalCostume", "NationalCostume")
                         .WithMany("Attachments")
                         .HasForeignKey("NationalCostumeId");
@@ -1983,8 +1857,6 @@ namespace Datas.Migrations
                     b.Navigation("Festival");
 
                     b.Navigation("Instrument");
-
-                    b.Navigation("Landmark");
 
                     b.Navigation("NationalCostume");
 
@@ -2068,15 +1940,6 @@ namespace Datas.Migrations
                         .HasForeignKey("ParentId");
 
                     b.Navigation("Parent");
-                });
-
-            modelBuilder.Entity("Datas.Models.DomainModels.Landmark", b =>
-                {
-                    b.HasOne("Datas.Models.DomainModels.People", "People")
-                        .WithMany()
-                        .HasForeignKey("PeopleId");
-
-                    b.Navigation("People");
                 });
 
             modelBuilder.Entity("Datas.Models.DomainModels.Location", b =>
@@ -2322,11 +2185,6 @@ namespace Datas.Migrations
                     b.Navigation("Childrens");
 
                     b.Navigation("Instruments");
-                });
-
-            modelBuilder.Entity("Datas.Models.DomainModels.Landmark", b =>
-                {
-                    b.Navigation("Attachments");
                 });
 
             modelBuilder.Entity("Datas.Models.DomainModels.NationalCostume", b =>

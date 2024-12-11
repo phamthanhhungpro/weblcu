@@ -1,9 +1,9 @@
 ﻿@using Common
 @using Common.Entity.Permission
-@model IEnumerable<Datas.Models.DomainModels.Instrument>
+@model IEnumerable<Datas.Models.DomainModels.Landmark>
 @{
-    ViewBag.Title = "Danh sách nhạc cụ";
-    var permission = (InstrumentPermission)ViewBag.Permission;
+    ViewBag.Title = "Danh sách điểm đến di tích, danh lam";
+    var permission = (LandmarkPermission)ViewBag.Permission;
 }
 
 <!-- Content Wrapper. Contains page content -->
@@ -13,14 +13,14 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Danh sách nhạc cụ</h1>
+                    <h1 class="m-0">Danh sách điểm đến di tích, danh lam</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item">
                             <a asp-area="Admin" asp-controller="Default" asp-action="Index">Trang chủ</a>
                         </li>
-                        <li class="breadcrumb-item active">Danh sách nhạc cụ</li>
+                        <li class="breadcrumb-item active">Danh sách điểm đến di tích, danh lam</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -39,14 +39,6 @@
                                     <div class="row">
                                         <div class="col-md-10">
                                             <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label class="control-label">Lọc loại công cụ: </label>
-                                                        @Html.DropDownList("searchType", (IEnumerable<SelectListItem>
-                                                                 )ViewBag.InstrumentCategories, "---Chọn loại nhạc cụ---",
-                                                                 new { @class = "form-control" })
-                                                    </div>
-                                                </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label class="control-label">Lọc dân tộc: </label>
@@ -69,7 +61,7 @@
                                 </div>
                                 @if (permission.IsAdd)
                                 {
-                                    <div class="float-right"><a class="btn btn-primary" asp-area="Admin" asp-controller="Instrument" asp-action="Create">Thêm mới</a></div>
+                                    <div class="float-right"><a class="btn btn-primary" asp-area="Admin" asp-controller="Landmark" asp-action="Create">Thêm mới</a></div>
                                 }
 
                             </div>
@@ -88,9 +80,6 @@
                                         </th>
                                         <th style="vertical-align:middle; text-align:center; width:10%">
                                             @Html.DisplayNameFor(model => model.People)
-                                        </th>
-                                        <th style="vertical-align:middle; text-align:center; width:25%">
-                                            @Html.DisplayNameFor(model => model.Material)
                                         </th>
                                         <th style="vertical-align:middle; text-align:center; width:10%">
                                             @Html.DisplayNameFor(model => model.Status)
@@ -121,7 +110,7 @@
     });
 
     function Search() {
-        var c = document.getElementById("searchType").value;
+        var c = document.getElementById("searchType")?.value;
         var p = document.getElementById("searchPeople").value;
         LoadAjaxNew(c,p);
     }
@@ -138,8 +127,8 @@
             },
             "pagingType": 'full_numbers', 'sPaging': 'pagination',
             "ajax": {
-                "url": "/Admin/Instrument/LoadAjaxNew",
-                "data": { category: category, people: people },
+                "url": "/Admin/Landmark/LoadAjaxNew",
+                "data": { people: people },
                 "type": "GET",
                 "datatype": "json"
             },
@@ -154,7 +143,6 @@
                 },
                 { "data": "name" },
                 { "data": "people" },
-                { "data": "material" },
                 {
                     "data": "status", "bSortable": false, "mRender": function (data, display, alldata) {
                         var str = ""
@@ -174,8 +162,8 @@
                 {
                     "data": "id", "bSortable": false, "render": function (data, display, alldata) {
                         var str = "";
-                        str += "<a class='fas fa fa-edit' forceopen='1'  href='/Admin/Instrument/Edit?id=" + alldata.id + "'  style='margin-right:6px'> Sửa</a>"
-                        str += "<a class='fas fa fa-trash' data-ajax='true' data-ajax-confirm='Bạn có chắc chắn xóa nhạc cụ này? ' data-ajax-failure='OnFailure' data-ajax-loading='#ajax-loading' data-ajax-method='POST' data-ajax-success='onDelete(this,data)' data-toggle='tooltip' href='/Admin/Instrument/Delete?id=" + alldata.id + "' style='margin-right:6px' title='Xóa nhạc cụ'> Xóa</a>"
+                        str += "<a class='fas fa fa-edit' forceopen='1'  href='/Admin/Landmark/Edit?id=" + alldata.id + "'  style='margin-right:6px'> Sửa</a>"
+                        str += "<a class='fas fa fa-trash' data-ajax='true' data-ajax-confirm='Bạn có chắc chắn xóa điểm đến di tích, danh lam này? ' data-ajax-failure='OnFailure' data-ajax-loading='#ajax-loading' data-ajax-method='POST' data-ajax-success='onDelete(this,data)' data-toggle='tooltip' href='/Admin/Landmark/Delete?id=" + alldata.id + "' style='margin-right:6px' title='Xóa điểm đến di tích, danh lam'> Xóa</a>"
                         return str;
                     }
                 },

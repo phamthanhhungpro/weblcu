@@ -22,6 +22,12 @@ namespace Datas.Models.DomainModels
 
         [Display(Name = "Trang phục")]
         public virtual NationalCostume NationalCostume { set; get; }
+        
+        [Display(Name = "Nhạc cụ")]
+        public int? InstrumentId { set; get; }
+
+        [Display(Name = "Nhạc cụ")]
+        public virtual Instrument? Instrument { set; get; }
 
         [Display(Name = "Công cụ sản xuất")]
         public int? ProduceToolId { set; get; }
@@ -40,6 +46,12 @@ namespace Datas.Models.DomainModels
 
         [Display(Name = "Lễ hội văn hóa")]
         public virtual Festival? Festival { set; get; }
+        
+        [Display(Name = "Di tích, danh lam")]
+        public int? LandmarkId { set; get; }
+
+        [Display(Name = "Di tích, danh lam")]
+        public virtual Landmark? Landmark { set; get; }
 
         public AttachmentModel ToAttachmentModel()
         {
@@ -53,7 +65,9 @@ namespace Datas.Models.DomainModels
                 NationalCostumeId = NationalCostumeId,
                 ProduceToolId = ProduceToolId,
                 CustomsTraditionId = CustomsTraditionId,
-                FestivalId = FestivalId
+                FestivalId = FestivalId,
+                InstrumentId = InstrumentId,
+                LandmarkId = LandmarkId
             };
             
             return data;

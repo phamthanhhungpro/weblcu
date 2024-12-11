@@ -48,6 +48,7 @@ builder.Services.AddTransient<FestivalService>();
 
 builder.Services.AddTransient<InstrumentCategoryService>();
 builder.Services.AddTransient<InstrumentService>();
+builder.Services.AddTransient<LandmarkService>();
 
 builder.Services.AddSingleton<AdminSettingUtils>();
 builder.Services.AddSingleton<SettingUtils>();
