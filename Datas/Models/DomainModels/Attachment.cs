@@ -31,6 +31,12 @@ namespace Datas.Models.DomainModels
         [Display(Name = "Trang phục")]
         public virtual NationalCostume NationalCostume { set; get; }
 
+        [Display(Name = "Trang phục")]
+        public int? ProduceToolId { set; get; }
+
+        [Display(Name = "Công cụ sản xuất")]
+        public virtual ProduceTool ProduceTool { set; get; }
+
         public AttachmentModel ToAttachmentModel()
         {
             var data = new AttachmentModel
@@ -40,7 +46,8 @@ namespace Datas.Models.DomainModels
                 Name = Name,
                 Status = Status,
                 PeopleId = PeopleId,
-                NationalCostumeId = NationalCostumeId
+                NationalCostumeId = NationalCostumeId,
+                ProduceToolId = ProduceToolId,
             };
             
             return data;

@@ -34,24 +34,63 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        @if (permission.IsAdd)
-                        {
                             <div class="card-header">
-                                <div class="float-right"><a class="btn btn-primary" asp-area="Admin" asp-controller="ProduceTool" asp-action="Create">Thêm mới</a></div>
+                                <div class="float-left col-md-8">
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="control-label">Lọc loại công cụ: </label>
+                                                        @Html.DropDownList("searchType", (IEnumerable<SelectListItem>
+                                                                 )ViewBag.ProduceToolCategories, "---Chọn loại công cụ sản xuất---",
+                                                                 new { @class = "form-control" })
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="control-label">Lọc dân tộc: </label>
+                                                        @Html.DropDownList("searchPeople", (IEnumerable<SelectListItem>
+                                                                 )ViewBag.Peoples, "---Chọn dân tộc---",
+                                                                 new { @class = "form-control" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label>Thao tác:</label>
+                                                <div class="clearfix"></div>
+                                                <button class="btn btn-success form-control" onclick="Search()"><i class="fa fa-search"></i> Tìm</button>
+                                            </div>
+                                        </div>      
+                                    </div>
+                                </div>
+                                @if (permission.IsAdd)
+                                {
+                                    <div class="float-right"><a class="btn btn-primary" asp-area="Admin" asp-controller="ProduceTool" asp-action="Create">Thêm mới</a></div>
+                                }
+
                             </div>
-                        }
                         <div class="card-body">
-                            <table class="table table-bordered table-hover" id="list-ProduceTool">
+                            <table class="table table-bordered table-hover" id="list-news">
                                 <thead>
                                     <tr style="text-align:center">
                                         <th style="vertical-align:middle; text-align:center; width:5%">
                                             Số TT
                                         </th>
-                                        <th style="vertical-align:middle; text-align:center; width:35%">
+                                        <th style="vertical-align:middle; text-align:center; width:10%">
+                                            @Html.DisplayNameFor(model => model.Image0)
+                                        </th>
+                                        <th style="vertical-align:middle; text-align:center; width:15%">
                                             @Html.DisplayNameFor(model => model.Name)
                                         </th>
-                                        <th style="vertical-align:middle; text-align:center; width:30%">
-                                            @Html.DisplayNameFor(model => model.Details)
+                                        <th style="vertical-align:middle; text-align:center; width:10%">
+                                            @Html.DisplayNameFor(model => model.People)
+                                        </th>
+                                        <th style="vertical-align:middle; text-align:center; width:25%">
+                                            @Html.DisplayNameFor(model => model.Material)
                                         </th>
                                         <th style="vertical-align:middle; text-align:center; width:10%">
                                             @Html.DisplayNameFor(model => model.Status)
@@ -75,12 +114,20 @@
     <!-- /.content -->
 </div>
 <script type="text/javascript">
+    var table;
+
     $(function () {
-        LoadAjaxNew();
+        LoadAjaxNew(0,0);
     });
 
-    function LoadAjaxNew() {
-        var table = $('#list-ProduceTool').DataTable({
+    function Search() {
+        var c = document.getElementById("searchType").value;
+        var p = document.getElementById("searchPeople").value;
+        LoadAjaxNew(c,p);
+    }
+
+    function LoadAjaxNew(category, people) {
+        table = $('#list-news').DataTable({
             "processing": true,
             "serverSide": true,
             "orderMulti": false,
@@ -91,16 +138,23 @@
             },
             "pagingType": 'full_numbers', 'sPaging': 'pagination',
             "ajax": {
-                "url": "/Admin/ProduceTool/LoadAjaxData",
-                //"data": { type: "25" },
+                "url": "/Admin/ProduceTool/LoadAjaxNew",
+                "data": { category: category, people: people },
                 "type": "GET",
                 "datatype": "json"
             },
             "bSortable": false,
             "columns": [
                 { "data": "index", "width": "5%" },
+                {
+                    "data": "image", "bSortable": false, "mRender": function (data, display, alldata) {
+                        var str = "<img src='" + data + "' width='100'>";
+                        return str;
+                    }
+                },
                 { "data": "name" },
-                { "data": "details" },
+                { "data": "people" },
+                { "data": "material" },
                 {
                     "data": "status", "bSortable": false, "mRender": function (data, display, alldata) {
                         var str = ""
@@ -115,15 +169,15 @@
                                 str = "<span class='label label-danger'>Ngừng hoạt động</span>";
                         }
                         return str;
-                    }, "width": "30%"
+                    }
                 },
                 {
                     "data": "id", "bSortable": false, "render": function (data, display, alldata) {
                         var str = "";
                         str += "<a class='fas fa fa-edit' forceopen='1'  href='/Admin/ProduceTool/Edit?id=" + alldata.id + "'  style='margin-right:6px'> Sửa</a>"
-                        str += "<a class='fas fa fa-trash' data-ajax='true' data-ajax-confirm='Bạn có chắc chắn xóa công cụ này? ' data-ajax-failure='OnFailure' data-ajax-loading='#ajax-loading' data-ajax-method='POST' data-ajax-success='onDelete(this,data)' data-toggle='tooltip' href='/Admin/ProduceTool/Delete?id=" + alldata.id + "' style='margin-right:6px' title='Xóa công cụ sản xuất'> Xóa</a>"
+                        str += "<a class='fas fa fa-trash' data-ajax='true' data-ajax-confirm='Bạn có chắc chắn xóa công cụ sản xuất này? ' data-ajax-failure='OnFailure' data-ajax-loading='#ajax-loading' data-ajax-method='POST' data-ajax-success='onDelete(this,data)' data-toggle='tooltip' href='/Admin/ProduceTool/Delete?id=" + alldata.id + "' style='margin-right:6px' title='Xóa công cụ sản xuất'> Xóa</a>"
                         return str;
-                    }, "width": "15%"
+                    }
                 },
             ],
         });

@@ -131,6 +131,7 @@ namespace Common
         public static readonly string PERMISSION_PRODUCETOOL_ADD = "PERMISSION_PRODUCETOOL_ADD";
         public static readonly string PERMISSION_PRODUCETOOL_EDIT = "PERMISSION_PRODUCETOOL_EDIT";
         public static readonly string PERMISSION_PRODUCETOOL_DELETE = "PERMISSION_PRODUCETOOL_DELETE";
+        public static readonly string PERMISSION_PRODUCETOOL_SHOW = "PERMISSION_PRODUCETOOL_SHOW";
 
     }
 }

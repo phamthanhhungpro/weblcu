@@ -1,32 +1,38 @@
-﻿using Datas.Models.DomainModels;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Datas.Models.ViewModels
 {
-    public class ProduceToolModel : AbstractData
+    public class ProduceToolModel : BaseModelViewModel
     {
-        [Required(ErrorMessage = "Bạn cần nhập tên")]
-        [Display(Name = "Tên")]
-        public string Name { get; set; } = string.Empty;
 
-        [Display(Name = "Từ khóa")]
-        public string? KeyWord { get; set; }
+        private string _categoryName = string.Empty;
+        private string _peopleName = string.Empty;
 
-        [Display(Name = "Mô tả")]
-        [DataType(DataType.MultilineText)]
-        public string? Details { set; get; }
+        [Required(ErrorMessage = "Bạn cần nhập tên công cụ sản xuất")]
+        [Display(Name = "Tên công cụ sản xuất")]
+        public string Name { set; get; }
 
-        [Display(Name = "Hình minh họa")]
-        public string? Image { get; set; } = string.Empty;
-
-        [Display(Name = "Chuyên mục")]
+        [Display(Name = "Loại công cụ sản xuất")]
         public int? CategoryId { get; set; }
 
-        [Display(Name = "Chuyên mục")]
-        public virtual ProduceToolCategory? Category { get; set; }
+        public void SetCategoryName(string data)
+        {
+            _categoryName = data;
+        }
 
-        public int View { get; set; }
+        public string GetCategoryName()
+        {
+            return _categoryName;
+        }
 
-        public string? Url { set; get; }
+        public void SetPeopleName(string data)
+        {
+            _peopleName = data;
+        }
+
+        public string GetPeopleName()
+        {
+            return _peopleName;
+        }
     }
 }

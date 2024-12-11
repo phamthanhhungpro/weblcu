@@ -5,31 +5,17 @@ using System.Text.RegularExpressions;
 
 namespace Datas.Models.DomainModels
 {
-    public class ProduceTool : AbstractData
+    public class ProduceTool : BaseModel
     {
-        [Required(ErrorMessage = "Bạn cần nhập tên")]
-        [Display(Name = "Tên")]
-        public string Name { get; set; } = string.Empty;
+        [Required(ErrorMessage = "Bạn cần nhập tên công cụ sản xuất")]
+        [Display(Name = "Tên công cụ sản xuất")]
+        public string Name { set; get; }
 
-        [Display(Name = "Từ khóa")]
-        public string? KeyWord { get; set; }
+        [Display(Name = "Loại công cụ sản xuất")]
+        public int? CategoryId { get; set; }
+        [Display(Name = "Loại công cụ sản xuất")]
+        public virtual ProduceToolCategory Category { get; set; }
 
-        [Display(Name = "Mô tả")]
-        [DataType(DataType.MultilineText)]
-        public string? Details { set; get; }
-
-        [Display(Name = "Hình minh họa")]
-        public string? Image { get; set; } = string.Empty;
-
-        [Display(Name = "Chuyên mục")]
-        public  int? CategoryId { get; set; }
-
-        [Display(Name = "Chuyên mục")]
-        public virtual ProduceToolCategory? Category { get; set; }
-
-        public int View { get; set; }
-
-        public string? Url { set; get; }
 
         public void ReNewUrl()
         {
@@ -39,43 +25,124 @@ namespace Datas.Models.DomainModels
             Url = newUrl;
         }
 
-        public void SetNewData(ProduceTool data)
+        public void SetNewData(ProduceTool model)
         {
+            Name = model.Name;
+            Code = model.Code;
+            IsDisplay = model.IsDisplay;
+            Top = model.Top;
+            Image360 = model.Image360;
+            Shape = model.Shape;
+            CurrentStatus = model.CurrentStatus;
+            Technique = model.Technique;
+            Classify = model.Classify;
+            Certification = model.Certification;
+            Material = model.Material;
+            Cost = model.Cost;
+            Color = model.Color;
+            Size = model.Size;
+            Details = model.Details;
+            Content = model.Content;
+            Status = model.Status;
+            Image0 = model.Image0;
+            Image1 = model.Image1;
+            Image2 = model.Image2;
+            Image3 = model.Image3;
+            Image4 = model.Image4;
+            Image5 = model.Image5;
+            Image6 = model.Image6;
+            Image7 = model.Image7;
+            Image8 = model.Image8;
+            Image9 = model.Image9;
 
-            Name = data.Name;
-            Image = data.Image;
-            KeyWord = data.KeyWord;
-            Details = data.Details;
-            Status = data.Status;
-            Category = data.Category;
-            CategoryId = data.CategoryId;
         }
-        public void SetNewData(ProduceToolModel data)
+
+        public void SetNewData(ProduceToolModel model)
         {
-            Name = data.Name;
-            Image = data.Image;
-            KeyWord = data.KeyWord;
-            Details = data.Details;
-            Status = data.Status;
-            Category = data.Category;
-            CategoryId = data.CategoryId;
+            Name = model.Name;
+            Code = model.Code;
+            IsDisplay = model.IsDisplay;
+            Top = model.Top;
+            Image360 = model.Image360;
+            Shape = model.Shape;
+            CurrentStatus = model.CurrentStatus;
+            Technique = model.Technique;
+            Classify = model.Classify;
+            Certification = model.Certification;
+            Material = model.Material;
+            Cost = model.Cost;
+            Color = model.Color;
+            Size = model.Size;
+            Details = model.Details;
+            Content = model.Content;
+            Status = model.Status;
+            Image0 = model.Image0;
+            Image1 = model.Image1;
+            Image2 = model.Image2;
+            Image3 = model.Image3;
+            Image4 = model.Image4;
+            Image5 = model.Image5;
+            Image6 = model.Image6;
+            Image7 = model.Image7;
+            Image8 = model.Image8;
+            Image9 = model.Image9;
         }
 
         public ProduceToolModel ToModel()
         {
-            var model = new ProduceToolModel
+            var data = new ProduceToolModel
             {
                 Id = Id,
-                Image = Image,
                 Name = Name,
-                KeyWord = KeyWord,
+                Code = Code,
+                IsDisplay = IsDisplay,
+                Top = Top,
+                Image360 = Image360,
+                Shape = Shape,
+                CurrentStatus = CurrentStatus,
+                Technique = Technique,
+                Classify = Classify,
+                Certification = Certification,
+                Material = Material,
+                Cost = Cost,
+                Color = Color,
+                Size = Size,
                 Details = Details,
+                Content = Content,
                 Status = Status,
-                View = View,
+                Image0 = Image0,
+                Image1 = Image1,
+                Image2 = Image2,
+                Image3 = Image3,
+                Image4 = Image4,
+                Image5 = Image5,
+                Image6 = Image6,
+                Image7 = Image7,
+                Image8 = Image8,
+                Image9 = Image9,
                 Url = Url,
-                CategoryId = CategoryId
+                CategoryId = CategoryId,
+                PeopleId = PeopleId
             };
-            return model;
+
+            if (People != null)
+            {
+                data.SetPeopleName(People.Name);
+            }
+
+            var lstAttach = new List<AttachmentModel>();
+            if (Attachments != null)
+            {
+                foreach (var item in Attachments)
+                {
+                    if (item.DeleteStatus == Enums.DeleteStatus.Normal)
+                    {
+                        lstAttach.Add(item.ToAttachmentModel());
+                    }
+                }
+            }
+            data.Attachments = lstAttach;
+            return data;
         }
     }
 }
