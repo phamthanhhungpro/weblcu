@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Datas.Models.DomainModels;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -20,5 +21,12 @@ namespace Datas.Models.ViewModels
 
         [Display(Name = "Trang phục")]
         public int? NationalCostumeId { set; get; }
+
+        [Display(Name = "Công cụ sản xuất")]
+        public int? ProduceToolId { set; get; }
+
+        [Display(Name = "Phong tục tập quán")]
+        public int? CustomsTraditionId { set; get; }
+
     }
 }

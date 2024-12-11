@@ -5,109 +5,17 @@ using System.Text.RegularExpressions;
 
 namespace Datas.Models.DomainModels
 {
-    public class NationalCostume : AbstractData
+    public class ProduceTool : BaseModel
     {
-        [Required(ErrorMessage = "Bạn cần nhập tên trang phục dân tộc")]
-        [Display(Name = "Tên trang phục dân tộc")]
+        [Required(ErrorMessage = "Bạn cần nhập tên công cụ sản xuất")]
+        [Display(Name = "Tên công cụ sản xuất")]
         public string Name { set; get; }
 
-        [Display(Name = "Ký hiệu, mã số ảnh")]
-        public string? Code { set; get; }
-
-        [Display(Name = "Dịp sử dụng")]
-        public string? Event { set; get; }
-
-        [Display(Name = "Hiển thị")]
-        public bool IsDisplay { set; get; } = true;
-
-        [Display(Name = "Lên đầu")]
-        public bool Top { get; set; } = false;
-
-        [Display(Name = "Ảnh 360")]
-        public string? Image360 { set; get; }
-
-        [Display(Name = "Phụ kiện đi kèm")]
-        public string? Shape { set; get; }
-
-        [Display(Name = "Hiện trạng")]
-        public string? CurrentStatus { set; get; }
-
-        [Display(Name = "Kỹ thuật chế tác")]
-        public string? Technique { set; get; }
-
-        [Display(Name = "Ý nghĩa văn hóa")]
-        public string? Classify { set; get; }
-
-        [Display(Name = "Nguyên tắc thiết kế")]
-        public string? Certification { set; get; }
-
-        [Display(Name = "Nguyên liệu sử dụng")]
-        public string? Material { set; get; }
-
-        [Display(Name = "Giá cả trung bình")]
-        public string? Cost { set; get; }
-
-        [Display(Name = "Màu sắc")]
-        public string? Color { set; get; }
-
-        [Display(Name = "Kích thước")]
-        [DataType(DataType.MultilineText)]
-        public string? Size { set; get; }
-
-        [Display(Name = "Mô tả ngắn")]
-        [DataType(DataType.MultilineText)]
-        public string? Details { set; get; }
-
-        [Display(Name = "Nội dung bài viết")]
-        public string Content { get; set; }
-
-        [Display(Name = "Loại trang phục dân tộc")]
+        [Display(Name = "Loại công cụ sản xuất")]
         public int? CategoryId { get; set; }
-        [Display(Name = "Loại trang phục dân tộc")]
-        public virtual NationalCostumeCategory Category { get; set; }
+        [Display(Name = "Loại công cụ sản xuất")]
+        public virtual ProduceToolCategory Category { get; set; }
 
-        [Display(Name = "Dân tộc")]
-        public int? PeopleId { get; set; }
-        [Display(Name = "Dân tộc")]
-        public virtual People People { get; set; }
-
-
-        [Display(Name = "Ảnh đại diện")]
-        public string? Image0 { set; get; }
-
-        [Display(Name = "Ảnh")]
-        public string? Image1 { set; get; }
-
-        [Display(Name = "Ảnh")]
-        public string? Image2 { set; get; }
-
-        [Display(Name = "Ảnh")]
-        public string? Image3 { set; get; }
-
-        [Display(Name = "Ảnh")]
-        public string? Image4 { set; get; }
-
-        [Display(Name = "Ảnh")]
-        public string? Image5 { set; get; }
-
-        [Display(Name = "Ảnh")]
-        public string? Image6 { set; get; }
-
-        [Display(Name = "Ảnh")]
-        public string? Image7 { set; get; }
-
-        [Display(Name = "Ảnh")]
-        public string? Image8 { set; get; }
-
-        [Display(Name = "Ảnh")]
-        public string? Image9 { set; get; }
-
-        public string Url { set; get; }
-
-        public int View { set; get; } = 0;
-
-        [Display(Name = "Tài liệu")]
-        public virtual ICollection<Attachment> Attachments { set; get; }
 
         public void ReNewUrl()
         {
@@ -117,7 +25,7 @@ namespace Datas.Models.DomainModels
             Url = newUrl;
         }
 
-        public void SetNewData(NationalCostume model)
+        public void SetNewData(ProduceTool model)
         {
             Name = model.Name;
             Code = model.Code;
@@ -146,10 +54,10 @@ namespace Datas.Models.DomainModels
             Image7 = model.Image7;
             Image8 = model.Image8;
             Image9 = model.Image9;
-           
+
         }
 
-        public void SetNewData(NationalCostumeModel model)
+        public void SetNewData(ProduceToolModel model)
         {
             Name = model.Name;
             Code = model.Code;
@@ -180,14 +88,9 @@ namespace Datas.Models.DomainModels
             Image9 = model.Image9;
         }
 
-        //public override bool IsExistAnother()
-        //{
-        //    return Artifactes.Any(o => o.DeleteStatus == Enums.DeleteStatus.Normal);
-        //}
-
-        public NationalCostumeModel ToNationalCostumeModel()
+        public ProduceToolModel ToModel()
         {
-            var data = new NationalCostumeModel
+            var data = new ProduceToolModel
             {
                 Id = Id,
                 Name = Name,
@@ -218,13 +121,15 @@ namespace Datas.Models.DomainModels
                 Image8 = Image8,
                 Image9 = Image9,
                 Url = Url,
-                CategoryId =CategoryId,
+                CategoryId = CategoryId,
                 PeopleId = PeopleId
             };
-            if(People !=null)
+
+            if (People != null)
             {
                 data.SetPeopleName(People.Name);
             }
+
             var lstAttach = new List<AttachmentModel>();
             if (Attachments != null)
             {

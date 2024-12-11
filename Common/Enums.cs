@@ -66,7 +66,10 @@ namespace Common
             File,
             Log,
             InstrumentCategory,
-            Instrument
+            Instrument,
+            ProduceToolCategory,
+            ProduceTool,
+            CustomsTradition
         }
 
         public enum ErrorCode

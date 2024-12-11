@@ -1,13 +1,5 @@
 ﻿using Datas.Models.ViewModels;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Drawing;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Datas.Models.DomainModels
 {
@@ -31,6 +23,18 @@ namespace Datas.Models.DomainModels
         [Display(Name = "Trang phục")]
         public virtual NationalCostume NationalCostume { set; get; }
 
+        [Display(Name = "Công cụ sản xuất")]
+        public int? ProduceToolId { set; get; }
+
+        [Display(Name = "Công cụ sản xuất")]
+        public virtual ProduceTool? ProduceTool { set; get; }
+
+        [Display(Name = "Phong tục tập quán")]
+        public int? CustomsTraditionId { set; get; }
+
+        [Display(Name = "Phong tục tập quán")]
+        public virtual CustomsTradition? CustomsTradition { set; get; }
+
         public AttachmentModel ToAttachmentModel()
         {
             var data = new AttachmentModel
@@ -40,7 +44,9 @@ namespace Datas.Models.DomainModels
                 Name = Name,
                 Status = Status,
                 PeopleId = PeopleId,
-                NationalCostumeId = NationalCostumeId
+                NationalCostumeId = NationalCostumeId,
+                ProduceToolId = ProduceToolId,
+                CustomsTraditionId = CustomsTraditionId
             };
             
             return data;

@@ -4,6 +4,7 @@ using Datas;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Datas.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20241211060343_Edit-ProduceTool-1")]
+    partial class EditProduceTool1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,9 +35,6 @@ namespace Datas.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("CustomsTraditionId")
-                        .HasColumnType("int");
 
                     b.Property<int>("DeleteStatus")
                         .HasColumnType("int");
@@ -64,8 +64,6 @@ namespace Datas.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CustomsTraditionId");
 
                     b.HasIndex("NationalCostumeId");
 
@@ -156,126 +154,6 @@ namespace Datas.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Contacts");
-                });
-
-            modelBuilder.Entity("Datas.Models.DomainModels.CustomsTradition", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Certification")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Classify")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Code")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Color")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Cost")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CurrentStatus")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("DeleteStatus")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Details")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Event")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Image0")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Image1")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Image2")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Image3")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Image360")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Image4")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Image5")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Image6")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Image7")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Image8")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Image9")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("InsertDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDisplay")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Material")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("PeopleId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Shape")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Size")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Technique")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("Top")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("UpdateDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Url")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("View")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PeopleId");
-
-                    b.ToTable("CustomsTraditions");
                 });
 
             modelBuilder.Entity("Datas.Models.DomainModels.Department", b =>
@@ -512,113 +390,6 @@ namespace Datas.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Images");
-                });
-
-            modelBuilder.Entity("Datas.Models.DomainModels.Instrument", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("CategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Content")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("DeleteStatus")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Details")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Image")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("InsertDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("KeyWord")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("PostDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("Top")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("UpdateDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Url")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("View")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CategoryId");
-
-                    b.ToTable("Instruments");
-                });
-
-            modelBuilder.Entity("Datas.Models.DomainModels.InstrumentCategory", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("DeleteStatus")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Details")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Image")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("InsertDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("KeyWord")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("ParentId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("UpdateDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Url")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("View")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ParentId");
-
-                    b.ToTable("InstrumentCategories");
                 });
 
             modelBuilder.Entity("Datas.Models.DomainModels.Language", b =>
@@ -1628,10 +1399,6 @@ namespace Datas.Migrations
 
             modelBuilder.Entity("Datas.Models.DomainModels.Attachment", b =>
                 {
-                    b.HasOne("Datas.Models.DomainModels.CustomsTradition", "CustomsTradition")
-                        .WithMany("Attachments")
-                        .HasForeignKey("CustomsTraditionId");
-
                     b.HasOne("Datas.Models.DomainModels.NationalCostume", "NationalCostume")
                         .WithMany("Attachments")
                         .HasForeignKey("NationalCostumeId");
@@ -1643,8 +1410,6 @@ namespace Datas.Migrations
                     b.HasOne("Datas.Models.DomainModels.ProduceTool", "ProduceTool")
                         .WithMany("Attachments")
                         .HasForeignKey("ProduceToolId");
-
-                    b.Navigation("CustomsTradition");
 
                     b.Navigation("NationalCostume");
 
@@ -1660,15 +1425,6 @@ namespace Datas.Migrations
                         .HasForeignKey("ParentId");
 
                     b.Navigation("Parent");
-                });
-
-            modelBuilder.Entity("Datas.Models.DomainModels.CustomsTradition", b =>
-                {
-                    b.HasOne("Datas.Models.DomainModels.People", "People")
-                        .WithMany()
-                        .HasForeignKey("PeopleId");
-
-                    b.Navigation("People");
                 });
 
             modelBuilder.Entity("Datas.Models.DomainModels.Department", b =>
@@ -1695,24 +1451,6 @@ namespace Datas.Migrations
                         .IsRequired();
 
                     b.Navigation("Group");
-                });
-
-            modelBuilder.Entity("Datas.Models.DomainModels.Instrument", b =>
-                {
-                    b.HasOne("Datas.Models.DomainModels.InstrumentCategory", "Category")
-                        .WithMany("Instrument")
-                        .HasForeignKey("CategoryId");
-
-                    b.Navigation("Category");
-                });
-
-            modelBuilder.Entity("Datas.Models.DomainModels.InstrumentCategory", b =>
-                {
-                    b.HasOne("Datas.Models.DomainModels.InstrumentCategory", "Parent")
-                        .WithMany("Childrens")
-                        .HasForeignKey("ParentId");
-
-                    b.Navigation("Parent");
                 });
 
             modelBuilder.Entity("Datas.Models.DomainModels.Location", b =>
@@ -1919,11 +1657,6 @@ namespace Datas.Migrations
                     b.Navigation("Departments");
                 });
 
-            modelBuilder.Entity("Datas.Models.DomainModels.CustomsTradition", b =>
-                {
-                    b.Navigation("Attachments");
-                });
-
             modelBuilder.Entity("Datas.Models.DomainModels.Department", b =>
                 {
                     b.Navigation("Childrens");
@@ -1941,13 +1674,6 @@ namespace Datas.Migrations
             modelBuilder.Entity("Datas.Models.DomainModels.GroupFunction", b =>
                 {
                     b.Navigation("Functions");
-                });
-
-            modelBuilder.Entity("Datas.Models.DomainModels.InstrumentCategory", b =>
-                {
-                    b.Navigation("Childrens");
-
-                    b.Navigation("Instrument");
                 });
 
             modelBuilder.Entity("Datas.Models.DomainModels.NationalCostume", b =>

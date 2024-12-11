@@ -1,0 +1,9 @@
+﻿@model Datas.Models.ViewModels.CustomsTraditionModel
+<div class="form-group">
+    <label asp-for="PeopleId" class="control-label"></label> <span class="text-danger">(*)</span>
+    <select class="form-control" asp-for="PeopleId" asp-items="(IEnumerable<SelectListItem>)ViewBag.Peoples">
+        <option value="">---Chọn dân tộc---</option>
+    </select>
+    <input type="hidden" asp-for="PeopleId" />
+    <span asp-validation-for="PeopleId" class="text-danger"></span>
+</div>

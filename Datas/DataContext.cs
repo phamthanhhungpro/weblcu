@@ -1,5 +1,6 @@
 ﻿using Castle.Components.DictionaryAdapter.Xml;
 using Datas.Models.DomainModels;
+using Datas.Models.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -44,6 +45,9 @@ namespace Datas
 
         public DbSet<PeopleConfirm> PeopleConfirmes { set; get; }
         public DbSet<LogData> Logs { set; get; }
+        public DbSet<ProduceToolCategory> ProduceToolCategories { set; get; }
+        public DbSet<ProduceTool> ProduceTools { set; get; }
+        public DbSet<CustomsTradition> CustomsTraditions { set; get; }
 
 
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

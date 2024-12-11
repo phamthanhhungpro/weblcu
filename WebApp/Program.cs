@@ -41,6 +41,9 @@ builder.Services.AddTransient<DistrictService>();
 builder.Services.AddTransient<LanguageService>();
 builder.Services.AddTransient<FileService>();
 builder.Services.AddTransient<LogService>();
+builder.Services.AddTransient<ProduceToolCategoryService>();
+builder.Services.AddTransient<ProduceToolService>();
+builder.Services.AddTransient<CustomsTraditionService>();
 
 builder.Services.AddTransient<InstrumentCategoryService>();
 builder.Services.AddTransient<InstrumentService>();
