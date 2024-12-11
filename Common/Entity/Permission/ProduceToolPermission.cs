@@ -8,5 +8,7 @@ namespace Common.Entity.Permission
 {
     public class ProduceToolPermission : PermissionInfo
     {
+        public bool IsShow { get; set; } = false;
+
     }
 }

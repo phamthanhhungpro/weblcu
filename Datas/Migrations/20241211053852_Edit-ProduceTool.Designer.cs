@@ -4,6 +4,7 @@ using Datas;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Datas.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20241211053852_Edit-ProduceTool")]
+    partial class EditProduceTool
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1130,9 +1133,6 @@ namespace Datas.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PeopleId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Shape")
                         .HasColumnType("nvarchar(max)");
 
@@ -1161,8 +1161,6 @@ namespace Datas.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
-
-                    b.HasIndex("PeopleId");
 
                     b.ToTable("ProduceTools");
                 });
@@ -1404,15 +1402,13 @@ namespace Datas.Migrations
                         .WithMany("Attachments")
                         .HasForeignKey("PeopleId");
 
-                    b.HasOne("Datas.Models.DomainModels.ProduceTool", "ProduceTool")
+                    b.HasOne("Datas.Models.DomainModels.ProduceTool", null)
                         .WithMany("Attachments")
                         .HasForeignKey("ProduceToolId");
 
                     b.Navigation("NationalCostume");
 
                     b.Navigation("People");
-
-                    b.Navigation("ProduceTool");
                 });
 
             modelBuilder.Entity("Datas.Models.DomainModels.Company", b =>
@@ -1552,13 +1548,7 @@ namespace Datas.Migrations
                         .WithMany("ProduceTools")
                         .HasForeignKey("CategoryId");
 
-                    b.HasOne("Datas.Models.DomainModels.People", "People")
-                        .WithMany()
-                        .HasForeignKey("PeopleId");
-
                     b.Navigation("Category");
-
-                    b.Navigation("People");
                 });
 
             modelBuilder.Entity("Datas.Models.DomainModels.ProduceToolCategory", b =>

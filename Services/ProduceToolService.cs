@@ -1,7 +1,7 @@
 ﻿using Common.Entity;
+using Datas;
 using Datas.Models.DomainModels;
 using Datas.Models.ViewModels;
-using Datas;
 using Microsoft.EntityFrameworkCore;
 
 namespace Services
@@ -69,6 +69,76 @@ namespace Services
             {
                 var data = new ProduceTool();
                 data.SetNewData(entity);
+                if (entity.CategoryId.HasValue)
+                {
+                    var peopleType = Context.ProduceToolCategories.FirstOrDefault(x => x.Id == entity.CategoryId);
+                    if (peopleType != null)
+                    {
+                        data.Category = peopleType;
+                    }
+                }
+                if (entity.PeopleId.HasValue)
+                {
+                    var people = Context.Peoples.FirstOrDefault(x => x.Id == entity.PeopleId);
+                    if (people != null)
+                    {
+                        data.People = people;
+                    }
+                }
+                if (entity.Attachments != null)
+                {
+                    foreach (var item in entity.Attachments)
+                    {
+                        if (!string.IsNullOrEmpty(item.Path))
+                        {
+                            Context.Attachments.Add(new Attachment
+                            {
+                                ProduceTool = data,
+                                Path = item.Path,
+                                Name = item.Name
+                            });
+                        }
+                    }
+                }
+                SetUrl(data);
+                Context.ProduceTools.Add(data);
+                Context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                result.Code = Common.Enums.ErrorCode.Error;
+                result.Message = ex.Message;
+            }
+            return result;
+        }
+
+        public MessageResult AddByCheckName(ProduceToolModel entity)
+        {
+            var result = new MessageResult();
+            try
+            {
+                var data = new ProduceTool();
+                var type = entity.GetCategoryName();
+                if (!string.IsNullOrEmpty(type))
+                {
+                    var typeData = Context.ProduceToolCategories.FirstOrDefault(o => o.Name.ToLower().Equals(type) && o.DeleteStatus == Common.Enums.DeleteStatus.Normal);
+                    if (typeData != null)
+                    {
+                        data.Category = typeData;
+                        entity.CategoryId = typeData.Id;
+                    }
+                }
+                var people = entity.GetPeopleName();
+                if (!string.IsNullOrEmpty(type))
+                {
+                    var typeData = Context.Peoples.FirstOrDefault(o => o.Name.ToLower().Equals(people) && o.DeleteStatus == Common.Enums.DeleteStatus.Normal);
+                    if (typeData != null)
+                    {
+                        data.People = typeData;
+                        entity.PeopleId = typeData.Id;
+                    }
+                }
+                data.SetNewData(entity);
                 SetUrl(data);
                 Context.ProduceTools.Add(data);
                 Context.SaveChanges();
@@ -89,7 +159,7 @@ namespace Services
                 if (updateData != null)
                 {
                     updateData.SetNewData(entity);
-                    SetUrl(updateData);
+                    SetUrl(entity);
                     updateData.UpdateDate = DateTime.Now;
                     Context.SaveChanges();
                 }
@@ -115,6 +185,81 @@ namespace Services
                 {
                     updateData.SetNewData(entity);
 
+                    if (entity.CategoryId.HasValue)
+                    {
+                        var ward = Context.ProduceToolCategories.FirstOrDefault(x => x.Id == entity.CategoryId);
+                        if (ward != null)
+                        {
+                            updateData.Category = ward;
+                        }
+                        else
+                        {
+                            updateData.Category = null;
+                        }
+                    }
+                    else
+                    {
+                        updateData.Category = null;
+                    }
+                    if (entity.PeopleId.HasValue)
+                    {
+                        var people = Context.Peoples.FirstOrDefault(x => x.Id == entity.PeopleId);
+                        if (people != null)
+                        {
+                            updateData.People = people;
+                        }
+                        else
+                        {
+                            updateData.People = null;
+                        }
+                    }
+                    else
+                    {
+                        updateData.People = null;
+                    }
+                    if (entity.Attachments != null)
+                    {
+                        foreach (var item in entity.Attachments)
+                        {
+                            if (item.Id > 0)
+                            {
+                                var location = updateData.Attachments.FirstOrDefault(o => o.Id.Equals(item.Id));
+                                if (location != null)
+                                {
+                                    if (!string.IsNullOrEmpty(item.Path))
+                                    {
+                                        location.Path = item.Path;
+                                        location.Name = item.Name;
+                                    }
+                                    else
+                                    {
+                                        location.DeleteStatus = Common.Enums.DeleteStatus.IsDelete;
+                                    }
+                                }
+                                else if (!string.IsNullOrEmpty(item.Path))
+                                {
+                                    Context.Attachments.Add(new Attachment
+                                    {
+                                        ProduceTool = updateData,
+                                        Path = item.Path,
+                                        Name = item.Name
+                                    });
+                                }
+                            }
+                            else
+                            {
+                                if (!string.IsNullOrEmpty(item.Path))
+                                {
+                                    Context.Attachments.Add(new Attachment
+                                    {
+                                        ProduceTool = updateData,
+                                        Path = item.Path,
+                                        Name = item.Name
+                                    });
+                                }
+                            }
+                        }
+                    }
                     SetUrl(updateData);
                     updateData.UpdateDate = DateTime.Now;
                     Context.SaveChanges();
@@ -163,7 +308,34 @@ namespace Services
             }
             return result;
         }
-        public override ProduceTool GetById(int id, params string[] includes) => AppendChildData(includes).FirstOrDefault(x => x.Id == id);
+        public override ProduceTool GetById(int id, params string[] includes)
+        {
+            return AppendChildData(includes).FirstOrDefault(x => x.Id == id);
+        }
+
+        public MessageResult AddView(int id)
+        {
+            var result = new MessageResult();
+            try
+            {
+                var updateData = Context.ProduceTools.FirstOrDefault(x => x.Id == id);
+                if (updateData != null)
+                {
+                    updateData.View = updateData.View + 1;
+                    Context.SaveChanges();
+                }
+                else
+                {
+                    result.Code = Common.Enums.ErrorCode.OtherNotExit;
+                }
+            }
+            catch (Exception ex)
+            {
+                result.Code = Common.Enums.ErrorCode.Error;
+                result.Message = ex.Message;
+            }
+            return result;
+        }
 
     }
 }
