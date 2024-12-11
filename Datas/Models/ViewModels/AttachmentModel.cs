@@ -36,5 +36,8 @@ namespace Datas.Models.ViewModels
         
         [Display(Name = "Di tích, danh lam")]
         public int? LandmarkId { set; get; }
+
+        [Display(Name = "Hoạt động du lịch")]
+        public int? TravelId { set; get; }
     }
 }

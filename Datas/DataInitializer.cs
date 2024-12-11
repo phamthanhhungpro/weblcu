@@ -339,6 +339,18 @@ namespace Datas
                     ("Xóa", Common.Constants.PERMISSION_FESTIVAL_DELETE),
                     ("Hiển thị", Common.Constants.PERMISSION_FESTIVAL_SHOW),
                 ]);
+          
+            AddGroupFunctionWithFunctions(
+                Enums.GroupFunctionType.Travel,
+                "Hoạt động du lịch",
+                11,
+                [
+                    ("Xem", Common.Constants.PERMISSION_TRAVEL_VIEW),
+                    ("Thêm mới", Common.Constants.PERMISSION_TRAVEL_ADD),
+                    ("Sửa", Common.Constants.PERMISSION_TRAVEL_EDIT),
+                    ("Xóa", Common.Constants.PERMISSION_TRAVEL_DELETE),
+                    ("Hiển thị", Common.Constants.PERMISSION_TRAVEL_SHOW),
+                ]);
             
             AddGroupFunctionWithFunctions(
                 Enums.GroupFunctionType.Landmark,
@@ -350,7 +362,7 @@ namespace Datas
                     ("Sửa", Common.Constants.PERMISSION_LANDMARK_EDIT),
                     ("Xóa", Common.Constants.PERMISSION_LANDMARK_DELETE),
                     ("Hiển thị", Common.Constants.PERMISSION_LANDMARK_SHOW),
-                ]);
+                  ]);
         }
 
         private void AddGroupFunctionWithFunctions(Enums.GroupFunctionType type, string groupName, int order, List<(string Name, string FunctionCode)> functions)

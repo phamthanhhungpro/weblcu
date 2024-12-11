@@ -71,7 +71,8 @@ namespace Common
             ProduceTool = 23,
             CustomsTradition = 24,
             Festival = 25,
-            Landmark = 26,
+            Travel = 26,
+            Landmark = 27,
         }
 
         public enum ErrorCode

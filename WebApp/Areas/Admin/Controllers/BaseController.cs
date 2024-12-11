@@ -385,6 +385,18 @@ namespace WebApp.Areas.Admin.Controllers
                                     Constants.PERMISSION_LANDMARK_VIEW,
                                     Constants.PERMISSION_LANDMARK_ADD,
                                     "fa fa-landmark");
+                                 break;
+                                 
+                            case Enums.GroupFunctionType.Travel:
+                                AddMenuItem(ref lstMenu,
+                                            controllerName,
+                                            "Travel",
+                                            group,
+                                            functionResult.Value,
+                                            url,
+                                            Constants.PERMISSION_TRAVEL_VIEW,
+                                            Constants.PERMISSION_TRAVEL_ADD,
+                                            "fa fa-plane");
                                 break;
                             default:
                                 break;
