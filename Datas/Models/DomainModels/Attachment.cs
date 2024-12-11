@@ -35,6 +35,12 @@ namespace Datas.Models.DomainModels
         [Display(Name = "Phong tục tập quán")]
         public virtual CustomsTradition? CustomsTradition { set; get; }
 
+        [Display(Name = "Lễ hội văn hóa")]
+        public int? FestivalId { set; get; }
+
+        [Display(Name = "Lễ hội văn hóa")]
+        public virtual Festival? Festival { set; get; }
+
         public AttachmentModel ToAttachmentModel()
         {
             var data = new AttachmentModel
@@ -46,7 +52,8 @@ namespace Datas.Models.DomainModels
                 PeopleId = PeopleId,
                 NationalCostumeId = NationalCostumeId,
                 ProduceToolId = ProduceToolId,
-                CustomsTraditionId = CustomsTraditionId
+                CustomsTraditionId = CustomsTraditionId,
+                FestivalId = FestivalId
             };
             
             return data;

@@ -65,12 +65,12 @@ namespace Common
             Language,
             File,
             Log,
-            InstrumentCategory,
-            Instrument,
-            ProduceToolCategory,
-            ProduceTool,
-            CustomsTradition,
-            Festival,
+            InstrumentCategory = 20,
+            Instrument = 21,
+            ProduceToolCategory = 22,
+            ProduceTool = 23,
+            CustomsTradition = 24,
+            Festival = 25,
         }
 
         public enum ErrorCode

@@ -28,5 +28,7 @@ namespace Datas.Models.ViewModels
         [Display(Name = "Phong tục tập quán")]
         public int? CustomsTraditionId { set; get; }
 
+        [Display(Name = "Lễ hội văn hóa")]
+        public int? FestivalId { set; get; }
     }
 }

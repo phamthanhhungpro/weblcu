@@ -1,8 +1,8 @@
 ﻿@using Datas.Models.ViewModels
 @using System.Net
-@model CustomsTraditionModel
+@model FestivalModel
 @{
-    var lstCustomsTradition = (List<CustomsTraditionModel>)ViewBag.OtherCustomsTradition;
+    var lstFestival = (List<FestivalModel>)ViewBag.OtherFestival;
     var detailsName = "Xem chi tiết";
     var detailsEthnicMinorityLink = "";
     var detailLink = "";
@@ -11,14 +11,14 @@
     {
         detailsName = "Xem chi tiết";
         detailsEthnicMinorityLink = "/dan-toc/chi-tiet";
-        detailLink = "/phong-tuc-tap-quan/chi-tiet";
+        detailLink = "/le-hoi-van-hoa/chi-tiet";
         detailsNewsLink = "/tin-tuc/chi-tiet";
     }
     else
     {
         detailsName = "Details";
         detailsEthnicMinorityLink = "/ethnic-minority/details";
-        detailLink = "/customs-tradition/details";
+        detailLink = "/festival/details";
         detailsNewsLink = "/news/details";
     }
     var url = ViewBag.Host + detailLink + "/" + Model.Url;
@@ -40,12 +40,12 @@
             <div class="artifacts-title">
                 @if (string.IsNullOrEmpty(ViewBag.SubDomain))
                 {
-                    <h2>Phong tục tập quán</h2>
+                    <h2>Lễ hội văn hóa</h2>
                 }
                 else
                 {
 
-                    <h2>Customs tradition</h2>
+                    <h2>Festival</h2>
                 }
             </div>
             <div class="row mb-4">
@@ -316,7 +316,7 @@
     </div>
 </section>
 <section id="artifacts-other">
-    @if (lstCustomsTradition.Count > 0)
+    @if (lstFestival.Count > 0)
     {
         <div class="container">
             @if (string.IsNullOrEmpty(ViewBag.SubDomain))
@@ -328,7 +328,7 @@
                 <h3>Other tools</h3>
             }
             <div class="slide-artifacts-other">
-                @foreach (var item in lstCustomsTradition)
+                @foreach (var item in lstFestival)
                 {
                     <div class="items-artifacts">
                         <div class="artifacts-img">
