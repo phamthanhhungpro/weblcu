@@ -39,5 +39,9 @@ namespace Datas.Models.ViewModels
 
         [Display(Name = "Hoạt động du lịch")]
         public int? TravelId { set; get; }
+
+        [Display(Name = "Trang sức")]
+        public int? JewelryId { set; get; }
+
     }
 }

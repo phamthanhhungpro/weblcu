@@ -280,7 +280,7 @@ namespace Datas
                     ("Sửa", Common.Constants.PERMISSION_INSTRUMENT_CATEGORY_EDIT),
                     ("Xóa", Common.Constants.PERMISSION_INSTRUMENT_CATEGORY_DELETE)
                 ]);
-            
+
             AddGroupFunctionWithFunctions(
                 Enums.GroupFunctionType.Instrument,
                 "Nhạc cụ",
@@ -339,7 +339,7 @@ namespace Datas
                     ("Xóa", Common.Constants.PERMISSION_FESTIVAL_DELETE),
                     ("Hiển thị", Common.Constants.PERMISSION_FESTIVAL_SHOW),
                 ]);
-          
+
             AddGroupFunctionWithFunctions(
                 Enums.GroupFunctionType.Travel,
                 "Hoạt động du lịch",
@@ -351,7 +351,7 @@ namespace Datas
                     ("Xóa", Common.Constants.PERMISSION_TRAVEL_DELETE),
                     ("Hiển thị", Common.Constants.PERMISSION_TRAVEL_SHOW),
                 ]);
-            
+
             AddGroupFunctionWithFunctions(
                 Enums.GroupFunctionType.Landmark,
                 "Điểm đến di tích, danh lam",
@@ -363,6 +363,29 @@ namespace Datas
                     ("Xóa", Common.Constants.PERMISSION_LANDMARK_DELETE),
                     ("Hiển thị", Common.Constants.PERMISSION_LANDMARK_SHOW),
                   ]);
+
+            AddGroupFunctionWithFunctions(
+                Enums.GroupFunctionType.JewelryCategory,
+                "Danh mục trang sức",
+                28,
+                [
+                    ("Xem", Common.Constants.PERMISSION_JEWELRY_CATEGORY_VIEW),
+                    ("Thêm mới", Common.Constants.PERMISSION_JEWELRY_CATEGORY_ADD),
+                    ("Sửa", Common.Constants.PERMISSION_JEWELRY_CATEGORY_EDIT),
+                    ("Xóa", Common.Constants.PERMISSION_JEWELRY_CATEGORY_DELETE)
+                ]);
+
+            AddGroupFunctionWithFunctions(
+                Enums.GroupFunctionType.Jewelry,
+                "Trang sức",
+                13,
+                [
+                    ("Xem", Common.Constants.PERMISSION_JEWELRY_VIEW),
+                    ("Thêm mới", Common.Constants.PERMISSION_JEWELRY_ADD),
+                    ("Sửa", Common.Constants.PERMISSION_JEWELRY_EDIT),
+                    ("Xóa", Common.Constants.PERMISSION_JEWELRY_DELETE),
+                    ("Hiển thị", Common.Constants.PERMISSION_JEWELRY_SHOW),
+                ]);
         }
 
         private void AddGroupFunctionWithFunctions(Enums.GroupFunctionType type, string groupName, int order, List<(string Name, string FunctionCode)> functions)

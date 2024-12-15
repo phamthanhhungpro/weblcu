@@ -1,0 +1,117 @@
+﻿
+@using Common
+@model Datas.Models.ViewModels.JewelryModel
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label asp-for="Name" class="control-label"></label> <span class="text-danger">(*)</span>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Code" class="control-label"></label> 
+            <input asp-for="Code" class="form-control" />
+            <span asp-validation-for="Code" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Event" class="control-label"></label>
+            <input asp-for="Event" class="form-control" />
+            <span asp-validation-for="Event" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            @Html.Partial("_DisplayJewelryCategory")
+        </div>
+        <div class="form-group">
+            @Html.Partial("_DisplayPeople")
+        </div>
+        <div class="form-group">
+            <label asp-for="Shape" class="control-label"></label>
+            <input asp-for="Shape" class="form-control" />
+            <span asp-validation-for="Shape" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="CurrentStatus" class="control-label"></label>
+            <input asp-for="CurrentStatus" class="form-control" />
+            <span asp-validation-for="CurrentStatus" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Technique" class="control-label"></label>
+            <input asp-for="Technique" class="form-control" />
+            <span asp-validation-for="Technique" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Classify" class="control-label"></label>
+            <input asp-for="Classify" class="form-control" />
+            <span asp-validation-for="Classify" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="row" style="margin-top:38px;">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label asp-for="IsDisplay" class="control-label"></label>
+                    <input asp-for="IsDisplay" />
+                    <span asp-validation-for="IsDisplay" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label asp-for="Top" class="control-label"></label>
+                    <input asp-for="Top" />
+                    <span asp-validation-for="Top" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Image360" class="control-label"></label>
+            <input asp-for="Image360" class="form-control" />
+            <span asp-validation-for="Image360" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Cost" class="control-label"></label>
+            <input asp-for="Cost" class="form-control" />
+            <span asp-validation-for="Cost" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Color" class="control-label"></label>
+            <input asp-for="Color" class="form-control"/>
+            <span asp-validation-for="Color" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Size" class="control-label"></label>
+            <textarea asp-for="Size" class="form-control"></textarea>
+            <span asp-validation-for="Size" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Certification" class="control-label"></label>
+            <input asp-for="Certification" class="form-control" />
+            <span asp-validation-for="Certification" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Material" class="control-label"></label>
+            <input asp-for="Material" class="form-control" />
+            <span asp-validation-for="Material" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Details" class="control-label"></label>
+            <textarea asp-for="Details" class="form-control"></textarea>
+            <span asp-validation-for="Details" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Status" class="control-label"></label>
+            <select class="form-control" asp-for="Status" asp-items="Html.GetEnumSelectList(typeof(Enums.ActiveStatus))">
+            </select>
+            <input type="hidden" asp-for="Status" />
+            <span asp-validation-for="Status" class="text-danger"></span>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            <label asp-for="Content" class="control-label"></label> <span class="text-danger">(*)</span>
+            <textarea asp-for="Content" class="form-control"></textarea>
+            <span asp-validation-for="Content" class="text-danger"></span>
+        </div>
+    </div>
+</div>

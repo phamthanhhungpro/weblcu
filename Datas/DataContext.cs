@@ -1,12 +1,5 @@
-﻿using Castle.Components.DictionaryAdapter.Xml;
-using Datas.Models.DomainModels;
-using Datas.Models.ViewModels;
+﻿using Datas.Models.DomainModels;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Datas
 {
@@ -51,6 +44,9 @@ namespace Datas
         public DbSet<Festival> Festivals { set; get; }
         public DbSet<Landmark> Landmarks { set; get; }
         public DbSet<Travel> Travels { set; get; }
+
+        public DbSet<JewelryCategory> JewelryCategories { set; get; }
+        public DbSet<Jewelry> Jewelries { set; get; }
 
 
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

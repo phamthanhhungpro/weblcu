@@ -1,0 +1,237 @@
+﻿@using Common
+@model Datas.Models.ViewModels.JewelryModel
+@{
+    var indexLocation = 3;
+    if (Model != null && Model.Attachments!=null)
+    {
+        indexLocation = Model.Attachments.Count;
+    }
+}
+<table class="table table-bordered table-hover" id="list-attachment">
+    <thead>
+        <tr>
+            <th style="width:5%">
+                Số TT
+            </th>
+            <th style="width:30%">
+                Đường dẫn
+            </th>
+            <th style="width:30%">
+                Tên tài liệu
+            </th>
+             <th style="width:5%">
+                #
+            </th>
+        </tr>
+    </thead>
+    <tbody id="lst-attachment">
+        @if (Model == null || (Model!=null && Model.Attachments == null))
+        {
+            <tr class="row-1">
+                <td>1</td>
+                <td>
+                    <input id="attachment-0-Path" type="text" name="Attachments[0].Path" style="width:75%" />
+                    <button type="button" class="btn btn-default btn-xs" onclick="OpenAttachment(0);">Upload</button>
+                    <button  type="button" class="btn btn-success btn-xs" onclick="ViewServerFile(0);">View</button>
+                </td>
+                <td>
+                    <input id="attachment-0-Name" type="text" name="Attachments[0].Name" style="width:100%" />
+                </td>
+                <td>
+                    <button type="button" class="btn btn-default btn-xs" onclick="RemoveAttachment(0);"><i class="fas fa-trash"></i> Xóa</button>
+                </td>
+            </tr>
+            <tr class="row-2">
+                <td>2</td>
+                <td>
+                    <input id="attachment-1-Path" type="text" name="Attachments[1].Path" style="width:75%" />
+                    <button type="button" class="btn btn-default btn-xs" onclick="OpenAttachment(1);">Upload</button>
+                    <button  type="button" class="btn btn-success btn-xs" onclick="ViewServerFile(1);">View</button>
+                </td>
+                <td>
+                    <input id="attachment-1-Name" type="text" name="Attachments[1].Name" style="width:100%" />
+                </td>
+                <td>
+                    <button type="button" class="btn btn-default btn-xs" onclick="RemoveAttachment(1);"><i class="fas fa-trash"></i> Xóa</button>
+                </td>
+            </tr>
+            <tr class="row-3">
+                <td>3</td>
+                <td>
+                    <input id="attachment-2-Path" type="text" name="Attachments[2].Path" style="width:75%" />
+                    <button type="button" class="btn btn-default btn-xs" onclick="OpenAttachment(2);">Upload</button>
+                    <button  type="button" class="btn btn-success btn-xs" onclick="ViewServerFile(2);">View</button>
+                </td>
+                <td>
+                    <input id="attachment-2-Name" type="text" name="Attachments[2].Name" style="width:100%" />
+                </td>
+                <td>
+                    <button type="button" class="btn btn-default btn-xs" onclick="RemoveAttachment(2);"><i class="fas fa-trash"></i> Xóa</button>
+                </td>
+            </tr>
+        }
+        else
+        {
+            int index = 0;
+            for (int i = 0; i < Model.Attachments.Count; i++)
+            {
+                index++;
+                var attach = Model.Attachments[i];
+                <tr class="row-@index">
+                    <td>
+                        @index
+                        <input id="attachment-@i-Id" type="hidden" name="Attachments[@i].Id" style="width:100%" value="@attach.Id" />
+                    </td>
+                    <td>
+                        <input id="attachment-@i-Path" type="text" name="Attachments[@i].Path" style="width:75%" value="@attach.Path" />
+                        <button type="button" class="btn btn-default btn-xs" onclick="OpenAttachment(@i);">Upload</button>
+                        <button  type="button" class="btn btn-success btn-xs" onclick="ViewServerFile(@i);">View</button>
+                    </td>
+                    <td>
+                        <input id="attachment-@i-Name" type="text" name="Attachments[@i].Name" style="width:100%" value="@attach.Name" />
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-default btn-xs" onclick="RemoveAttachment(@i);"><i class="fas fa-trash"></i> Xóa</button>
+                    </td>
+                </tr>
+            }
+        }
+
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="6"><button type="button" class="btn btn-success btn-xs float-right" onclick="Add();"><i class="fas fa-plus-square"></i> Dòng</button></td>
+        </tr>
+    </tfoot>
+</table>
+<script>
+    var indexLocation = @indexLocation;
+    function Add()
+    {
+        var index = indexLocation + 1;
+        var strLocation = '';
+        strLocation += '<tr class="row-' + index + '" ><td>' + index + '</td>';
+        strLocation += '<td><input id="attachment-' + indexLocation + '-Path" type="text" name="Attachments[' + indexLocation + '].Path" style="width:75%" />';
+        strLocation += '<button type="button" class="btn btn-default btn-xs" onclick = "OpenAttachment('+ indexLocation +');" > Upload</button >';
+        strLocation += '<button  type="button" class="btn btn-success btn-xs" onclick="ViewServerFile(' + indexLocation + ');">View</button></td>';
+        strLocation += '<td><input id="attachment-' + indexLocation + '-Name" type="text" name="Attachments[' + indexLocation + '].Name" style="width:100%" /></td>';
+        strLocation += '<td><button type="button" class="btn btn-default btn-xs" onclick="RemoveAttachment(' + indexLocation + ');"><i class="fas fa-trash"></i> Xóa</button></td></tr>';
+        $("#lst-attachment").append(strLocation);
+        indexLocation++;
+    }
+
+    function RemoveAttachment(index)
+    {
+        $("#attachment-" + index + "-Path").val("");
+        $("#attachment-" + index + "-Name").val("");
+    }
+</script>
+<script type="text/javascript">
+    let openAttach;
+    let idAttach = 0;
+    let optionAttach;
+    $(function () {
+        var myCommands = elFinder.prototype._options.commands;
+        optionAttach = {
+            baseUrl: "/lib/elfinder/",
+            url: "/Admin/file-system/connector",
+            rememberLastDir: false,
+            commands: myCommands,
+            lang: 'vi',
+            dialogContained: true,
+            commandsOptions: {
+                getfile: {
+                    oncomplete: 'close' // destroy elFinder after file selection
+                }
+            },
+            dialogContained: true,
+            getFileCallback: function (a, b) {
+                document.getElementById("attachment-" + idAttach + "-Path").value = "/" + a.path;
+                document.getElementById("attachment-" + idAttach + "-Name").value = a.name;
+            },
+            uiOptions: {
+                toolbar: [
+                    ['back', 'forward'],
+                    ['reload'],
+                    ['home', 'up'],
+                    ['mkdir', 'mkfile', 'upload'],
+                    ['open', 'download'],
+                    ['undo', 'redo'],
+                    ['info'],
+                    ['quicklook'],
+                    ['copy', 'cut', 'paste'],
+                    ['rm'],
+                    ['duplicate', 'rename', 'edit'],
+                    ['selectall', 'selectnone', 'selectinvert'],
+                    ['view', 'sort']
+                ]
+            },
+            lang: 'vi',
+        };
+    });
+
+    function OpenAttachment(id) {
+        idAttach = id;
+        if (!openAttach) {
+            openAttach = $('#attach-finder').dialogelfinder(optionAttach);
+        }
+        else {
+            openAttach.dialogelfinder('open');
+        }
+    }
+
+    function ViewServerFile(id) {
+        $("#view-file").removeAttr("data");
+        //var fileUrl = element.getAttribute("data-file");
+        var fileUrl = document.getElementById("attachment-" + id + "-Path").value
+        if (fileUrl) {
+            var extension = fileUrl.substring(fileUrl.lastIndexOf("."));
+            var type = "";
+            switch (extension) {
+                case ".jpg":
+                    type = "image/jpg";
+                    break;
+                case ".png":
+                    type = "image/png";
+                    break;
+                case ".gif":
+                    type = "image/gif";
+                    break;
+                case ".jpeg":
+                    type = "image/jpeg";
+                    break;
+                case ".pdf":
+                    type = "application/pdf";
+                    break;
+            }
+            if (type) {
+                $("#view-file").attr("data", fileUrl)
+                var obj = document.getElementById("view-file");
+                obj.setAttribute('data', fileUrl);
+                var cl = obj.cloneNode(true);
+                var parent = obj.parentNode;
+                parent.removeChild(obj);
+                parent.appendChild(cl);
+                $('#modal-view-file').modal('show');
+            }
+            else
+            {
+                $('#modal-view-word-file').modal('show');
+                $.ajax({
+                    url: "/Admin/File/ReadFileByPublic",
+                    type: "POST",
+                    data: { filePath: fileUrl },
+                    beforeSend: function (xhr) {
+                        $("#ajax-loading").modal("show");
+                    },
+                    success: function (data) {
+                        $("#view-word-file").html(data);
+                    },
+                    complete: function () {
+                        $("#ajax-loading").modal("hide");
+                    },
+                });
+            }
+        }
+    }
+</script>

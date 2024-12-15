@@ -59,6 +59,13 @@ namespace Datas.Models.DomainModels
         [Display(Name = "Hoạt động du lịch")]
         public virtual Travel? Travel { set; get; }
 
+        [Display(Name = "Trang sức")]
+        public int? JewelryId { set; get; }
+
+        [Display(Name = "Trang sức")]
+        public virtual Jewelry? Jewelry { set; get; }
+
+
         public AttachmentModel ToAttachmentModel()
         {
             var data = new AttachmentModel
@@ -73,8 +80,9 @@ namespace Datas.Models.DomainModels
                 CustomsTraditionId = CustomsTraditionId,
                 FestivalId = FestivalId,
                 InstrumentId = InstrumentId,
-                LandmarkId = LandmarkId
-                TravelId = TravelId
+                LandmarkId = LandmarkId,
+                TravelId = TravelId,
+                JewelryId = JewelryId
             };
             
             return data;

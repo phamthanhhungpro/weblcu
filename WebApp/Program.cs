@@ -46,6 +46,8 @@ builder.Services.AddTransient<ProduceToolService>();
 builder.Services.AddTransient<CustomsTraditionService>();
 builder.Services.AddTransient<FestivalService>();
 builder.Services.AddTransient<TravelService>();
+builder.Services.AddTransient<JewelryCategoryService>();
+builder.Services.AddTransient<JewelryService>();
 
 
 builder.Services.AddTransient<InstrumentCategoryService>();
