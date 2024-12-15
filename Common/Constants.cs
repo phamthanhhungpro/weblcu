@@ -168,5 +168,16 @@ namespace Common
         public static readonly string PERMISSION_TRAVEL_EDIT = "PERMISSION_TRAVEL_EDIT";
         public static readonly string PERMISSION_TRAVEL_DELETE = "PERMISSION_TRAVEL_DELETE";
         public static readonly string PERMISSION_TRAVEL_SHOW = "PERMISSION_TRAVEL_SHOW";
+
+        public static readonly string PERMISSION_JEWELRY_CATEGORY_VIEW = "PERMISSION_JEWELRY_CATEGORY_VIEW";
+        public static readonly string PERMISSION_JEWELRY_CATEGORY_ADD = "PERMISSION_JEWELRY_CATEGORY_ADD";
+        public static readonly string PERMISSION_JEWELRY_CATEGORY_EDIT = "PERMISSION_JEWELRY_CATEGORY_EDIT";
+        public static readonly string PERMISSION_JEWELRY_CATEGORY_DELETE = "PERMISSION_JEWELRY_CATEGORY_DELETE";
+
+        public static readonly string PERMISSION_JEWELRY_VIEW = "PERMISSION_JEWELRY_VIEW";
+        public static readonly string PERMISSION_JEWELRY_ADD = "PERMISSION_JEWELRY_ADD";
+        public static readonly string PERMISSION_JEWELRY_EDIT = "PERMISSION_JEWELRY_EDIT";
+        public static readonly string PERMISSION_JEWELRY_DELETE = "PERMISSION_JEWELRY_DELETE";
+        public static readonly string PERMISSION_JEWELRY_SHOW = "PERMISSION_JEWELRY_SHOW";
     }
 }

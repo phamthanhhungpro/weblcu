@@ -1,0 +1,199 @@
+﻿@using Common
+@using Common.Entity.Permission
+@model IEnumerable<Datas.Models.DomainModels.Jewelry>
+@{
+    ViewBag.Title = "Danh sách trang sức";
+    var permission = (JewelryPermission)ViewBag.Permission;
+}
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Danh sách trang sức</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item">
+                            <a asp-area="Admin" asp-controller="Default" asp-action="Index">Trang chủ</a>
+                        </li>
+                        <li class="breadcrumb-item active">Danh sách trang sức</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <!-- Main row -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                            <div class="card-header">
+                                <div class="float-left col-md-8">
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="control-label">Lọc loại công cụ: </label>
+                                                        @Html.DropDownList("searchType", (IEnumerable<SelectListItem>
+                                                                 )ViewBag.JewelryCategories, "---Chọn loại trang sức---",
+                                                                 new { @class = "form-control" })
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="control-label">Lọc dân tộc: </label>
+                                                        @Html.DropDownList("searchPeople", (IEnumerable<SelectListItem>
+                                                                 )ViewBag.Peoples, "---Chọn dân tộc---",
+                                                                 new { @class = "form-control" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label>Thao tác:</label>
+                                                <div class="clearfix"></div>
+                                                <button class="btn btn-success form-control" onclick="Search()"><i class="fa fa-search"></i> Tìm</button>
+                                            </div>
+                                        </div>      
+                                    </div>
+                                </div>
+                                @if (permission.IsAdd)
+                                {
+                                    <div class="float-right"><a class="btn btn-primary" asp-area="Admin" asp-controller="Jewelry" asp-action="Create">Thêm mới</a></div>
+                                }
+
+                            </div>
+                        <div class="card-body">
+                            <table class="table table-bordered table-hover" id="list-news">
+                                <thead>
+                                    <tr style="text-align:center">
+                                        <th style="vertical-align:middle; text-align:center; width:5%">
+                                            Số TT
+                                        </th>
+                                        <th style="vertical-align:middle; text-align:center; width:10%">
+                                            @Html.DisplayNameFor(model => model.Image0)
+                                        </th>
+                                        <th style="vertical-align:middle; text-align:center; width:15%">
+                                            @Html.DisplayNameFor(model => model.Name)
+                                        </th>
+                                        <th style="vertical-align:middle; text-align:center; width:10%">
+                                            @Html.DisplayNameFor(model => model.People)
+                                        </th>
+                                        <th style="vertical-align:middle; text-align:center; width:25%">
+                                            @Html.DisplayNameFor(model => model.Material)
+                                        </th>
+                                        <th style="vertical-align:middle; text-align:center; width:10%">
+                                            @Html.DisplayNameFor(model => model.Status)
+                                        </th>
+                                        <th style="vertical-align:middle; text-align:center; width:10%">
+                                            Thao tác
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+              
+            </div>
+            <!-- /.row (main row) -->
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+<script type="text/javascript">
+    var table;
+
+    $(function () {
+        LoadAjaxNew(0,0);
+    });
+
+    function Search() {
+        var c = document.getElementById("searchType").value;
+        var p = document.getElementById("searchPeople").value;
+        LoadAjaxNew(c,p);
+    }
+
+    function LoadAjaxNew(category, people) {
+        table = $('#list-news').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "orderMulti": false,
+            "destroy": true,
+            "searchHighlight": true,
+            "language": {
+                "url": "/plugins/datatables/Vietnamese.json"
+            },
+            "pagingType": 'full_numbers', 'sPaging': 'pagination',
+            "ajax": {
+                "url": "/Admin/Jewelry/LoadAjaxNew",
+                "data": { category: category, people: people },
+                "type": "GET",
+                "datatype": "json"
+            },
+            "bSortable": false,
+            "columns": [
+                { "data": "index", "width": "5%" },
+                {
+                    "data": "image", "bSortable": false, "mRender": function (data, display, alldata) {
+                        var str = "<img src='" + data + "' width='100'>";
+                        return str;
+                    }
+                },
+                { "data": "name" },
+                { "data": "people" },
+                { "data": "material" },
+                {
+                    "data": "status", "bSortable": false, "mRender": function (data, display, alldata) {
+                        var str = ""
+                        switch (data) {
+                            case 1:
+                                str = "<span class='label label-danger'>Ngừng hoạt động</span>";
+                                break;
+                            case 0:
+                                str = "<span class='label label-success'>Đang hoạt động</span>";
+                                break;
+                            default:
+                                str = "<span class='label label-danger'>Ngừng hoạt động</span>";
+                        }
+                        return str;
+                    }
+                },
+                {
+                    "data": "id", "bSortable": false, "render": function (data, display, alldata) {
+                        var str = "";
+                        str += "<a class='fas fa fa-edit' forceopen='1'  href='/Admin/Jewelry/Edit?id=" + alldata.id + "'  style='margin-right:6px'> Sửa</a>"
+                        str += "<a class='fas fa fa-trash' data-ajax='true' data-ajax-confirm='Bạn có chắc chắn xóa trang sức này? ' data-ajax-failure='OnFailure' data-ajax-loading='#ajax-loading' data-ajax-method='POST' data-ajax-success='onDelete(this,data)' data-toggle='tooltip' href='/Admin/Jewelry/Delete?id=" + alldata.id + "' style='margin-right:6px' title='Xóa trang sức'> Xóa</a>"
+                        return str;
+                    }
+                },
+            ],
+        });
+        //table.$('[data-toggle="tooltip"]').tooltip({
+        //    placement: '',
+        //    html: true
+        //});
+    };
+
+    function onDelete(id, data) {
+        if (data.code == 0) {
+            id.parentNode.parentNode.style.display = 'none';
+            toastr.success(data.message);
+        }
+        else {
+            toastr.error("Lỗi: " + data.message);
+        }
+    };
+</script>

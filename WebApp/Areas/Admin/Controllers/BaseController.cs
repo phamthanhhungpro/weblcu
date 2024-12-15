@@ -398,6 +398,30 @@ namespace WebApp.Areas.Admin.Controllers
                                             Constants.PERMISSION_TRAVEL_ADD,
                                             "fa fa-plane");
                                 break;
+                            case Enums.GroupFunctionType.JewelryCategory:
+                                AddMenuItem(ref lstMenu,
+                                            controllerName,
+                                            "JewelryCategory",
+                                            group,
+                                            functionResult.Value,
+                                            url,
+                                            Constants.PERMISSION_JEWELRY_CATEGORY_VIEW,
+                                            Constants.PERMISSION_JEWELRY_CATEGORY_ADD,
+                                            "fa fa-gem");
+                                break;
+
+                            case Enums.GroupFunctionType.Jewelry:
+                                AddMenuItem(ref lstMenu,
+                                            controllerName,
+                                            "Jewelry",
+                                            group,
+                                            functionResult.Value,
+                                            url,
+                                            Constants.PERMISSION_JEWELRY_VIEW,
+                                            Constants.PERMISSION_JEWELRY_ADD,
+                                            "fa fa-gem");
+                                break;
+
                             default:
                                 break;
 

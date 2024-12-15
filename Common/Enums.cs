@@ -73,6 +73,8 @@ namespace Common
             Festival = 25,
             Travel = 26,
             Landmark = 27,
+            JewelryCategory = 28,
+            Jewelry = 29,
         }
 
         public enum ErrorCode
