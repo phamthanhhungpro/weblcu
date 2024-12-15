@@ -15,11 +15,11 @@ namespace WebApp.Areas.Admin.Controllers
 {
     [Area(nameof(Admin))]
     [Route(nameof(Admin) + "/[controller]")]
-    public class InstrumentController(LogService logService, ILogger<InstrumentController> logger, AuthenUtils authenUtils, IWebHostEnvironment environment, InstrumentCategoryService InstrumentCategoryService, InstrumentService InstrumentService, PeopleService peopleService) : BaseController<InstrumentController>(logger, authenUtils, logService)
+    public class DailyItemController(LogService logService, ILogger<DailyItemController> logger, AuthenUtils authenUtils, IWebHostEnvironment environment, DailyItemCategoryService DailyItemCategoryService, DailyItemService DailyItemService, PeopleService peopleService) : BaseController<DailyItemController>(logger, authenUtils, logService)
     {
         private IWebHostEnvironment _hostEnvironment = environment;
-        private InstrumentCategoryService _InstrumentCategoryService = InstrumentCategoryService;
-        private InstrumentService _InstrumentService = InstrumentService;
+        private DailyItemCategoryService _DailyItemCategoryService = DailyItemCategoryService;
+        private DailyItemService _DailyItemService = DailyItemService;
         private PeopleService _peopleService = peopleService;
 
         // GET: Admin/News
@@ -27,16 +27,16 @@ namespace WebApp.Areas.Admin.Controllers
         [Route("")]
         public ActionResult Index()
         {
-            var permission = new InstrumentPermission();
-            if (CheckFunctionPermission(Constants.PERMISSION_INSTRUMENT_VIEW))
+            var permission = new DailyItemPermission();
+            if (CheckFunctionPermission(Constants.PERMISSION_DAILYITEM_VIEW))
             {
                 permission.IsView = true;
-                permission.IsAdd = CheckFunctionPermission(Constants.PERMISSION_INSTRUMENT_ADD);
-                permission.IsEdit = CheckFunctionPermission(Constants.PERMISSION_INSTRUMENT_EDIT);
-                permission.IsDelete = CheckFunctionPermission(Constants.PERMISSION_INSTRUMENT_DELETE);
-                permission.IsShow = CheckFunctionPermission(Constants.PERMISSION_INSTRUMENT_SHOW);
+                permission.IsAdd = CheckFunctionPermission(Constants.PERMISSION_DAILYITEM_ADD);
+                permission.IsEdit = CheckFunctionPermission(Constants.PERMISSION_DAILYITEM_EDIT);
+                permission.IsDelete = CheckFunctionPermission(Constants.PERMISSION_DAILYITEM_DELETE);
+                permission.IsShow = CheckFunctionPermission(Constants.PERMISSION_DAILYITEM_SHOW);
                 ViewBag.Permission = permission;
-                ViewBag.InstrumentCategories = GetListInstrumentCategory();
+                ViewBag.DailyItemCategories = GetListDailyItemCategory();
                 ViewBag.Peoples = GetListPeople(true);
                 return View();
             }
@@ -50,16 +50,16 @@ namespace WebApp.Areas.Admin.Controllers
         [Route("ImportExcel")]
         public ActionResult ImportExcel()
         {
-            if (CheckFunctionPermission(Constants.PERMISSION_INSTRUMENT_ADD))
+            if (CheckFunctionPermission(Constants.PERMISSION_DAILYITEM_ADD))
             {
-                var permission = new InstrumentPermission();
+                var permission = new DailyItemPermission();
                 permission.IsView = true;
-                permission.IsAdd = CheckFunctionPermission(Constants.PERMISSION_INSTRUMENT_ADD);
-                permission.IsEdit = CheckFunctionPermission(Constants.PERMISSION_INSTRUMENT_EDIT);
-                permission.IsDelete = CheckFunctionPermission(Constants.PERMISSION_INSTRUMENT_DELETE);
-                permission.IsShow = CheckFunctionPermission(Constants.PERMISSION_INSTRUMENT_SHOW);
+                permission.IsAdd = CheckFunctionPermission(Constants.PERMISSION_DAILYITEM_ADD);
+                permission.IsEdit = CheckFunctionPermission(Constants.PERMISSION_DAILYITEM_EDIT);
+                permission.IsDelete = CheckFunctionPermission(Constants.PERMISSION_DAILYITEM_DELETE);
+                permission.IsShow = CheckFunctionPermission(Constants.PERMISSION_DAILYITEM_SHOW);
                 ViewBag.Permission = permission;
-                var excel = new InstrumentExcel(Log, _hostEnvironment.ContentRootPath, UserData.Id);
+                var excel = new DailyItemExcel(Log, _hostEnvironment.ContentRootPath, UserData.Id);
                 excel.Read();
                 ViewBag.Date = excel.ImportDate;
                 ViewBag.FileName = excel.FileName;
@@ -76,16 +76,16 @@ namespace WebApp.Areas.Admin.Controllers
         [Route("ImportExcel")]
         public ActionResult ImportExcel(IFormFile file, bool save = false)
         {
-            if (CheckFunctionPermission(Constants.PERMISSION_INSTRUMENT_ADD))
+            if (CheckFunctionPermission(Constants.PERMISSION_DAILYITEM_ADD))
             {
-                var permission = new InstrumentPermission();
+                var permission = new DailyItemPermission();
                 permission.IsView = true;
-                permission.IsAdd = CheckFunctionPermission(Constants.PERMISSION_INSTRUMENT_ADD);
-                permission.IsEdit = CheckFunctionPermission(Constants.PERMISSION_INSTRUMENT_EDIT);
-                permission.IsDelete = CheckFunctionPermission(Constants.PERMISSION_INSTRUMENT_DELETE);
-                permission.IsShow = CheckFunctionPermission(Constants.PERMISSION_INSTRUMENT_SHOW);
+                permission.IsAdd = CheckFunctionPermission(Constants.PERMISSION_DAILYITEM_ADD);
+                permission.IsEdit = CheckFunctionPermission(Constants.PERMISSION_DAILYITEM_EDIT);
+                permission.IsDelete = CheckFunctionPermission(Constants.PERMISSION_DAILYITEM_DELETE);
+                permission.IsShow = CheckFunctionPermission(Constants.PERMISSION_DAILYITEM_SHOW);
                 ViewBag.Permission = permission;
-                var excel = new GenericExcelHandler<InstrumentModel>(Log, _hostEnvironment.ContentRootPath, UserData.Id);
+                var excel = new GenericExcelHandler<DailyItemModel>(Log, _hostEnvironment.ContentRootPath, UserData.Id);
                 excel.Read();
                 if (file != null && file.Length > 0)
                 {
@@ -130,10 +130,10 @@ namespace WebApp.Areas.Admin.Controllers
         }
 
 
-        private List<InstrumentModel> ReadExcelSheet(string filePath, bool isSave = false)
+        private List<DailyItemModel> ReadExcelSheet(string filePath, bool isSave = false)
         {
             var countAdd = 0;
-            var lstData = new List<InstrumentModel>();
+            var lstData = new List<DailyItemModel>();
             using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             {
                 using (SpreadsheetDocument doc = SpreadsheetDocument.Open(fs, false))
@@ -149,7 +149,7 @@ namespace WebApp.Areas.Admin.Controllers
                     {
                         var row = rows[i];
                         var cells = row.Elements<Cell>().ToList();
-                        var model = new InstrumentModel();
+                        var model = new DailyItemModel();
                         model.Id = i;
                         bool isAdd = cells.Count > 0;
                         for (int j = 0; j < cells.Count; j++)
@@ -166,7 +166,7 @@ namespace WebApp.Areas.Admin.Controllers
                         {
                             if (isSave)
                             {
-                                if (_InstrumentService.AddByCheckName(model).IsSuccess())
+                                if (_DailyItemService.AddByCheckName(model).IsSuccess())
                                     countAdd++;
                                 else
                                 {
@@ -188,12 +188,12 @@ namespace WebApp.Areas.Admin.Controllers
             return lstData;
         }
 
-        private void SetBaseValue(InstrumentModel model)
+        private void SetBaseValue(DailyItemModel model)
         {
             var type = model.GetCategoryName();
             if (!string.IsNullOrEmpty(type))
             {
-                var typeData = _InstrumentCategoryService.GetFirstOrDefault(o => o.Name.ToLower().Equals(type));
+                var typeData = _DailyItemCategoryService.GetFirstOrDefault(o => o.Name.ToLower().Equals(type));
                 if (typeData != null)
                 {
                     model.CategoryId = typeData.Id;
@@ -210,7 +210,7 @@ namespace WebApp.Areas.Admin.Controllers
             }
         }
 
-        private void SetData(InstrumentModel InstrumentModel, int index, Cell cellData, SharedStringTable sst)
+        private void SetData(DailyItemModel DailyItemModel, int index, Cell cellData, SharedStringTable sst)
         {
             var value = string.Empty;
             if ((cellData.DataType != null) && (cellData.DataType == CellValues.SharedString))
@@ -318,7 +318,7 @@ namespace WebApp.Areas.Admin.Controllers
             var startParam = HttpContext.Request.Query["start"].ToString();
             var lengthParam = HttpContext.Request.Query["length"].ToString();
             var orderDir = HttpContext.Request.Query["order[0][dir]"].ToString();
-            IEnumerable<Instrument> list = null;
+            IEnumerable<DailyItem> list = null;
             if (term != null)
             {
                 term = term.ToLower();
@@ -341,9 +341,9 @@ namespace WebApp.Areas.Admin.Controllers
                 int.TryParse(people, out p);
             var totalRecord = 0;
             var total = _peopleService.GetAll().Count();
-            if (CheckFunctionPermission(Constants.PERMISSION_INSTRUMENT_VIEW))
+            if (CheckFunctionPermission(Constants.PERMISSION_DAILYITEM_VIEW))
             {
-                Expression<Func<Instrument, bool>> expression = o => o.DeleteStatus == Enums.DeleteStatus.Normal;
+                Expression<Func<DailyItem, bool>> expression = o => o.DeleteStatus == Enums.DeleteStatus.Normal;
                 if (c > 0)
                 {
                     expression = expression.AndAlso1(o => o.CategoryId.HasValue && o.CategoryId == c);
@@ -356,7 +356,7 @@ namespace WebApp.Areas.Admin.Controllers
                 {
                     expression = expression.AndAlso1(e => e.Content.ToLower().Contains(term) || e.Name.ToLower().Contains(term) || (!string.IsNullOrEmpty(e.Image360) && e.Image360.ToLower().Contains(term)) || (!string.IsNullOrEmpty(e.Shape) && e.Shape.ToLower().Contains(term)) || (!string.IsNullOrEmpty(e.CurrentStatus) && e.CurrentStatus.ToLower().Contains(term)) || (!string.IsNullOrEmpty(e.Classify) && e.Classify.ToLower().Contains(term)) || (!string.IsNullOrEmpty(e.Certification) && e.Certification.ToLower().Contains(term)) || (!string.IsNullOrEmpty(e.Material) && e.Material.ToLower().Contains(term)) || (!string.IsNullOrEmpty(e.Color) && e.Color.ToLower().Contains(term)) || (!string.IsNullOrEmpty(e.Size) && e.Size.ToLower().Contains(term)));
                 }
-                list = _InstrumentService.GetAll(expression);
+                list = _DailyItemService.GetAll(expression);
                 totalRecord = list.Count();
             }
             var result = new
@@ -369,7 +369,7 @@ namespace WebApp.Areas.Admin.Controllers
             return jsonResult;
         }
 
-        private Object BindData(IEnumerable<Instrument> list, int start, int length)
+        private Object BindData(IEnumerable<DailyItem> list, int start, int length)
         {
             var result = new List<object>();
             var index = start + 1;
@@ -395,9 +395,9 @@ namespace WebApp.Areas.Admin.Controllers
         [Route("Create")]
         public ActionResult Create()
         {
-            if (CheckFunctionPermission(Constants.PERMISSION_INSTRUMENT_ADD))
+            if (CheckFunctionPermission(Constants.PERMISSION_DAILYITEM_ADD))
             {
-                ViewBag.InstrumentCategories = GetListInstrumentCategory();
+                ViewBag.DailyItemCategories = GetListDailyItemCategory();
                 ViewBag.Peoples = GetListPeople(true);
                 return View();
             }
@@ -425,35 +425,35 @@ namespace WebApp.Areas.Admin.Controllers
             return lstData;
         }
 
-        private List<SelectListItem> GetListInstrumentCategory(int? InstrumentCategoryId = null)
+        private List<SelectListItem> GetListDailyItemCategory(int? DailyItemCategoryId = null)
         {
-            Expression<Func<InstrumentCategory, bool>> query = x => x.Status == Enums.ActiveStatus.Active && x.Parent == null;
-            if (InstrumentCategoryId.HasValue)
+            Expression<Func<DailyItemCategory, bool>> query = x => x.Status == Enums.ActiveStatus.Active && x.Parent == null;
+            if (DailyItemCategoryId.HasValue)
             {
-                query = ExtensionMethod.AndAlso(query, x => x.Id != InstrumentCategoryId.Value);
+                query = ExtensionMethod.AndAlso(query, x => x.Id != DailyItemCategoryId.Value);
             }
             var companyData = new List<SelectListItem>();
-            foreach (var item in _InstrumentCategoryService.GetAll().Where(query.Compile()))
+            foreach (var item in _DailyItemCategoryService.GetAll().Where(query.Compile()))
             {
-                companyData.AddRange(CreateInstrumentCategory(item, InstrumentCategoryId));
+                companyData.AddRange(CreateDailyItemCategory(item, DailyItemCategoryId));
             }
 
             return companyData;
         }
 
-        private List<SelectListItem> CreateInstrumentCategory(InstrumentCategory InstrumentCategory, int? newsCategoryId, string prefix = "")
+        private List<SelectListItem> CreateDailyItemCategory(DailyItemCategory DailyItemCategory, int? newsCategoryId, string prefix = "")
         {
             var lstData = new List<SelectListItem>();
-            lstData.Add(new SelectListItem { Value = InstrumentCategory.Id.ToString(), Text = prefix + InstrumentCategory.Name });
-            foreach (var item in InstrumentCategory.Childrens)
+            lstData.Add(new SelectListItem { Value = DailyItemCategory.Id.ToString(), Text = prefix + DailyItemCategory.Name });
+            foreach (var item in DailyItemCategory.Childrens)
             {
                 if (newsCategoryId.HasValue && !item.Id.Equals(newsCategoryId.Value))
                 {
-                    lstData.AddRange(CreateInstrumentCategory(item, newsCategoryId, prefix + "---"));
+                    lstData.AddRange(CreateDailyItemCategory(item, newsCategoryId, prefix + "---"));
                 }
                 else if (!newsCategoryId.HasValue)
                 {
-                    lstData.AddRange(CreateInstrumentCategory(item, newsCategoryId, prefix + "---"));
+                    lstData.AddRange(CreateDailyItemCategory(item, newsCategoryId, prefix + "---"));
                 }
             }
             return lstData;
@@ -473,20 +473,20 @@ namespace WebApp.Areas.Admin.Controllers
 
         [HttpPost]
         [Route("Create")]
-        public ActionResult Create(InstrumentModel model)
+        public ActionResult Create(DailyItemModel model)
         {
-            if (CheckFunctionPermission(Constants.PERMISSION_INSTRUMENT_ADD))
+            if (CheckFunctionPermission(Constants.PERMISSION_DAILYITEM_ADD))
             {
                 if (ModelState.IsValid)
                 {
-                    _InstrumentService.Add(model);
-                    base.SuccessNotification("Thêm mới nhạc cụ thành công !");
+                    _DailyItemService.Add(model);
+                    base.SuccessNotification("Thêm mới vật dụng hàng ngày thành công !");
                     return RedirectToAction(nameof(Index));
                 }
                 else
                 {
                     ModelState.AddModelError("", "Bạn chưa nhập đủ thông tin bắt buộc");
-                    ViewBag.InstrumentCategories = GetListInstrumentCategory();
+                    ViewBag.DailyItemCategories = GetListDailyItemCategory();
                     ViewBag.Peoples = GetListPeople(true);
                     return View(model);
                 }
@@ -502,17 +502,17 @@ namespace WebApp.Areas.Admin.Controllers
         [Route("Edit")]
         public ActionResult Edit(int id)
         {
-            if (CheckFunctionPermission(Constants.PERMISSION_INSTRUMENT_EDIT))
+            if (CheckFunctionPermission(Constants.PERMISSION_DAILYITEM_EDIT))
             {
-                var data = _InstrumentService.GetById(id);
+                var data = _DailyItemService.GetById(id);
 
                 if (data != null)
                 {
-                    ViewBag.InstrumentCategories = GetListInstrumentCategory();
+                    ViewBag.DailyItemCategories = GetListDailyItemCategory();
                     ViewBag.Peoples = GetListPeople(true);
                     return View(data.ToModel());
                 }
-                base.ErrorNotification("Không tồn tại nhạc cụ!");
+                base.ErrorNotification("Không tồn tại vật dụng hàng ngày!");
                 return RedirectToAction(nameof(Index));
             }
             else
@@ -526,23 +526,23 @@ namespace WebApp.Areas.Admin.Controllers
         [HttpPost]
         [Route("Edit")]
         [AutoValidateAntiforgeryToken]
-        public ActionResult Edit(InstrumentModel model)
+        public ActionResult Edit(DailyItemModel model)
         {
-            if (CheckFunctionPermission(Constants.PERMISSION_INSTRUMENT_EDIT))
+            if (CheckFunctionPermission(Constants.PERMISSION_DAILYITEM_EDIT))
             {
                 if (ModelState.IsValid)
                 {
-                    var result = _InstrumentService.Update(model);
+                    var result = _DailyItemService.Update(model);
                     if (result.IsSuccess())
                     {
-                        base.SuccessNotification("Cập nhật nhạc cụ thành công");
+                        base.SuccessNotification("Cập nhật vật dụng hàng ngày thành công");
                         return RedirectToAction(nameof(Index));
                     }
                     else
                     {
                         base.ErrorNotification(result.Message);
                         ViewBag.Peoples = GetListPeople(true);
-                        ViewBag.InstrumentCategories = GetListInstrumentCategory();
+                        ViewBag.DailyItemCategories = GetListDailyItemCategory();
                         return View(model);
                     }
                 }
@@ -550,7 +550,7 @@ namespace WebApp.Areas.Admin.Controllers
                 {
                     ModelState.AddModelError("", "Bạn chưa nhập đủ thông tin bắt buộc");
                     ViewBag.Peoples = GetListPeople();
-                    ViewBag.InstrumentCategories = GetListInstrumentCategory();
+                    ViewBag.DailyItemCategories = GetListDailyItemCategory();
                     return View(model);
                 }
 
@@ -566,18 +566,18 @@ namespace WebApp.Areas.Admin.Controllers
         public ActionResult EditExcel(int id)
         {
 
-            if (CheckFunctionPermission(Constants.PERMISSION_INSTRUMENT_ADD))
+            if (CheckFunctionPermission(Constants.PERMISSION_DAILYITEM_ADD))
             {
                 var excel = new PeopleExcel(Log, _hostEnvironment.ContentRootPath, UserData.Id);
                 excel.Read();
                 var data = excel.Datas.FirstOrDefault(o => o.Id == id);
                 if (data != null)
                 {
-                    ViewBag.InstrumentCategories = GetListInstrumentCategory();
+                    ViewBag.DailyItemCategories = GetListDailyItemCategory();
                     ViewBag.Peoples = GetListPeople(true);
                     return View(data);
                 }
-                base.ErrorNotification("Không tồn tại nhạc cụ!");
+                base.ErrorNotification("Không tồn tại vật dụng hàng ngày!");
                 return RedirectToAction(nameof(ImportExcel));
             }
             else
@@ -590,17 +590,17 @@ namespace WebApp.Areas.Admin.Controllers
 
         [HttpPost]
         [Route("EditExcel")]
-        public ActionResult EditExcel(InstrumentModel model, int idExcel)
+        public ActionResult EditExcel(DailyItemModel model, int idExcel)
         {
-            if (CheckFunctionPermission(Constants.PERMISSION_INSTRUMENT_EDIT))
+            if (CheckFunctionPermission(Constants.PERMISSION_DAILYITEM_EDIT))
             {
                 if (ModelState.IsValid)
                 {
                     model.Id = 0;
-                    var result = _InstrumentService.Add(model);
+                    var result = _DailyItemService.Add(model);
                     if (result.IsSuccess())
                     {
-                        var excel = new InstrumentExcel(Log, _hostEnvironment.ContentRootPath, UserData.Id);
+                        var excel = new DailyItemExcel(Log, _hostEnvironment.ContentRootPath, UserData.Id);
                         excel.Read();
                         var data = excel.Datas.FirstOrDefault(o => o.Id == idExcel);
                         if (data != null)
@@ -608,21 +608,21 @@ namespace WebApp.Areas.Admin.Controllers
                             excel.Datas.Remove(data);
                             excel.Save();
                         }
-                        base.SuccessNotification("Thêm mới nhạc cụ từ excel thành công");
+                        base.SuccessNotification("Thêm mới vật dụng hàng ngày từ excel thành công");
                         return RedirectToAction(nameof(ImportExcel));
                     }
                     else
                     {
                         base.ErrorNotification(result.Message);
                         ViewBag.Peoples = GetListPeople(true);
-                        ViewBag.InstrumentCategories = GetListInstrumentCategory();
+                        ViewBag.DailyItemCategories = GetListDailyItemCategory();
                         return View(model);
                     }
                 }
                 else
                 {
                     ViewBag.Peoples = GetListPeople(true);
-                    ViewBag.InstrumentCategories = GetListInstrumentCategory();
+                    ViewBag.DailyItemCategories = GetListDailyItemCategory();
                     return View(model);
                 }
 
@@ -639,13 +639,13 @@ namespace WebApp.Areas.Admin.Controllers
         public JsonResult Delete(int id)
         {
             MessageResult message = new MessageResult();
-            if (CheckFunctionPermission(Constants.PERMISSION_INSTRUMENT_DELETE))
+            if (CheckFunctionPermission(Constants.PERMISSION_DAILYITEM_DELETE))
             {
                 message = new MessageResult();
-                message = _InstrumentService.Delete(id);
+                message = _DailyItemService.Delete(id);
                 if (message.IsSuccess())
                 {
-                    message.Message = "Xóa thành công nhạc cụ";
+                    message.Message = "Xóa thành công vật dụng hàng ngày";
                 }
             }
             else
@@ -661,7 +661,7 @@ namespace WebApp.Areas.Admin.Controllers
         public JsonResult DeleteExcel(int id)
         {
             MessageResult message = new MessageResult();
-            if (CheckFunctionPermission(Constants.PERMISSION_INSTRUMENT_ADD))
+            if (CheckFunctionPermission(Constants.PERMISSION_DAILYITEM_ADD))
             {
                 message = new MessageResult();
                 var excel = new PeopleExcel(Log, _hostEnvironment.ContentRootPath, UserData.Id);
@@ -671,7 +671,7 @@ namespace WebApp.Areas.Admin.Controllers
                 {
                     excel.Datas.Remove(data);
                     excel.Save();
-                    message.Message = "Xóa thành công nhạc cụ từ excel";
+                    message.Message = "Xóa thành công vật dụng hàng ngày từ excel";
                 }
             }
             else

@@ -54,6 +54,9 @@ builder.Services.AddTransient<InstrumentCategoryService>();
 builder.Services.AddTransient<InstrumentService>();
 builder.Services.AddTransient<LandmarkService>();
 
+builder.Services.AddTransient<DailyItemCategoryService>();
+builder.Services.AddTransient<DailyItemService>();
+
 builder.Services.AddSingleton<AdminSettingUtils>();
 builder.Services.AddSingleton<SettingUtils>();
 builder.Services.AddSingleton<MailUtils>();

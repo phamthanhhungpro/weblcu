@@ -1,6 +1,6 @@
 ﻿@using Datas.Models.ViewModels
 @{
-    var lstNews = (List<LandmarkModel>)ViewBag.Landmarks;
+    var lstNews = (List<DailyItemModel>)ViewBag.DailyItems;
     var currentPage = (int)ViewBag.CurrentPage;
     var maxPage = (int)ViewBag.MaxPage;
     var isSearch = (bool)ViewBag.IsSearch;
@@ -13,18 +13,18 @@
     var detailsNewsLink = "";
     if (string.IsNullOrEmpty(ViewBag.SubDomain))
     {
-        urlPrefix = "/di-tich";
+        urlPrefix = "/vat-dung-hang-ngay";
         detailsName = "Xem chi tiết";
         detailsEthnicMinorityLink = "/dan-toc/chi-tiet";
-        detailsTraditionalCostumeLink = "/di-tich/chi-tiet";
+        detailsTraditionalCostumeLink = "/vat-dung-hang-ngay/chi-tiet";
         detailsNewsLink = "/tin-tuc/chi-tiet";
     }
     else
     {
-        urlPrefix = "/landmark";
+        urlPrefix = "/dailyItem";
         detailsName = "Details";
         detailsEthnicMinorityLink = "/ethnic-minority/details";
-        detailsTraditionalCostumeLink = "/landmark/details";
+        detailsTraditionalCostumeLink = "/dailyItem/details";
         detailsNewsLink = "/news/details";
     }
     if (isSearch)
@@ -45,12 +45,12 @@
         @if (string.IsNullOrEmpty(ViewBag.SubDomain))
         {
             <div class="news-title">
-                <h1>Điểm đến di tích, danh lam</h1>
+                <h1>Vật dụng hàng ngày</h1>
             </div>
             <div class="news-search">
                 <div class="news-search-input">
-                    <form action="/di-tich/tim-kiem/">
-                        <input type="text" name="search" placeholder="Tìm kiếm Điểm đến di tích, danh lam...">
+                    <form action="/vat-dung-hang-ngay/tim-kiem/">
+                        <input type="text" name="search" placeholder="Tìm kiếm Vật dụng hàng ngày...">
                         <div class="news-search-btn">
                             <button style="border:none; background:transparent;" type="submit">
                                 <i class="fa-solid fa-magnifying-glass"></i>
@@ -64,12 +64,12 @@
         else
         {
             <div class="news-title">
-                <h1>Landmark</h1>
+                <h1>DailyItem</h1>
             </div>
             <div class="news-search">
                 <div class="news-search-input">
-                    <form action="/landmark/search/">
-                        <input type="text" name="search" placeholder="Search landmark...">
+                    <form action="/dailyItem/search/">
+                        <input type="text" name="search" placeholder="Search Daily Items...">
                         <div class="news-search-btn">
                             <button style="border:none; background:transparent;" type="submit">
                                 <i class="fa-solid fa-magnifying-glass"></i>
@@ -86,13 +86,13 @@
     @if (string.IsNullOrEmpty(ViewBag.SubDomain))
     {
         <div class="news-page-text">
-            <p>Điểm đến di tích, danh lam</p>
+            <p>Vật dụng hàng ngày</p>
         </div>
     }
     else
     {
         <div class="news-page-text">
-            <p>Landmark</p>
+            <p>DailyItem</p>
         </div>
     }
 

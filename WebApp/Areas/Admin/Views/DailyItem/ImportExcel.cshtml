@@ -1,0 +1,200 @@
+﻿@using Common
+@using Common.Entity.Permission
+@model IEnumerable<Datas.Models.ViewModels.DailyItemModel>
+@{
+    ViewBag.Title = "Danh sách vật dụng hàng ngày import excel";
+    var permission = (DailyItemPermission)ViewBag.Permission;
+    var date = (DateTime)ViewBag.Date;
+    var fileName = (string)ViewBag.FileName;
+}
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Danh sách vật dụng hàng ngày</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item">
+                            <a asp-area="Admin" asp-controller="Default" asp-action="Index">Trang chủ</a>
+                        </li>
+                        <li class="breadcrumb-item active">Danh sách vật dụng hàng ngày</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <!-- Main row -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        @if (permission.IsAdd)
+                        {
+                            <div class="card-header">
+                                <div class="float-right"><a class="btn btn-primary" asp-area="Admin" asp-controller="NationalCostume" asp-action="Create">Thêm mới</a></div>
+                            </div>
+                        }
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label " for="Title">Tải file mẫu:</label>
+                                            <a class="form-control text-box single-line" href="~/Content/template/H_Example.xlsx"><span class="fas fa fa-file-excel"></span> File mẫu dùng import  vật dụng hàng ngày</a>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label " for="Title">Ngày import:</label>
+                                            <div class="form-control text-box single-line" disabled="true">@date</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    @using (Html.BeginForm("ImportExcel", "NationalCostume", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                    {
+                                        <div class="form-group">
+                                            <label class="control-label " for="Title">Import mới:</label>
+                                            <input class="form-control text-box single-line" style="padding-top:3px;" type="file" name="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label " for="save">Tự động lưu:</label>
+                                            <input id="save" name="save" type="checkbox" value="true">
+                                        </div>
+                                        <button class="btn btn-success" type="submit">Tải lên</button>
+                                        if (ViewBag.CountAdd != null)
+                                        {
+                                            <label class="control-label" style="color:red;"> Đã lưu thành công @ViewBag.CountAdd  vật dụng hàng ngày.</label>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                            <div>
+                                <label class="control-label"> Danh sách chưa lưu: </label>
+                            </div>
+                            <div>
+
+                            </div>
+                            <table class="table table-bordered table-hover" id="list-company">
+                                <thead>
+                                    <tr style="text-align:center">
+                                        <th style="vertical-align:middle; text-align:center; width:5%">
+                                            Số TT
+                                        </th>
+                                        <th style="vertical-align:middle; text-align:center; width:10%">
+                                            Ảnh đại diện
+                                        </th>
+                                        <th style="vertical-align:middle; text-align:center; width:10%">
+                                            Tên  vật dụng hàng ngày
+                                        </th>
+                                        <th style="vertical-align:middle; text-align:center; width:10%">
+                                            vật dụng hàng ngày
+                                        </th>
+                                        <th style="vertical-align:middle; text-align:center; width:30%">
+                                            Chất liệu
+                                        </th>
+                                        <th style="vertical-align:middle; text-align:center; width:10%">
+                                           Trạng thái
+                                        </th>
+                                        <th style="vertical-align:middle; text-align:center; width:10%">
+                                            Thao tác
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        int index = 1;
+                                    }
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr class="row-@item.Id">
+                                            <td style="vertical-align:middle;text-align:center">
+                                                @index
+                                            </td>
+                                            <td style="vertical-align:middle;text-align:left">
+                                                <img src='@item.Image0' width='100' />
+                                            </td>
+                                            <td style="vertical-align:middle;text-align:left">
+                                                @Html.DisplayFor(modelItem => item.Name)
+                                            </td>
+                                            <td style="vertical-align:middle;text-align:center">
+                                                @item.GetPeopleName()
+                                            </td>
+                                            <td style="vertical-align:middle;text-align:center">
+                                                @Html.DisplayFor(modelItem => item.Material)
+                                            </td>
+                                            <td style="vertical-align:middle;text-align:center">
+                                                @{
+                                                    if (item.Status == Enums.ActiveStatus.Active)
+                                                    {
+                                                        <span class="label label-success">@item.Status.DisplayName()</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="label label-danger">@item.Status.DisplayName()</span>
+                                                    }
+                                                }
+                                            </td>
+                                            <td style="vertical-align:middle;text-align:center">
+                                                @if (permission.IsEdit)
+                                                {
+                                                    <a asp-action="EditExcel" asp-route-id="@item.Id" asp-area="Admin" class="fas fa fa-edit" style="margin-right:6px" data_toggle="tooltip" title="Chỉnh sửa dữ liệu">Thêm</a>
+                                                }
+                                                @if (permission.IsDelete)
+                                                {
+                                                    <a class="fas fa fa-trash"
+                                                       data-ajax="true"
+                                                       data-ajax-confirm="Bạn có muốn xóa dữ liệu này?"
+                                                       data-ajax-failure="OnFailure"
+                                                       data-ajax-loading="#ajax-loading"
+                                                       data-ajax-method="POST"
+                                                       data-ajax-success="onDelete(@item.Id,data)"
+                                                       data-toggle="tooltip"
+                                                       asp-action="DeleteExcel" asp-route-id="@item.Id" asp-area="Admin" asp-controller="NationalCostume"
+                                                       style="margin-right:6px"
+                                                       title=""
+                                                       data-original-title="Xóa dữ liệu danh sách"> Xóa</a>
+                                                }
+                                            </td>
+                                        </tr>
+                                        index++;
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.row (main row) -->
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+<script type="text/javascript">
+
+
+    $(function () {
+        $("#list-company").dataTable({
+            "language": {
+                "url": "/plugins/datatables/Vietnamese.json"
+            }
+        });
+    });
+
+    function onDelete(id, data) {
+        if (data.code == 0) {
+            $(".row-" + id + "").hide();
+            toastr.success("Xóa thành công");
+        }
+        else {
+            toastr.error("Lỗi: " + data.message);
+        }
+    };
+</script>
