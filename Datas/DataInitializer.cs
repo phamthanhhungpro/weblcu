@@ -280,7 +280,7 @@ namespace Datas
                     ("Sửa", Common.Constants.PERMISSION_INSTRUMENT_CATEGORY_EDIT),
                     ("Xóa", Common.Constants.PERMISSION_INSTRUMENT_CATEGORY_DELETE)
                 ]);
-
+            
             AddGroupFunctionWithFunctions(
                 Enums.GroupFunctionType.Instrument,
                 "Nhạc cụ",
@@ -339,7 +339,7 @@ namespace Datas
                     ("Xóa", Common.Constants.PERMISSION_FESTIVAL_DELETE),
                     ("Hiển thị", Common.Constants.PERMISSION_FESTIVAL_SHOW),
                 ]);
-
+          
             AddGroupFunctionWithFunctions(
                 Enums.GroupFunctionType.Travel,
                 "Hoạt động du lịch",
@@ -351,7 +351,7 @@ namespace Datas
                     ("Xóa", Common.Constants.PERMISSION_TRAVEL_DELETE),
                     ("Hiển thị", Common.Constants.PERMISSION_TRAVEL_SHOW),
                 ]);
-
+            
             AddGroupFunctionWithFunctions(
                 Enums.GroupFunctionType.Landmark,
                 "Điểm đến di tích, danh lam",
@@ -385,6 +385,29 @@ namespace Datas
                     ("Sửa", Common.Constants.PERMISSION_JEWELRY_EDIT),
                     ("Xóa", Common.Constants.PERMISSION_JEWELRY_DELETE),
                     ("Hiển thị", Common.Constants.PERMISSION_JEWELRY_SHOW),
+                ]);
+            
+            AddGroupFunctionWithFunctions(
+                Enums.GroupFunctionType.DailyItemCategory,
+                "Danh mục vật dụng hàng ngày",
+                30,
+                [
+                    ("Xem", Common.Constants.PERMISSION_DAILYITEM_CATEGORY_VIEW),
+                    ("Thêm mới", Common.Constants.PERMISSION_DAILYITEM_CATEGORY_ADD),
+                    ("Sửa", Common.Constants.PERMISSION_DAILYITEM_CATEGORY_EDIT),
+                    ("Xóa", Common.Constants.PERMISSION_DAILYITEM_CATEGORY_DELETE)
+                ]);
+
+            AddGroupFunctionWithFunctions(
+                Enums.GroupFunctionType.DailyItem,
+                "Vật dụng hàng ngày",
+                14,
+                [
+                    ("Xem", Common.Constants.PERMISSION_DAILYITEM_VIEW),
+                    ("Thêm mới", Common.Constants.PERMISSION_DAILYITEM_ADD),
+                    ("Sửa", Common.Constants.PERMISSION_DAILYITEM_EDIT),
+                    ("Xóa", Common.Constants.PERMISSION_DAILYITEM_DELETE),
+                    ("Hiển thị", Common.Constants.PERMISSION_DAILYITEM_SHOW),
                 ]);
         }
 

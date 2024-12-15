@@ -1,8 +1,8 @@
 ﻿@using Datas.Models.ViewModels
 @using System.Net
-@model LandmarkModel
+@model DailyItemModel
 @{
-    var lstLandmark = (List<LandmarkModel>)ViewBag.OtherLandmark;
+    var lstDailyItem = (List<DailyItemModel>)ViewBag.OtherDailyItem;
     var detailsName = "Xem chi tiết";
     var detailsEthnicMinorityLink = "";
     var detailLink = "";
@@ -11,14 +11,14 @@
     {
         detailsName = "Xem chi tiết";
         detailsEthnicMinorityLink = "/dan-toc/chi-tiet";
-        detailLink = "/di-tich/chi-tiet";
+        detailLink = "/vat-dung-hang-ngay/chi-tiet";
         detailsNewsLink = "/tin-tuc/chi-tiet";
     }
     else
     {
         detailsName = "Details";
         detailsEthnicMinorityLink = "/ethnic-minority/details";
-        detailLink = "/landmark/details";
+        detailLink = "/dailyItem/details";
         detailsNewsLink = "/news/details";
     }
     var url = ViewBag.Host + detailLink + "/" + Model.Url;
@@ -40,12 +40,12 @@
             <div class="artifacts-title">
                 @if (string.IsNullOrEmpty(ViewBag.SubDomain))
                 {
-                    <h2>Điểm đến di tích, danh lam</h2>
+                    <h2>Vật dụng hàng ngày</h2>
                 }
                 else
                 {
 
-                    <h2>Landmark</h2>
+                    <h2>DailyItem</h2>
                 }
             </div>
             <div class="row mb-4">
@@ -200,7 +200,7 @@
                         <h3>@Model.Name</h3>
                     </div>
                     <div class="artifacts-infor">
-                        <p><span>Điểm đến di tích, danh lam: </span>@Model.GetPeopleName()</p>
+                        <p><span>Vật dụng hàng ngày: </span>@Model.GetPeopleName()</p>
                         @if (!string.IsNullOrEmpty(Model.Code))
                         {
                             <p><span>Kí hiệu, mã số ảnh: </span>@Model.Code</p>
@@ -316,7 +316,7 @@
     </div>
 </section>
 <section id="artifacts-other">
-    @if (lstLandmark.Count > 0)
+    @if (lstDailyItem.Count > 0)
     {
         <div class="container">
             @if (string.IsNullOrEmpty(ViewBag.SubDomain))
@@ -328,7 +328,7 @@
                 <h3>Other tools</h3>
             }
             <div class="slide-artifacts-other">
-                @foreach (var item in lstLandmark)
+                @foreach (var item in lstDailyItem)
                 {
                     <div class="items-artifacts">
                         <div class="artifacts-img">

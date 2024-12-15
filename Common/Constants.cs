@@ -179,5 +179,17 @@ namespace Common
         public static readonly string PERMISSION_JEWELRY_EDIT = "PERMISSION_JEWELRY_EDIT";
         public static readonly string PERMISSION_JEWELRY_DELETE = "PERMISSION_JEWELRY_DELETE";
         public static readonly string PERMISSION_JEWELRY_SHOW = "PERMISSION_JEWELRY_SHOW";
+        
+        
+        public static readonly string PERMISSION_DAILYITEM_CATEGORY_VIEW = "PERMISSION_DAILYITEM_CATEGORY_VIEW";
+        public static readonly string PERMISSION_DAILYITEM_CATEGORY_ADD = "PERMISSION_DAILYITEM_CATEGORY_ADD";
+        public static readonly string PERMISSION_DAILYITEM_CATEGORY_EDIT = "PERMISSION_DAILYITEM_CATEGORY_EDIT";
+        public static readonly string PERMISSION_DAILYITEM_CATEGORY_DELETE = "PERMISSION_DAILYITEM_CATEGORY_DELETE";
+        
+        public static readonly string PERMISSION_DAILYITEM_VIEW = "PERMISSION_DAILYITEM_VIEW";
+        public static readonly string PERMISSION_DAILYITEM_ADD = "PERMISSION_DAILYITEM_ADD";
+        public static readonly string PERMISSION_DAILYITEM_EDIT = "PERMISSION_DAILYITEM_EDIT";
+        public static readonly string PERMISSION_DAILYITEM_DELETE = "PERMISSION_DAILYITEM_DELETE";
+        public static readonly string PERMISSION_DAILYITEM_SHOW = "PERMISSION_DAILYITEM_SHOW";
     }
 }

@@ -421,6 +421,30 @@ namespace WebApp.Areas.Admin.Controllers
                                             Constants.PERMISSION_JEWELRY_ADD,
                                             "fa fa-gem");
                                 break;
+                            
+                            case Enums.GroupFunctionType.DailyItemCategory:
+                                AddMenuItem(ref lstMenu,
+                                    controllerName,
+                                    "DailyItemCategory",
+                                    group,
+                                    functionResult.Value,
+                                    url,
+                                    Constants.PERMISSION_DAILYITEM_CATEGORY_VIEW,
+                                    Constants.PERMISSION_DAILYITEM_CATEGORY_ADD,
+                                    "fa fa-mortar-pestle");
+                                break;
+                            
+                            case Enums.GroupFunctionType.DailyItem:
+                                AddMenuItem(ref lstMenu,
+                                    controllerName,
+                                    "DailyItem",
+                                    group,
+                                    functionResult.Value,
+                                    url,
+                                    Constants.PERMISSION_DAILYITEM_VIEW,
+                                    Constants.PERMISSION_DAILYITEM_ADD,
+                                    "fa fa-mortar-pestle");
+                                break;
 
                             default:
                                 break;

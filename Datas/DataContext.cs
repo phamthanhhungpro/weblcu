@@ -44,6 +44,9 @@ namespace Datas
         public DbSet<Festival> Festivals { set; get; }
         public DbSet<Landmark> Landmarks { set; get; }
         public DbSet<Travel> Travels { set; get; }
+        
+        public DbSet<DailyItem> DailyItems { set; get; }
+        public DbSet<DailyItemCategory> DailyItemCategories { set; get; }
 
         public DbSet<JewelryCategory> JewelryCategories { set; get; }
         public DbSet<Jewelry> Jewelries { set; get; }

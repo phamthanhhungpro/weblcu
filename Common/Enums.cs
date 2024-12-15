@@ -75,6 +75,8 @@ namespace Common
             Landmark = 27,
             JewelryCategory = 28,
             Jewelry = 29,
+            DailyItemCategory = 30,
+            DailyItem = 31,
         }
 
         public enum ErrorCode
