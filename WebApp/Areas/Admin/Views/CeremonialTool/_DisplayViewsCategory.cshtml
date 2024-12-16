@@ -1,0 +1,9 @@
+@model Datas.Models.ViewModels.CeremonialToolModel
+<div class="form-group">
+    <label asp-for="CategoryId" class="control-label"></label> <span class="text-danger">(*)</span>
+    <select class="form-control" asp-for="CategoryId" asp-items="(IEnumerable<SelectListItem>)ViewBag.CeremonialToolCategories">
+        <option value="">---Chọn loại dụng cụ nghi lễ---</option>
+    </select>
+    <input type="hidden" asp-for="CategoryId" />
+    <span asp-validation-for="CategoryId" class="text-danger"></span>
+</div>

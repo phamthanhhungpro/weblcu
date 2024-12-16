@@ -50,6 +50,9 @@ namespace Datas
 
         public DbSet<JewelryCategory> JewelryCategories { set; get; }
         public DbSet<Jewelry> Jewelries { set; get; }
+        
+        public DbSet<CeremonialToolCategory> CeremonialToolCategories { set; get; }
+        public DbSet<CeremonialTool> CeremonialTools { set; get; }
 
 
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

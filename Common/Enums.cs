@@ -77,6 +77,8 @@ namespace Common
             Jewelry = 29,
             DailyItemCategory = 30,
             DailyItem = 31,
+            CeremonialToolCategory = 32,
+            CeremonialTool = 33,
         }
 
         public enum ErrorCode

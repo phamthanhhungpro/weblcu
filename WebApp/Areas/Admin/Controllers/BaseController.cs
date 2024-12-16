@@ -445,6 +445,30 @@ namespace WebApp.Areas.Admin.Controllers
                                     Constants.PERMISSION_DAILYITEM_ADD,
                                     "fa fa-mortar-pestle");
                                 break;
+                            
+                            case Enums.GroupFunctionType.CeremonialToolCategory:
+                                AddMenuItem(ref lstMenu,
+                                    controllerName,
+                                    "CeremonialToolCategory",
+                                    group,
+                                    functionResult.Value,
+                                    url,
+                                    Constants.PERMISSION_CEREMONIALTOOL_CATEGORY_VIEW,
+                                    Constants.PERMISSION_CEREMONIALTOOL_CATEGORY_ADD,
+                                    "fa fa-mortar-pestle");
+                                break;
+                            
+                            case Enums.GroupFunctionType.CeremonialTool:
+                                AddMenuItem(ref lstMenu,
+                                    controllerName,
+                                    "CeremonialTool",
+                                    group,
+                                    functionResult.Value,
+                                    url,
+                                    Constants.PERMISSION_CEREMONIALTOOL_VIEW,
+                                    Constants.PERMISSION_CEREMONIALTOOL_ADD,
+                                    "fa fa-mortar-pestle");
+                                break;
 
                             default:
                                 break;

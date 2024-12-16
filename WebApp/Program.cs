@@ -53,6 +53,8 @@ builder.Services.AddTransient<JewelryService>();
 builder.Services.AddTransient<InstrumentCategoryService>();
 builder.Services.AddTransient<InstrumentService>();
 builder.Services.AddTransient<LandmarkService>();
+builder.Services.AddTransient<CeremonialToolService>();
+builder.Services.AddTransient<CeremonialToolCategoryService>();
 
 builder.Services.AddTransient<DailyItemCategoryService>();
 builder.Services.AddTransient<DailyItemService>();

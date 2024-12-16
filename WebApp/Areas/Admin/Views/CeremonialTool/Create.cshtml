@@ -1,0 +1,72 @@
+﻿@model Datas.Models.ViewModels.CeremonialToolModel
+
+@{
+    ViewBag.Title = "Thêm mới dụng cụ nghi lễ";
+}
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Thêm mới dụng cụ nghi lễ</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item">
+                            <a asp-area="Admin" asp-controller="Default" asp-action="Index">Trang chủ</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a asp-area="Admin" asp-controller="CeremonialTool" asp-action="Index">Danh sách</a>
+                        </li>
+                        <li class="breadcrumb-item active">
+                            <a asp-area="Admin" asp-controller="CeremonialTool" asp-action="Create">Thêm mới</a>
+                        </li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <!-- Main row -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="float-left">
+                                <span>Trường có dấu <span class="text-danger">(*)</span> là bắt buộc</span>
+                            </div>
+                            <div class="float-right">
+                                <a asp-area="Admin" asp-controller="CeremonialTool" asp-action="Index" class="btn btn-primary">Danh sách</a>
+                            </div>
+                        </div>
+                        <form asp-action="Create" asp-controller="CeremonialTool" asp-area="Admin">
+                            <div class="card-body">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                @Html.Partial("_CreateOrEdit")
+                            </div>
+                            <div class="card-footer">
+                                <div class="form-group">
+                                    <input type="submit" value="Thêm mới" class="btn btn-primary" />
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.row (main row) -->
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+

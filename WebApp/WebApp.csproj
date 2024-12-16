@@ -34,6 +34,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <AdditionalFiles Include="Areas\Admin\Views\CeremonialToolCategory\Create.cshtml" />
+    <AdditionalFiles Include="Areas\Admin\Views\CeremonialToolCategory\Edit.cshtml" />
+    <AdditionalFiles Include="Areas\Admin\Views\CeremonialToolCategory\Index.cshtml" />
+    <AdditionalFiles Include="Areas\Admin\Views\CeremonialToolCategory\_CreateOrEdit.cshtml" />
+    <AdditionalFiles Include="Areas\Admin\Views\CeremonialTool\EditExcel.cshtml" />
+    <AdditionalFiles Include="Areas\Admin\Views\CeremonialTool\ImportExcel.cshtml" />
+    <AdditionalFiles Include="Areas\Admin\Views\CeremonialTool\_AttachmentData.cshtml" />
+    <AdditionalFiles Include="Areas\Admin\Views\CeremonialTool\_DisplayInstrumentCategory.cshtml" />
+    <AdditionalFiles Include="Areas\Admin\Views\CeremonialTool\_DisplayPeople.cshtml" />
+    <AdditionalFiles Include="Areas\Admin\Views\CeremonialTool\_ImageData.cshtml" />
+    <AdditionalFiles Include="Areas\Admin\Views\CeremonialTool\_InfoData.cshtml" />
     <AdditionalFiles Include="Areas\Admin\Views\DailyItemCategory\Create.cshtml" />
     <AdditionalFiles Include="Areas\Admin\Views\DailyItemCategory\Edit.cshtml" />
     <AdditionalFiles Include="Areas\Admin\Views\DailyItemCategory\Index.cshtml" />

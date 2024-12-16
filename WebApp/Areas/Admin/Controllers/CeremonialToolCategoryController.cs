@@ -13,17 +13,17 @@ namespace WebApp.Areas.Admin.Controllers
 {
     [Area(nameof(Admin))]
     [Route(nameof(Admin) + "/[controller]")]
-    public class InstrumentCategoryController : BaseController<InstrumentCategoryController>
+    public class CeremonialToolCategoryController : BaseController<CeremonialToolCategoryController>
     
     {
 
-        private readonly InstrumentCategoryService _instrumentCategoryService;
-        public InstrumentCategoryController(ILogger<InstrumentCategoryController> logger,
+        private readonly CeremonialToolCategoryService _ceremonialToolCategoryService;
+        public CeremonialToolCategoryController(ILogger<CeremonialToolCategoryController> logger,
             AuthenUtils authenUtils,
             LogService logService,
-            InstrumentCategoryService instrumentCategoryService) : base(logger, authenUtils, logService)
+            CeremonialToolCategoryService ceremonialToolCategoryService) : base(logger, authenUtils, logService)
         {
-            _instrumentCategoryService = instrumentCategoryService;
+            _ceremonialToolCategoryService = ceremonialToolCategoryService;
         }
 
         [HttpGet]
@@ -32,14 +32,14 @@ namespace WebApp.Areas.Admin.Controllers
         public ActionResult Index()
         {
             var permission = new PermissionInfo();
-            if (CheckFunctionPermission(Constants.PERMISSION_INSTRUMENT_CATEGORY_VIEW))
+            if (CheckFunctionPermission(Constants.PERMISSION_CEREMONIALTOOL_CATEGORY_VIEW))
             {
                 permission.IsView = true;
-                permission.IsAdd = CheckFunctionPermission(Constants.PERMISSION_INSTRUMENT_CATEGORY_ADD);
-                permission.IsEdit = CheckFunctionPermission(Constants.PERMISSION_INSTRUMENT_CATEGORY_EDIT);
-                permission.IsDelete = CheckFunctionPermission(Constants.PERMISSION_INSTRUMENT_CATEGORY_DELETE);
+                permission.IsAdd = CheckFunctionPermission(Constants.PERMISSION_CEREMONIALTOOL_CATEGORY_ADD);
+                permission.IsEdit = CheckFunctionPermission(Constants.PERMISSION_CEREMONIALTOOL_CATEGORY_EDIT);
+                permission.IsDelete = CheckFunctionPermission(Constants.PERMISSION_CEREMONIALTOOL_CATEGORY_DELETE);
                 ViewBag.Permission = permission;
-                var list = _instrumentCategoryService.GetAll().ToList();
+                var list = _ceremonialToolCategoryService.GetAll().ToList();
                 return View(list);
             }
             else
@@ -52,17 +52,17 @@ namespace WebApp.Areas.Admin.Controllers
         // CREATE
         [HttpPost]
         [Route("Create")]
-        public ActionResult Create(InstrumentCategory model)
+        public ActionResult Create(CeremonialToolCategory model)
         {
-            if (CheckFunctionPermission(Constants.PERMISSION_INSTRUMENT_CATEGORY_ADD))
+            if (CheckFunctionPermission(Constants.PERMISSION_CEREMONIALTOOL_CATEGORY_ADD))
             {
                 if (ModelState.IsValid)
                 {
-                    _instrumentCategoryService.Add(model);
-                    base.SuccessNotification("Thêm danh mục nhạc cụ thành công !");
+                    _ceremonialToolCategoryService.Add(model);
+                    base.SuccessNotification("Thêm danh mục dụng cụ nghi lễ thành công !");
                     return RedirectToAction(nameof(Index));
                 }
-                base.ErrorNotification("Thêm danh mục nhạc cụ thất bại !");
+                base.ErrorNotification("Thêm danh mục dụng cụ nghi lễ thất bại !");
                 return View(model);
             }
             base.ErrorNotification("Tài khoản không được cấp quyền này");
@@ -73,9 +73,9 @@ namespace WebApp.Areas.Admin.Controllers
         [Route("Create")]
         public ActionResult Create()
         {
-            if (CheckFunctionPermission(Constants.PERMISSION_INSTRUMENT_CATEGORY_ADD))
+            if (CheckFunctionPermission(Constants.PERMISSION_CEREMONIALTOOL_CATEGORY_ADD))
             {
-                ViewBag.InstrumentCategories = GetData();
+                ViewBag.CeremonialToolCategories = GetData();
                 return View();
             }
             else
@@ -90,15 +90,15 @@ namespace WebApp.Areas.Admin.Controllers
         [Route("Edit/{id}")]
         public ActionResult Edit(int id)
         {
-            if (CheckFunctionPermission(Constants.PERMISSION_INSTRUMENT_CATEGORY_EDIT))
+            if (CheckFunctionPermission(Constants.PERMISSION_CEREMONIALTOOL_CATEGORY_EDIT))
             {
-                var model = _instrumentCategoryService.GetById(id);
+                var model = _ceremonialToolCategoryService.GetById(id);
                 if (model == null)
                 {
-                    base.ErrorNotification("Danh mục nhạc cụ không tồn tại !");
+                    base.ErrorNotification("Danh mục dụng cụ nghi lễ không tồn tại !");
                     return RedirectToAction(nameof(Index));
                 }
-                ViewBag.InstrumentCategories = GetData(id);
+                ViewBag.CeremonialToolCategories = GetData(id);
                 return View(model.ToModel());
             }
             else
@@ -110,18 +110,18 @@ namespace WebApp.Areas.Admin.Controllers
 
         [HttpPost]
         [Route("Edit/{id}")]
-        public ActionResult Edit(InstrumentCategory model)
+        public ActionResult Edit(CeremonialToolCategory model)
         {
-            if (CheckFunctionPermission(Constants.PERMISSION_INSTRUMENT_CATEGORY_EDIT))
+            if (CheckFunctionPermission(Constants.PERMISSION_CEREMONIALTOOL_CATEGORY_EDIT))
             {
                 if (ModelState.IsValid)
                 {
-                    _instrumentCategoryService.Update(model);
-                    base.SuccessNotification("Cập nhật danh mục nhạc cụ thành công !");
+                    _ceremonialToolCategoryService.Update(model);
+                    base.SuccessNotification("Cập nhật danh mục dụng cụ nghi lễ thành công !");
                     return RedirectToAction(nameof(Index));
                 }
-                base.ErrorNotification("Cập nhật danh mục nhạc cụ thất bại !");
-                ViewBag.InstrumentCategories = GetData(model.Id);
+                base.ErrorNotification("Cập nhật danh mục dụng cụ nghi lễ thất bại !");
+                ViewBag.CeremonialToolCategories = GetData(model.Id);
                 return View(model);
             }
             base.ErrorNotification("Tài khoản không được cấp quyền này");
@@ -134,12 +134,12 @@ namespace WebApp.Areas.Admin.Controllers
         public JsonResult Delete(int id)
         {
             MessageResult message = new MessageResult();
-            if (CheckFunctionPermission(Constants.PERMISSION_INSTRUMENT_CATEGORY_DELETE))
+            if (CheckFunctionPermission(Constants.PERMISSION_CEREMONIALTOOL_CATEGORY_DELETE))
             {
-                message = _instrumentCategoryService.Delete(id);
+                message = _ceremonialToolCategoryService.Delete(id);
                 if (message.IsSuccess())
                 {
-                    message.Message = "Xóa thành công danh mục nhạc cụ";
+                    message.Message = "Xóa thành công danh mục dụng cụ nghi lễ";
                 }
             }
             else
@@ -152,14 +152,14 @@ namespace WebApp.Areas.Admin.Controllers
         // CRUD method
         private List<SelectListItem> GetData(int? id = null)
         {
-            Expression<Func<InstrumentCategory, bool>> query = x => x.Status == Enums.ActiveStatus.Active && x.Parent == null;
+            Expression<Func<CeremonialToolCategory, bool>> query = x => x.Status == Enums.ActiveStatus.Active && x.Parent == null;
             if (id.HasValue)
             {
                 query = ExtensionMethod.AndAlso(query, x => x.Id != id.Value);
             }
             var data = new List<SelectListItem>();
 
-            foreach (var item in _instrumentCategoryService.GetAll().Where(query.Compile()))
+            foreach (var item in _ceremonialToolCategoryService.GetAll().Where(query.Compile()))
             {
                 data.AddRange(CreateData(item, id));
             }
@@ -167,7 +167,7 @@ namespace WebApp.Areas.Admin.Controllers
             return data;
         }
 
-        private List<SelectListItem> CreateData(InstrumentCategory model, int? id, string prefix = "")
+        private List<SelectListItem> CreateData(CeremonialToolCategory model, int? id, string prefix = "")
         {
             var data = new List<SelectListItem>();
             data.Add(new SelectListItem { Value = model.Id.ToString(), Text = prefix + model.Name });
