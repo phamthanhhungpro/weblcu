@@ -46,5 +46,8 @@ namespace Datas.Models.ViewModels
         
         [Display(Name = "Vật dụng hàng ngày")]
         public int? DailyItemId { set; get; }
+        
+        [Display(Name = "Dụng cụ nghi lễ")]
+        public int? CeremonialToolId { set; get; }
     }
 }

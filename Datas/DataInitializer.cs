@@ -409,6 +409,29 @@ namespace Datas
                     ("Xóa", Common.Constants.PERMISSION_DAILYITEM_DELETE),
                     ("Hiển thị", Common.Constants.PERMISSION_DAILYITEM_SHOW),
                 ]);
+            
+            AddGroupFunctionWithFunctions(
+                Enums.GroupFunctionType.CeremonialToolCategory,
+                "Danh mục dụng cụ nghi lễ",
+                31,
+                [
+                    ("Xem", Common.Constants.PERMISSION_CEREMONIALTOOL_CATEGORY_VIEW),
+                    ("Thêm mới", Common.Constants.PERMISSION_CEREMONIALTOOL_CATEGORY_ADD),
+                    ("Sửa", Common.Constants.PERMISSION_CEREMONIALTOOL_CATEGORY_EDIT),
+                    ("Xóa", Common.Constants.PERMISSION_CEREMONIALTOOL_CATEGORY_DELETE)
+                ]);
+
+            AddGroupFunctionWithFunctions(
+                Enums.GroupFunctionType.CeremonialTool,
+                "Dụng cụ nghi lễ",
+                15,
+                [
+                    ("Xem", Common.Constants.PERMISSION_CEREMONIALTOOL_VIEW),
+                    ("Thêm mới", Common.Constants.PERMISSION_CEREMONIALTOOL_ADD),
+                    ("Sửa", Common.Constants.PERMISSION_CEREMONIALTOOL_EDIT),
+                    ("Xóa", Common.Constants.PERMISSION_CEREMONIALTOOL_DELETE),
+                    ("Hiển thị", Common.Constants.PERMISSION_CEREMONIALTOOL_SHOW),
+                ]);
         }
 
         private void AddGroupFunctionWithFunctions(Enums.GroupFunctionType type, string groupName, int order, List<(string Name, string FunctionCode)> functions)

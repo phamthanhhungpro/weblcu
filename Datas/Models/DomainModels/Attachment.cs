@@ -70,6 +70,11 @@ namespace Datas.Models.DomainModels
         public int? DailyItemId { set; get; }
         [Display(Name = "Vật dụng hàng ngày")]
         public virtual DailyItem? DailyItem { set; get; }
+        
+        [Display(Name = "Dụng cụ nghi lễ")]
+        public int? CeremonialToolId { set; get; }
+        [Display(Name = "Dụng cụ nghi lễ")]
+        public virtual CeremonialTool? CeremonialTool { set; get; }
 
 
         public AttachmentModel ToAttachmentModel()
@@ -90,6 +95,7 @@ namespace Datas.Models.DomainModels
                 LandmarkId = LandmarkId,
                 TravelId = TravelId,
                 DailyItemId = DailyItemId,
+                CeremonialToolId = CeremonialToolId,
             };
             
             return data;
