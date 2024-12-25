@@ -5,10 +5,11 @@
 <div class="top-menu" id="fixedNav">
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="@Url.Action("Index","Home")">
+            <a class="navbar-brand" href="@Url.Action("Index", "Home")">
                 <img src="~/fe/images/logo.png" alt="">
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav" style="justify-content: start">
@@ -16,12 +17,15 @@
                     @if (string.IsNullOrEmpty(ViewBag.SubDomain))
                     {
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="@Url.Action("Index","Home")">Trang chủ</a>
+                            <a class="nav-link active" aria-current="page" href="@Url.Action("Index", "Home")">Trang
+                                chủ</a>
                         </li>
 
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                               aria-expanded="false">
                                 Dân tộc thiểu số
+                                <i class="fa-solid fa-chevron-down dropdown-icon"></i>
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="/dan-toc">Danh sách dân tộc</a></li>
@@ -29,14 +33,14 @@
                                 <li><a class="dropdown-item" href="/nhac-cu">Nhạc cụ</a></li>
                                 <li><a class="dropdown-item" href="/cong-cu-san-xuat">Công cụ sản xuất</a></li>
                                 <li><a class="dropdown-item" href="/phong-tuc-tap-quan">Phong tục tập quán</a></li>
-                                <li><a class="dropdown-item" href="/le-hoi-van-hoa">Lễ hội văn hóa</a></li>
-                                <li><a class="dropdown-item" href="/hoat-dong-du-lich">Hoạt động du lịch</a></li>
-                                <li><a class="dropdown-item" href="/di-tich-lich-su">Di tích lịch sử</a></li>
+                                <li><a class="dropdown-item" href="/di-tich">Di tích lịch sử</a></li>
                                 <li><a class="dropdown-item" href="/trang-suc">Trang sức</a></li>
                                 <li><a class="dropdown-item" href="/vat-dung-hang-ngay">Vật dụng hàng ngày</a></li>
                                 <li><a class="dropdown-item" href="/dung-cu-nghi-le">Dụng cụ nghi lễ</a></li>
                             </ul>
                         </li>
+                        <li class="nav-item"><a class="nav-link" href="/le-hoi-van-hoa">Lễ hội văn hóa</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/hoat-dong-du-lich">Hoạt động du lịch</a></li>
                         <li class="nav-item">
                             <a class="nav-link" href="/tin-tuc">Tin tức - Sự kiện</a>
                         </li>
@@ -46,8 +50,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/lien-he">Liên hệ</a>
                         </li>
-                        <li class="nav-item dropdown" >
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                               aria-expanded="false">
                                 <i class="fa-solid fa-star"></i>
                                 <i class="fa-solid fa-chevron-down dropdown-icon"></i>
 
@@ -61,36 +66,30 @@
                     else
                     {
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="@Url.Action("Index","Home")">Home</a>
+                            <a class="nav-link active" aria-current="page" href="@Url.Action("Index", "Home")">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/ethnic-minority">List Of Ethnic Minority</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/traditional-costume">Traditional Costume</a>
-                        </li>
-
+                        
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                More
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                               aria-expanded="false">
+                                Ethnic minorities
+                                <i class="fa-solid fa-chevron-down dropdown-icon"></i>
                             </a>
                             <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/ethnic-minority">Ethnic Minority</a></li>
+                                <li><a class="dropdown-item" href="/traditional-costume">Traditional Costume</a></li>
                                 <li><a class="dropdown-item" href="/instrument">Instrument</a></li>
                                 <li><a class="dropdown-item" href="/produce-tool">Produce Tool</a></li>
                                 <li><a class="dropdown-item" href="/customs-tradition">Customs Tradition</a></li>
-                                <li><a class="dropdown-item" href="/festival">Festival</a></li>
                                 <li><a class="dropdown-item" href="/landmark">Landmark</a></li>
-                                <li><a class="dropdown-item" href="/travel">Travel</a></li>
                                 <li><a class="dropdown-item" href="/jewelry">Jewelry</a></li>
-
+                                <li><a class="dropdown-item" href="/dailyItem">Daily Item</a></li>
+                                <li><a class="dropdown-item" href="/ceremonialTool">Ceremonial Tool</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/dailyItem">Daily Item</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/ceremonialTool">Ceremonial Tool</a>
-                        </li>
+                        <li class="nav-item"><a class="nav-link" href="/festival">Festival</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/travel">Travel</a></li>
+                        
                         <li class="nav-item">
                             <a class="nav-link" href="/news">News And Events</a>
                         </li>
@@ -101,7 +100,8 @@
                             <a class="nav-link" href="/contact">Contact</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                               aria-expanded="false">
                                 <i class="fa-solid fa-star"></i>
                                 <i class="fa-solid fa-chevron-down dropdown-icon"></i>
 
