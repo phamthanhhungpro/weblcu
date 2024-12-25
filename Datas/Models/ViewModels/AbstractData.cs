@@ -20,7 +20,7 @@ namespace Datas.Models.ViewModels
 
     public class BaseModelViewModel : AbstractData
     {
-        [Display(Name = "Ký hiệu, mã số ảnh")]
+        [Display(Name = "Ký hiệu, mã số")]
         public string? Code { set; get; }
 
         [Display(Name = "Dịp sử dụng")]

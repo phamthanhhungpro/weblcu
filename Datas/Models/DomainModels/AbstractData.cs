@@ -37,7 +37,7 @@ namespace Datas.Models.DomainModels
     public class BaseModel : AbstractData
     {
 
-        [Display(Name = "Ký hiệu, mã số ảnh")]
+        [Display(Name = "Ký hiệu, mã số")]
         public string? Code { set; get; }
 
         [Display(Name = "Dịp sử dụng")]

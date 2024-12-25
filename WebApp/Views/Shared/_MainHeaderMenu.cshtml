@@ -11,32 +11,30 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
+            <div class="collapse navbar-collapse" id="navbarNav" style="justify-content: start">
                 <ul class="navbar-nav">
                     @if (string.IsNullOrEmpty(ViewBag.SubDomain))
                     {
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="@Url.Action("Index","Home")">Trang chủ</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/dan-toc">Danh mục dân tộc thiểu số</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/trang-phuc">Trang phục truyền thống</a>
-                        </li>
 
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Khám phá thêm
+                                Dân tộc thiểu số
                             </a>
                             <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/dan-toc">Danh sách dân tộc</a></li>
+                                <li><a class="dropdown-item" href="/trang-phuc">Trang phục</a></li>
                                 <li><a class="dropdown-item" href="/nhac-cu">Nhạc cụ</a></li>
-                                <li><a class="dropdown-item" href="/cong-cu-lao-dong">Công cụ lao động</a></li>
+                                <li><a class="dropdown-item" href="/cong-cu-san-xuat">Công cụ sản xuất</a></li>
                                 <li><a class="dropdown-item" href="/phong-tuc-tap-quan">Phong tục tập quán</a></li>
                                 <li><a class="dropdown-item" href="/le-hoi-van-hoa">Lễ hội văn hóa</a></li>
                                 <li><a class="dropdown-item" href="/hoat-dong-du-lich">Hoạt động du lịch</a></li>
                                 <li><a class="dropdown-item" href="/di-tich-lich-su">Di tích lịch sử</a></li>
                                 <li><a class="dropdown-item" href="/trang-suc">Trang sức</a></li>
+                                <li><a class="dropdown-item" href="/vat-dung-hang-ngay">Vật dụng hàng ngày</a></li>
+                                <li><a class="dropdown-item" href="/dung-cu-nghi-le">Dụng cụ nghi lễ</a></li>
                             </ul>
                         </li>
                         <li class="nav-item">
@@ -48,7 +46,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/lien-he">Liên hệ</a>
                         </li>
-                        <li class="nav-item dropdown">
+                        <li class="nav-item dropdown" >
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fa-solid fa-star"></i>
                                 <i class="fa-solid fa-chevron-down dropdown-icon"></i>
