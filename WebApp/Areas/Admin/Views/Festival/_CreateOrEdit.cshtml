@@ -270,8 +270,24 @@
             filebrowserBrowseUrl: '#',
             extraPlugins: 'image2',
             filebrowserUploadUrl: '/Admin/file-system/connector',
-            imageUploadUrl: '/Admin/file-system/connector'
+            imageUploadUrl: '/Admin/file-system/connector',
+            allowedContent: true,
+            extraAllowedContent: 'iframe[!src|width|height|allowfullscreen|frameborder|allow|referrerpolicy]',
+            removePlugins: 'htmlwriter',
+            on: {
+                instanceReady: function (evt) {
+                    // Remove sandbox attribute from iframes
+                    evt.editor.dataProcessor.htmlFilter.addRules({
+                        elements: {
+                            iframe: function (element) {
+                                delete element.attributes.sandbox;
+                            }
+                        }
+                    });
+                }
+            }
         });
+        // Remove sandbox attribute from iframes
         $('#Content').show();
     });
 </script>
