@@ -1,0 +1,43 @@
+﻿@model Datas.Models.ViewModels.CustomsTraditionModel
+
+<div class="row">
+    <div class="col-md-6">
+        <!-- New form group for Tình trạng bảo tồn -->
+        <div class="form-group">
+            <label asp-for="ConservationStatus" class="control-label">Tình trạng bảo tồn</label>
+            <div class="col-md-12">
+                <select asp-for="ConservationStatus" class="form-control">
+                    <option value="Còn phổ biến">Còn phổ biến</option>
+                    <option value="Mai một">Mai một</option>
+                    <option value="Có nguy cơ biến mất">Có nguy cơ biến mất</option>
+                </select>
+            </div>
+            <div>
+                <span asp-validation-for="ConservationStatus" class="text-danger"></span>
+            </div>
+        </div>
+
+        <!-- New form group for Đơn vị bảo tồn -->
+        <div class="form-group">
+            <label asp-for="ConservationUnit" class="control-label">Đơn vị bảo tồn</label>
+            <div class="col-md-12">
+                <input asp-for="ConservationUnit" class="form-control" placeholder="Cơ quan văn hóa, viện nghiên cứu, bảo tàng dân tộc học…" />
+            </div>
+            <div>
+                <span asp-validation-for="ConservationUnit" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <!-- New form group for Hoạt động gìn giữ -->
+        <div class="form-group">
+            <label asp-for="PreservationActivities" class="control-label">Hoạt động gìn giữ</label>
+            <div class="col-md-12">
+                <textarea asp-for="PreservationActivities" class="form-control" placeholder="Các dự án, chương trình bảo tồn, truyền dạy cho thế hệ sau"></textarea>
+            </div>
+            <div>
+                <span asp-validation-for="PreservationActivities" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+</div>

@@ -11,6 +11,21 @@ namespace Datas.Models.DomainModels
         [Display(Name = "Tên phong tục tập quán")]
         public string Name { set; get; }
 
+        public string? PurposeMeaning { get; set; }
+        public string? TimeOfOccurrence { get; set; }
+        public string? FormOfImplementation { get; set; }
+        public string? Participants { get; set; }
+        public string? Origin { get; set; }
+        public string? ChangesOverTime { get; set; }
+        public string? RelatedBeliefs { get; set; }
+        public string? SocialImpact { get; set; }
+        public string? RequiredItems { get; set; }
+        public string? TraditionalAttire { get; set; }
+        public string? Steps { get; set; }
+        public string? ConservationStatus { get; set; }
+        public string? ConservationUnit { get; set; }
+        public string? PreservationActivities { get; set; }
+        public string? TenGoiKhac { get; set; }
         public void ReNewUrl()
         {
             var newUrl = ExtensionMethod.RemoveUnicode(Name);
@@ -48,7 +63,21 @@ namespace Datas.Models.DomainModels
             Image7 = model.Image7;
             Image8 = model.Image8;
             Image9 = model.Image9;
-
+            PurposeMeaning = model.PurposeMeaning;
+            TimeOfOccurrence = model.TimeOfOccurrence;
+            FormOfImplementation = model.FormOfImplementation;
+            Participants = model.Participants;
+            Origin = model.Origin;
+            ChangesOverTime = model.ChangesOverTime;
+            RelatedBeliefs = model.RelatedBeliefs;
+            SocialImpact = model.SocialImpact;
+            RequiredItems = model.RequiredItems;
+            TraditionalAttire = model.TraditionalAttire;
+            Steps = model.Steps;
+            ConservationStatus = model.ConservationStatus;
+            ConservationUnit = model.ConservationUnit;
+            PreservationActivities = model.PreservationActivities;
+            TenGoiKhac = model.TenGoiKhac;
         }
 
         public void SetNewData(CustomsTraditionModel model)
@@ -80,6 +109,21 @@ namespace Datas.Models.DomainModels
             Image7 = model.Image7;
             Image8 = model.Image8;
             Image9 = model.Image9;
+            PurposeMeaning = model.PurposeMeaning;
+            TimeOfOccurrence = model.TimeOfOccurrence;
+            FormOfImplementation = model.FormOfImplementation;
+            Participants = model.Participants;
+            Origin = model.Origin;
+            ChangesOverTime = model.ChangesOverTime;
+            RelatedBeliefs = model.RelatedBeliefs;
+            SocialImpact = model.SocialImpact;
+            RequiredItems = model.RequiredItems;
+            TraditionalAttire = model.TraditionalAttire;
+            Steps = model.Steps;
+            ConservationStatus = model.ConservationStatus;
+            ConservationUnit = model.ConservationUnit;
+            PreservationActivities = model.PreservationActivities;
+            TenGoiKhac = model.TenGoiKhac;
         }
 
         public CustomsTraditionModel ToModel()
@@ -115,7 +159,22 @@ namespace Datas.Models.DomainModels
                 Image8 = Image8,
                 Image9 = Image9,
                 Url = Url,
-                PeopleId = PeopleId
+                PeopleId = PeopleId,
+                PurposeMeaning = PurposeMeaning,
+                TimeOfOccurrence = TimeOfOccurrence,
+                FormOfImplementation = FormOfImplementation,
+                Participants = Participants,
+                Origin = Origin,
+                ChangesOverTime = ChangesOverTime,
+                RelatedBeliefs = RelatedBeliefs,
+                SocialImpact = SocialImpact,
+                RequiredItems = RequiredItems,
+                TraditionalAttire = TraditionalAttire,
+                Steps = Steps,
+                ConservationStatus = ConservationStatus,
+                ConservationUnit = ConservationUnit,
+                PreservationActivities = PreservationActivities,
+                TenGoiKhac = TenGoiKhac,
             };
 
             if (People != null)

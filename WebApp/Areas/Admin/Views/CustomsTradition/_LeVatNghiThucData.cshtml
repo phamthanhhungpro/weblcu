@@ -1,0 +1,39 @@
+﻿@model Datas.Models.ViewModels.CustomsTraditionModel
+
+<div class="row">
+    <div class="col-md-6">
+        <!-- New form group for Đồ vật, lễ vật cần có -->
+        <div class="form-group">
+            <label asp-for="RequiredItems" class="control-label">Đồ vật, lễ vật cần có</label>
+            <div class="col-md-12">
+                <textarea asp-for="RequiredItems" class="form-control" placeholder="Nếu là phong tục có nghi lễ (ví dụ: cúng tổ tiên, cưới hỏi)"></textarea>
+            </div>
+            <div>
+                <span asp-validation-for="RequiredItems" class="text-danger"></span>
+            </div>
+        </div>
+
+        <!-- New form group for Trang phục truyền thống -->
+        <div class="form-group">
+            <label asp-for="TraditionalAttire" class="control-label">Trang phục truyền thống</label>
+            <div class="col-md-12">
+                <textarea asp-for="TraditionalAttire" class="form-control" placeholder="Nếu có yêu cầu về trang phục"></textarea>
+            </div>
+            <div>
+                <span asp-validation-for="TraditionalAttire" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <!-- New form group for Các bước thực hiện -->
+        <div class="form-group">
+            <label asp-for="Steps" class="control-label">Các bước thực hiện</label>
+            <div class="col-md-12">
+                <textarea asp-for="Steps" class="form-control" placeholder="Chi tiết từng bước thực hành phong tục"></textarea>
+            </div>
+            <div>
+                <span asp-validation-for="Steps" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+</div>

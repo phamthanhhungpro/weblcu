@@ -1,0 +1,51 @@
+﻿@using Common
+@model Datas.Models.ViewModels.ProduceToolModel
+
+<div class="row">
+    <div class="col-md-6">
+        <!-- New form group for Chất liệu -->
+        <div class="form-group">
+            <label asp-for="Material" class="control-label">Chất liệu</label>
+            <div class="col-md-12">
+                <input asp-for="Material" class="form-control" placeholder="Gỗ, kim loại, tre, vải…" />
+            </div>
+            <div>
+                <span asp-validation-for="Material" class="text-danger"></span>
+            </div>
+        </div>
+
+        <!-- New form group for Cấu tạo -->
+        <div class="form-group">
+            <label asp-for="Structure" class="control-label">Cấu tạo</label>
+            <div class="col-md-12">
+                <textarea asp-for="Structure" class="form-control" placeholder="Mô tả chi tiết các bộ phận"></textarea>
+            </div>
+            <div>
+                <span asp-validation-for="Structure" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <!-- New form group for Kích thước -->
+        <div class="form-group">
+            <label asp-for="Dimensions" class="control-label">Kích thước</label>
+            <div class="col-md-12">
+                <textarea asp-for="Dimensions" class="form-control" placeholder="Dài, rộng, cao, trọng lượng (nếu cần)"></textarea>
+            </div>
+            <div>
+                <span asp-validation-for="Dimensions" class="text-danger"></span>
+            </div>
+        </div>
+
+        <!-- New form group for Cách sử dụng -->
+        <div class="form-group">
+            <label asp-for="Usage" class="control-label">Cách sử dụng</label>
+            <div class="col-md-12">
+                <textarea asp-for="Usage" class="form-control" placeholder="Mô tả cách dùng công cụ"></textarea>
+            </div>
+            <div>
+                <span asp-validation-for="Usage" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+</div>

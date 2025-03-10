@@ -154,6 +154,12 @@ namespace WebApp.Areas.Admin.Controllers
         private void BuildMenu(string controllerName)
         {
             List<MenuItem> lstMenu = new List<MenuItem>();
+            var menuDtthieuso = new MenuItem()
+            {
+                Name = "Dân tộc thiểu số",
+                Url = "#"
+            };
+            var lstDtts = menuDtthieuso.Childrens;
             var url = Request.Path;
 
             try
@@ -318,7 +324,7 @@ namespace WebApp.Areas.Admin.Controllers
                                             "fa fa-music");
                                 break;
                             case Enums.GroupFunctionType.Instrument:
-                                AddMenuItem(ref lstMenu,
+                                AddMenuItem(ref lstDtts,
                                     controllerName,
                                     "Instrument",
                                     group,
@@ -340,7 +346,7 @@ namespace WebApp.Areas.Admin.Controllers
                                             "fa fa-wrench");
                                 break;
                             case Enums.GroupFunctionType.ProduceTool:
-                                AddMenuItem(ref lstMenu,
+                                AddMenuItem(ref lstDtts,
                                             controllerName,
                                             "ProduceTool",
                                             group,
@@ -352,7 +358,7 @@ namespace WebApp.Areas.Admin.Controllers
                                 break;
 
                             case Enums.GroupFunctionType.CustomsTradition:
-                                AddMenuItem(ref lstMenu,
+                                AddMenuItem(ref lstDtts,
                                             controllerName,
                                             "CustomsTradition",
                                             group,
@@ -364,7 +370,7 @@ namespace WebApp.Areas.Admin.Controllers
                                 break;
 
                             case Enums.GroupFunctionType.Festival:
-                                AddMenuItem(ref lstMenu,
+                                AddMenuItem(ref lstDtts,
                                             controllerName,
                                             "Festival",
                                             group,
@@ -376,7 +382,7 @@ namespace WebApp.Areas.Admin.Controllers
                                 break;
                             
                             case Enums.GroupFunctionType.Landmark:
-                                AddMenuItem(ref lstMenu,
+                                AddMenuItem(ref lstDtts,
                                     controllerName,
                                     "Landmark",
                                     group,
@@ -388,7 +394,7 @@ namespace WebApp.Areas.Admin.Controllers
                                  break;
                                  
                             case Enums.GroupFunctionType.Travel:
-                                AddMenuItem(ref lstMenu,
+                                AddMenuItem(ref lstDtts,
                                             controllerName,
                                             "Travel",
                                             group,
@@ -411,7 +417,7 @@ namespace WebApp.Areas.Admin.Controllers
                                 break;
 
                             case Enums.GroupFunctionType.Jewelry:
-                                AddMenuItem(ref lstMenu,
+                                AddMenuItem(ref lstDtts,
                                             controllerName,
                                             "Jewelry",
                                             group,
@@ -435,7 +441,7 @@ namespace WebApp.Areas.Admin.Controllers
                                 break;
                             
                             case Enums.GroupFunctionType.DailyItem:
-                                AddMenuItem(ref lstMenu,
+                                AddMenuItem(ref lstDtts,
                                     controllerName,
                                     "DailyItem",
                                     group,
@@ -459,7 +465,7 @@ namespace WebApp.Areas.Admin.Controllers
                                 break;
                             
                             case Enums.GroupFunctionType.CeremonialTool:
-                                AddMenuItem(ref lstMenu,
+                                AddMenuItem(ref lstDtts,
                                     controllerName,
                                     "CeremonialTool",
                                     group,
@@ -485,6 +491,8 @@ namespace WebApp.Areas.Admin.Controllers
             {
                 Log.LogError(ex, "");
             }
+
+            lstMenu.Insert(4, menuDtthieuso);
 
             ViewBag.Menu = lstMenu;
         }

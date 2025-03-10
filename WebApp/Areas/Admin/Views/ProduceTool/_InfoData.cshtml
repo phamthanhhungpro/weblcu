@@ -9,14 +9,24 @@
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="Code" class="control-label"></label> 
+            <label asp-for="Code" class="control-label">Mã công cụ</label> 
             <input asp-for="Code" class="form-control" />
             <span asp-validation-for="Code" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="Event" class="control-label"></label>
-            <input asp-for="Event" class="form-control" />
-            <span asp-validation-for="Event" class="text-danger"></span>
+            <label asp-for="TenGoiKhac" class="control-label">Tên gọi khác</label>
+            <input asp-for="TenGoiKhac" class="form-control" />
+            <span asp-validation-for="TenGoiKhac" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="VungMien" class="control-label">Vùng miền</label>
+            <input asp-for="VungMien" class="form-control" placeholder="Vùng miền phổ biến" />
+            <span asp-validation-for="VungMien" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="NganhNgheSuDung" class="control-label">Ngành nghề sử dụng</label>
+            <input asp-for="NganhNgheSuDung" class="form-control" placeholder="Ngành nghề sử dụng" />
+            <span asp-validation-for="NganhNgheSuDung" class="text-danger"></span>
         </div>
         <div class="form-group">
             @Html.Partial("_DisplayProduceToolCategory")
@@ -24,26 +34,7 @@
         <div class="form-group">
             @Html.Partial("_DisplayPeople")
         </div>
-        <div class="form-group">
-            <label asp-for="Shape" class="control-label"></label>
-            <input asp-for="Shape" class="form-control" />
-            <span asp-validation-for="Shape" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="CurrentStatus" class="control-label"></label>
-            <input asp-for="CurrentStatus" class="form-control" />
-            <span asp-validation-for="CurrentStatus" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Technique" class="control-label"></label>
-            <input asp-for="Technique" class="form-control" />
-            <span asp-validation-for="Technique" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Classify" class="control-label"></label>
-            <input asp-for="Classify" class="form-control" />
-            <span asp-validation-for="Classify" class="text-danger"></span>
-        </div>
+
     </div>
     <div class="col-md-6">
         <div class="row" style="margin-top:38px;">
@@ -67,31 +58,7 @@
             <input asp-for="Image360" class="form-control" />
             <span asp-validation-for="Image360" class="text-danger"></span>
         </div>
-        <div class="form-group">
-            <label asp-for="Cost" class="control-label"></label>
-            <input asp-for="Cost" class="form-control" />
-            <span asp-validation-for="Cost" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Color" class="control-label"></label>
-            <input asp-for="Color" class="form-control"/>
-            <span asp-validation-for="Color" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Size" class="control-label"></label>
-            <textarea asp-for="Size" class="form-control"></textarea>
-            <span asp-validation-for="Size" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Certification" class="control-label"></label>
-            <input asp-for="Certification" class="form-control" />
-            <span asp-validation-for="Certification" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Material" class="control-label"></label>
-            <input asp-for="Material" class="form-control" />
-            <span asp-validation-for="Material" class="text-danger"></span>
-        </div>
+
         <div class="form-group">
             <label asp-for="Details" class="control-label"></label>
             <textarea asp-for="Details" class="form-control"></textarea>

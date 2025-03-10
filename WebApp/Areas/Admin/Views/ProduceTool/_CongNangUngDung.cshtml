@@ -1,0 +1,51 @@
+﻿@using Common
+@model Datas.Models.ViewModels.ProduceToolModel
+
+<div class="row">
+    <div class="col-md-6">
+        <!-- New form group for Chức năng chính -->
+        <div class="form-group">
+            <label asp-for="MainFunction" class="control-label">Chức năng chính</label>
+            <div class="col-md-12">
+                <textarea asp-for="MainFunction" class="form-control" placeholder="Công cụ dùng để làm gì"></textarea>
+            </div>
+            <div>
+                <span asp-validation-for="MainFunction" class="text-danger"></span>
+            </div>
+        </div>
+
+        <!-- New form group for Nghề truyền thống liên quan -->
+        <div class="form-group">
+            <label asp-for="RelatedTraditionalCrafts" class="control-label">Nghề truyền thống liên quan</label>
+            <div class="col-md-12">
+                <textarea asp-for="RelatedTraditionalCrafts" class="form-control" placeholder="Dệt vải, làm gốm, đúc đồng…"></textarea>
+            </div>
+            <div>
+                <span asp-validation-for="RelatedTraditionalCrafts" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <!-- New form group for Hiệu suất sử dụng -->
+        <div class="form-group">
+            <label asp-for="UsageEfficiency" class="control-label">Hiệu suất sử dụng</label>
+            <div class="col-md-12">
+                <textarea asp-for="UsageEfficiency" class="form-control" placeholder="Thời gian hoạt động trung bình, hiệu quả làm việc"></textarea>
+            </div>
+            <div>
+                <span asp-validation-for="UsageEfficiency" class="text-danger"></span>
+            </div>
+        </div>
+
+        <!-- New form group for Các biến thể/phiên bản -->
+        <div class="form-group">
+            <label asp-for="Variants" class="control-label">Các biến thể/phiên bản</label>
+            <div class="col-md-12">
+                <textarea asp-for="Variants" class="form-control" placeholder="Các dạng công cụ tương tự trong cùng ngành"></textarea>
+            </div>
+            <div>
+                <span asp-validation-for="Variants" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+</div>

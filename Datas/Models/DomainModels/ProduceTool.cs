@@ -16,6 +16,22 @@ namespace Datas.Models.DomainModels
         [Display(Name = "Loại công cụ sản xuất")]
         public virtual ProduceToolCategory Category { get; set; }
 
+        public string? Structure { get; set; }
+        public string? Dimensions { get; set; }
+        public string? Usage { get; set; }
+        public string? MainFunction { get; set; }
+        public string? RelatedTraditionalCrafts { get; set; }
+        public string? UsageEfficiency { get; set; }
+        public string? Variants { get; set; }
+        public string? Origin { get; set; }
+        public string? CulturalSignificance { get; set; }
+        public string? FamousArtisans { get; set; }
+        public string? TinhTrangHienTai { get; set; }
+        public string? Custodian { get; set; }
+        public string? EconomicValue { get; set; }
+        public string? VungMien { get; set; }
+        public string? NganhNgheSuDung { get; set; }
+        public string? TenGoiKhac { get; set; }
 
         public void ReNewUrl()
         {
@@ -54,7 +70,22 @@ namespace Datas.Models.DomainModels
             Image7 = model.Image7;
             Image8 = model.Image8;
             Image9 = model.Image9;
-
+            Structure = model.Structure;
+            Dimensions = model.Dimensions;
+            Usage = model.Usage;
+            MainFunction = model.MainFunction;
+            RelatedTraditionalCrafts = model.RelatedTraditionalCrafts;
+            UsageEfficiency = model.UsageEfficiency;
+            Variants = model.Variants;
+            Origin = model.Origin;
+            CulturalSignificance = model.CulturalSignificance;
+            FamousArtisans = model.FamousArtisans;
+            TinhTrangHienTai = model.TinhTrangHienTai;
+            Custodian = model.Custodian;
+            EconomicValue = model.EconomicValue;
+            VungMien = model.VungMien;
+            NganhNgheSuDung = model.NganhNgheSuDung;
+            TenGoiKhac = model.TenGoiKhac;
         }
 
         public void SetNewData(ProduceToolModel model)
@@ -86,6 +117,22 @@ namespace Datas.Models.DomainModels
             Image7 = model.Image7;
             Image8 = model.Image8;
             Image9 = model.Image9;
+            Structure = model.Structure;
+            Dimensions = model.Dimensions;
+            Usage = model.Usage;
+            MainFunction = model.MainFunction;
+            RelatedTraditionalCrafts = model.RelatedTraditionalCrafts;
+            UsageEfficiency = model.UsageEfficiency;
+            Variants = model.Variants;
+            Origin = model.Origin;
+            CulturalSignificance = model.CulturalSignificance;
+            FamousArtisans = model.FamousArtisans;
+            TinhTrangHienTai = model.TinhTrangHienTai;
+            Custodian = model.Custodian;
+            EconomicValue = model.EconomicValue;
+            VungMien = model.VungMien;
+            NganhNgheSuDung = model.NganhNgheSuDung;
+            TenGoiKhac = model.TenGoiKhac;
         }
 
         public ProduceToolModel ToModel()
@@ -122,7 +169,23 @@ namespace Datas.Models.DomainModels
                 Image9 = Image9,
                 Url = Url,
                 CategoryId = CategoryId,
-                PeopleId = PeopleId
+                PeopleId = PeopleId,
+                Structure = Structure,
+                Dimensions = Dimensions,
+                Usage = Usage,
+                MainFunction = MainFunction,
+                RelatedTraditionalCrafts = RelatedTraditionalCrafts,
+                UsageEfficiency = UsageEfficiency,
+                Variants = Variants,
+                Origin = Origin,
+                CulturalSignificance = CulturalSignificance,
+                FamousArtisans = FamousArtisans,
+                TinhTrangHienTai = TinhTrangHienTai,
+                Custodian = Custodian,
+                EconomicValue = EconomicValue,
+                VungMien = VungMien,
+                NganhNgheSuDung = NganhNgheSuDung,
+                TenGoiKhac = TenGoiKhac,
             };
 
             if (People != null)

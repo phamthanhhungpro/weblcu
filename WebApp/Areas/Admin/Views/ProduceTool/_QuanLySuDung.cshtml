@@ -1,0 +1,44 @@
+﻿@using Common
+@model Datas.Models.ViewModels.ProduceToolModel
+
+<div class="row">
+    <div class="col-md-6">
+        <!-- New form group for Tình trạng hiện tại -->
+        <div class="form-group">
+            <label asp-for="TinhTrangHienTai" class="control-label">Tình trạng hiện tại</label>
+            <div class="col-md-12">
+                <select asp-for="TinhTrangHienTai" class="form-control">
+                    <option value="Còn sử dụng">Còn sử dụng</option>
+                    <option value="Đã lỗi thời">Đã lỗi thời</option>
+                    <option value="Cần bảo trì">Cần bảo trì</option>
+                </select>
+            </div>
+            <div>
+                <span asp-validation-for="TinhTrangHienTai" class="text-danger"></span>
+            </div>
+        </div>
+
+        <!-- New form group for Đơn vị bảo quản/sử dụng -->
+        <div class="form-group">
+            <label asp-for="Custodian" class="control-label">Đơn vị bảo quản/sử dụng</label>
+            <div class="col-md-12">
+                <input asp-for="Custodian" class="form-control" placeholder="Ai đang sử dụng hoặc bảo quản công cụ này" />
+            </div>
+            <div>
+                <span asp-validation-for="Custodian" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <!-- New form group for Giá trị kinh tế -->
+        <div class="form-group">
+            <label asp-for="EconomicValue" class="control-label">Giá trị kinh tế</label>
+            <div class="col-md-12">
+                <textarea asp-for="EconomicValue" class="form-control" placeholder="Giá trị sản xuất, buôn bán"></textarea>
+            </div>
+            <div>
+                <span asp-validation-for="EconomicValue" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+</div>

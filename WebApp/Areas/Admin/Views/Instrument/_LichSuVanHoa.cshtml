@@ -1,0 +1,39 @@
+﻿@using Common
+@model Datas.Models.ViewModels.InstrumentModel
+
+<div class="row">
+    <div class="col-md-12">
+        <!-- New form group for Nguồn gốc -->
+        <div class="form-group">
+            <label asp-for="Origin" class="control-label">Nguồn gốc</label>
+            <div class="col-md-12">
+                <textarea asp-for="Origin" class="form-control" placeholder="Lịch sử hình thành"></textarea>
+            </div>
+            <div>
+                <span asp-validation-for="Origin" class="text-danger"></span>
+            </div>
+        </div>
+
+        <!-- New form group for Ý nghĩa văn hóa -->
+        <div class="form-group">
+            <label asp-for="CulturalSignificance" class="control-label">Ý nghĩa văn hóa</label>
+            <div class="col-md-12">
+                <textarea asp-for="CulturalSignificance" class="form-control" placeholder="Liên quan đến tín ngưỡng, phong tục"></textarea>
+            </div>
+            <div>
+                <span asp-validation-for="CulturalSignificance" class="text-danger"></span>
+            </div>
+        </div>
+
+        <!-- New form group for Nghệ nhân tiêu biểu -->
+        <div class="form-group">
+            <label asp-for="FamousArtisans" class="control-label">Nghệ nhân tiêu biểu</label>
+            <div class="col-md-12">
+                <textarea asp-for="FamousArtisans" class="form-control" placeholder="Người chơi, chế tác nổi tiếng"></textarea>
+            </div>
+            <div>
+                <span asp-validation-for="FamousArtisans" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+</div>

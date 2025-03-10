@@ -1,0 +1,50 @@
+﻿@model Datas.Models.ViewModels.CustomsTraditionModel
+
+<div class="row">
+    <div class="col-md-6">
+        <!-- New form group for Nguồn gốc -->
+        <div class="form-group">
+            <label asp-for="Origin" class="control-label">Nguồn gốc</label>
+            <div class="col-md-12">
+                <textarea asp-for="Origin" class="form-control" placeholder="Xuất phát từ thời kỳ nào, ai khởi xướng"></textarea>
+            </div>
+            <div>
+                <span asp-validation-for="Origin" class="text-danger"></span>
+            </div>
+        </div>
+
+        <!-- New form group for Sự thay đổi theo thời gian -->
+        <div class="form-group">
+            <label asp-for="ChangesOverTime" class="control-label">Sự thay đổi theo thời gian</label>
+            <div class="col-md-12">
+                <textarea asp-for="ChangesOverTime" class="form-control" placeholder="So sánh phong tục xưa và nay"></textarea>
+            </div>
+            <div>
+                <span asp-validation-for="ChangesOverTime" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <!-- New form group for Tín ngưỡng liên quan -->
+        <div class="form-group">
+            <label asp-for="RelatedBeliefs" class="control-label">Tín ngưỡng liên quan</label>
+            <div class="col-md-12">
+                <textarea asp-for="RelatedBeliefs" class="form-control" placeholder="Nếu phong tục có liên quan đến tôn giáo, tâm linh"></textarea>
+            </div>
+            <div>
+                <span asp-validation-for="RelatedBeliefs" class="text-danger"></span>
+            </div>
+        </div>
+
+        <!-- New form group for Tác động xã hội -->
+        <div class="form-group">
+            <label asp-for="SocialImpact" class="control-label">Tác động xã hội</label>
+            <div class="col-md-12">
+                <textarea asp-for="SocialImpact" class="form-control" placeholder="Ảnh hưởng đến đời sống, kinh tế, văn hóa"></textarea>
+            </div>
+            <div>
+                <span asp-validation-for="SocialImpact" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+</div>

@@ -4,6 +4,7 @@ using Datas;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Datas.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20250309135833_update-nhac-cu-model-1")]
+    partial class updatenhaccumodel1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -378,9 +381,6 @@ namespace Datas.Migrations
                     b.Property<string>("Certification")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ChangesOverTime")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Classify")
                         .HasColumnType("nvarchar(max)");
 
@@ -388,12 +388,6 @@ namespace Datas.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Color")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ConservationStatus")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ConservationUnit")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Content")
@@ -413,9 +407,6 @@ namespace Datas.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Event")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FormOfImplementation")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Image0")
@@ -464,26 +455,8 @@ namespace Datas.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Origin")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Participants")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int?>("PeopleId")
                         .HasColumnType("int");
-
-                    b.Property<string>("PreservationActivities")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PurposeMeaning")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RelatedBeliefs")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RequiredItems")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Shape")
                         .HasColumnType("nvarchar(max)");
@@ -491,29 +464,14 @@ namespace Datas.Migrations
                     b.Property<string>("Size")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SocialImpact")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("Status")
                         .HasColumnType("int");
-
-                    b.Property<string>("Steps")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Technique")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("TenGoiKhac")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TimeOfOccurrence")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("Top")
                         .HasColumnType("bit");
-
-                    b.Property<string>("TraditionalAttire")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("UpdateDate")
                         .HasColumnType("datetime2");
@@ -1190,9 +1148,6 @@ namespace Datas.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Technique")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TenGoiKhac")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Timbre")
@@ -2249,13 +2204,7 @@ namespace Datas.Migrations
                     b.Property<string>("Cost")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CulturalSignificance")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("CurrentStatus")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Custodian")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("DeleteStatus")
@@ -2264,16 +2213,7 @@ namespace Datas.Migrations
                     b.Property<string>("Details")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Dimensions")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EconomicValue")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Event")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FamousArtisans")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Image0")
@@ -2315,9 +2255,6 @@ namespace Datas.Migrations
                     b.Property<bool>("IsDisplay")
                         .HasColumnType("bit");
 
-                    b.Property<string>("MainFunction")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Material")
                         .HasColumnType("nvarchar(max)");
 
@@ -2325,17 +2262,8 @@ namespace Datas.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("NganhNgheSuDung")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Origin")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int?>("PeopleId")
                         .HasColumnType("int");
-
-                    b.Property<string>("RelatedTraditionalCrafts")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Shape")
                         .HasColumnType("nvarchar(max)");
@@ -2346,16 +2274,7 @@ namespace Datas.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.Property<string>("Structure")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Technique")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TenGoiKhac")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TinhTrangHienTai")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Top")
@@ -2368,20 +2287,8 @@ namespace Datas.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Usage")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UsageEfficiency")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Variants")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("View")
                         .HasColumnType("int");
-
-                    b.Property<string>("VungMien")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

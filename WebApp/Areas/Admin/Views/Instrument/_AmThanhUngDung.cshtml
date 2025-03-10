@@ -1,0 +1,50 @@
+﻿@using Common
+@model Datas.Models.ViewModels.InstrumentModel
+
+<div class="row">
+    <div class="col-md-12">
+        <!-- New form group for Quãng âm -->
+        <div class="form-group">
+            <label asp-for="PitchRange" class="control-label">Quãng âm</label>
+            <div class="col-md-12">
+                <input asp-for="PitchRange" class="form-control" placeholder="Âm vực của nhạc cụ" />
+            </div>
+            <div>
+                <span asp-validation-for="PitchRange" class="text-danger"></span>
+            </div>
+        </div>
+
+        <!-- New form group for Âm sắc -->
+        <div class="form-group">
+            <label asp-for="Timbre" class="control-label">Âm sắc</label>
+            <div class="col-md-12">
+                <input asp-for="Timbre" class="form-control" placeholder="Đặc điểm âm thanh của nhạc cụ" />
+            </div>
+            <div>
+                <span asp-validation-for="Timbre" class="text-danger"></span>
+            </div>
+        </div>
+
+        <!-- New form group for Vai trò trong dàn nhạc -->
+        <div class="form-group">
+            <label asp-for="RoleInOrchestra" class="control-label">Vai trò trong dàn nhạc</label>
+            <div class="col-md-12">
+                <input asp-for="RoleInOrchestra" class="form-control" placeholder="Nhạc cụ chính, đệm, hòa tấu…" />
+            </div>
+            <div>
+                <span asp-validation-for="RoleInOrchestra" class="text-danger"></span>
+            </div>
+        </div>
+
+        <!-- New form group for Sự kiện biểu diễn -->
+        <div class="form-group">
+            <label asp-for="PerformanceEvents" class="control-label">Sự kiện biểu diễn</label>
+            <div class="col-md-12">
+                <input asp-for="PerformanceEvents" class="form-control" placeholder="Lễ hội, nghi lễ, biểu diễn chuyên nghiệp…" />
+            </div>
+            <div>
+                <span asp-validation-for="PerformanceEvents" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+</div>

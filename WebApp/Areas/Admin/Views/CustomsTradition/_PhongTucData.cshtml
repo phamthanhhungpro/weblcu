@@ -1,0 +1,51 @@
+﻿@using Common
+@model Datas.Models.ViewModels.CustomsTraditionModel
+
+<div class="row">
+    <div class="col-md-6">
+        <!-- New form group for Mục đích/Ý nghĩa -->
+        <div class="form-group">
+            <label asp-for="PurposeMeaning" class="control-label">Mục đích/Ý nghĩa</label>
+            <div class="col-md-12">
+                <textarea asp-for="PurposeMeaning" class="form-control" placeholder="Tại sao phong tục này ra đời, ý nghĩa về mặt tín ngưỡng, văn hóa"></textarea>
+            </div>
+            <div>
+                <span asp-validation-for="PurposeMeaning" class="text-danger"></span>
+            </div>
+        </div>
+
+        <!-- New form group for Thời gian diễn ra -->
+        <div class="form-group">
+            <label asp-for="TimeOfOccurrence" class="control-label">Thời gian diễn ra</label>
+            <div class="col-md-12">
+                <input asp-for="TimeOfOccurrence" class="form-control" placeholder="Ngày tháng cụ thể hoặc theo âm lịch, mùa vụ, sự kiện đặc biệt" />
+            </div>
+            <div>
+                <span asp-validation-for="TimeOfOccurrence" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <!-- New form group for Hình thức thực hiện -->
+        <div class="form-group">
+            <label asp-for="FormOfImplementation" class="control-label">Hình thức thực hiện</label>
+            <div class="col-md-12">
+                <textarea asp-for="FormOfImplementation" class="form-control" placeholder="Cá nhân, gia đình, cộng đồng, lễ hội…"></textarea>
+            </div>
+            <div>
+                <span asp-validation-for="FormOfImplementation" class="text-danger"></span>
+            </div>
+        </div>
+
+        <!-- New form group for Đối tượng tham gia -->
+        <div class="form-group">
+            <label asp-for="Participants" class="control-label">Đối tượng tham gia</label>
+            <div class="col-md-12">
+                <textarea asp-for="Participants" class="form-control" placeholder="Nam, nữ, trẻ em, người lớn tuổi…"></textarea>
+            </div>
+            <div>
+                <span asp-validation-for="Participants" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+</div>
