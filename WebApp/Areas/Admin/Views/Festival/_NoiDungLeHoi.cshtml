@@ -1,0 +1,37 @@
+﻿@model Datas.Models.ViewModels.FestivalModel
+
+<div class="row">
+    <div class="col-md-12">
+        <!-- New form group for Mục đích & Ý nghĩa -->
+        <div class="form-group">
+            <label asp-for="Purpose" class="control-label">Mục đích & Ý nghĩa</label>
+            <div class="col-md-12">
+                <textarea asp-for="Purpose" class="form-control" rows="3" placeholder="Tín ngưỡng, tâm linh, tưởng nhớ tổ tiên, mừng mùa màng…"></textarea>
+            </div>
+        </div>
+
+        <!-- New form group for Hình thức tổ chức -->
+        <div class="form-group">
+            <label asp-for="OrganizationForm" class="control-label">Hình thức tổ chức</label>
+            <div class="col-md-12">
+                <textarea asp-for="OrganizationForm" class="form-control" rows="3" placeholder="Cấp độ tổ chức (làng, huyện, quốc gia…), cộng đồng tham gia"></textarea>
+            </div>
+        </div>
+
+        <!-- New form group for Đối tượng tham gia -->
+        <div class="form-group">
+            <label asp-for="Participants" class="control-label">Đối tượng tham gia</label>
+            <div class="col-md-12">
+                <textarea asp-for="Participants" class="form-control" rows="3" placeholder="Ai có thể tham gia, độ tuổi, giới tính…"></textarea>
+            </div>
+        </div>
+
+        <!-- New form group for Sự kiện chính -->
+        <div class="form-group">
+            <label asp-for="MainEvents" class="control-label">Sự kiện chính</label>
+            <div class="col-md-12">
+                <textarea asp-for="MainEvents" class="form-control" rows="3" placeholder="Các nghi lễ quan trọng trong lễ hội"></textarea>
+            </div>
+        </div>
+    </div>
+</div>

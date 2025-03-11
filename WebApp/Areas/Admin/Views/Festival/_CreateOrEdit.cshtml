@@ -4,6 +4,38 @@
     <div class="col-md-12">
         <ul class="nav nav-tabs" id="tab-data" role="tablist">
             <li class="nav-item"><a class="nav-link active" id="info-data-tab" data-toggle="pill" href="#info-data" aria-controls="info-data" aria-selected="true">Thông tin lễ hội văn hóa</a></li>
+
+            <li class="nav-item">
+                <a class="nav-link"
+                   id="ndlehoi-tab"
+                   data-toggle="pill" href="#ndlehoi"
+                   aria-controls="ndlehoi"
+                   aria-selected="true">Nội dung lễ hội</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link"
+                   id="lsvanhoa-tab"
+                   data-toggle="pill" href="#lsvanhoa"
+                   aria-controls="lsvanhoa"
+                   aria-selected="true">Lịch sử&Văn hóa</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link"
+                   id="nlhoatdong-tab"
+                   data-toggle="pill"
+                   href="#nlhoatdong"
+                   aria-controls="nlhoatdong"
+                   aria-selected="false">Nghi lễ&Hoạt động</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link"
+                   id="qlbaoton-tab"
+                   data-toggle="pill"
+                   href="#qlbaoton"
+                   aria-controls="qlbaoton"
+                   aria-selected="false">Quản lý&Bảo tồn</a>
+            </li>
+
             <li class="nav-item"><a class="nav-link" id="image-data-tab" data-toggle="pill" href="#image-data" aria-controls="image-data" aria-selected="false">Hình ảnh</a></li>
             <li class="nav-item"><a class="nav-link" id="file-data-tab" data-toggle="pill" href="#file-data" aria-controls="file-data" aria-selected="false">Tài liệu</a></li>
         </ul>
@@ -11,14 +43,27 @@
             <div class="tab-pane fade show active" id="info-data" role="tabpanel" aria-labelledby="info-data-tab">
                 @Html.Partial("_InfoData")
             </div>
+            <div class="tab-pane fade" id="ndlehoi" role="tabpanel" aria-labelledby="ndlehoi-tab">
+                @Html.Partial("_NoiDungLeHoi")
+            </div>
+            <div class="tab-pane fade" id="lsvanhoa" role="tabpanel" aria-labelledby="lsvanhoa-tab">
+                @Html.Partial("_LichSuVanHoa")
+            </div>
+            <div class="tab-pane fade" id="nlhoatdong" role="tabpanel" aria-labelledby="nlhoatdong-tab">
+                @Html.Partial("_NghiLeHoatDong")
+            </div>
+            <div class="tab-pane fade" id="qlbaoton" role="tabpanel" aria-labelledby="qlbaoton-tab">
+                @Html.Partial("_QuanLyBaoTon")
+            </div>
             <div class="tab-pane fade" id="image-data" role="tabpanel" aria-labelledby="image-data-tab">
                 @Html.Partial("_ImageData")
             </div>
             <div class="tab-pane fade" id="file-data" role="tabpanel" aria-labelledby="file-data-tab">
-                  @Html.Partial("_AttachmentData")
+                @Html.Partial("_AttachmentData")
             </div>
         </div>
     </div>
+</div>
 </div>
 
 <script>

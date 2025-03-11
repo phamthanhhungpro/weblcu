@@ -1,0 +1,49 @@
+﻿@model Datas.Models.ViewModels.FestivalModel
+
+<div class="row">
+    <div class="col-md-12">
+        <!-- New form group for Nghi thức chính -->
+        <div class="form-group">
+            <label asp-for="MainRituals" class="control-label">Nghi thức chính</label>
+            <div class="col-md-12">
+                <textarea asp-for="MainRituals" class="form-control" placeholder="Các nghi lễ quan trọng của lễ hội"></textarea>
+            </div>
+            <div>
+                <span asp-validation-for="MainRituals" class="text-danger"></span>
+            </div>
+        </div>
+
+        <!-- New form group for Trang phục truyền thống -->
+        <div class="form-group">
+            <label asp-for="TraditionalCostumes" class="control-label">Trang phục truyền thống</label>
+            <div class="col-md-12">
+                <textarea asp-for="TraditionalCostumes" class="form-control" placeholder="Nếu có yêu cầu về trang phục"></textarea>
+            </div>
+            <div>
+                <span asp-validation-for="TraditionalCostumes" class="text-danger"></span>
+            </div>
+        </div>
+
+        <!-- New form group for Lễ vật & Cúng tế -->
+        <div class="form-group">
+            <label asp-for="OfferingsAndWorship" class="control-label">Lễ vật & Cúng tế</label>
+            <div class="col-md-12">
+                <textarea asp-for="OfferingsAndWorship" class="form-control" placeholder="Nếu có nghi lễ dâng hương, dâng lễ"></textarea>
+            </div>
+            <div>
+                <span asp-validation-for="OfferingsAndWorship" class="text-danger"></span>
+            </div>
+        </div>
+
+        <!-- New form group for Trò chơi dân gian -->
+        <div class="form-group">
+            <label asp-for="FolkGames" class="control-label">Trò chơi dân gian</label>
+            <div class="col-md-12">
+                <textarea asp-for="FolkGames" class="form-control" placeholder="Các hoạt động vui chơi, thi đấu đi kèm"></textarea>
+            </div>
+            <div>
+                <span asp-validation-for="FolkGames" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+</div>

@@ -4,6 +4,37 @@
     <div class="col-md-12">
         <ul class="nav nav-tabs" id="tab-data" role="tablist">
             <li class="nav-item"><a class="nav-link active" id="info-data-tab" data-toggle="pill" href="#info-data" aria-controls="info-data" aria-selected="true">Thông tin hoạt động du lịch</a></li>
+
+            <li class="nav-item">
+                <a class="nav-link"
+                   id="ndhoatdong-tab"
+                   data-toggle="pill" href="#ndhoatdong"
+                   aria-controls="ndhoatdong"
+                   aria-selected="true">Nội dung hoạt động</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link"
+                   id="dactrung-tab"
+                   data-toggle="pill" href="#dactrung"
+                   aria-controls="dactrung"
+                   aria-selected="true">Điểm đặc trưng & Trải nghiệm</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link"
+                   id="chiphi-tab"
+                   data-toggle="pill" href="#chiphi"
+                   aria-controls="chiphi"
+                   aria-selected="true">Chi phí & Dịch vụ đi kèm</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link"
+                   id="quanlyphattrien-tab"
+                   data-toggle="pill" href="#quanlyphattrien"
+                   aria-controls="quanlyphattrien"
+                   aria-selected="true">Quản lý & Phát triển</a>
+            </li>
+
+
             <li class="nav-item"><a class="nav-link" id="image-data-tab" data-toggle="pill" href="#image-data" aria-controls="image-data" aria-selected="false">Hình ảnh</a></li>
             <li class="nav-item"><a class="nav-link" id="file-data-tab" data-toggle="pill" href="#file-data" aria-controls="file-data" aria-selected="false">Tài liệu</a></li>
         </ul>
@@ -11,11 +42,23 @@
             <div class="tab-pane fade show active" id="info-data" role="tabpanel" aria-labelledby="info-data-tab">
                 @Html.Partial("_InfoData")
             </div>
+            <div class="tab-pane fade" id="ndhoatdong" role="tabpanel" aria-labelledby="ndhoatdong-tab">
+                @Html.Partial("_NoiDungHoatDong")
+            </div>
+            <div class="tab-pane fade" id="dactrung" role="tabpanel" aria-labelledby="dactrung-tab">
+                @Html.Partial("_DacTrungTraiNghiem")
+            </div>
+            <div class="tab-pane fade" id="chiphi" role="tabpanel" aria-labelledby="chiphi-tab">
+                @Html.Partial("_ChiPhiDichVu")
+            </div>
+            <div class="tab-pane fade" id="quanlyphattrien" role="tabpanel" aria-labelledby="quanlyphattrien-tab">
+                @Html.Partial("_QuanLyPhatTrien")
+            </div>
             <div class="tab-pane fade" id="image-data" role="tabpanel" aria-labelledby="image-data-tab">
                 @Html.Partial("_ImageData")
             </div>
             <div class="tab-pane fade" id="file-data" role="tabpanel" aria-labelledby="file-data-tab">
-                  @Html.Partial("_AttachmentData")
+                @Html.Partial("_AttachmentData")
             </div>
         </div>
     </div>

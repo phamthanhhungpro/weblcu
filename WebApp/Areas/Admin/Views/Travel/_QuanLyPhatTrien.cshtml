@@ -1,0 +1,21 @@
+﻿@model Datas.Models.ViewModels.TravelModel
+
+<div class="row">
+    <div class="col-md-12">
+        <!-- New form group for Cơ quan quản lý -->
+        <div class="form-group">
+            <label asp-for="ManagingAgency" class="control-label">Cơ quan quản lý</label>
+            <div class="col-md-12">
+                <textarea asp-for="ManagingAgency" class="form-control" rows="3" placeholder="Đơn vị cấp phép và giám sát"></textarea>
+            </div>
+        </div>
+
+        <!-- New form group for Hoạt động quảng bá -->
+        <div class="form-group">
+            <label asp-for="PromotionalActivities" class="control-label">Hoạt động quảng bá</label>
+            <div class="col-md-12">
+                <textarea asp-for="PromotionalActivities" class="form-control" rows="3" placeholder="Các chiến dịch quảng cáo, truyền thông"></textarea>
+            </div>
+        </div>
+    </div>
+</div>

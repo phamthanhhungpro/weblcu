@@ -4,6 +4,7 @@ using Datas;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Datas.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20250310152016_update-festival")]
+    partial class updatefestival
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -2538,12 +2541,6 @@ namespace Datas.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("AccompanyingEvents")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("AccompanyingServices")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Certification")
                         .HasColumnType("nvarchar(max)");
 
@@ -2563,34 +2560,16 @@ namespace Datas.Migrations
                     b.Property<string>("Cost")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CulturalSocialImpact")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("CurrentStatus")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("DeleteStatus")
                         .HasColumnType("int");
 
-                    b.Property<string>("DetailedDescription")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Details")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("DiaDiem")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DiscountsAndPromotions")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DonViToChuc")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Event")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Highlights")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Image0")
@@ -2632,12 +2611,6 @@ namespace Datas.Migrations
                     b.Property<bool>("IsDisplay")
                         .HasColumnType("bit");
 
-                    b.Property<string>("LoaiHinh")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ManagingAgency")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Material")
                         .HasColumnType("nvarchar(max)");
 
@@ -2645,23 +2618,8 @@ namespace Datas.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("OperationalStatus")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Participants")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ParticipationCost")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int?>("PeopleId")
                         .HasColumnType("int");
-
-                    b.Property<string>("PromotionalActivities")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RequiredAttireAndEquipment")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Shape")
                         .HasColumnType("nvarchar(max)");
@@ -2672,20 +2630,11 @@ namespace Datas.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.Property<string>("Suitability")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Technique")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ThoiGian")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Top")
                         .HasColumnType("bit");
-
-                    b.Property<string>("UniqueExperiences")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("UpdateDate")
                         .HasColumnType("datetime2");
