@@ -1,0 +1,45 @@
+﻿@using Common
+@model Datas.Models.ViewModels.DailyItemModel
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Origin" class="control-label">Nguồn gốc & Xuất xứ</label>
+                            <input asp-for="Origin" class="form-control" placeholder="Nguồn gốc, xuất xứ của vật dụng" />
+                            <small class="text-muted">Mô tả nguồn gốc và xuất xứ của vật dụng</small>
+                            <span asp-validation-for="Origin" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mt-4">
+                            <label asp-for="CulturalValue" class="control-label">Giá trị văn hóa</label>
+                            <textarea asp-for="CulturalValue" class="form-control" rows="4"></textarea>
+                            <small class="text-muted">Mô tả giá trị văn hóa, ý nghĩa của vật dụng</small>
+                            <span asp-validation-for="CulturalValue" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="HistoricalChanges" class="control-label">Sự thay đổi theo thời gian</label>
+                            <textarea asp-for="HistoricalChanges" class="form-control" rows="4"></textarea>
+                            <small class="text-muted">Mô tả quá trình thay đổi, phát triển qua các thời kỳ</small>
+                            <span asp-validation-for="HistoricalChanges" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mt-4">
+                            <label asp-for="RelatedCustoms" class="control-label">Phong tục tập quán liên quan</label>
+                            <textarea asp-for="RelatedCustoms" class="form-control" rows="4"></textarea>
+                            <small class="text-muted">Mô tả các phong tục, tập quán gắn liền với vật dụng</small>
+                            <span asp-validation-for="RelatedCustoms" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

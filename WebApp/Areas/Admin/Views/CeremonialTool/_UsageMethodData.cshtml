@@ -1,0 +1,46 @@
+﻿@using Common
+@model Datas.Models.ViewModels.CeremonialToolModel
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Purpose" class="control-label">Mục đích sử dụng</label>
+                            <input asp-for="Purpose" class="form-control" placeholder="Thờ cúng, cầu an, trừ tà, tế lễ..." />
+                            <small class="text-muted">Mô tả mục đích sử dụng chính của dụng cụ nghi lễ</small>
+                            <span asp-validation-for="Purpose" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mt-4">
+                            <label asp-for="RelatedRituals" class="control-label">Nghi lễ liên quan</label>
+                            <textarea asp-for="RelatedRituals" class="form-control" rows="3" placeholder="Được sử dụng trong lễ hội, cúng tế, tang ma, cưới hỏi..."></textarea>
+                            <small class="text-muted">Các nghi lễ mà dụng cụ này được sử dụng</small>
+                            <span asp-validation-for="RelatedRituals" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="UsageCharacters" class="control-label">Nhân vật sử dụng</label>
+                            <input asp-for="UsageCharacters" class="form-control" placeholder="Thầy cúng, sư thầy, già làng..." />
+                            <small class="text-muted">Những người thường sử dụng dụng cụ này</small>
+                            <span asp-validation-for="UsageCharacters" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mt-4">
+                            <label asp-for="UsageMethod" class="control-label">Cách sử dụng</label>
+                            <textarea asp-for="UsageMethod" class="form-control" rows="3" placeholder="Phương pháp sử dụng trong nghi lễ"></textarea>
+                            <small class="text-muted">Mô tả chi tiết cách thức sử dụng dụng cụ</small>
+                            <span asp-validation-for="UsageMethod" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

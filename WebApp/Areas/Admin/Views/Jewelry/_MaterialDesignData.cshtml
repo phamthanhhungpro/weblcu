@@ -1,0 +1,50 @@
+﻿@using Common
+@model Datas.Models.ViewModels.JewelryModel
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="MainMaterial" class="control-label">Chất liệu chính</label>
+                            <input asp-for="MainMaterial" class="form-control" placeholder="Bạc, vàng, đồng, đá quý, ngọc trai..." />
+                            <small class="text-muted">Chất liệu chính được sử dụng để chế tạo trang sức</small>
+                            <span asp-validation-for="MainMaterial" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="DesignStyle" class="control-label">Phong cách thiết kế</label>
+                            <input asp-for="DesignStyle" class="form-control" placeholder="Hoa văn chạm khắc, đính đá, dây xích..." />
+                            <small class="text-muted">Phong cách thiết kế chính của trang sức</small>
+                            <span asp-validation-for="DesignStyle" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Technique" class="control-label">Kỹ thuật chế tác</label>
+                            <input asp-for="Technique" class="form-control" placeholder="Đúc, khắc, chạm trổ, dát mỏng..." />
+                            <small class="text-muted">Kỹ thuật chính được sử dụng để làm ra trang sức</small>
+                            <span asp-validation-for="Technique" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="SizeWeight" class="control-label">Kích thước & Trọng lượng</label>
+                            <textarea asp-for="SizeWeight" class="form-control" rows="3"></textarea>
+                            <small class="text-muted">Thông tin về kích thước và trọng lượng của trang sức (vd: Đường kính 6cm, nặng 25g)</small>
+                            <span asp-validation-for="SizeWeight" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,85 @@
+﻿@using Common
+@model Datas.Models.ViewModels.LandmarkModel
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <!-- Nguồn gốc & Lịch sử -->
+                <div class="form-group">
+                    <label asp-for="History" class="control-label"></label> <span class="text-danger">(*)</span>
+                    <textarea asp-for="History" class="form-control ckeditor" rows="6"></textarea>
+                    <small class="form-text text-muted">Mô tả quá trình hình thành và phát triển của di tích</small>
+                    <span asp-validation-for="History" class="text-danger"></span>
+                </div>
+
+                <!-- Sự kiện liên quan -->
+                <div class="form-group mt-4">
+                    <label asp-for="RelatedEvents" class="control-label"></label>
+                    <input asp-for="RelatedEvents" class="form-control" type="text" />
+                    <small class="form-text text-muted">Liệt kê các sự kiện lịch sử, văn hóa quan trọng gắn liền với di tích</small>
+                    <span asp-validation-for="RelatedEvents" class="text-danger"></span>
+                </div>
+
+                <!-- Tín ngưỡng & Tâm linh -->
+                <div class="form-group mt-4">
+                    <label asp-for="SpiritualBelief" class="control-label"></label>
+                    <input asp-for="SpiritualBelief" class="form-control" type="text" />
+                    <small class="form-text text-muted">Thông tin về giá trị tín ngưỡng, tôn giáo và các phong tục tập quán</small>
+                    <span asp-validation-for="SpiritualBelief" class="text-danger"></span>
+                </div>
+
+                <!-- Giá trị văn hóa - xã hội -->
+                <div class="form-group mt-4">
+                    <label asp-for="CulturalValue" class="control-label"></label>
+                    <textarea asp-for="CulturalValue" class="form-control ckeditor" rows="6"></textarea>
+                    <small class="form-text text-muted">Phân tích ảnh hưởng và đóng góp về văn hóa, xã hội và du lịch</small>
+                    <span asp-validation-for="CulturalValue" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        // Initialize CKEditor only for textareas that need rich text editing
+        ['History', 'CulturalValue'].forEach(function(fieldId) {
+            CKEDITOR.replace(fieldId, {
+                height: '300px',
+                toolbarGroups: [
+                    { name: 'document', groups: ['mode', 'document', 'doctools'] },
+                    { name: 'clipboard', groups: ['clipboard', 'undo'] },
+                    { name: 'editing', groups: ['find', 'selection', 'spellchecker', 'editing'] },
+                    '/',
+                    { name: 'basicstyles', groups: ['basicstyles', 'cleanup'] },
+                    { name: 'paragraph', groups: ['list', 'indent', 'blocks', 'align', 'paragraph'] },
+                    { name: 'links', groups: ['links'] },
+                    { name: 'insert', groups: ['insert'] },
+                    '/',
+                    { name: 'styles', groups: ['styles'] },
+                    { name: 'colors', groups: ['colors'] },
+                ],
+                removeButtons: 'Save,NewPage,Preview,Print,Templates,Cut,Copy,Paste,PasteText,PasteFromWord,Find,Replace,SelectAll,Scayt,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,Strike,Subscript,Superscript,CopyFormatting,RemoveFormat,NumberedList,BulletedList,Outdent,Indent,Blockquote,CreateDiv,JustifyLeft,JustifyCenter,JustifyRight,JustifyBlock,BidiLtr,BidiRtl,Language,Link,Unlink,Anchor,Flash,HorizontalRule,Smiley,SpecialChar,PageBreak,Iframe,Styles,Format,Font,FontSize,TextColor,BGColor,Maximize,ShowBlocks,About'
+            });
+        });
+
+        // Add auto-save functionality
+        var autoSaveInterval = 60000; // 1 minute
+        setInterval(function() {
+            var formData = new FormData($('form')[0]);
+            $.ajax({
+                url: '/Admin/Landmark/AutoSave',
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    if(response.success) {
+                        console.log('Auto-saved successfully');
+                    }
+                }
+            });
+        }, autoSaveInterval);
+    });
+</script>

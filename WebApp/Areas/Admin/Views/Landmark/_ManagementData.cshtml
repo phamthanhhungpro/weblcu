@@ -1,0 +1,59 @@
+﻿@using Common
+@model Datas.Models.ViewModels.LandmarkModel
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="HeritageRanking" class="control-label">Xếp hạng di tích</label>
+                            <input asp-for="HeritageRanking" class="form-control" />
+                            <small class="form-text text-muted">Cấp độ xếp hạng di tích theo quy định của nhà nước và tổ chức quốc tế</small>
+                            <span asp-validation-for="HeritageRanking" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="ManagementAuthority" class="control-label">Cơ quan quản lý</label>
+                            <input asp-for="ManagementAuthority" class="form-control" />
+                            <small class="form-text text-muted">Liệt kê các cơ quan chịu trách nhiệm quản lý, vận hành di tích</small>
+                            <span asp-validation-for="ManagementAuthority" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group mt-4">
+                    <label asp-for="ConservationProject" class="control-label">Dự án bảo tồn & Phục dựng</label>
+                    <textarea asp-for="ConservationProject" class="form-control ckeditor" rows="8"></textarea>
+                    <small class="form-text text-muted">Mô tả chi tiết các dự án bảo tồn, trùng tu, tôn tạo đã và đang thực hiện tại di tích</small>
+                    <span asp-validation-for="ConservationProject" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        // Initialize CKEditor for ConservationProject
+        CKEDITOR.replace('ConservationProject', {
+            height: '400px',
+            toolbarGroups: [
+                { name: 'document', groups: ['mode', 'document', 'doctools'] },
+                { name: 'clipboard', groups: ['clipboard', 'undo'] },
+                { name: 'editing', groups: ['find', 'selection', 'spellchecker', 'editing'] },
+                '/',
+                { name: 'basicstyles', groups: ['basicstyles', 'cleanup'] },
+                { name: 'paragraph', groups: ['list', 'indent', 'blocks', 'align', 'paragraph'] },
+                { name: 'links', groups: ['links'] },
+                { name: 'insert', groups: ['insert'] },
+                '/',
+                { name: 'styles', groups: ['styles'] },
+                { name: 'colors', groups: ['colors'] },
+            ],
+            removeButtons: 'Save,NewPage,Preview,Print,Templates,Cut,Copy,Paste,PasteText,PasteFromWord,Find,Replace,SelectAll,Scayt,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,Strike,Subscript,Superscript,CopyFormatting,RemoveFormat,NumberedList,BulletedList,Outdent,Indent,Blockquote,CreateDiv,JustifyLeft,JustifyCenter,JustifyRight,JustifyBlock,BidiLtr,BidiRtl,Language,Link,Unlink,Anchor,Flash,HorizontalRule,Smiley,SpecialChar,PageBreak,Iframe,Styles,Format,Font,FontSize,TextColor,BGColor,Maximize,ShowBlocks,About'
+        });
+    });
+</script>

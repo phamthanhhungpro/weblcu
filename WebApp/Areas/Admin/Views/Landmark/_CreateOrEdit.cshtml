@@ -4,6 +4,10 @@
     <div class="col-md-12">
         <ul class="nav nav-tabs" id="tab-data" role="tablist">
             <li class="nav-item"><a class="nav-link active" id="info-data-tab" data-toggle="pill" href="#info-data" aria-controls="info-data" aria-selected="true">Thông tin điểm đến di tích, danh lam</a></li>
+            <li class="nav-item"><a class="nav-link" id="history-culture-tab" data-toggle="pill" href="#history-culture" aria-controls="history-culture" aria-selected="false">Thông tin lịch sử & văn hóa</a></li>
+            <li class="nav-item"><a class="nav-link" id="architecture-tab" data-toggle="pill" href="#architecture" aria-controls="architecture" aria-selected="false">Kiến trúc & Đặc điểm nổi bật</a></li>
+            <li class="nav-item"><a class="nav-link" id="tourism-tab" data-toggle="pill" href="#tourism" aria-controls="tourism" aria-selected="false">Hoạt động tham quan & Du lịch</a></li>
+            <li class="nav-item"><a class="nav-link" id="management-tab" data-toggle="pill" href="#management" aria-controls="management" aria-selected="false">Quản lý & Bảo tồn</a></li>
             <li class="nav-item"><a class="nav-link" id="image-data-tab" data-toggle="pill" href="#image-data" aria-controls="image-data" aria-selected="false">Hình ảnh</a></li>
             <li class="nav-item"><a class="nav-link" id="file-data-tab" data-toggle="pill" href="#file-data" aria-controls="file-data" aria-selected="false">Tài liệu</a></li>
         </ul>
@@ -11,15 +15,30 @@
             <div class="tab-pane fade show active" id="info-data" role="tabpanel" aria-labelledby="info-data-tab">
                 @Html.Partial("_InfoData")
             </div>
+            <div class="tab-pane fade" id="history-culture" role="tabpanel" aria-labelledby="history-culture-tab">
+                @Html.Partial("_HistoryCultureData")
+            </div>
+            <div class="tab-pane fade" id="architecture" role="tabpanel" aria-labelledby="architecture-tab">
+                @Html.Partial("_ArchitectureData")
+            </div>
+            <div class="tab-pane fade" id="tourism" role="tabpanel" aria-labelledby="tourism-tab">
+                @Html.Partial("_TourismData")
+            </div>
+            <div class="tab-pane fade" id="management" role="tabpanel" aria-labelledby="management-tab">
+                @Html.Partial("_ManagementData")
+            </div>
             <div class="tab-pane fade" id="image-data" role="tabpanel" aria-labelledby="image-data-tab">
                 @Html.Partial("_ImageData")
             </div>
             <div class="tab-pane fade" id="file-data" role="tabpanel" aria-labelledby="file-data-tab">
-                  @Html.Partial("_AttachmentData")
+                @Html.Partial("_AttachmentData")
             </div>
         </div>
     </div>
 </div>
+
+@* ... existing script section remains unchanged ... *@
+
 
 <script>
     $(function () {

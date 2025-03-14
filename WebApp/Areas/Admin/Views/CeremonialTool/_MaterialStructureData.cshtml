@@ -1,0 +1,45 @@
+﻿@using Common
+@model Datas.Models.ViewModels.CeremonialToolModel
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="MainMaterial" class="control-label">Chất liệu chính</label>
+                            <input asp-for="MainMaterial" class="form-control" placeholder="Gỗ, đồng, vàng, bạc, gốm, vải, giấy..." />
+                            <small class="text-muted">Chất liệu chính được sử dụng để chế tạo dụng cụ</small>
+                            <span asp-validation-for="MainMaterial" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mt-4">
+                            <label asp-for="Material" class="control-label">Các chất liệu khác</label>
+                            <textarea asp-for="Material" class="form-control" rows="3"></textarea>
+                            <small class="text-muted">Mô tả chi tiết về các vật liệu phụ được sử dụng</small>
+                            <span asp-validation-for="Material" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="SizeWeight" class="control-label">Kích thước & Trọng lượng</label>
+                            <textarea asp-for="SizeWeight" class="form-control" rows="3"></textarea>
+                            <small class="text-muted">Thông tin về kích thước và trọng lượng của dụng cụ</small>
+                            <span asp-validation-for="SizeWeight" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mt-4">
+                            <label asp-for="Structure" class="control-label">Cấu tạo</label>
+                            <textarea asp-for="Structure" class="form-control" rows="3" placeholder="Các bộ phận chính của dụng cụ"></textarea>
+                            <small class="text-muted">Mô tả chi tiết về cấu tạo của dụng cụ</small>
+                            <span asp-validation-for="Structure" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

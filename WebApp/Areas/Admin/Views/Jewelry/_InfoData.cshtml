@@ -1,107 +1,81 @@
-﻿
-@using Common
+﻿@using Common
 @model Datas.Models.ViewModels.JewelryModel
 <div class="row">
     <div class="col-md-6">
         <div class="form-group">
-            <label asp-for="Name" class="control-label"></label> <span class="text-danger">(*)</span>
+            <label asp-for="IdentityCode" class="control-label">Mã trang sức</label> <span class="text-danger">(*)</span>
+            <input asp-for="IdentityCode" class="form-control" />
+            <span asp-validation-for="IdentityCode" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Name" class="control-label">Tên trang sức</label> <span class="text-danger">(*)</span>
             <input asp-for="Name" class="form-control" />
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="Code" class="control-label"></label> 
-            <input asp-for="Code" class="form-control" />
-            <span asp-validation-for="Code" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Event" class="control-label"></label>
-            <input asp-for="Event" class="form-control" />
-            <span asp-validation-for="Event" class="text-danger"></span>
+            <label asp-for="AlternativeNames" class="control-label">Tên gọi khác</label>
+            <input asp-for="AlternativeNames" class="form-control" />
+            <span asp-validation-for="AlternativeNames" class="text-danger"></span>
         </div>
         <div class="form-group">
             @Html.Partial("_DisplayJewelryCategory")
         </div>
+
         <div class="form-group">
             @Html.Partial("_DisplayPeople")
         </div>
         <div class="form-group">
-            <label asp-for="Shape" class="control-label"></label>
-            <input asp-for="Shape" class="form-control" />
-            <span asp-validation-for="Shape" class="text-danger"></span>
+            <label asp-for="Gender" class="control-label">Giới tính sử dụng</label>
+            <select asp-for="Gender" class="form-control">
+                <option value="">-- Chọn giới tính --</option>
+                <option value="Nam">Nam</option>
+                <option value="Nữ">Nữ</option>
+                <option value="Cả hai">Cả hai</option>
+            </select>
+            <span asp-validation-for="Gender" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="CurrentStatus" class="control-label"></label>
-            <input asp-for="CurrentStatus" class="form-control" />
-            <span asp-validation-for="CurrentStatus" class="text-danger"></span>
+            <label asp-for="AgeGroup" class="control-label">Độ tuổi sử dụng</label>
+            <input asp-for="AgeGroup" class="form-control" placeholder="Trẻ em, người lớn, người già..." />
+            <span asp-validation-for="AgeGroup" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="Technique" class="control-label"></label>
-            <input asp-for="Technique" class="form-control" />
-            <span asp-validation-for="Technique" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Classify" class="control-label"></label>
-            <input asp-for="Classify" class="form-control" />
-            <span asp-validation-for="Classify" class="text-danger"></span>
+            <label asp-for="Scan3DLink" class="control-label">Link ảnh scan 3D</label>
+            <input asp-for="Scan3DLink" class="form-control" />
+            <span asp-validation-for="Scan3DLink" class="text-danger"></span>
         </div>
     </div>
     <div class="col-md-6">
         <div class="row" style="margin-top:38px;">
             <div class="col-md-3">
                 <div class="form-group">
-                    <label asp-for="IsDisplay" class="control-label"></label>
+                    <label asp-for="IsDisplay" class="control-label">Hiển thị</label>
                     <input asp-for="IsDisplay" />
                     <span asp-validation-for="IsDisplay" class="text-danger"></span>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    <label asp-for="Top" class="control-label"></label>
+                    <label asp-for="Top" class="control-label">Lên đầu</label>
                     <input asp-for="Top" />
                     <span asp-validation-for="Top" class="text-danger"></span>
                 </div>
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="Image360" class="control-label"></label>
+            <label asp-for="Image360" class="control-label">Link ảnh 360°</label>
             <input asp-for="Image360" class="form-control" />
             <span asp-validation-for="Image360" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="Cost" class="control-label"></label>
-            <input asp-for="Cost" class="form-control" />
-            <span asp-validation-for="Cost" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Color" class="control-label"></label>
-            <input asp-for="Color" class="form-control"/>
-            <span asp-validation-for="Color" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Size" class="control-label"></label>
-            <textarea asp-for="Size" class="form-control"></textarea>
-            <span asp-validation-for="Size" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Certification" class="control-label"></label>
-            <input asp-for="Certification" class="form-control" />
-            <span asp-validation-for="Certification" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Material" class="control-label"></label>
-            <input asp-for="Material" class="form-control" />
-            <span asp-validation-for="Material" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Details" class="control-label"></label>
-            <textarea asp-for="Details" class="form-control"></textarea>
+            <label asp-for="Details" class="control-label">Mô tả ngắn</label>
+            <textarea asp-for="Details" class="form-control" rows="3"></textarea>
             <span asp-validation-for="Details" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="Status" class="control-label"></label>
+            <label asp-for="Status" class="control-label">Trạng thái</label>
             <select class="form-control" asp-for="Status" asp-items="Html.GetEnumSelectList(typeof(Enums.ActiveStatus))">
             </select>
-            <input type="hidden" asp-for="Status" />
             <span asp-validation-for="Status" class="text-danger"></span>
         </div>
     </div>
@@ -109,9 +83,35 @@
 <div class="row">
     <div class="col-md-12">
         <div class="form-group">
-            <label asp-for="Content" class="control-label"></label> <span class="text-danger">(*)</span>
-            <textarea asp-for="Content" class="form-control"></textarea>
+            <label asp-for="Content" class="control-label">Giới thiệu chi tiết</label> <span class="text-danger">(*)</span>
+            <textarea asp-for="Content" class="form-control" rows="6"></textarea>
             <span asp-validation-for="Content" class="text-danger"></span>
         </div>
     </div>
 </div>
+
+@*This JavaScript handles the category name/ID relationship*@
+<script>
+    $(document).ready(function() {
+        // You'll need to write code here that handles the relationship between
+        // the text input (JewelryType) and the hidden CategoryId field.
+        // This might involve an AJAX lookup or other approach depending on
+        // your application's architecture.
+
+        // For example, you could implement AJAX search when typing:
+        /*
+        $('#JewelryType').on('change', function() {
+            var categoryName = $(this).val();
+
+            // Call a backend API to find the category ID for this name
+            $.get('/api/jewelry-categories/by-name?name=' + encodeURIComponent(categoryName), function(data) {
+                if (data && data.id) {
+                    $('#CategoryId').val(data.id);
+                } else {
+                    $('#CategoryId').val(''); // Clear if not found
+                }
+            });
+        });
+        */
+    });
+</script>

@@ -1,0 +1,44 @@
+﻿@using Common
+@model Datas.Models.ViewModels.JewelryModel
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label asp-for="Origin" class="control-label">Nguồn gốc</label>
+                            <input asp-for="Origin" class="form-control" placeholder="Mô tả nguồn gốc và thời kỳ hình thành của trang sức" />
+                            <small class="text-muted">Mô tả nguồn gốc và thời kỳ hình thành của trang sức, gắn với nền văn hóa nào</small>
+                            <span asp-validation-for="Origin" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label asp-for="HistoricalChanges" class="control-label">Sự thay đổi theo thời gian</label>
+                            <input asp-for="HistoricalChanges" class="form-control" placeholder="Mô tả quá trình phát triển và thay đổi qua các thời kỳ lịch sử" />
+                            <small class="text-muted">Mô tả quá trình phát triển và thay đổi của trang sức qua các thời kỳ lịch sử</small>
+                            <span asp-validation-for="HistoricalChanges" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label asp-for="CommonRegions" class="control-label">Khu vực phổ biến</label>
+                            <input asp-for="CommonRegions" class="form-control" placeholder="Ví dụ: Miền Bắc, Tây Nguyên, Hòa Bình, Sơn La..." />
+                            <small class="text-muted">Mô tả các khu vực, địa phương nơi trang sức này được sử dụng phổ biến</small>
+                            <span asp-validation-for="CommonRegions" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

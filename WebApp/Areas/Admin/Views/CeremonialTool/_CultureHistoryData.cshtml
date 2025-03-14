@@ -1,0 +1,46 @@
+﻿@using Common
+@model Datas.Models.ViewModels.CeremonialToolModel
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Origin" class="control-label">Nguồn gốc & Xuất xứ</label>
+                            <input asp-for="Origin" class="form-control" placeholder="Hình thành từ thời kỳ nào, gắn với nền văn hóa nào" />
+                            <small class="text-muted">Nguồn gốc và xuất xứ của dụng cụ nghi lễ</small>
+                            <span asp-validation-for="Origin" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mt-4">
+                            <label asp-for="CulturalValue" class="control-label">Giá trị văn hóa</label>
+                            <input asp-for="CulturalValue" class="form-control" placeholder="Vai trò trong đời sống tâm linh, cộng đồng" />
+                            <small class="text-muted">Giá trị văn hóa của dụng cụ nghi lễ</small>
+                            <span asp-validation-for="CulturalValue" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="HistoricalChanges" class="control-label">Sự thay đổi theo thời gian</label>
+                            <input asp-for="HistoricalChanges" class="form-control" placeholder="Có thay đổi hay vẫn giữ nguyên hình thức truyền thống" />
+                            <small class="text-muted">Quá trình thay đổi của dụng cụ qua các thời kỳ</small>
+                            <span asp-validation-for="HistoricalChanges" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mt-4">
+                            <label asp-for="RelatedCustoms" class="control-label">Phong tục tập quán liên quan</label>
+                            <input asp-for="RelatedCustoms" class="form-control" placeholder="Nếu có gắn liền với nghi lễ, tín ngưỡng" />
+                            <small class="text-muted">Các phong tục tập quán liên quan đến dụng cụ</small>
+                            <span asp-validation-for="RelatedCustoms" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

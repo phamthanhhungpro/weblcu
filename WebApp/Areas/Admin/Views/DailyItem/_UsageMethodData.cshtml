@@ -1,0 +1,52 @@
+﻿@using Common
+@model Datas.Models.ViewModels.DailyItemModel
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Purpose" class="control-label">Mục đích sử dụng</label>
+                            <input asp-for="Purpose" class="form-control" placeholder="Mục đích chính khi sử dụng vật dụng này" />
+                            <small class="text-muted">Mô tả mục đích sử dụng chính của vật dụng</small>
+                            <span asp-validation-for="Purpose" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="UserGroup" class="control-label">Đối tượng sử dụng</label>
+                            <input asp-for="UserGroup" class="form-control" placeholder="Người lớn, trẻ em, nam giới, nữ giới..." />
+                            <small class="text-muted">Những đối tượng thường sử dụng vật dụng này</small>
+                            <span asp-validation-for="UserGroup" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label asp-for="UsageMethod" class="control-label">Cách sử dụng</label>
+                            <textarea asp-for="UsageMethod" class="form-control" rows="5"></textarea>
+                            <small class="text-muted">Mô tả chi tiết cách thức sử dụng vật dụng</small>
+                            <span asp-validation-for="UsageMethod" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label asp-for="RelatedEvents" class="control-label">Sự kiện liên quan</label>
+                            <input asp-for="RelatedEvents" class="form-control" placeholder="Các sự kiện, nghi lễ, lễ hội liên quan đến việc sử dụng vật dụng này" />
+                            <small class="text-muted">Mô tả các sự kiện đặc biệt khi vật dụng này được sử dụng</small>
+                            <span asp-validation-for="RelatedEvents" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

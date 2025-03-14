@@ -1,0 +1,44 @@
+﻿@using Common
+@model Datas.Models.ViewModels.JewelryModel
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Purpose" class="control-label">Mục đích sử dụng</label>
+                            <input asp-for="Purpose" class="form-control" placeholder="Trang trí, tín ngưỡng, phong thủy, quyền lực..." />
+                            <small class="text-muted">Mục đích chính khi sử dụng trang sức này trong cộng đồng</small>
+                            <span asp-validation-for="Purpose" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mt-4">
+                            <label asp-for="RelatedEvents" class="control-label">Sự kiện liên quan</label>
+                            <input asp-for="RelatedEvents" class="form-control" placeholder="Lễ cưới, lễ hội, nghi lễ tôn giáo..." />
+                            <small class="text-muted">Các sự kiện, lễ hội, nghi lễ mà trang sức này được sử dụng</small>
+                            <span asp-validation-for="RelatedEvents" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="SymbolicMeaning" class="control-label">Ý nghĩa biểu tượng</label>
+                            <input asp-for="SymbolicMeaning" class="form-control" placeholder="Ý nghĩa biểu tượng và giá trị tinh thần của trang sức" />
+                            <small class="text-muted">Ý nghĩa biểu tượng và giá trị tinh thần gắn liền với trang sức</small>
+                            <span asp-validation-for="SymbolicMeaning" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mt-4">
+                            <label asp-for="CulturalImpact" class="control-label">Ảnh hưởng văn hóa - xã hội</label>
+                            <input asp-for="CulturalImpact" class="form-control" placeholder="Ảnh hưởng và cách đánh giá của cộng đồng" />
+                            <small class="text-muted">Mô tả ảnh hưởng và cách đánh giá của cộng đồng đối với trang sức này</small>
+                            <span asp-validation-for="CulturalImpact" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

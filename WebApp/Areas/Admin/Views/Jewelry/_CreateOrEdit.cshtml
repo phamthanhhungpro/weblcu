@@ -4,6 +4,10 @@
     <div class="col-md-12">
         <ul class="nav nav-tabs" id="tab-data" role="tablist">
             <li class="nav-item"><a class="nav-link active" id="info-data-tab" data-toggle="pill" href="#info-data" aria-controls="info-data" aria-selected="true">Thông tin trang sức</a></li>
+            <li class="nav-item"><a class="nav-link" id="material-design-tab" data-toggle="pill" href="#material-design" aria-controls="material-design" aria-selected="false">Chất liệu & Kiểu dáng</a></li>
+            <li class="nav-item"><a class="nav-link" id="meaning-culture-tab" data-toggle="pill" href="#meaning-culture" aria-controls="meaning-culture" aria-selected="false">Ý nghĩa & Văn hóa</a></li>
+            <li class="nav-item"><a class="nav-link" id="history-origin-tab" data-toggle="pill" href="#history-origin" aria-controls="history-origin" aria-selected="false">Lịch sử & Xuất xứ</a></li>
+            <li class="nav-item"><a class="nav-link" id="status-preservation-tab" data-toggle="pill" href="#status-preservation" aria-controls="status-preservation" aria-selected="false">Hiện trạng & Bảo tồn</a></li>
             <li class="nav-item"><a class="nav-link" id="image-data-tab" data-toggle="pill" href="#image-data" aria-controls="image-data" aria-selected="false">Hình ảnh</a></li>
             <li class="nav-item"><a class="nav-link" id="file-data-tab" data-toggle="pill" href="#file-data" aria-controls="file-data" aria-selected="false">Tài liệu</a></li>
         </ul>
@@ -11,11 +15,23 @@
             <div class="tab-pane fade show active" id="info-data" role="tabpanel" aria-labelledby="info-data-tab">
                 @Html.Partial("_InfoData")
             </div>
+            <div class="tab-pane fade" id="material-design" role="tabpanel" aria-labelledby="material-design-tab">
+                @Html.Partial("_MaterialDesignData")
+            </div>
+            <div class="tab-pane fade" id="meaning-culture" role="tabpanel" aria-labelledby="meaning-culture-tab">
+                @Html.Partial("_MeaningCultureData")
+            </div>
+            <div class="tab-pane fade" id="history-origin" role="tabpanel" aria-labelledby="history-origin-tab">
+                @Html.Partial("_HistoryOriginData")
+            </div>
+            <div class="tab-pane fade" id="status-preservation" role="tabpanel" aria-labelledby="status-preservation-tab">
+                @Html.Partial("_StatusPreservationData")
+            </div>
             <div class="tab-pane fade" id="image-data" role="tabpanel" aria-labelledby="image-data-tab">
                 @Html.Partial("_ImageData")
             </div>
             <div class="tab-pane fade" id="file-data" role="tabpanel" aria-labelledby="file-data-tab">
-                  @Html.Partial("_AttachmentData")
+                @Html.Partial("_AttachmentData")
             </div>
         </div>
     </div>
@@ -273,5 +289,24 @@
             imageUploadUrl: '/Admin/file-system/connector'
         });
         $('#Content').show();
+
+        // Initialize CKEditor for other rich text fields in the added tabs
+        var richTextFields = [
+            'Origin', 'HistoricalChanges', 'DisplayedItems'
+        ];
+
+        richTextFields.forEach(function(fieldId) {
+            if ($('#' + fieldId).length) {
+                CKEDITOR.replace(fieldId, {
+                    height: '250px',
+                    filebrowserBrowseUrl: '#',
+                    extraPlugins: 'image2',
+                    filebrowserUploadUrl: '/Admin/file-system/connector',
+                    imageUploadUrl: '/Admin/file-system/connector'
+                });
+                $('#' + fieldId).show();
+            }
+        });
     });
 </script>
+

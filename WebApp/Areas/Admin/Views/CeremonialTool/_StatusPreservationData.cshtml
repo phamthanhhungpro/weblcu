@@ -1,0 +1,43 @@
+﻿@using Common
+@model Datas.Models.ViewModels.CeremonialToolModel
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="CurrentStatus" class="control-label">Tình trạng hiện tại</label>
+                            <input asp-for="CurrentStatus" class="form-control" placeholder="Còn phổ biến hay mai một" />
+                            <small class="text-muted">Mô tả tình trạng sử dụng và phổ biến hiện nay</small>
+                            <span asp-validation-for="CurrentStatus" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="PreservationMethod" class="control-label">Cách bảo quản</label>
+                            <input asp-for="PreservationMethod" class="form-control" placeholder="Yêu cầu bảo quản đặc biệt nếu có" />
+                            <small class="text-muted">Mô tả cách thức bảo quản, bảo vệ dụng cụ</small>
+                            <span asp-validation-for="PreservationMethod" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label asp-for="DisplayedItems" class="control-label">Hiện vật trưng bày</label>
+                            <textarea asp-for="DisplayedItems" class="form-control" rows="4" placeholder="Nếu được lưu giữ tại bảo tàng, nhà thờ tổ, đình, chùa..."></textarea>
+                            <small class="text-muted">Thông tin về các hiện vật tương tự được lưu giữ và trưng bày</small>
+                            <span asp-validation-for="DisplayedItems" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

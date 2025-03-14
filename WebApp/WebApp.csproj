@@ -52,7 +52,6 @@
     <AdditionalFiles Include="Areas\Admin\Views\DailyItem\EditExcel.cshtml" />
     <AdditionalFiles Include="Areas\Admin\Views\DailyItem\ImportExcel.cshtml" />
     <AdditionalFiles Include="Areas\Admin\Views\DailyItem\_AttachmentData.cshtml" />
-    <AdditionalFiles Include="Areas\Admin\Views\DailyItem\_DisplayInstrumentCategory.cshtml" />
     <AdditionalFiles Include="Areas\Admin\Views\DailyItem\_DisplayPeople.cshtml" />
     <AdditionalFiles Include="Areas\Admin\Views\DailyItem\_ImageData.cshtml" />
     <AdditionalFiles Include="Areas\Admin\Views\DailyItem\_InfoData.cshtml" />

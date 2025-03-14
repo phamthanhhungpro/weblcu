@@ -11,18 +11,115 @@ public class Landmark : BaseModel
     [Display(Name = "Tên điểm đến di tích, danh lam")]
     public string Name { set; get; }
 
-    public void ReNewUrl()
-    {
-        var newUrl = ExtensionMethod.RemoveUnicode(Name);
-        newUrl = newUrl.Replace(" ", "-").ToLower();
-        newUrl = Regex.Replace(newUrl, @"[^a-zA-Z0-9 -]", string.Empty);
-        Url = newUrl;
-    }
+    [Display(Name = "Tên gọi khác")]
+    public string? AlternativeNames { get; set; }
 
+    [Required(ErrorMessage = "Bạn cần nhập mã định danh")]
+    [Display(Name = "Mã di tích")]
+    public string IdentityCode { get; set; }
+
+    [Display(Name = "Loại di tích")]
+    public string? LandmarkType { get; set; }
+
+    [Display(Name = "Địa chỉ")]
+    public string? Address { get; set; }
+
+    [Display(Name = "Tọa độ GPS")]
+    public string? GpsCoordinates { get; set; }
+
+    [Display(Name = "Nguồn gốc & Lịch sử")]
+    [DataType(DataType.MultilineText)]
+    public string? History { get; set; }
+
+    [Display(Name = "Sự kiện liên quan")]
+    [DataType(DataType.MultilineText)]
+    public string? RelatedEvents { get; set; }
+
+    [Display(Name = "Tín ngưỡng & Tâm linh")]
+    [DataType(DataType.MultilineText)]
+    public string? SpiritualBelief { get; set; }
+
+    [Display(Name = "Giá trị văn hóa - xã hội")]
+    [DataType(DataType.MultilineText)]
+    public string? CulturalValue { get; set; }
+
+    [Display(Name = "Kiến trúc/Tự nhiên")]
+    [DataType(DataType.MultilineText)]
+    public string? Architecture { get; set; }
+
+    [Display(Name = "Chất liệu xây dựng")]
+    public string? BuildingMaterial { get; set; }
+
+    [Display(Name = "Tình trạng hiện tại")]
+    [DataType(DataType.MultilineText)]
+    public string? CurrentCondition { get; set; }
+
+    [Display(Name = "Diện tích & Quy mô")]
+    public string? SizeScale { get; set; }
+
+    [Display(Name = "Hiện vật trưng bày")]
+    [DataType(DataType.MultilineText)]
+    public string? Exhibits { get; set; }
+
+    [Display(Name = "Thời gian mở cửa")]
+    public string? OpeningHours { get; set; }
+
+    [Display(Name = "Giá vé")]
+    public string? TicketPrice { get; set; }
+
+    [Display(Name = "Các dịch vụ hỗ trợ")]
+    [DataType(DataType.MultilineText)]
+    public string? SupportServices { get; set; }
+
+    [Display(Name = "Hoạt động trải nghiệm")]
+    [DataType(DataType.MultilineText)]
+    public string? ExperienceActivities { get; set; }
+
+    [Display(Name = "Lượng khách tham quan hàng năm")]
+    public int? AnnualVisitors { get; set; }
+
+    [Display(Name = "Xếp hạng di tích")]
+    public string? HeritageRanking { get; set; }
+
+    [Display(Name = "Cơ quan quản lý")]
+    public string? ManagementAuthority { get; set; }
+
+    [Display(Name = "Dự án bảo tồn & Phục dựng")]
+    [DataType(DataType.MultilineText)]
+    public string? ConservationProject { get; set; }
+
+    // Update SetNewData methods to include new fields
     public void SetNewData(Landmark model)
     {
+        // Existing fields
         Name = model.Name;
         Code = model.Code;
+        AlternativeNames = model.AlternativeNames;
+        IdentityCode = model.IdentityCode;
+        LandmarkType = model.LandmarkType;
+        Address = model.Address;
+        GpsCoordinates = model.GpsCoordinates;
+
+        // New fields
+        History = model.History;
+        RelatedEvents = model.RelatedEvents;
+        SpiritualBelief = model.SpiritualBelief;
+        CulturalValue = model.CulturalValue;
+        Architecture = model.Architecture;
+        BuildingMaterial = model.BuildingMaterial;
+        CurrentCondition = model.CurrentCondition;
+        SizeScale = model.SizeScale;
+        Exhibits = model.Exhibits;
+        OpeningHours = model.OpeningHours;
+        TicketPrice = model.TicketPrice;
+        SupportServices = model.SupportServices;
+        ExperienceActivities = model.ExperienceActivities;
+        AnnualVisitors = model.AnnualVisitors;
+        HeritageRanking = model.HeritageRanking;
+        ManagementAuthority = model.ManagementAuthority;
+        ConservationProject = model.ConservationProject;
+
+        // Existing base fields
         IsDisplay = model.IsDisplay;
         Top = model.Top;
         Image360 = model.Image360;
@@ -52,8 +149,35 @@ public class Landmark : BaseModel
 
     public void SetNewData(LandmarkModel model)
     {
+        // Existing fields
         Name = model.Name;
         Code = model.Code;
+        AlternativeNames = model.AlternativeNames;
+        IdentityCode = model.IdentityCode;
+        LandmarkType = model.LandmarkType;
+        Address = model.Address;
+        GpsCoordinates = model.GpsCoordinates;
+
+        // New fields
+        History = model.History;
+        RelatedEvents = model.RelatedEvents;
+        SpiritualBelief = model.SpiritualBelief;
+        CulturalValue = model.CulturalValue;
+        Architecture = model.Architecture;
+        BuildingMaterial = model.BuildingMaterial;
+        CurrentCondition = model.CurrentCondition;
+        SizeScale = model.SizeScale;
+        Exhibits = model.Exhibits;
+        OpeningHours = model.OpeningHours;
+        TicketPrice = model.TicketPrice;
+        SupportServices = model.SupportServices;
+        ExperienceActivities = model.ExperienceActivities;
+        AnnualVisitors = model.AnnualVisitors;
+        HeritageRanking = model.HeritageRanking;
+        ManagementAuthority = model.ManagementAuthority;
+        ConservationProject = model.ConservationProject;
+
+        // Base fields
         IsDisplay = model.IsDisplay;
         Top = model.Top;
         Image360 = model.Image360;
@@ -88,6 +212,30 @@ public class Landmark : BaseModel
             Id = Id,
             Name = Name,
             Code = Code,
+            AlternativeNames = AlternativeNames,
+            IdentityCode = IdentityCode,
+            LandmarkType = LandmarkType,
+            Address = Address,
+            GpsCoordinates = GpsCoordinates,
+            History = History,
+            RelatedEvents = RelatedEvents,
+            SpiritualBelief = SpiritualBelief,
+            CulturalValue = CulturalValue,
+            Architecture = Architecture,
+            BuildingMaterial = BuildingMaterial,
+            CurrentCondition = CurrentCondition,
+            SizeScale = SizeScale,
+            Exhibits = Exhibits,
+            OpeningHours = OpeningHours,
+            TicketPrice = TicketPrice,
+            SupportServices = SupportServices,
+            ExperienceActivities = ExperienceActivities,
+            AnnualVisitors = AnnualVisitors,
+            HeritageRanking = HeritageRanking,
+            ManagementAuthority = ManagementAuthority,
+            ConservationProject = ConservationProject,
+
+            // Base model properties
             IsDisplay = IsDisplay,
             Top = Top,
             Image360 = Image360,
@@ -113,8 +261,8 @@ public class Landmark : BaseModel
             Image7 = Image7,
             Image8 = Image8,
             Image9 = Image9,
-            Url = Url,
-            PeopleId = PeopleId
+            PeopleId = PeopleId,
+            Url = Url
         };
 
         if (People != null)
@@ -136,5 +284,14 @@ public class Landmark : BaseModel
 
         data.Attachments = lstAttach;
         return data;
+    }
+
+    // Existing ReNewUrl method
+    public void ReNewUrl()
+    {
+        var newUrl = ExtensionMethod.RemoveUnicode(Name);
+        newUrl = newUrl.Replace(" ", "-").ToLower();
+        newUrl = Regex.Replace(newUrl, @"[^a-zA-Z0-9 -]", string.Empty);
+        Url = newUrl;
     }
 }
