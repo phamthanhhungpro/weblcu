@@ -1,0 +1,37 @@
+﻿@model Datas.Models.ViewModels.TravelModel
+
+<div class="row">
+    <div class="col-md-12">
+        <!-- New form group for Điểm nổi bật -->
+        <div class="form-group">
+            <label asp-for="Highlights" class="control-label">Điểm nổi bật</label>
+            <div class="col-md-12">
+                <textarea asp-for="Highlights" class="form-control" rows="3" placeholder="Điều gì làm nên sự hấp dẫn của hoạt động này"></textarea>
+            </div>
+        </div>
+
+        <!-- New form group for Trải nghiệm đặc biệt -->
+        <div class="form-group">
+            <label asp-for="UniqueExperiences" class="control-label">Trải nghiệm đặc biệt</label>
+            <div class="col-md-12">
+                <textarea asp-for="UniqueExperiences" class="form-control" rows="3" placeholder="Những điều độc đáo du khách có thể trải nghiệm"></textarea>
+            </div>
+        </div>
+
+        <!-- New form group for Ảnh hưởng văn hóa - xã hội -->
+        <div class="form-group">
+            <label asp-for="CulturalSocialImpact" class="control-label">Ảnh hưởng văn hóa - xã hội</label>
+            <div class="col-md-12">
+                <textarea asp-for="CulturalSocialImpact" class="form-control" rows="3" placeholder="Tác động đến địa phương, cộng đồng"></textarea>
+            </div>
+        </div>
+
+        <!-- New form group for Sự kiện kèm theo -->
+        <div class="form-group">
+            <label asp-for="AccompanyingEvents" class="control-label">Sự kiện kèm theo</label>
+            <div class="col-md-12">
+                <textarea asp-for="AccompanyingEvents" class="form-control" rows="3" placeholder="Nếu có các sự kiện đi kèm như lễ hội, triển lãm"></textarea>
+            </div>
+        </div>
+    </div>
+</div>

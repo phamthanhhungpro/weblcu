@@ -1,0 +1,38 @@
+﻿@model Datas.Models.ViewModels.FestivalModel
+
+<div class="row">
+    <div class="col-md-12">
+        <!-- New form group for Tình trạng bảo tồn -->
+        <div class="form-group">
+            <label asp-for="ConservationStatus" class="control-label">Tình trạng bảo tồn</label>
+            <div class="col-md-12">
+                <textarea asp-for="ConservationStatus" class="form-control" placeholder="Tình trạng bảo tồn"></textarea>
+            </div>
+            <div>
+                <span asp-validation-for="ConservationStatus" class="text-danger"></span>
+            </div>
+        </div>
+
+        <!-- New form group for Cơ quan tổ chức & quản lý -->
+        <div class="form-group">
+            <label asp-for="OrganizingAgency" class="control-label">Cơ quan tổ chức & quản lý</label>
+            <div class="col-md-12">
+                <textarea asp-for="OrganizingAgency" class="form-control" placeholder="Đơn vị nào chịu trách nhiệm tổ chức"></textarea>
+            </div>
+            <div>
+                <span asp-validation-for="OrganizingAgency" class="text-danger"></span>
+            </div>
+        </div>
+
+        <!-- New form group for Hoạt động gìn giữ -->
+        <div class="form-group">
+            <label asp-for="ConservationActivities" class="control-label">Hoạt động gìn giữ</label>
+            <div class="col-md-12">
+                <textarea asp-for="ConservationActivities" class="form-control" placeholder="Các dự án, chương trình bảo tồn, quảng bá"></textarea>
+            </div>
+            <div>
+                <span asp-validation-for="ConservationActivities" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,37 @@
+﻿@model Datas.Models.ViewModels.TravelModel
+
+<div class="row">
+    <div class="col-md-12">
+        <!-- New form group for Mô tả chi tiết -->
+        <div class="form-group">
+            <label asp-for="DetailedDescription" class="control-label">Mô tả chi tiết</label>
+            <div class="col-md-12">
+                <textarea asp-for="DetailedDescription" class="form-control" rows="3" placeholder="Hoạt động bao gồm những gì, cách tham gia"></textarea>
+            </div>
+        </div>
+
+        <!-- New form group for Đối tượng tham gia -->
+        <div class="form-group">
+            <label asp-for="Participants" class="control-label">Đối tượng tham gia</label>
+            <div class="col-md-12">
+                <textarea asp-for="Participants" class="form-control" rows="3" placeholder="Ai có thể tham gia (du khách, người dân địa phương…)"></textarea>
+            </div>
+        </div>
+
+        <!-- New form group for Mức độ phù hợp -->
+        <div class="form-group">
+            <label asp-for="Suitability" class="control-label">Mức độ phù hợp</label>
+            <div class="col-md-12">
+                <textarea asp-for="Suitability" class="form-control" rows="3" placeholder="Phù hợp với độ tuổi, thể lực nào"></textarea>
+            </div>
+        </div>
+
+        <!-- New form group for Trang phục & Dụng cụ cần thiết -->
+        <div class="form-group">
+            <label asp-for="RequiredAttireAndEquipment" class="control-label">Trang phục & Dụng cụ cần thiết</label>
+            <div class="col-md-12">
+                <textarea asp-for="RequiredAttireAndEquipment" class="form-control" rows="3" placeholder="Nếu có yêu cầu đặc biệt khi tham gia"></textarea>
+            </div>
+        </div>
+    </div>
+</div>

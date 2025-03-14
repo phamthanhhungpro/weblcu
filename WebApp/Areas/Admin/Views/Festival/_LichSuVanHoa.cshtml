@@ -1,0 +1,49 @@
+﻿@model Datas.Models.ViewModels.FestivalModel
+
+<div class="row">
+    <div class="col-md-12">
+        <!-- New form group for Nguồn gốc -->
+        <div class="form-group">
+            <label asp-for="Origin" class="control-label">Nguồn gốc</label>
+            <div class="col-md-12">
+                <textarea asp-for="Origin" class="form-control" placeholder="Lịch sử hình thành lễ hội">@Model.Origin</textarea>
+            </div>
+            <div>
+                <span asp-validation-for="Origin" class="text-danger"></span>
+            </div>
+        </div>
+
+        <!-- New form group for Sự thay đổi theo thời gian -->
+        <div class="form-group">
+            <label asp-for="ChangesOverTime" class="control-label">Sự thay đổi theo thời gian</label>
+            <div class="col-md-12">
+                <textarea asp-for="ChangesOverTime" class="form-control" placeholder="So sánh lễ hội ngày xưa và hiện nay">@Model.ChangesOverTime</textarea>
+            </div>
+            <div>
+                <span asp-validation-for="ChangesOverTime" class="text-danger"></span>
+            </div>
+        </div>
+
+        <!-- New form group for Tín ngưỡng liên quan -->
+        <div class="form-group">
+            <label asp-for="RelatedBeliefs" class="control-label">Tín ngưỡng liên quan</label>
+            <div class="col-md-12">
+                <textarea asp-for="RelatedBeliefs" class="form-control" placeholder="Nếu lễ hội có liên quan đến tôn giáo, tâm linh">@Model.RelatedBeliefs</textarea>
+            </div>
+            <div>
+                <span asp-validation-for="RelatedBeliefs" class="text-danger"></span>
+            </div>
+        </div>
+
+        <!-- New form group for Ảnh hưởng văn hóa - xã hội -->
+        <div class="form-group">
+            <label asp-for="CulturalSocialImpact" class="control-label">Ảnh hưởng văn hóa - xã hội</label>
+            <div class="col-md-12">
+                <textarea asp-for="CulturalSocialImpact" class="form-control" placeholder="Lễ hội tác động thế nào đến cộng đồng và địa phương">@Model.CulturalSocialImpact</textarea>
+            </div>
+            <div>
+                <span asp-validation-for="CulturalSocialImpact" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+</div>

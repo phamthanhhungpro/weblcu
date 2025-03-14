@@ -11,6 +11,32 @@ namespace Datas.Models.DomainModels
         [Display(Name = "Tên hoạt động du lịch")]
         public string Name { set; get; }
 
+        public string? DiaDiem { set; get; }
+        public string? LoaiHinh { set; get; }
+        public string? ThoiGian { set; get; }
+        public string? DonViToChuc { set; get; }
+
+        public string? Highlights { get; set; }
+        public string? UniqueExperiences { get; set; }
+        public string? CulturalSocialImpact { get; set; }
+        public string? AccompanyingEvents { get; set; }
+
+        // Fields for Chi phí tham gia, Dịch vụ đi kèm, Ưu đãi & Khuyến mãi
+        public string? ParticipationCost { get; set; }
+        public string? AccompanyingServices { get; set; }
+        public string? DiscountsAndPromotions { get; set; }
+
+        // Fields for Tình trạng hoạt động, Cơ quan quản lý, Hoạt động quảng bá
+        public string? OperationalStatus { get; set; }
+        public string? ManagingAgency { get; set; }
+        public string? PromotionalActivities { get; set; }
+        public string? DetailedDescription { get; set; }
+        public string? Participants { get; set; }
+        public string? Suitability { get; set; }
+        public string? RequiredAttireAndEquipment
+        {
+            get; set;
+        }
         public void ReNewUrl()
         {
             var newUrl = ExtensionMethod.RemoveUnicode(Name);
@@ -48,6 +74,25 @@ namespace Datas.Models.DomainModels
             Image7 = model.Image7;
             Image8 = model.Image8;
             Image9 = model.Image9;
+            DiaDiem = model.DiaDiem;
+            LoaiHinh = model.LoaiHinh;
+            ThoiGian = model.ThoiGian;
+            DonViToChuc = model.DonViToChuc;
+            Highlights = model.Highlights;
+            UniqueExperiences = model.UniqueExperiences;
+            CulturalSocialImpact = model.CulturalSocialImpact;
+            AccompanyingEvents = model.AccompanyingEvents;
+            ParticipationCost = model.ParticipationCost;
+            AccompanyingServices = model.AccompanyingServices;
+            DiscountsAndPromotions = model.DiscountsAndPromotions;
+            OperationalStatus = model.OperationalStatus;
+            ManagingAgency = model.ManagingAgency;
+            PromotionalActivities = model.PromotionalActivities;
+            DetailedDescription = model.DetailedDescription;
+            Participants = model.Participants;
+            Suitability = model.Suitability;
+            RequiredAttireAndEquipment = model.RequiredAttireAndEquipment;
+
 
         }
 
@@ -80,6 +125,24 @@ namespace Datas.Models.DomainModels
             Image7 = model.Image7;
             Image8 = model.Image8;
             Image9 = model.Image9;
+            DiaDiem = model.DiaDiem;
+            LoaiHinh = model.LoaiHinh;
+            ThoiGian = model.ThoiGian;
+            DonViToChuc = model.DonViToChuc;
+            Highlights = model.Highlights;
+            UniqueExperiences = model.UniqueExperiences;
+            CulturalSocialImpact = model.CulturalSocialImpact;
+            AccompanyingEvents = model.AccompanyingEvents;
+            ParticipationCost = model.ParticipationCost;
+            AccompanyingServices = model.AccompanyingServices;
+            DiscountsAndPromotions = model.DiscountsAndPromotions;
+            OperationalStatus = model.OperationalStatus;
+            ManagingAgency = model.ManagingAgency;
+            PromotionalActivities = model.PromotionalActivities;
+            DetailedDescription = model.DetailedDescription;
+            Participants = model.Participants;
+            Suitability = model.Suitability;
+            RequiredAttireAndEquipment = model.RequiredAttireAndEquipment;
         }
 
         public TravelModel ToModel()
@@ -115,7 +178,25 @@ namespace Datas.Models.DomainModels
                 Image8 = Image8,
                 Image9 = Image9,
                 Url = Url,
-                PeopleId = PeopleId
+                PeopleId = PeopleId,
+                DiaDiem = DiaDiem,
+                LoaiHinh = LoaiHinh,
+                ThoiGian = ThoiGian,
+                DonViToChuc = DonViToChuc,
+                Highlights = Highlights,
+                UniqueExperiences = UniqueExperiences,
+                CulturalSocialImpact = CulturalSocialImpact,
+                AccompanyingEvents = AccompanyingEvents,
+                ParticipationCost = ParticipationCost,
+                AccompanyingServices = AccompanyingServices,
+                DiscountsAndPromotions = DiscountsAndPromotions,
+                OperationalStatus = OperationalStatus,
+                ManagingAgency = ManagingAgency,
+                PromotionalActivities = PromotionalActivities,
+                DetailedDescription = DetailedDescription,
+                Participants = Participants,
+                Suitability = Suitability,
+                RequiredAttireAndEquipment = RequiredAttireAndEquipment,
             };
 
             if (People != null)

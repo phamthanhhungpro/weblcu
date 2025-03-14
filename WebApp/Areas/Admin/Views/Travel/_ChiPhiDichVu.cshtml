@@ -1,0 +1,29 @@
+﻿@model Datas.Models.ViewModels.TravelModel
+
+<div class="row">
+    <div class="col-md-12">
+        <!-- New form group for Chi phí tham gia -->
+        <div class="form-group">
+            <label asp-for="ParticipationCost" class="control-label">Chi phí tham gia</label>
+            <div class="col-md-12">
+                <textarea asp-for="ParticipationCost" class="form-control" rows="3" placeholder="Miễn phí hoặc giá vé"></textarea>
+            </div>
+        </div>
+
+        <!-- New form group for Dịch vụ đi kèm -->
+        <div class="form-group">
+            <label asp-for="AccompanyingServices" class="control-label">Dịch vụ đi kèm</label>
+            <div class="col-md-12">
+                <textarea asp-for="AccompanyingServices" class="form-control" rows="3" placeholder="Hướng dẫn viên, ăn uống, phương tiện di chuyển…"></textarea>
+            </div>
+        </div>
+
+        <!-- New form group for Ưu đãi & Khuyến mãi -->
+        <div class="form-group">
+            <label asp-for="DiscountsAndPromotions" class="control-label">Ưu đãi & Khuyến mãi</label>
+            <div class="col-md-12">
+                <textarea asp-for="DiscountsAndPromotions" class="form-control" rows="3" placeholder="Nếu có giảm giá hoặc ưu đãi cho nhóm, trẻ em…"></textarea>
+            </div>
+        </div>
+    </div>
+</div>
