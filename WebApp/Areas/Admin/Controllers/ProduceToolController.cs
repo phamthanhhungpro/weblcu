@@ -536,7 +536,7 @@ namespace WebApp.Areas.Admin.Controllers
                     var result = _ProduceToolService.Update(model);
                     if (result.IsSuccess())
                     {
-                        base.SuccessNotification("Cập nhật trang phục thành công");
+                        base.SuccessNotification("Cập nhật  thành công");
                         return RedirectToAction(nameof(Index));
                     }
                     else

@@ -291,22 +291,22 @@
         $('#Content').show();
 
         // Initialize CKEditor for other rich text fields in the added tabs
-        var richTextFields = [
-            'Origin', 'HistoricalChanges', 'DisplayedItems'
-        ];
+        // var richTextFields = [
+        //     'Origin', 'HistoricalChanges', 'DisplayedItems'
+        // ];
 
-        richTextFields.forEach(function(fieldId) {
-            if ($('#' + fieldId).length) {
-                CKEDITOR.replace(fieldId, {
-                    height: '250px',
-                    filebrowserBrowseUrl: '#',
-                    extraPlugins: 'image2',
-                    filebrowserUploadUrl: '/Admin/file-system/connector',
-                    imageUploadUrl: '/Admin/file-system/connector'
-                });
-                $('#' + fieldId).show();
-            }
-        });
+        // richTextFields.forEach(function(fieldId) {
+        //     if ($('#' + fieldId).length) {
+        //         CKEDITOR.replace(fieldId, {
+        //             height: '250px',
+        //             filebrowserBrowseUrl: '#',
+        //             extraPlugins: 'image2',
+        //             filebrowserUploadUrl: '/Admin/file-system/connector',
+        //             imageUploadUrl: '/Admin/file-system/connector'
+        //         });
+        //         $('#' + fieldId).show();
+        //     }
+        // });
     });
 </script>
 

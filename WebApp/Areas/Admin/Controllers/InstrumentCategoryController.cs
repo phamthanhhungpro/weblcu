@@ -59,7 +59,7 @@ namespace WebApp.Areas.Admin.Controllers
                 if (ModelState.IsValid)
                 {
                     _instrumentCategoryService.Add(model);
-                    base.SuccessNotification("Thêm danh mục nhạc cụ thành công !");
+                    base.SuccessNotification("Thêm danh mục thành công !");
                     return RedirectToAction(nameof(Index));
                 }
                 base.ErrorNotification("Thêm danh mục nhạc cụ thất bại !");
@@ -117,7 +117,7 @@ namespace WebApp.Areas.Admin.Controllers
                 if (ModelState.IsValid)
                 {
                     _instrumentCategoryService.Update(model);
-                    base.SuccessNotification("Cập nhật danh mục nhạc cụ thành công !");
+                    base.SuccessNotification("Cập nhật danh mục thành công !");
                     return RedirectToAction(nameof(Index));
                 }
                 base.ErrorNotification("Cập nhật danh mục nhạc cụ thất bại !");

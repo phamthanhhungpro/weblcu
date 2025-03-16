@@ -33,11 +33,16 @@ namespace Datas.Models.DomainModels
         [Display(Name = "Link ảnh scan 3D")]
         public string? Scan3DLink { get; set; }
 
+        [Display(Name = "Chất liệu chính")]
+        public string? MainMaterial { get; set; }
+
+        [Display(Name = "Phong cách thiết kế")]
+        public string? DesignStyle { get; set; }
+
         [Display(Name = "Kích thước & Trọng lượng")]
         public string? SizeWeight { get; set; }
 
         [Display(Name = "Mục đích sử dụng")]
-
         public string? Purpose { get; set; }
 
         [Display(Name = "Ý nghĩa biểu tượng")]
@@ -81,6 +86,8 @@ namespace Datas.Models.DomainModels
             Gender = model.Gender;
             AgeGroup = model.AgeGroup;
             Scan3DLink = model.Scan3DLink;
+            MainMaterial = model.MainMaterial;
+            DesignStyle = model.DesignStyle;
             SizeWeight = model.SizeWeight;
             Purpose = model.Purpose;
             SymbolicMeaning = model.SymbolicMeaning;
@@ -129,6 +136,8 @@ namespace Datas.Models.DomainModels
             Gender = model.Gender;
             AgeGroup = model.AgeGroup;
             Scan3DLink = model.Scan3DLink;
+            MainMaterial = model.MainMaterial;
+            DesignStyle = model.DesignStyle;
             SizeWeight = model.SizeWeight;
             Purpose = model.Purpose;
             SymbolicMeaning = model.SymbolicMeaning;
@@ -180,6 +189,8 @@ namespace Datas.Models.DomainModels
                 Gender = Gender,
                 AgeGroup = AgeGroup,
                 Scan3DLink = Scan3DLink,
+                MainMaterial = MainMaterial,
+                DesignStyle = DesignStyle,
                 SizeWeight = SizeWeight,
                 Purpose = Purpose,
                 SymbolicMeaning = SymbolicMeaning,

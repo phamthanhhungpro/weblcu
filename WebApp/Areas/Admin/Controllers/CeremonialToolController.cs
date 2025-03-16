@@ -480,7 +480,7 @@ namespace WebApp.Areas.Admin.Controllers
                 if (ModelState.IsValid)
                 {
                     _CeremonialToolService.Add(model);
-                    base.SuccessNotification("Thêm mới nhạc cụ thành công !");
+                    base.SuccessNotification("Thêm mới thành công !");
                     return RedirectToAction(nameof(Index));
                 }
                 else
@@ -535,7 +535,7 @@ namespace WebApp.Areas.Admin.Controllers
                     var result = _CeremonialToolService.Update(model);
                     if (result.IsSuccess())
                     {
-                        base.SuccessNotification("Cập nhật nhạc cụ thành công");
+                        base.SuccessNotification("Cập nhật thành công");
                         return RedirectToAction(nameof(Index));
                     }
                     else
